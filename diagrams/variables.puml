@@ -1,0 +1,7 @@
+'''''''''
+' Class '
+'''''''''
+
+!define CLASS_AUTOMATE Automate
+!define CLASS_ETAT Etat
+!define CLASS_SYMBOLE Symbole

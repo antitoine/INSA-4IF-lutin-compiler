@@ -1,0 +1,16 @@
+@startuml
+!include ../variables.puml
+!include ../skin.puml
+
+'' CLASS_AUTOMATE
+CLASS_AUTOMATE : lecture()
+
+CLASS_AUTOMATE --> CLASS_SYMBOLE : pileSymboles *
+CLASS_AUTOMATE --> CLASS_ETAT : pileEtats *
+
+'' CLASS_ETAT
+CLASS_ETAT : String nom
+CLASS_ETAT : virtual transition( CLASS_AUTOMATE, CLASS_SYMBOLE)
+
+
+@enduml
