@@ -22,7 +22,7 @@ abstract class "State" as CLASS_ETAT {
 
 '' Symbols ------------------------------------------------
 
-class "Symbol" as CLASS_SYMBOLE {
+abstract class "Symbol" as CLASS_SYMBOLE {
     # id: int
     + {abstract} operator int() const: int
 }

@@ -1,5 +1,5 @@
-#ifndef STATE_H
-#define STATE_H
+#ifndef LUTIN_COMPILER_STATE_H
+#define LUTIN_COMPILER_STATE_H
 
 #include <string>
 #include <iostream>
@@ -18,4 +18,4 @@ protected:
     string name;
 };
 
-#endif //STATE_H
+#endif //LUTIN_COMPILER_STATE_H
