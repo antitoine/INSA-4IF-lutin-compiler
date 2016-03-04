@@ -28,16 +28,18 @@ abstract class "Symbol" as CLASS_SYMBOLE {
 }
 
 enum "TypeUnitSymbol" as ENUM_SYMBOLE_UNITAIRE {
-    PLUS
-    MINUS
-    MULT
-    DIV
-    EQUAL
-    AFFECT
-    ENDING_PAR
-    OPENING_PAR
+    SU_PLUS
+    SU_MINUS
+    SU_MULT
+    SU_DIV
+    SU_EQUAL
+    SU_AFFECT
+    SU_ENDING_PAR
+    SU_OPENING_PAR
+    SU_SEMICOLON
+    SU_COMMA
 }
-class "UnitSymbol" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
+class "SymbolUnit" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
     - type: TypeUnitSymbol
 }
 
@@ -76,7 +78,7 @@ class "SymbolInstructionAffect" as CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION ext
     + {static} analyse()
 }
 
-abstract class "SymbolExpression" as CLASS_SYMBOLE_EXPRESSION extends CLASS_SYMBOLE_INSTRUCTION {
+abstract class "SymbolExpression" as CLASS_SYMBOLE_EXPRESSION extends CLASS_SYMBOLE {
     + {abstract} eval(dicoVariables) : float
 }
 
