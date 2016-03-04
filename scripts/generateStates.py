@@ -24,14 +24,14 @@ for stateNumber in range(0, 45):
 
     #Header
     f = open("../src/states/state" + strState + ".h", 'w')
-    f.write("#ifndef STATE" + strState + "_H\n")
-    f.write("#define STATE" + strState + "_H\n\n")
+    f.write("#ifndef LUTIN_COMPILER_STATE" + strState + "_H\n")
+    f.write("#define LUTIN_COMPILER_STATE" + strState + "_H\n\n")
     f.write("class State" + strState + " : public State {\n\n")
     f.write("public:\n")
     f.write("    State" + strState + "();\n")
     f.write("    ~State" + strState + "();\n")
     f.write("    bool transition(Automaton automaton, Symbol symbol);\n\n")
     f.write("};\n\n")
-    f.write("#endif //STATE" + strState + "_H")
+    f.write("#endif //LUTIN_COMPILER_STATE" + strState + "_H")
 
     f.close()
