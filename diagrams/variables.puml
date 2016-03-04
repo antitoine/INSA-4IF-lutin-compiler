@@ -9,6 +9,7 @@ class "StructVar" as STRUCT_VAR {
 
 class "Automaton" as CLASS_AUTOMATE {
     - dicoVariables: map<SymbolVariable*, StructVar>
+    - activeSymbol: IActiveSymbol
     + analyse()
     - lireSymbolSuivant()
     + execute()
@@ -40,7 +41,11 @@ class "UnitSymbol" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
     - type: TypeUnitSymbol
 }
 
-abstract class "SymbolDeclaration" as CLASS_SYMBOLE_DECLARATION extends CLASS_SYMBOLE {
+interface "IActiveSymbol" as INTERFACE_ACTIVE_SYMBOL {
+    + computeSymbol(symbol:Symbol)
+}
+
+abstract class "SymbolDeclaration" as CLASS_SYMBOLE_DECLARATION extends CLASS_SYMBOLE implements INTERFACE_ACTIVE_SYMBOL {
     + {abstract} execute(dicoVariables)
     + {abstract} {static} analyse()
 }
@@ -54,7 +59,7 @@ class "SymbolDeclarationConst" as CLASS_SYMBOLE_DECLARATION_CONST extends CLASS_
     + execute(dicoVariables)
     + {static} analyse()
 }
-abstract class "SymbolInstruction" as CLASS_SYMBOLE_INSTRUCTION extends CLASS_SYMBOLE {
+abstract class "SymbolInstruction" as CLASS_SYMBOLE_INSTRUCTION extends CLASS_SYMBOLE implements INTERFACE_ACTIVE_SYMBOL {
     + {abstract} execute(dicoVariables)
     + {abstract} {static} analyse()
 }

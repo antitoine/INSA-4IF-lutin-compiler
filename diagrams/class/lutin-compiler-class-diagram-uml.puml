@@ -5,8 +5,8 @@
 '' CLASS_AUTOMATE
 
 CLASS_AUTOMATE --> CLASS_SYMBOLE : instructions *
-CLASS_AUTOMATE --> CLASS_SYMBOLE : pileSymboles *
-CLASS_AUTOMATE --> CLASS_ETAT : pileEtats *
+CLASS_AUTOMATE --> CLASS_SYMBOLE : stackSymbols *
+CLASS_AUTOMATE --> CLASS_ETAT : stackStates *
 
 '' Symboles
 

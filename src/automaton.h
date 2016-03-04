@@ -1,11 +1,10 @@
-//
-// Created by Deirdre on 04/03/2016.
-//
-
 #ifndef LUTIN_COMPILER_AUTOMATE_H
 #define LUTIN_COMPILER_AUTOMATE_H
 
 #include <map>
+#include <stack>
+
+#include "state.h"
 
 using namespace std;
 
@@ -19,10 +18,11 @@ class Automaton {
 
 private:
     map<Symbol*, StructVar> dicoVariables;
+    IActiveSymbol activeSymbol;
+    stack<State> stackStates;
 
 public :
     void readFile(string filename);
-
 };
 
 
