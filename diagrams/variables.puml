@@ -42,6 +42,11 @@ class "Variable" as CLASS_VARIABLE extends CLASS_EXPRESSION {
     + evaluer(dicoVariables) : float
 }
 
+class "ValeurNum" as CLASS_VAL_NUM extends CLASS_EXPRESSION {
+    - valeur: float
+    + evaluer(dicoVariables) : float
+}
+
 class "OperateurBinaire" as CLASS_OPERATEUR_BINAIRE extends CLASS_EXPRESSION {
     + {abstract} evaluer(dicoVariables) : float
 }
