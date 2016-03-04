@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include "symbol.h"
+#include "automaton.h"
 
 using namespace std;
 
