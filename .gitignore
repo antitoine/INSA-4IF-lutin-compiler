@@ -28,5 +28,10 @@
 *.out
 *.app
 
+# IDE
 /.idea
+
+# CMake
 /CMakeFiles
+/CMakeCache.txt
+/cmake_install.cmake
