@@ -1,1 +1,0 @@
-/usr/bin/c++    -std=c++11   CMakeFiles/lutin_compiler.dir/src/main.cpp.o CMakeFiles/lutin_compiler.dir/src/state.cpp.o CMakeFiles/lutin_compiler.dir/src/symbol.cpp.o  -o lutin_compiler -rdynamic 
