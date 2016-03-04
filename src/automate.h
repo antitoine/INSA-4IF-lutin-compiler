@@ -7,20 +7,18 @@
 
 #include <map>
 
-struct structVar {
+typedef struct structVar {
     // What define a symbol : what it contains and if it's constant
     float value;
     bool constant;
-};
-
+} StructVar;
 
 class Automate {
 
-public :
-
 private:
-    map<&Symbol, structVar> librairy;
+    std::map<Symbol*, StructVar> dicoVariables;
 
+public :
 
 };
 
