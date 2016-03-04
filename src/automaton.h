@@ -7,18 +7,21 @@
 
 #include <map>
 
+using namespace std;
+
 typedef struct structVar {
     // What define a symbol : what it contains and if it's constant
     float value;
     bool constant;
 } StructVar;
 
-class Automate {
+class Automaton {
 
 private:
-    std::map<Symbol*, StructVar> dicoVariables;
+    map<Symbol*, StructVar> dicoVariables;
 
 public :
+    void readFile(string filename);
 
 };
 
