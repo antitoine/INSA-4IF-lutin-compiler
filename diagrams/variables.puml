@@ -2,93 +2,90 @@
 ' Class '
 '''''''''
 
-class "Automate" as CLASS_AUTOMATE {
-    - dicoVariables: Map<id:string, valeur:float>
-    + analyser()
-    - lireSymboleSuivant()
-    + executer()
-    + decalage(symbole:Symbole, etat:Etat)
+class "StructVar" as STRUCT_VAR {
+    value: float
+    isConstant: bool
 }
 
-abstract class "Etat" as CLASS_ETAT {
-    - nom: String
-    + {abstract} transition(automate:Automate, symbole:Symbole)
+class "Automaton" as CLASS_AUTOMATE {
+    - dicoVariables: map<SymbolVariable*, StructVar>
+    + analyse()
+    - lireSymbolSuivant()
+    + execute()
 }
 
-abstract class "Instruction" as CLASS_INSTRUCTION {
-    + {abstract} executer(dicoVariables)
+abstract class "State" as CLASS_ETAT {
+    - name: String
+    + {abstract} transition(automate:Automate, symbol:Symbol)
 }
 
-class "Lecture" as CLASS_LECTURE extends CLASS_INSTRUCTION {
-    - idVariable: int
-    + executer(dicoVariables)
-}
+'' Symbols ------------------------------------------------
 
-class "Ecriture" as CLASS_ECRITURE extends CLASS_INSTRUCTION {
-    + executer(dicoVariables)
-}
-
-class "Affectation" as CLASS_AFFECTATION extends CLASS_INSTRUCTION {
-    - idVariable: int
-    + executer(dicoVariables)
-}
-
-abstract class "Expression" as CLASS_EXPRESSION {
-    + {abstract} evaluer(dicoVariables) : float
-}
-
-class "Variable" as CLASS_VARIABLE extends CLASS_EXPRESSION {
-    - idVariable: int
-    + evaluer(dicoVariables) : float
-}
-
-class "ValeurNum" as CLASS_VAL_NUM extends CLASS_EXPRESSION {
-    - valeur: float
-    + evaluer(dicoVariables) : float
-}
-
-class "OperateurBinaire" as CLASS_OPERATEUR_BINAIRE extends CLASS_EXPRESSION {
-    + {abstract} evaluer(dicoVariables) : float
-}
-
-class "OperateurBinaireAddition" as CLASS_OPERATEUR_PLUS extends CLASS_OPERATEUR_BINAIRE {
-    + evaluer(dicoVariables) : float
-}
-class "OperateurBinaireSoustraction" as CLASS_OPERATEUR_MOINS extends CLASS_OPERATEUR_BINAIRE {
-    + evaluer(dicoVariables) : float
-}
-class "OperateurBinaireMultiplication" as CLASS_OPERATEUR_FOIS extends CLASS_OPERATEUR_BINAIRE {
-    + evaluer(dicoVariables) : float
-}
-class "OperateurBinaireDivision" as CLASS_OPERATEUR_DIVISER extends CLASS_OPERATEUR_BINAIRE {
-    + evaluer(dicoVariables) : float
-}
-
-'' Symboles ------------------------------------------------
-
-class "Symbole" as CLASS_SYMBOLE {
+class "Symbol" as CLASS_SYMBOLE {
     # id: int
     + {abstract} operator int() const: int
 }
 
-class "SymboleDeclaration" as CLASS_SYMBOLE_DECLARATION extends CLASS_SYMBOLE
-class "SymboleDeclarationVar" as CLASS_SYMBOLE_DECLARATION_VAR extends CLASS_SYMBOLE_DECLARATION
-class "SymboleDeclarationConst" as CLASS_SYMBOLE_DECLARATION_CONST extends CLASS_SYMBOLE_DECLARATION
-class "SymboleInstruction" as CLASS_SYMBOLE_INSTRUCTION extends CLASS_SYMBOLE
-class "SymboleInstructionVar" as CLASS_SYMBOLE_INSTRUCTION_VAR extends CLASS_SYMBOLE_INSTRUCTION
-class "SymboleInstructionEcriture" as CLASS_SYMBOLE_INSTRUCTION_ECRITURE extends CLASS_SYMBOLE_INSTRUCTION
-class "SymboleInstructionVarLecture" as CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE extends CLASS_SYMBOLE_INSTRUCTION_VAR
-class "SymboleInstructionVarAffectation" as CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION extends CLASS_SYMBOLE_INSTRUCTION_VAR
-
-interface "ISymboleExpression" as INTERFACE_SYMBOLE_EXPR {
+enum "TypeUnitSymbol" as ENUM_SYMBOLE_UNITAIRE {
+    PLUS
+    MINUS
+    MULT
+    DIV
+    EQUAL
+    AFFECT
+    ENDING_PAR
+    OPENING_PAR
+}
+class "UnitSymbol" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
+    - type: TypeUnitSymbol
 }
 
-class "SymboleNombre" as CLASS_SYMBOLE_NOMBRE extends CLASS_SYMBOLE implements INTERFACE_SYMBOLE_EXPR
-class "SymboleVariable" as CLASS_SYMBOLE_VARIABLE extends CLASS_SYMBOLE implements INTERFACE_SYMBOLE_EXPR
+abstract class "SymbolDeclaration" as CLASS_SYMBOLE_DECLARATION extends CLASS_SYMBOLE {
+    + {abstract} execute(dicoVariables)
+    + {abstract} {static} analyse()
+}
+class "SymbolDeclarationVar" as CLASS_SYMBOLE_DECLARATION_VAR extends CLASS_SYMBOLE_DECLARATION {
+    - idVariable: string
+    + execute(dicoVariables)
+    + {static} analyse()
+}
+class "SymbolDeclarationConst" as CLASS_SYMBOLE_DECLARATION_CONST extends CLASS_SYMBOLE_DECLARATION {
+    - variables: map<idVar:string, value:float>
+    + execute(dicoVariables)
+    + {static} analyse()
+}
+abstract class "SymbolInstruction" as CLASS_SYMBOLE_INSTRUCTION extends CLASS_SYMBOLE {
+    + {abstract} execute(dicoVariables)
+    + {abstract} {static} analyse()
+}
+class "SymbolInstructionWrite" as CLASS_SYMBOLE_INSTRUCTION_ECRITURE extends CLASS_SYMBOLE_INSTRUCTION {
+    + execute(dicoVariables)
+    + {static} analyse()
+}
+class "SymbolInstructionRead" as CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE extends CLASS_SYMBOLE_INSTRUCTION {
+    + execute(dicoVariables)
+    + {static} analyse()
+}
+class "SymbolInstructionAffect" as CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION extends CLASS_SYMBOLE_INSTRUCTION {
+    + execute(dicoVariables)
+    + {static} analyse()
+}
 
-class "SymboleExpression" as CLASS_SYMBOLE_EXPRESSION extends CLASS_SYMBOLE_INSTRUCTION implements INTERFACE_SYMBOLE_EXPR
-class "SymboleExpressionBinaire" as CLASS_SYMBOLE_EXPRESSION_BINAIRE extends CLASS_SYMBOLE_EXPRESSION
-class "SymboleExpressionBinaireAddition" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_ADD extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
-class "SymboleExpressionBinaireSoustraction" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
-class "SymboleExpressionBinaireMultiplication" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_MULT extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
-class "SymboleExpressionBinaireDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
+abstract class "SymbolExpression" as CLASS_SYMBOLE_EXPRESSION extends CLASS_SYMBOLE_INSTRUCTION {
+    + {abstract} eval(dicoVariables) : float
+}
+
+class "SymbolNumber" as CLASS_SYMBOLE_NOMBRE extends CLASS_SYMBOLE_EXPRESSION
+class "SymbolVariable" as CLASS_SYMBOLE_VARIABLE extends CLASS_SYMBOLE_EXPRESSION
+
+abstract class "SymbolExpressionBinary" as CLASS_SYMBOLE_EXPRESSION_BINAIRE extends CLASS_SYMBOLE_EXPRESSION {
+}
+
+class "SymbolExpressionParenthesis" as CLASS_SYMBOLE_EXPRESSION_PARENTHESE extends CLASS_SYMBOLE_EXPRESSION {
+}
+
+class "SymbolExpressionBinaryAdd" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_ADD extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
+class "SymbolExpressionBinarySoustract" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
+class "SymbolExpressionBinaryMultiplication" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_MULT extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
+class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
+
