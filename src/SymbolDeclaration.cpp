@@ -1,11 +1,10 @@
-#include <boost>
+//#include <boost>
 #include <map>
 #include "SymbolDeclaration.h"
 
 using namespace std;
 
-SymbolDeclaration::SymbolDeclaration()
+SymbolDeclaration::SymbolDeclaration():Symbol(S_DECLARATION)
 {
 
 }
-	

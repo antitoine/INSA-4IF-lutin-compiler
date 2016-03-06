@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLDECLARATION ) 
-#define SYMBOLDECLARATION 
+#if ! defined SYMBOLDECLARATION
+#define SYMBOLDECLARATION
 
-class SymbolDeclaration
+#include "symbol.h"
+
+class SymbolDeclaration : public Symbol
 {
 public:
     SymbolDeclaration();

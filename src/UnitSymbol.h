@@ -1,13 +1,15 @@
-#if ! defined ( UNITSYMBOL ) 
-#define UNITSYMBOL 
+#if ! defined ( UNITSYMBOL )
+#define UNITSYMBOL
 
-class UnitSymbol
+#include "symbol.h"
+
+class UnitSymbol : public Symbol
 {
 public:
-    UnitSymbol();
+    UnitSymbol(enum unitSymbolIdTable);
 
 protected:
-
+    enum unitSymbolIdTable unitSymbol;
 };
 
 #endif

@@ -1,11 +1,10 @@
-#include <boost>
+//#include <boost>
 #include <map>
 #include "UnitSymbol.h"
 
 using namespace std;
 
-UnitSymbol::UnitSymbol()
+UnitSymbol::UnitSymbol(enum unitSymbolIdTable uSymbol):Symbol(S_UNIT)
 {
-
+    unitSymbol = uSymbol;
 }
-	

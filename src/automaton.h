@@ -8,6 +8,9 @@
 
 using namespace std;
 
+class State;
+class IActiveSymbol;
+
 typedef struct structVar {
     // What define a symbol : what it contains and if it's constant
     float value;
@@ -18,7 +21,7 @@ class Automaton {
 
 private:
     map<Symbol*, StructVar> dicoVariables;
-    IActiveSymbol activeSymbol;
+    IActiveSymbol activeSymbol();
     stack<State> stackStates;
 
 public :
