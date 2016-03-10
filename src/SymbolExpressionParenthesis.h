@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLEXPRESSIONPARENTHESIS ) 
-#define SYMBOLEXPRESSIONPARENTHESIS 
+#if ! defined ( SYMBOLEXPRESSIONPARENTHESIS )
+#define SYMBOLEXPRESSIONPARENTHESIS
 
-class SymbolExpressionParenthesis
+#include "SymbolExpression.h"
+
+class SymbolExpressionParenthesis : public SymbolExpression
 {
 public:
     SymbolExpressionParenthesis();

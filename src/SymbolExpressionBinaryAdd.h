@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARYADD ) 
-#define SYMBOLEXPRESSIONBINARYADD 
+#if ! defined ( SYMBOLEXPRESSIONBINARYADD )
+#define SYMBOLEXPRESSIONBINARYADD
 
-class SymbolExpressionBinaryAdd
+#include "SymbolExpressionBinary.h"
+
+class SymbolExpressionBinaryAdd : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryAdd();

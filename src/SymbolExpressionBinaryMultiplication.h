@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARYMULTIPLICATION ) 
-#define SYMBOLEXPRESSIONBINARYMULTIPLICATION 
+#if ! defined ( SYMBOLEXPRESSIONBINARYMULTIPLICATION )
+#define SYMBOLEXPRESSIONBINARYMULTIPLICATION
 
-class SymbolExpressionBinaryMultiplication
+#include "SymbolExpressionBinary.h"
+
+class SymbolExpressionBinaryMultiplication : SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryMultiplication();

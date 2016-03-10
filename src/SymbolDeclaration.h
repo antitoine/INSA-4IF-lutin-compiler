@@ -6,7 +6,7 @@
 class SymbolDeclaration : public Symbol
 {
 public:
-    SymbolDeclaration();
+    SymbolDeclaration(enum symbolIdTable idSymbol);
 
 protected:
 

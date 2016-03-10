@@ -1,10 +1,12 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARY ) 
-#define SYMBOLEXPRESSIONBINARY 
+#if ! defined ( SYMBOLEXPRESSIONBINARY )
+#define SYMBOLEXPRESSIONBINARY
 
-class SymbolExpressionBinary
+#include "SymbolExpression.h"
+
+class SymbolExpressionBinary : public SymbolExpression
 {
 public:
-    SymbolExpressionBinary();
+    SymbolExpressionBinary(enum symbolIdTable idSymbol);
 
 protected:
 

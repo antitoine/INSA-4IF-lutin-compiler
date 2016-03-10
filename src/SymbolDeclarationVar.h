@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLDECLARATIONVAR ) 
-#define SYMBOLDECLARATIONVAR 
+#if ! defined ( SYMBOLDECLARATIONVAR )
+#define SYMBOLDECLARATIONVAR
 
-class SymbolDeclarationVar
+#include "SymbolDeclaration.h"
+
+class SymbolDeclarationVar : public SymbolDeclaration
 {
 public:
     SymbolDeclarationVar();

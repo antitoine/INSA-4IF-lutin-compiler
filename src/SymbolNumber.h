@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLNUMBER ) 
-#define SYMBOLNUMBER 
+#if ! defined ( SYMBOLNUMBER )
+#define SYMBOLNUMBER
 
-class SymbolNumber
+#include "SymbolExpression.h"
+
+class SymbolNumber : public SymbolExpression
 {
 public:
     SymbolNumber();

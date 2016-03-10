@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLDECLARATIONCONST ) 
-#define SYMBOLDECLARATIONCONST 
+#if ! defined ( SYMBOLDECLARATIONCONST )
+#define SYMBOLDECLARATIONCONST
 
-class SymbolDeclarationConst
+#include "SymbolDeclaration.h"
+
+class SymbolDeclarationConst : public SymbolDeclaration
 {
 public:
     SymbolDeclarationConst();

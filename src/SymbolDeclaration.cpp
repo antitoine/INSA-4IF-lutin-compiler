@@ -4,7 +4,7 @@
 
 using namespace std;
 
-SymbolDeclaration::SymbolDeclaration():Symbol(S_DECLARATION)
+SymbolDeclaration::SymbolDeclaration(enum symbolIdTable idSymbol):Symbol(idSymbol)
 {
 
 }
