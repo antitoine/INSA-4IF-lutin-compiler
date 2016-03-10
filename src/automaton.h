@@ -3,8 +3,7 @@
 
 #include <map>
 #include <stack>
-
-#include "state.h"
+#include "states/state.h"
 
 class State;
 class IActiveSymbol;
@@ -22,12 +21,16 @@ private:
     IActiveSymbol * activeSymbol;
     std::stack<State*> stackStates;
     std::stack<Symbol*> stackSymbols;
+    std::list<Symbol*> listActiveSymbols;
 
 public :
     bool readFile(std::string filename);
+    void transition(Symbol * symbol, State * newState);
+    void reduction(int reductionSize, State * newState);
 
 private:
     void computeNewSymbol(Symbol * symbol);
+    void init();
 };
 
 

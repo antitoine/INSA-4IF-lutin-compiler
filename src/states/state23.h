@@ -1,12 +1,14 @@
 #ifndef LUTIN_COMPILER_STATE23_H
 #define LUTIN_COMPILER_STATE23_H
 
+#include "state.h"
+
 class State23 : public State {
 
 public:
     State23();
-    ~State23();
-    bool transition(Automaton automaton, Symbol symbol);
+    virtual ~State23();
+    virtual bool transition(Automaton & automaton, Symbol * symbol);
 
 };
 

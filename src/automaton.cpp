@@ -1,10 +1,20 @@
 #include <ostream>
 #include <iostream>
 #include <fstream>
+#include <list>
 #include "automaton.h"
 #include "Lexer.h"
+#include "states/state0.h"
+
+void Automaton::init() {
+    // TODO
+    stackStates.push(new State0());
+}
 
 bool Automaton::readFile(std::string filename) {
+
+    init();
+
     std::string line;
     std::ifstream file(filename);
     Symbol * symbol;
@@ -46,10 +56,31 @@ bool Automaton::readFile(std::string filename) {
 
 void Automaton::computeNewSymbol(Symbol * symbol)
 {
-    if (IActiveSymbol * newActiveSymbol = dynamic_cast<IActiveSymbol*>(symbol)) {
-        activeSymbol = newActiveSymbol;
-    }
-
     stackSymbols.push(symbol);
     stackStates.top()->transition(*this, symbol);
+}
+
+void Automaton::reduction(int reductionSize, State * newState) {
+    std::cout << "reduction !" << std::endl;
+    std::list<Symbol*> symbolsToCompute;
+
+    for (int i=0, maxI = reductionSize - 1; i <= maxI; ++i) {
+        stackStates.pop();
+
+        if (i != maxI) {
+            symbolsToCompute.push_back(stackSymbols.top());
+        } else {
+            Symbol * activeSymbol = stackSymbols.top();
+            activeSymbol->computeSublistSymbols(symbolsToCompute);
+            listActiveSymbols.push_back(activeSymbol);
+        }
+
+        stackSymbols.pop();
+    }
+
+    stackStates.push(newState);
+}
+
+void Automaton::transition(Symbol * symbol, State * newState) {
+    stackStates.push(newState);
 }

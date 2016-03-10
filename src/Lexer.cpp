@@ -4,8 +4,9 @@
 
 #include <iostream>
 #include "Lexer.h"
-#include "SymbolDeclarationConst.h"
-#include "SymbolDeclarationVar.h"
+#include "symbols/SymbolDeclarationVar.h"
+#include "symbols/SymbolDeclarationConst.h"
+#include "symbols/UnitSymbol.h"
 
 Symbol * Lexer::readNextSymbol(std::string & stringToRead)
 {
@@ -15,6 +16,8 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead)
     // Test to find a symbol, by priority order
     if ((symbol = SymbolDeclarationVar::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, symbolDetected)) != NULL);
+    else if ((symbol = SymbolVariable::analyse(stringToRead, symbolDetected)) != NULL);
+    else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);
 
     // If a symbol is found
     if (symbol != NULL) {
