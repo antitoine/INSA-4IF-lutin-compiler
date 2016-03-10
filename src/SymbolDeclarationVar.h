@@ -1,10 +1,14 @@
 #if ! defined ( SYMBOLDECLARATIONVAR ) 
 #define SYMBOLDECLARATIONVAR 
 
-class SymbolDeclarationVar
+#include "SymbolDeclaration.h"
+
+class SymbolDeclarationVar : public SymbolDeclaration
 {
 public:
     SymbolDeclarationVar();
+    virtual std::string toString();
+    static Symbol * analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected);
 
 protected:
 

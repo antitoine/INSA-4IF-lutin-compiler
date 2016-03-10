@@ -6,8 +6,6 @@
 
 #include "state.h"
 
-using namespace std;
-
 class State;
 class IActiveSymbol;
 
@@ -20,12 +18,16 @@ typedef struct structVar {
 class Automaton {
 
 private:
-    map<Symbol*, StructVar> dicoVariables;
-    IActiveSymbol activeSymbol();
-    stack<State> stackStates;
+    std::map<Symbol*, StructVar> dicoVariables;
+    IActiveSymbol * activeSymbol;
+    std::stack<State*> stackStates;
+    std::stack<Symbol*> stackSymbols;
 
 public :
-    void readFile(string filename);
+    bool readFile(std::string filename);
+
+private:
+    void computeNewSymbol(Symbol * symbol);
 };
 
 

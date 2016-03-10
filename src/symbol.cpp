@@ -1,9 +1,8 @@
 #include "symbol.h"
 #include <iostream>
+#include <string>
 
-using namespace std;
-
-void Symbol::print() {
-    cout << "Symbol : " << id << endl;
+std::string Symbol::toString() {
+    std::cout << "Symbol : " << id << std::endl;
 }
 

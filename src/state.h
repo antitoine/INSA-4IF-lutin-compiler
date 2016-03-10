@@ -6,18 +6,18 @@
 #include "symbol.h"
 #include "automaton.h"
 
-using namespace std;
+class Automaton;
 
 class State {
 
 public:
-    State(string name);
+    State(std::string name);
     void print() const;
     virtual ~State();
     virtual bool transition(Automaton & automaton, Symbol * symbol);
 
 protected:
-    string name;
+    std::string name;
 };
 
 #endif //LUTIN_COMPILER_STATE_H

@@ -1,8 +1,10 @@
 #include <iostream>
+#include "automaton.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello, World!" << endl;
+    Automaton automaton;
+    automaton.readFile("/home/pierre/Documents/Projects/lutin-compiler/test/testTMP");
     return 0;
 }

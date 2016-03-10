@@ -1,22 +1,55 @@
-#include
-#include "Automaton.h"
+#include <ostream>
+#include <iostream>
+#include <fstream>
+#include "automaton.h"
+#include "Lexer.h"
 
-using namespace std;
+bool Automaton::readFile(std::string filename) {
+    std::string line;
+    std::ifstream file(filename);
+    Symbol * symbol;
 
-bool Automaton::readFile(string filename) {
-    string line;
-    ifstream file(filename);
-
-    if (!myfile.is_open())
+    if (!file.is_open())
     {
-        cerr << "Error: unable to open the file " << filename << endl;
+        std::cerr << "Error: unable to open the file " << filename << std::endl;
         return false;
     }
 
-    while ( getline (myfile, line) )
+    std::cout << "File " << filename << " opened." << std::endl;
+
+    // TODO : line too long
+    while (std::getline(file, line))
     {
-        cout << line << '\n';
+        std::string stringToCompute(line);
+
+        while (!stringToCompute.empty())
+        {
+            std::cout << "String to compute: " << stringToCompute << std::endl;
+            symbol = Lexer::readNextSymbol(stringToCompute);
+
+            if (symbol == NULL) {
+                // TODO : Warning/Error : unknown symbol
+                break;
+            }
+            else
+            {
+                // TODO : Compute symbol
+                computeNewSymbol(symbol);
+            }
+
+        }
+
     }
 
-    myfile.close();
+    file.close();
+}
+
+void Automaton::computeNewSymbol(Symbol * symbol)
+{
+    if (IActiveSymbol * newActiveSymbol = dynamic_cast<IActiveSymbol*>(symbol)) {
+        activeSymbol = newActiveSymbol;
+    }
+
+    stackSymbols.push(symbol);
+    stackStates.top()->transition(*this, symbol);
 }

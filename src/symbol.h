@@ -1,6 +1,8 @@
 #ifndef LUTIN_COMPILER_SYMBOL_H
 #define LUTIN_COMPILER_SYMBOL_H
 
+#include <string>
+
 enum symbolIdTable {
     S_UNIT,
 
@@ -43,7 +45,7 @@ protected:
 public:
     Symbol(int id) : id(id) {}
     virtual ~Symbol() {}
-    void print();
+    virtual std::string toString();
     operator int() const { return id; }
 
 };
