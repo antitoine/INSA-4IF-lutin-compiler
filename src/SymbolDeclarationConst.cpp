@@ -4,12 +4,10 @@
 
 using namespace std;
 
-SymbolDeclarationConst::SymbolDeclarationConst()
-        :SymbolDeclaration(S_DECLARATION_CONST)
+SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATION_CONST)
 {
 
 }
-
 
 Symbol * SymbolDeclarationConst::analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected) {
     // TODO

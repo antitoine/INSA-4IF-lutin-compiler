@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARYSOUSTRACT ) 
-#define SYMBOLEXPRESSIONBINARYSOUSTRACT 
+#if ! defined ( SYMBOLEXPRESSIONBINARYSOUSTRACT )
+#define SYMBOLEXPRESSIONBINARYSOUSTRACT
 
-class SymbolExpressionBinarySoustract
+#include "SymbolExpressionBinary.h"
+
+class SymbolExpressionBinarySoustract : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinarySoustract();

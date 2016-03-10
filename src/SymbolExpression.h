@@ -1,10 +1,12 @@
-#if ! defined ( SYMBOLEXPRESSION ) 
-#define SYMBOLEXPRESSION 
+#if ! defined ( SYMBOLEXPRESSION )
+#define SYMBOLEXPRESSION
 
-class SymbolExpression
+#include "symbol.h"
+
+class SymbolExpression : public Symbol
 {
 public:
-    SymbolExpression();
+    SymbolExpression(enum symbolIdTable idSymbol);
 
 protected:
 

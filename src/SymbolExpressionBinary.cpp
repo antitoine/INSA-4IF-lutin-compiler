@@ -1,11 +1,10 @@
-#include <boost>
+//#include <boost>
 #include <map>
 #include "SymbolExpressionBinary.h"
 
 using namespace std;
 
-SymbolExpressionBinary::SymbolExpressionBinary()
+SymbolExpressionBinary::SymbolExpressionBinary(enum symbolIdTable idSymbol) : SymbolExpression(idSymbol)
 {
 
 }
-	

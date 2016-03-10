@@ -1,4 +1,4 @@
-#if ! defined SYMBOLINSTRUCTION 
+#if ! defined SYMBOLINSTRUCTION
 #define SYMBOLINSTRUCTION
 
 #include "symbol.h"
@@ -6,7 +6,7 @@
 class SymbolInstruction : public Symbol
 {
 public:
-    SymbolInstruction();
+    SymbolInstruction(enum symbolIdTable idSymbol);
 
 protected:
 

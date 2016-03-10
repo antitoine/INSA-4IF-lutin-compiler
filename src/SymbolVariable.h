@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLVARIABLE ) 
-#define SYMBOLVARIABLE 
+#if ! defined ( SYMBOLVARIABLE )
+#define SYMBOLVARIABLE
 
-class SymbolVariable
+#include "SymbolExpression.h"
+
+class SymbolVariable : public SymbolExpression
 {
 public:
     SymbolVariable();

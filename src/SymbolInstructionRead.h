@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLINSTRUCTIONREAD ) 
-#define SYMBOLINSTRUCTIONREAD 
+#if ! defined ( SYMBOLINSTRUCTIONREAD )
+#define SYMBOLINSTRUCTIONREAD
 
-class SymbolInstructionRead
+#include "SymbolInstruction.h"
+
+class SymbolInstructionRead : public SymbolInstruction
 {
 public:
     SymbolInstructionRead();

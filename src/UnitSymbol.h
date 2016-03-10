@@ -9,7 +9,7 @@ public:
     UnitSymbol(enum unitSymbolIdTable);
 
 protected:
-    enum unitSymbolIdTable unitSymbol;
+    enum unitSymbolIdTable type;
 };
 
 #endif

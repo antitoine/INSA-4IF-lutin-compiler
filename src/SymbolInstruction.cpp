@@ -4,7 +4,7 @@
 
 using namespace std;
 
-SymbolInstruction::SymbolInstruction():Symbol(S_INSTRUCTION)
+SymbolInstruction::SymbolInstruction(enum symbolIdTable idSymbol):Symbol(idSymbol)
 {
 
 }

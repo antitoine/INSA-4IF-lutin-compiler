@@ -1,5 +1,5 @@
-#if ! defined ( SYMBOLDECLARATIONVAR ) 
-#define SYMBOLDECLARATIONVAR 
+#if ! defined ( SYMBOLDECLARATIONVAR )
+#define SYMBOLDECLARATIONVAR
 
 #include "SymbolDeclaration.h"
 

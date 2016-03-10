@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARYDIVISION ) 
-#define SYMBOLEXPRESSIONBINARYDIVISION 
+#if ! defined ( SYMBOLEXPRESSIONBINARYDIVISION )
+#define SYMBOLEXPRESSIONBINARYDIVISION
 
-class SymbolExpressionBinaryDivision
+#include "SymbolExpressionBinary.h"
+
+class SymbolExpressionBinaryDivision : SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryDivision();
