@@ -1,11 +1,10 @@
-#include <boost>
+//#include <boost>
 #include <map>
 #include "SymbolInstructionRead.h"
 
 using namespace std;
 
-SymbolInstructionRead::SymbolInstructionRead()
+SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_READ)
 {
 
 }
-	

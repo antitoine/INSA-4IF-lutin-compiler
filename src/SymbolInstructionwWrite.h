@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLINSTRUCTIONWWRITE ) 
-#define SYMBOLINSTRUCTIONWWRITE 
+#if ! defined ( SYMBOLINSTRUCTIONWWRITE )
+#define SYMBOLINSTRUCTIONWWRITE
 
-class SymbolInstructionwWrite
+#include "SymbolInstruction.h"
+
+class SymbolInstructionwWrite : public SymbolInstruction
 {
 public:
     SymbolInstructionwWrite();

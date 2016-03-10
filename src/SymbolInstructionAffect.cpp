@@ -1,11 +1,10 @@
-#include <boost>
+//#include <boost>
 #include <map>
 #include "SymbolInstructionAffect.h"
 
 using namespace std;
 
-SymbolInstructionAffect::SymbolInstructionAffect()
+SymbolInstructionAffect::SymbolInstructionAffect():SymbolInstruction(S_INSTRUCTION_AFFECT)
 {
 
 }
-	

@@ -1,7 +1,9 @@
-#if ! defined ( SYMBOLINSTRUCTIONAFFECT ) 
-#define SYMBOLINSTRUCTIONAFFECT 
+#if ! defined ( SYMBOLINSTRUCTIONAFFECT )
+#define SYMBOLINSTRUCTIONAFFECT
 
-class SymbolInstructionAffect
+#include "SymbolInstruction.h"
+
+class SymbolInstructionAffect : public SymbolInstruction
 {
 public:
     SymbolInstructionAffect();

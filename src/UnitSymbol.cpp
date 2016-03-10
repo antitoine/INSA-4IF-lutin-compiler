@@ -6,5 +6,5 @@ using namespace std;
 
 UnitSymbol::UnitSymbol(enum unitSymbolIdTable uSymbol):Symbol(S_UNIT)
 {
-    unitSymbol = uSymbol;
+    type = uSymbol;
 }
