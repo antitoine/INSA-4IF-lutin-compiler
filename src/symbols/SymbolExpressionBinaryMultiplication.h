@@ -7,6 +7,8 @@ class SymbolExpressionBinaryMultiplication : SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryMultiplication();
+    float eval(std::map<Symbol*, StructVar> & dicoVariables);
+
 
 protected:
 

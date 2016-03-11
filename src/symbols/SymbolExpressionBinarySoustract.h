@@ -7,6 +7,7 @@ class SymbolExpressionBinarySoustract : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinarySoustract();
+    float eval(std::map<Symbol*, StructVar> & dicoVariables);
 
 protected:
 

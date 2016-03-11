@@ -10,6 +10,8 @@ public:
     virtual std::string toString();
     static Symbol * analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected);
     std::string getName() const;
+    float eval(std::map<Symbol*, StructVar> & dicoVariables);
+
 
 protected:
 

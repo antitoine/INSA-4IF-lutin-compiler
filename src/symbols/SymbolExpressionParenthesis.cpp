@@ -4,7 +4,10 @@
 
 using namespace std;
 
-SymbolExpressionParenthesis::SymbolExpressionParenthesis() : SymbolExpression(S_EXPRESSION_PARENTHESIS)
-{
+SymbolExpressionParenthesis::SymbolExpressionParenthesis() : SymbolExpression(S_EXPRESSION_PARENTHESIS) {
 
+}
+
+float SymbolExpressionParenthesis::eval(std::map<Symbol*, StructVar> & dicoVariables){
+    return symbolExpression->eval(dicoVariables);
 }
