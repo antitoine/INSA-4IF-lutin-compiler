@@ -8,7 +8,8 @@ class State2 : public State {
 public:
     State2();
     virtual ~State2();
-    virtual bool transition(Automaton automaton, Symbol symbol);
+    virtual bool transition(Automaton & automaton, Symbol * symbol);
+
 };
 
 #endif //LUTIN_COMPILER_STATE2_H

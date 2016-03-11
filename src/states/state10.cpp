@@ -8,7 +8,7 @@ State10::State10() : State("10") {
 State10::~State10() {
 }
 
-bool State10::transition(Automaton automaton, Symbol symbol) {
+bool State10::transition(Automaton & automaton, Symbol * symbol) {
     switch (symbol->getId()) {
 
         /*
