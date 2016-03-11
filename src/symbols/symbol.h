@@ -34,7 +34,8 @@ enum unitSymbolIdTable {
     SU_ENDING_PAR,
     SU_OPENNING_PAR,
     SU_COMMA,
-    SU_SEMICOLON
+    SU_SEMICOLON,
+    SU_DOLLAR
 };
 
 enum unterminalSymbolIdTable {

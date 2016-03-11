@@ -5,6 +5,9 @@
 #include "automaton.h"
 #include "Lexer.h"
 #include "states/state0.h"
+#include "symbols/SymbolDeclarationVar.h"
+
+using namespace std;
 
 void Automaton::init() {
     // TODO
@@ -61,26 +64,18 @@ void Automaton::computeNewSymbol(Symbol * symbol)
 }
 
 void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
-    // TODO : refaire
-    std::list<Symbol*> symbolsToCompute;
 
-    for (int i=0, maxI = reductionSize - 1; i <= maxI; ++i) {
+    for (int i = 0; i < reductionSize; ++i) {
         stackStates.pop();
-
-        if (i != maxI) {
-            symbolsToCompute.push_back(stackSymbols.top());
-        } else {
-            Symbol * activeSymbol = stackSymbols.top();
-            activeSymbol->computeSublistSymbols(symbolsToCompute);
-            listActiveSymbols.push_back(activeSymbol);
-        }
-
-        stackSymbols.pop();
     }
 
-    //stackStates.push(newState);
+    stackStates.top()->transition(*this, unterminalSymbol);
 }
 
 void Automaton::transition(Symbol * symbol, State * newState) {
     stackStates.push(newState);
+}
+
+void Automaton::accept() {
+    // TODO implementer
 }

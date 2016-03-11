@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "state.h"
 #include "../symbols/symbol.h"
 #include "../automaton.h"
 
@@ -14,7 +15,7 @@ public:
     State(std::string name);
     void print() const;
     virtual ~State();
-    virtual bool transition(Automaton & automaton, Symbol * symbol) = 0;
+    virtual bool transition(Automaton & automaton, Symbol * symbol);
 
 protected:
     std::string name;
