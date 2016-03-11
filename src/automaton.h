@@ -9,9 +9,10 @@ class State;
 class IActiveSymbol;
 
 typedef struct structVar {
-    // What define a symbol : what it contains and if it's constant
+    // What define a symbol : what it contains, if it's constant, and if it has been initialized yet
     float value;
     bool constant;
+    bool initialized;
 } StructVar;
 
 class Automaton {

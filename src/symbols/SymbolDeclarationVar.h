@@ -11,6 +11,8 @@ public:
     virtual std::string toString();
     static Symbol * analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected);
     virtual void computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute);
+    void execute(std::map<Symbol*, StructVar> & dicoVariables);
+
 
 protected:
 
