@@ -1,8 +1,6 @@
 #include <string>
 #include <iostream>
 #include "state.h"
-#include "../symbols/symbol.h"
-#include "../automaton.h"
 
 using namespace std;
 

@@ -1,8 +1,6 @@
 #include "state0.h"
 #include "state1.h"
 #include "../symbols/SymbolUnterminal.h"
-#include "../symbols/symbol.h"
-#include "../automaton.h"
 
 State0::State0() : State(" 0") {
 }
