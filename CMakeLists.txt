@@ -7,6 +7,8 @@ set(SOURCE_FILES src/main.cpp src/automaton.cpp src/automaton.h src/states/state
 
 include_directories(lib/re2)
 
+set(LIB_RE2 ${CMAKE_CURRENT_SOURCE_DIR}/lib/re2)
+
 add_executable(lutin_compiler ${SOURCE_FILES})
 
-target_link_libraries(lutin_compiler libre2.a pthread)
+target_link_libraries(lutin_compiler ${LIB_RE2}/libre2.a pthread)
