@@ -1,25 +1,25 @@
 #include "state0.h"
 #include "state1.h"
 #include "../symbols/SymbolUnterminal.h"
+#include "../symbols/symbol.h"
+#include "../automaton.h"
 
 State0::State0() : State(" 0") {
 }
 
-
 State0::~State0() {
 }
-
 
 bool State0::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
         /*
          * R3 : D -> Epsilon *
-         * var   | R3
-         * const | R3
-         * id    | R3
-         * lire  | R3
-         * ecrire| R3
+         * var    | R3
+         * const  | R3
+         * id     | R3
+         * lire   | R3
+         * ecrire | R3
          */
 
         case S_DECLARATION_VAR:
@@ -31,7 +31,7 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
             return true;
 
         /*
-         * D     | E1
+         * D : E1
          */
 
         case S_DECLARATION:

@@ -38,6 +38,7 @@ enum "TypeUnitSymbol" as ENUM_SYMBOLE_UNITAIRE {
     SU_OPENING_PAR
     SU_SEMICOLON
     SU_COMMA
+    SU_DOLLAR
 }
 class "SymbolUnit" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
     - type: TypeUnitSymbol
