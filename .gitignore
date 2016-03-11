@@ -36,3 +36,8 @@
 /CMakeCache.txt
 /cmake_install.cmake
 /Makefile
+
+# Libs
+/local
+!/lib/*.a
+!/lib/*.o

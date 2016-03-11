@@ -18,6 +18,7 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
          * lire   | R4
          * ecrire | R4
          */
+
         case S_DECLARATION_VAR:
         case S_DECLARATION_CONST:
         case S_VARIABLE:

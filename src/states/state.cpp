@@ -19,3 +19,4 @@ bool State::transition(Automaton & automaton, Symbol * symbol) {
     return false;
 
 }
+

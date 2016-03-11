@@ -1,0 +1,6 @@
+#ifndef LUTIN_COMPILER_TESTREGEX_H
+#define LUTIN_COMPILER_TESTREGEX_H
+
+void testRegex();
+
+#endif //LUTIN_COMPILER_TESTREGEX_H
