@@ -11,7 +11,7 @@ class SymbolInstruction : public Symbol
 {
 public:
     SymbolInstruction(enum symbolIdTable idSymbol);
-    virtual void execute(std::map<Symbol*, StructVar> & dicoVariables);
+    virtual void execute(std::map<Symbol*, StructVar> & dicoVariables) = 0;
 
 protected:
 

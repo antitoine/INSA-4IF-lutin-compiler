@@ -10,7 +10,7 @@ public:
     SymbolDeclaration(enum symbolIdTable idSymbol);
     SymbolDeclaration();
     virtual std::string toString();
-    virtual void execute(std::map<Symbol*, StructVar> & dicoVariables);
+    virtual void execute(std::map<Symbol*, StructVar> & dicoVariables) = 0 ;
 
 
 protected:

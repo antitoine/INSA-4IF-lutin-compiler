@@ -7,7 +7,7 @@ class SymbolExpressionBinary : public SymbolExpression {
 public:
     SymbolExpressionBinary(enum symbolIdTable idSymbol);
 
-    virtual float eval(std::map<Symbol *, StructVar> &dicoVariables);
+    virtual float eval(std::map<Symbol *, StructVar> &dicoVariables) = 0;
 
 
 protected:
