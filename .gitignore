@@ -2,7 +2,7 @@
 # Compiled Object files
 *.slo
 *.lo
-#*.o
+*.o
 *.obj
 
 # Precompiled Headers
@@ -20,7 +20,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-#*.a
+*.a
 *.lib
 
 # Executables
@@ -37,5 +37,7 @@
 /cmake_install.cmake
 /Makefile
 
-
+# Libs
 /local
+!/lib/*.a
+!/lib/*.o
