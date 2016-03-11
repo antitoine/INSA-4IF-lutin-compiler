@@ -1,4 +1,5 @@
 #include "state25.h"
+#include "../symbols/SymbolUnterminal.h"
 
 State25::State25() : State("25") {
 }
