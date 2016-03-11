@@ -3,11 +3,9 @@
 #include "state24.h"
 
 State13::State13() : State("13") {
-
 }
 
 State13::~State13() {
-
 }
 
 
@@ -17,7 +15,6 @@ bool State13::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * ; : E23
          */
-
         case SU_SEMICOLON:
             automaton.transition(symbol, new State23());
             return true;

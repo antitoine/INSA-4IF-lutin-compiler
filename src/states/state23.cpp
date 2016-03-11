@@ -1,5 +1,6 @@
 #include "state23.h"
 #include "state3.h"
+#include "../symbols/SymbolUnterminal.h"
 
 State23::State23()
         :State("")
@@ -27,7 +28,7 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
 
         case SU_SEMICOLON:
             // TODO
-            automaton.reduction(3, new State3());
+            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
             return true;
 
         default:

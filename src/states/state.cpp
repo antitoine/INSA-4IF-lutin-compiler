@@ -4,8 +4,7 @@
 
 using namespace std;
 
-State::State(string name) {
-    this->name = name;
+State::State(string name) : name(name) {
 }
 
 State::~State() {
@@ -14,8 +13,6 @@ State::~State() {
 void State::print() const {
     cout << "State : " << name << endl;
 }
-
-
 
 bool State::transition(Automaton & automaton, Symbol * symbol) {
     // TODO : make abstract
