@@ -31,3 +31,15 @@ Symbol * SymbolVariable::analyse(const std::string & stringToAnalyse, std::strin
 std::string SymbolVariable::getName() const {
     return name;
 }
+
+float SymbolVariable::eval(std::map<Symbol*, StructVar> & dicoVariables){
+    std::map<Symbol*, StructVar>::iterator it = dicoVariables.find(this);
+
+    //if the variable has already been initialized
+    if(it->second.initialized == true){
+        return it->second.value;
+    }
+    else{
+        std::cout << "Variable " << this->getName() << "has not been declared" << std::endl;
+    }
+}

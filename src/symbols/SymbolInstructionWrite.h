@@ -8,6 +8,7 @@ class SymbolInstructionWrite : public SymbolInstruction
 {
 public:
     SymbolInstructionWrite();
+    void execute(std::map<Symbol*, StructVar> & dicoVariables);
 
 protected:
     SymbolExpression* symbolExpression;

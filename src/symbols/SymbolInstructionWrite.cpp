@@ -4,7 +4,10 @@
 
 using namespace std;
 
-SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION_WRITE)
-{
+SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION_WRITE) {
 
+}
+
+void SymbolInstructionWrite::execute(std::map<Symbol*, StructVar> & dicoVariables) {
+    cout << symbolExpression->eval(dicoVariables) << endl;
 }

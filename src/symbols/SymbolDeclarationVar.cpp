@@ -38,3 +38,14 @@ void SymbolDeclarationVar::computeSublistSymbols(const std::list<Symbol*> & symb
         }
     }
 }
+
+void SymbolDeclarationVar::execute(std::map<Symbol*, StructVar> & dicoVariables) {
+    for (SymbolVariable * v : variables) {
+        StructVar s = {0, false, false};
+        std::pair<std::map<Symbol*, StructVar>::iterator, bool> variableExist = dicoVariables.insert(std::pair<Symbol *, StructVar>(v, s));
+        if(variableExist.second == false){
+            std::cout << "Variable " << v->getName() << "has already been declared" << std::endl;
+        }
+
+    }
+}

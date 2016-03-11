@@ -16,7 +16,7 @@ std::string SymbolDeclarationConst::toString() {
 
 Symbol * SymbolDeclarationConst::analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected) {
     std::smatch match;
-    std::regex regex("^(var )");
+    std::regex regex("^(const )");
 
     if (std::regex_search(stringToAnalyse.begin(), stringToAnalyse.end(), match, regex))
     {
@@ -26,5 +26,16 @@ Symbol * SymbolDeclarationConst::analyse(const std::string & stringToAnalyse, st
     else
     {
         return NULL;
+    }
+}
+
+void SymbolDeclarationConst::execute(std::map<Symbol*, StructVar> & dicoVariables) {
+    //For each constant declaration, add it to dicoVariable
+    for (auto const &v : constants) {
+        StructVar s = {v.second, true, true};
+        std::pair<std::map<Symbol*, StructVar>::iterator, bool> variableExist = dicoVariables.insert(std::pair<Symbol *, StructVar>(v.first, s));
+        if(variableExist.second == false){
+            std::cout << "Variable " << v.first->getName() << "has already been declared" << std::endl;
+        }
     }
 }

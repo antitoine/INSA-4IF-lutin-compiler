@@ -4,7 +4,10 @@
 
 using namespace std;
 
-SymbolExpressionBinarySoustract::SymbolExpressionBinarySoustract() : SymbolExpressionBinary(S_EXPRESSION_BIN_SUB)
-{
+SymbolExpressionBinarySoustract::SymbolExpressionBinarySoustract() : SymbolExpressionBinary(S_EXPRESSION_BIN_SUB) {
 
+}
+
+float SymbolExpressionBinarySoustract::eval(std::map<Symbol*, StructVar> & dicoVariables){
+    return firstOperand->eval(dicoVariables) - secondOperand->eval(dicoVariables);
 }
