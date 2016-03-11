@@ -1,6 +1,8 @@
 #ifndef LUTIN_COMPILER_STATE10_H
 #define LUTIN_COMPILER_STATE10_H
 
+#include "state.h"
+
 class State10 : public State {
 
 public:

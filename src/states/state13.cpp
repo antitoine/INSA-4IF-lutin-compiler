@@ -17,7 +17,6 @@ bool State13::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * ; : E23
          */
-
         case SU_SEMICOLON:
             automaton.transition(symbol, new State23());
             return true;
