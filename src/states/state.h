@@ -15,7 +15,7 @@ public:
     State(std::string name);
     void print() const;
     virtual ~State();
-    virtual bool transition(Automaton & automaton, Symbol * symbol);
+    virtual bool transition(Automaton & automaton, Symbol * symbol) = 0;
 
 protected:
     std::string name;

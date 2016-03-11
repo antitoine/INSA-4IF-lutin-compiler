@@ -12,40 +12,19 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
 
         /*
          * R4 : D’ → var V ;
-         * var | R4
-         */
-        case S_DECLARATION_VAR:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
-            return true;
-
-        /*
-         * const | R4
-         */
-        case S_DECLARATION_CONST:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
-            return true;
-
-        /*
-         * id | R4
-         */
-        case S_VARIABLE:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
-            return true;
-
-        /*
-         * lire | R4
-         */
-        case S_INSTRUCTION_READ:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
-            return true;
-
-        /*
+         * var    | R4
+         * const  | R4
+         * id     | R4
+         * lire   | R4
          * ecrire | R4
          */
+        case S_DECLARATION_VAR:
+        case S_DECLARATION_CONST:
+        case S_VARIABLE:
+        case S_INSTRUCTION_READ:
         case S_INSTRUCTION_WRITE:
             automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
             return true;
-
 
         default:
             // TODO : handle exceptions with warning message
