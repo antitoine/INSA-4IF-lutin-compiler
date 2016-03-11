@@ -5,7 +5,7 @@ class State25 : public State {
 
 public:
     State25();
-    ~State25();
+    virtual ~State25();
     bool transition(Automaton automaton, Symbol symbol);
 
 };

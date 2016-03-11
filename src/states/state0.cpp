@@ -12,7 +12,7 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
         /*
-         * R3 : D -> Epsilon *
+         * R3 : D -> Epsilon
          * var    | R3
          * const  | R3
          * id     | R3
