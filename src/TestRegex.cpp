@@ -1,6 +1,7 @@
-#include <boost/regex.hpp>
 #include <string>
 #include <iostream>
+#include <re2/re2.h>
+#include <assert.h>
 #include "TestRegex.h"
 
 void testRegex () {
@@ -9,12 +10,14 @@ void testRegex () {
 //    cerr << "st|mt|tr" << " matches mt? " << regex_match("mt", r) << endl;
 //    cerr << "st|mt|tr" << " matches tr? " << regex_match("tr", r) << endl;
 
+    assert(RE2::FullMatch("hello", "h.*o"));
+    assert(!RE2::FullMatch("hello", "e"));
 
     // Regex for the project
-    boost::regex REG_VAR("(var )");
-    std::string var = "var ";
-    boost::smatch match;
-    std::cout << "Match : " << regex_match(var, match, REG_VAR);
+    //boost::regex REG_VAR("(var )");
+//    std::string var = "var ";
+//    boost::smatch match;
+//    std::cout << "Match : " << regex_match(var, match, REG_VAR);
 
 //    regex REG_CONST("^const ");
 //    regex REG_LIRE("^lire ");
