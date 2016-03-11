@@ -25,7 +25,7 @@ bool State14::transition(Automaton & automaton, Symbol * symbol) {
         // TODO : implements missing symbols
 
         case SU_SEMICOLON:
-            automaton.reduction(1, new State13());
+            //automaton.reduction(1, new State13());
             return true;
 
         default:

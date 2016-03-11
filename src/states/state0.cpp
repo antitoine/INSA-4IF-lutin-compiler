@@ -30,7 +30,7 @@ bool State0::transition(Automaton & automaton, Symbol * symbol) {
         case S_VARIABLE:
         case S_INSTRUCTION_READ:
         case S_INSTRUCTION_WRITE:
-            automaton.reduction(0, new State1());
+//            automaton.reduction(0, new State1());
             return true;
 
         /*

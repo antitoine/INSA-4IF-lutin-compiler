@@ -27,7 +27,7 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
 
         case SU_SEMICOLON:
             // TODO
-            automaton.reduction(3, new State3());
+            //automaton.reduction(3, new State3());
             return true;
 
         default:

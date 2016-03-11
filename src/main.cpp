@@ -1,10 +1,11 @@
 #include <iostream>
-#include "automaton.h"
+#include "TestRegex.h"
 
 using namespace std;
 
 int main() {
-    Automaton automaton;
-    automaton.readFile("/home/pierre/Documents/Projects/lutin-compiler/test/testTMP");
+    cout << "Hello, World!" << endl;
+
+    testRegex();
     return 0;
 }
