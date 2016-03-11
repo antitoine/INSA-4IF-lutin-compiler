@@ -60,8 +60,8 @@ void Automaton::computeNewSymbol(Symbol * symbol)
     stackStates.top()->transition(*this, symbol);
 }
 
-void Automaton::reduction(int reductionSize, State * newState) {
-    std::cout << "reduction !" << std::endl;
+void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
+    // TODO : refaire
     std::list<Symbol*> symbolsToCompute;
 
     for (int i=0, maxI = reductionSize - 1; i <= maxI; ++i) {
@@ -78,7 +78,7 @@ void Automaton::reduction(int reductionSize, State * newState) {
         stackSymbols.pop();
     }
 
-    stackStates.push(newState);
+    //stackStates.push(newState);
 }
 
 void Automaton::transition(Symbol * symbol, State * newState) {

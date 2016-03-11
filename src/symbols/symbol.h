@@ -37,6 +37,18 @@ enum unitSymbolIdTable {
     SU_SEMICOLON
 };
 
+enum unterminalSymbolIdTable {
+    UT_P = SU_SEMICOLON + 1,
+    UT_D,
+    UT_D_PRIM,
+    UT_V,
+    UT_C,
+    UT_I,
+    UT_I_PRIM,
+    UT_E
+};
+
+
 class Symbol {
 
 protected:
