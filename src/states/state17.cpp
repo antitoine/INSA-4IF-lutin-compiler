@@ -6,11 +6,9 @@
 #include "state32.h"
 
 State17::State17() : State("17") {
-
 }
 
 State17::~State17() {
-
 }
 
 bool State17::transition(Automaton & automaton, Symbol * symbol) {

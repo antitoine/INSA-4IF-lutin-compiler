@@ -2,11 +2,9 @@
 #include "state21.h"
 
 State11::State11() : State("11") {
-
 }
 
 State11::~State11() {
-
 }
 
 bool State11::transition(Automaton automaton, Symbol symbol) {

@@ -3,11 +3,9 @@
 #include "state24.h"
 
 State13::State13() : State("13") {
-
 }
 
 State13::~State13() {
-
 }
 
 

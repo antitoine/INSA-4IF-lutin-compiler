@@ -5,11 +5,9 @@
 #include "state33.h"
 
 State18::State18() : State("18") {
-
 }
 
 State18::~State18() {
-
 }
 
 bool State18::transition(Automaton & automaton, Symbol * symbol) {
