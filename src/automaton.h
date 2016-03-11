@@ -27,6 +27,7 @@ public :
     bool readFile(std::string filename);
     void transition(Symbol * symbol, State * newState);
     void reduction(int reductionSize, Symbol * unterminalSymbol);
+    void accept();
 
 private:
     void computeNewSymbol(Symbol * symbol);

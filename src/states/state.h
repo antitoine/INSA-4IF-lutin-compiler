@@ -3,10 +3,9 @@
 
 #include <string>
 #include <iostream>
+#include "state.h"
 #include "../symbols/symbol.h"
 #include "../automaton.h"
-
-class Automaton;
 
 class State {
 

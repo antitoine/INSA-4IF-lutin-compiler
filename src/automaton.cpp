@@ -84,3 +84,7 @@ void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
 void Automaton::transition(Symbol * symbol, State * newState) {
     stackStates.push(newState);
 }
+
+void Automaton::accept() {
+    // TODO implementer
+}
