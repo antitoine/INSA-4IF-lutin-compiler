@@ -65,19 +65,7 @@ void Automaton::computeNewSymbol(Symbol * symbol)
 
 void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
 
-    std::list<Symbol*> symbolsToCompute;
-
-    switch (unterminalSymbol->getId()) {
-        case UT_D_PRIM:
-            SymbolDeclarationVar* declarationVar;
-            while (!stackSymbols.empty() && (declarationVar != dynamic_cast<SymbolDeclarationVar*>(stackSymbols.top()))) {
-                symbolsToCompute.push_back(stackSymbols.top());
-                stackSymbols.pop();
-            }
-            break;
-    }
-
-    for (int i=0, maxI = reductionSize - 1; i <= maxI; ++i) {
+    for (int i = 0; i < reductionSize; ++i) {
         stackStates.pop();
     }
 
