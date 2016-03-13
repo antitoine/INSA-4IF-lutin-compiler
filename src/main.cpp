@@ -3,6 +3,7 @@
 #include <string.h>
 #include "automaton.h"
 #include "symbols/RegexSymbol.h"
+#include "TestRegex.h"
 
 using namespace std;
 

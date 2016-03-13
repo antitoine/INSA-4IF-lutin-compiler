@@ -29,15 +29,16 @@ const RE2 * RegexSymbol::findRegex(Regex::Symbol regexToFind) {
     return NULL;
 }
 
-bool RegexSymbol::matches(std::string stringToMatch, Regex::Symbol regexToMatch) {
+MatchingResult RegexSymbol::matches(const std::string & stringToMatch, const Regex::Symbol regexToMatch) {
     const RE2 * regex = findRegex(regexToMatch);
-    if(regex == NULL) {
-        return false;
-    }
+    if(regex != NULL) {
+        re2::StringPiece result;
+        if(RE2::PartialMatch(stringToMatch, *regex, &result)) {
+            std::string stringConsumed = result.end();
 
-    if(RE2::PartialMatch(stringToMatch, *regex)) {
-        return true;
+            return MatchingResult {true, stringConsumed};
+        }
     }
-    return false;
+    return MatchingResult {false, ""};
 }
 

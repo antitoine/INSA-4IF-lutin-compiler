@@ -24,6 +24,11 @@ namespace Regex {
     };
 }
 
+typedef struct MatchingResult {
+    bool matched;
+    std::string stringConsumed;
+} MatchingResult;
+
 static const RE2 REG_VAR("^(var )");
 static const RE2 REG_CONST("^(const )");
 static const RE2 REG_LIRE("^(lire )");
@@ -43,10 +48,10 @@ static const RE2 REG_SEPARATEUR_DECLARATION("^(,)");
 
 class RegexSymbol {
 public:
-    static bool matches(std::string stringToMatch, Regex::Symbol regexToMatch);
+    static MatchingResult matches(const std::string & stringToMatch, const Regex::Symbol regexToMatch);
 
 private:
-    RegexSymbol();
+    RegexSymbol() {};
     static const RE2 * findRegex(Regex::Symbol regexToFind);
 
 private:

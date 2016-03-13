@@ -3,8 +3,18 @@
 #include <re2/re2.h>
 #include <assert.h>
 #include "TestRegex.h"
+#include "symbols/RegexSymbol.h"
 
-void testRegex () {
+
+void testRegex() {
+    using namespace std;
+    cout << "Matches : " << RegexSymbol::matches("var ab", Regex::Symbol::VAR).matched << endl;
+    string foo = "var ab";
+    string res = RegexSymbol::matches(foo, Regex::Symbol::VAR).stringConsumed;
+    cout << "Advanced : " << res << endl;
+}
+
+void testRegexOld() {
 
     RE2 REG_VAR("^(var )");
     if(!REG_VAR.ok()) {
@@ -83,7 +93,7 @@ void testRegex () {
     for(int i = 0; i < 6; i++) {
         re2::StringPiece result;
         if(RE2::PartialMatch(text[i], "([aeiou])", &result))
-            std::cout << "First lower-case vowel at " << result.data() - text[i].data() << " & " << result.data() << " - " << text[i].data() << "\n";
+            std::cout << "First lower-case vowel at " << result.data() - text[i].data() << " & " << result.data() << " - " << text[i].data() << " -- " << result.length() << "\n";
         else
             std::cout << "No lower-case vowel\n";
     }
