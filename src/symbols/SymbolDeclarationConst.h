@@ -14,6 +14,9 @@ public:
 
 protected:
     std::map<SymbolVariable*, float> constants;
+
+private:
+
 };
 
 #endif

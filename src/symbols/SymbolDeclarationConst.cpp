@@ -3,6 +3,8 @@
 #include <regex>
 #include "SymbolDeclarationConst.h"
 #include "symbol.h"
+#include "RegexSymbol.h"
+#include <re2/re2.h>
 
 
 SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATION_CONST)
@@ -15,8 +17,17 @@ std::string SymbolDeclarationConst::toString() {
 }
 
 Symbol * SymbolDeclarationConst::analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+
+
     std::smatch match;
     std::regex regex("^(const )");
+
+    // TODO pointers ?
+//    RE2 regexa = regexes.find(Symbol::CONST)->second;
+//    re2::StringPiece result;
+//    if(RE2::PartialMatch(stringToAnalyse, regexa, &result)) {
+//        result.data();
+//    }
 
     if (std::regex_search(stringToAnalyse.begin(), stringToAnalyse.end(), match, regex))
     {

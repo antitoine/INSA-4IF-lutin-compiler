@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <string.h>
 #include "automaton.h"
+#include "symbols/RegexSymbol.h"
 
 using namespace std;
 
