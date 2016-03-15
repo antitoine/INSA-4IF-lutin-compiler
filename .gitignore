@@ -27,6 +27,7 @@
 *.exe
 *.out
 *.app
+/bin
 
 # IDE
 /.idea
@@ -41,3 +42,7 @@
 /local
 !/lib/*.a
 !/lib/*.o
+
+# Tests
+/tests/*.csv
+/tests/lut
