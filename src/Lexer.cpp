@@ -7,6 +7,7 @@
 #include "symbols/SymbolDeclarationVar.h"
 #include "symbols/SymbolDeclarationConst.h"
 #include "symbols/UnitSymbol.h"
+#include "symbols/SymbolNumber.h"
 
 Symbol * Lexer::readNextSymbol(std::string & stringToRead)
 {
@@ -17,15 +18,14 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead)
     if ((symbol = SymbolDeclarationVar::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolVariable::analyse(stringToRead, symbolDetected)) != NULL);
+    else if ((symbol = SymbolNumber::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);
 
     // If a symbol is found
     if (symbol != NULL) {
         std::cout << "Symbol detected: " << symbolDetected << std::endl;
-
-        // Reduce the string
-        stringToRead.erase(0, symbolDetected.length());
     }
 
     return symbol;
 }
+

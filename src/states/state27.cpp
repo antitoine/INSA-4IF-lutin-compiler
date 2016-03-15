@@ -14,6 +14,7 @@ bool State27::transition(Automaton & automaton, Symbol * symbol) {
          * val : E37
          */
         case S_NUMBER:
+            automaton.addConstantValueToCurrentDeclarationConst((SymbolNumber *) symbol);
             automaton.transition(symbol, new State37());
             return true;
 

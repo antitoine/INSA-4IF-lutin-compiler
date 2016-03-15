@@ -2,22 +2,25 @@
 #define SYMBOLDECLARATIONVAR
 
 #include "SymbolDeclaration.h"
-#include "SymbolVariable.h"
+
+class SymbolVariable;
+
+using namespace std;
 
 class SymbolDeclarationVar : public SymbolDeclaration
 {
 public:
     SymbolDeclarationVar();
-    virtual std::string toString();
-    static Symbol * analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected);
-    virtual void computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute);
-    void execute(std::map<Symbol*, StructVar> & dicoVariables);
+    virtual string toString();
+    static Symbol * analyse(string & stringToAnalyse, string & stringSymbolDetected);
+    void execute(map<Symbol*, StructVar> & dicoVariables);
 
+    void addVariable(SymbolVariable *pVariable);
 
 protected:
 
 private:
-    std::list<SymbolVariable*> variables;
+    list<SymbolVariable*> variables;
 };
 
 #endif

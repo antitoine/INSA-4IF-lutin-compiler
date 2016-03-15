@@ -1,9 +1,11 @@
 #include <map>
 #include <ostream>
 #include <iostream>
-#include <regex>
 #include "SymbolDeclarationVar.h"
+#include "SymbolVariable.h"
+#include "RegexSymbol.h"
 
+using namespace std;
 
 SymbolDeclarationVar::SymbolDeclarationVar()
         :SymbolDeclaration(S_DECLARATION_VAR)
@@ -11,17 +13,17 @@ SymbolDeclarationVar::SymbolDeclarationVar()
 
 }
 
-std::string SymbolDeclarationVar::toString() {
-    std::cout << "Symbol VAR (id: " << id << ")" << std::endl;
+string SymbolDeclarationVar::toString() {
+    cout << "Symbol VAR (id: " << id << ")" << endl;
 }
 
-Symbol * SymbolDeclarationVar::analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected) {
-    std::smatch match;
-    std::regex regex("^(var )");
+Symbol * SymbolDeclarationVar::analyse(string & stringToAnalyse, string & stringSymbolDetected) {
+    MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::VAR);
 
-    if (std::regex_search(stringToAnalyse.begin(), stringToAnalyse.end(), match, regex))
+    if (result.matched)
     {
-        stringSymbolDetected = match[1].str().c_str();
+        stringToAnalyse = result.stringConsumed;
+        stringSymbolDetected = result.stringMatched;
         return new SymbolDeclarationVar();
     }
     else
@@ -30,22 +32,20 @@ Symbol * SymbolDeclarationVar::analyse(const std::string & stringToAnalyse, std:
     }
 }
 
-void SymbolDeclarationVar::computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute) {
-    std::cout << "compute !!" << std::endl;
-    for (Symbol * s : symbolsToCompute) {
-        if (SymbolVariable* var = dynamic_cast<SymbolVariable*>(s)) {
-            std::cout << "var detected!" << std::endl;
+void SymbolDeclarationVar::execute(map<Symbol*, StructVar> & dicoVariables) {
+    cout << "#TRACE: execute declaration var" << endl;
+    for (SymbolVariable * v : variables) {
+        StructVar s = {0, false, false};
+        pair<map<Symbol*, StructVar>::iterator, bool> variableExist = dicoVariables.insert(pair<Symbol *, StructVar>(
+                (Symbol *const &) v, s));
+        // TODO : Incorrect
+        if(variableExist.second == false){
+            cout << "Variable " << ((SymbolVariable*)v)->getName() << "has already been declared" << endl;
         }
+
     }
 }
 
-void SymbolDeclarationVar::execute(std::map<Symbol*, StructVar> & dicoVariables) {
-    for (SymbolVariable * v : variables) {
-        StructVar s = {0, false, false};
-        std::pair<std::map<Symbol*, StructVar>::iterator, bool> variableExist = dicoVariables.insert(std::pair<Symbol *, StructVar>(v, s));
-        if(variableExist.second == false){
-            std::cout << "Variable " << v->getName() << "has already been declared" << std::endl;
-        }
-
-    }
+void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable) {
+    variables.push_back(pVariable);
 }

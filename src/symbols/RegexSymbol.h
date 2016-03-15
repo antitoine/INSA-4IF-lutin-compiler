@@ -26,6 +26,7 @@ namespace Regex {
 
 typedef struct MatchingResult {
     bool matched;
+    std::string stringMatched;
     std::string stringConsumed;
 } MatchingResult;
 

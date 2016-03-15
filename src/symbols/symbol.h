@@ -3,6 +3,10 @@
 
 #include <string>
 #include <list>
+#include <map>
+#include "../StructVar.h"
+
+using namespace std;
 
 enum symbolIdTable {
     S_UNIT,
@@ -61,6 +65,9 @@ public:
     virtual std::string toString();
     virtual void computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute);
     operator int() const { return id; }
+
+    virtual bool isPersistent() const;
+    virtual void execute(map<Symbol*, StructVar> & dicoVariables);
 
     int getId() const;
 

@@ -16,6 +16,7 @@ bool State8::transition(Automaton & automaton, Symbol * symbol) {
          */
 
         case S_VARIABLE:
+            automaton.addVariableToCurrentDeclarationVar((SymbolVariable *) symbol);
             automaton.transition(symbol, new State14());
             return true;
 

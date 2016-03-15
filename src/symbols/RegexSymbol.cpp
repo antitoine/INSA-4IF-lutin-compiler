@@ -36,9 +36,9 @@ MatchingResult RegexSymbol::matches(const std::string & stringToMatch, const Reg
         if(RE2::PartialMatch(stringToMatch, *regex, &result)) {
             std::string stringConsumed = result.end();
 
-            return MatchingResult {true, stringConsumed};
+            return MatchingResult {true, result.as_string(), stringConsumed};
         }
     }
-    return MatchingResult {false, ""};
+    return MatchingResult {false, "", ""};
 }
 

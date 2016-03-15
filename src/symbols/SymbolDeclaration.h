@@ -1,8 +1,9 @@
 #if ! defined SYMBOLDECLARATION
 #define SYMBOLDECLARATION
 
-#include "symbol.h"
+#include "../StructVar.h"
 #include "../automaton.h"
+#include "symbol.h"
 
 class SymbolDeclaration : public Symbol
 {
@@ -11,7 +12,7 @@ public:
     SymbolDeclaration();
     virtual std::string toString();
     virtual void execute(std::map<Symbol*, StructVar> & dicoVariables) = 0 ;
-
+    virtual bool isPersistent() const;
 
 protected:
 };

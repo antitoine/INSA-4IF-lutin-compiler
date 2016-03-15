@@ -3,6 +3,7 @@
 #include <iostream>
 #include "UnitSymbol.h"
 #include "SymbolVariable.h"
+#include "RegexSymbol.h"
 
 using namespace std;
 
@@ -14,15 +15,30 @@ std::string UnitSymbol::toString() {
     std::cout << "Symbol ID (id: " << id << ")" << std::endl;
 }
 
-Symbol * UnitSymbol::analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+Symbol * UnitSymbol::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+    Symbol * unitSymbol = NULL;
+    MatchingResult result;
 
-    char firstCharacter = stringToAnalyse.c_str()[0];
-
-    // TODO
-    switch (firstCharacter) {
-        case ';':
-            return new UnitSymbol(SU_SEMICOLON);
+    if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::FIN_INSTRUCTION)).matched) {
+        unitSymbol = new UnitSymbol(SU_SEMICOLON);
+    } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::SEPARATEUR_DECLARATION)).matched) {
+        unitSymbol = new UnitSymbol(SU_COMMA);
+    } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::OP_DECLARER)).matched) {
+        unitSymbol = new UnitSymbol(SU_EQUAL);
     }
 
-    return NULL;
+    // TODO : other cases
+
+    if (result.matched)
+    {
+        stringSymbolDetected = result.stringMatched;
+        stringToAnalyse = result.stringConsumed;
+    }
+    else
+    {
+        // TODO : other cases
+        return NULL;
+    }
+
+    return unitSymbol;
 }

@@ -8,6 +8,8 @@ class Lexer {
 
 public:
     static Symbol * readNextSymbol(std::string & stringToRead);
+
+    static Symbol *analyse(string &stringToRead, string stringSymbolDetected);
 };
 
 

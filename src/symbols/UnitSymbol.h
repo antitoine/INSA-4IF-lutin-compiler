@@ -9,7 +9,7 @@ public:
     UnitSymbol(enum unitSymbolIdTable);
 
     virtual std::string toString();
-    static Symbol * analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected);
+    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
 
 protected:
 };

@@ -17,3 +17,7 @@ SymbolDeclaration::SymbolDeclaration():Symbol(S_DECLARATION) {
 std::string SymbolDeclaration::toString() {
     std::cout << "Symbol D" << std::endl;
 }
+
+bool SymbolDeclaration::isPersistent() const {
+    return true;
+}

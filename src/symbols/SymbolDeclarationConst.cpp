@@ -1,6 +1,5 @@
 #include <map>
 #include <iostream>
-#include <regex>
 #include "SymbolDeclarationConst.h"
 #include "symbol.h"
 #include "RegexSymbol.h"
@@ -16,22 +15,13 @@ std::string SymbolDeclarationConst::toString() {
     std::cout << "Symbol CONST (id: " << id << ")" << std::endl;
 }
 
-Symbol * SymbolDeclarationConst::analyse(const std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+Symbol * SymbolDeclarationConst::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+    MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::CONST);
 
-
-    std::smatch match;
-    std::regex regex("^(const )");
-
-    // TODO pointers ?
-//    RE2 regexa = regexes.find(Symbol::CONST)->second;
-//    re2::StringPiece result;
-//    if(RE2::PartialMatch(stringToAnalyse, regexa, &result)) {
-//        result.data();
-//    }
-
-    if (std::regex_search(stringToAnalyse.begin(), stringToAnalyse.end(), match, regex))
+    if (result.matched)
     {
-        stringSymbolDetected = match[1].str().c_str();
+        stringToAnalyse = result.stringConsumed;
+        stringSymbolDetected = result.stringMatched;
         return new SymbolDeclarationConst();
     }
     else
@@ -48,5 +38,18 @@ void SymbolDeclarationConst::execute(std::map<Symbol*, StructVar> & dicoVariable
         if(variableExist.second == false){
             std::cout << "Variable " << v.first->getName() << "has already been declared" << std::endl;
         }
+    }
+}
+
+void SymbolDeclarationConst::addConstant(SymbolVariable *pVariable) {
+    temporaryPtVariable = pVariable;
+}
+
+void SymbolDeclarationConst::addConstantValue(float constantValue) {
+    if (temporaryPtVariable != NULL) {
+        constants.insert(pair<SymbolVariable*, float>(temporaryPtVariable, constantValue));
+        temporaryPtVariable = NULL;
+    } else {
+        cerr << "No constant to affect a value." << endl;
     }
 }

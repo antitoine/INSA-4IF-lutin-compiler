@@ -33,7 +33,7 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
          * D : E1
          */
 
-        case S_DECLARATION:
+        case UT_D:
             automaton.transition(symbol, new State1());
             return true;
 

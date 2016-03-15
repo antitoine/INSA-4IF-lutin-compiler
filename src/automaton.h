@@ -5,15 +5,14 @@
 #include <stack>
 #include "states/state.h"
 
+#include "StructVar.h"
+
 class State;
 class IActiveSymbol;
-
-typedef struct structVar {
-    // What define a symbol : what it contains, if it's constant, and if it has been initialized yet
-    float value;
-    bool constant;
-    bool initialized;
-} StructVar;
+class SymbolDeclarationVar;
+class SymbolDeclarationConst;
+class SymbolVariable;
+class SymbolNumber;
 
 class Automaton {
 
@@ -22,13 +21,24 @@ private:
     IActiveSymbol * activeSymbol;
     std::stack<State*> stackStates;
     std::stack<Symbol*> stackSymbols;
-    std::list<Symbol*> listActiveSymbols;
+    std::list<Symbol*> symbolsToExecute;
+
+    SymbolDeclarationVar * currentSymbolDeclarationVar;
+    SymbolDeclarationConst * currentSymbolDeclarationConst;
 
 public :
     bool readFile(std::string filename);
     void transition(Symbol * symbol, State * newState);
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();
+
+    void setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar);
+    void addVariableToCurrentDeclarationVar(SymbolVariable * variable);
+
+    void setCurrentDeclarationConst(SymbolDeclarationConst * symbolDeclarationConst);
+    void addConstantToCurrentDeclarationConst(SymbolVariable * variable);
+    void addConstantValueToCurrentDeclarationConst(SymbolNumber * number);
+
 
 private:
     void computeNewSymbol(Symbol * symbol);

@@ -7,6 +7,7 @@
 #include "state7.h"
 #include "state8.h"
 #include "state9.h"
+#include "../symbols/SymbolDeclarationConst.h"
 
 State1::State1() : State(" 1") {
 }
@@ -22,6 +23,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          */
 
         case S_DECLARATION_VAR:
+            automaton.setCurrentDeclarationVar((SymbolDeclarationVar *) symbol);
             automaton.transition(symbol, new State8());
             return true;
 
@@ -30,6 +32,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          */
 
         case S_DECLARATION_CONST:
+            automaton.setCurrentDeclarationConst((SymbolDeclarationConst *) symbol);
             automaton.transition(symbol, new State9());
             return true;
 

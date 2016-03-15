@@ -7,3 +7,8 @@ SymbolInstruction::SymbolInstruction(enum symbolIdTable idSymbol):Symbol(idSymbo
 {
 
 }
+
+
+bool SymbolInstruction::isPersistent() const {
+    return true;
+}

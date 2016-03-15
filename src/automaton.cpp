@@ -6,6 +6,9 @@
 #include "Lexer.h"
 #include "states/state0.h"
 #include "symbols/SymbolDeclarationVar.h"
+#include "symbols/SymbolVariable.h"
+#include "symbols/SymbolNumber.h"
+#include "symbols/SymbolDeclarationConst.h"
 
 using namespace std;
 
@@ -55,6 +58,11 @@ bool Automaton::readFile(std::string filename) {
     }
 
     file.close();
+
+    cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
+    cout << "Execute..." << endl;
+
+    symbolsToExecute.front()->execute(dicoVariables);
 }
 
 void Automaton::computeNewSymbol(Symbol * symbol)
@@ -66,16 +74,60 @@ void Automaton::computeNewSymbol(Symbol * symbol)
 void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
 
     for (int i = 0; i < reductionSize; ++i) {
+        delete stackStates.top();
         stackStates.pop();
     }
+
+    stackSymbols.push(unterminalSymbol);
 
     stackStates.top()->transition(*this, unterminalSymbol);
 }
 
 void Automaton::transition(Symbol * symbol, State * newState) {
+    if (!stackSymbols.top()->isPersistent()) {
+        delete stackSymbols.top();
+    }
+
+    stackSymbols.pop();
+
     stackStates.push(newState);
+    if (!stackSymbols.empty()) {
+        stackStates.top()->transition(*this, stackSymbols.top());
+    }
 }
 
 void Automaton::accept() {
     // TODO implementer
+}
+
+void Automaton::setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar) {
+    currentSymbolDeclarationVar = symbolDeclarationVar;
+    symbolsToExecute.push_back(currentSymbolDeclarationVar);
+    cout << "#TRACE: setCurrentDeclarationVar" << endl;
+}
+
+void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
+    if (currentSymbolDeclarationVar != NULL) {
+        currentSymbolDeclarationVar->addVariable(variable);
+        cout << "#TRACE: Variable " << variable->getName() << " added to the current declaration var" << endl;
+    }
+}
+
+void Automaton::setCurrentDeclarationConst(SymbolDeclarationConst * symbolDeclarationConst) {
+    currentSymbolDeclarationConst = symbolDeclarationConst;
+    cout << "#TRACE: setCurrentDeclarationConst" << endl;
+}
+
+void Automaton::addConstantToCurrentDeclarationConst(SymbolVariable * variable) {
+    if (currentSymbolDeclarationConst != NULL) {
+        currentSymbolDeclarationConst->addConstant(variable);
+        cout << "#TRACE: Variable " << variable->getName() << " added to the current declaration const" << endl;
+    }
+}
+void Automaton::addConstantValueToCurrentDeclarationConst(SymbolNumber * number) {
+    if (currentSymbolDeclarationConst != NULL) {
+        float constantValue = number->getFloatValue();
+        currentSymbolDeclarationConst->addConstantValue(constantValue);
+        cout << "#TRACE: Constant value " << constantValue << " added to the current declaration const" << endl;
+    }
 }
