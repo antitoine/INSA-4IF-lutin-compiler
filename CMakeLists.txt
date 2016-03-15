@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project(lutin_compiler)
+project(lut)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -9,6 +9,9 @@ include_directories(lib/re2)
 
 set(LIB_RE2 ${CMAKE_CURRENT_SOURCE_DIR}/lib/re2)
 
-add_executable(lutin_compiler ${SOURCE_FILES} src/StructVar.h)
+add_executable(lut ${SOURCE_FILES})
 
-target_link_libraries(lutin_compiler ${LIB_RE2}/libre2.a pthread)
+target_link_libraries(lut ${LIB_RE2}/libre2.a pthread)
+
+# Uncoment to run tests after build
+#add_custom_command(TARGET lut POST_BUILD COMMAND ln -fs ${lut_BINARY_DIR}/lut lut COMMAND bash mktest.sh WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests COMMENT "Run tests ...")
