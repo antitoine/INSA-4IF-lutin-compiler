@@ -49,6 +49,7 @@ void displayHelp() {
 
 int main(int argc, char * argv[]) {
 
+    // No argument
     if (argc <= 1) {
         displayHelp();
         return 1;
@@ -76,10 +77,11 @@ int main(int argc, char * argv[]) {
     }
 
     string filename = getCmdFile(argc, argv);
-    if (filename != "")
-        automaton.readFile(getCmdFile(argc, argv));
-    else
-        //automaton.readFile("/home/pierre/Documents/Projects/lutin-compiler/test/testTMP");
 
-    return 0;
+    if (filename == "") {
+        cerr << "Error: unable to get the file path argument" << endl;
+        return 1;
+    }
+
+    return automaton.readFile(getCmdFile(argc, argv));
 }

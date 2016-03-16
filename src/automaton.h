@@ -27,7 +27,7 @@ private:
     SymbolDeclarationConst * currentSymbolDeclarationConst;
 
 public :
-    bool readFile(std::string filename);
+    int readFile(std::string filename);
     void transition(Symbol * symbol, State * newState);
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();
