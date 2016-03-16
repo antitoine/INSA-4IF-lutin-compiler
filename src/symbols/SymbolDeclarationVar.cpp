@@ -36,13 +36,22 @@ void SymbolDeclarationVar::execute(map<Symbol*, StructVar> & dicoVariables) {
     cout << "#TRACE: execute declaration var" << endl;
     for (SymbolVariable * v : variables) {
         StructVar s = {0, false, false};
-        pair<map<Symbol*, StructVar>::iterator, bool> variableExist = dicoVariables.insert(pair<Symbol *, StructVar>(
-                (Symbol *const &) v, s));
-        // TODO : Incorrect
-        if(variableExist.second == false){
-            cout << "Variable " << ((SymbolVariable*)v)->getName() << "has already been declared" << endl;
+        bool exist = false;
+
+        //we check if the variable is already in the dico
+        for(auto const &it : dicoVariables) {
+            if(dynamic_cast<SymbolVariable*>(it.first)->getName() == v->getName()){
+                exist = true;
+                break;
+            }
         }
 
+        if(exist){
+            cout << "Variable " << ((SymbolVariable*)v)->getName() << "has already been declared" << endl;
+        }
+        else{
+            dicoVariables.insert(pair<Symbol *, StructVar>((Symbol *const &) v, s));
+        }
     }
 }
 
