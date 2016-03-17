@@ -13,6 +13,7 @@
 #include "symbols/SymbolExpressionBinary.h"
 #include "symbols/SymbolExpressionParenthesis.h"
 #include "symbols/SymbolInstruction.h"
+#include "exceptions/Error.h"
 
 using namespace std;
 
@@ -37,34 +38,41 @@ int Automaton::readFile(std::string filename) {
     }
 
     std::cout << "File " << filename << " opened." << std::endl;
+    int currentLine = 1, currentCharPos = 1;
 
-    // TODO : line too long
-    while (std::getline(file, line))
-    {
-        std::string stringToCompute(line);
+    try {
 
-        while (!stringToCompute.empty())
-        {
-            //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
-            symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables);
+        // TODO : line too long
+        while (std::getline(file, line)) {
+            std::string stringToCompute(line);
+            currentCharPos = 1;
 
-            if (symbol == NULL) {
-                // TODO : Warning/Error : unknown symbol
-                break;
+            while (!stringToCompute.empty()) {
+                //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
+                symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, currentCharPos);
+
+                if (symbol == NULL) {
+                    // TODO : Warning/Error : unknown symbol
+                    break;
+                }
+                else {
+                    // TODO : Compute symbol
+                    computeNewSymbol(symbol);
+                }
+
             }
-            else
-            {
-                // TODO : Compute symbol
-                computeNewSymbol(symbol);
-            }
+
+            currentLine++;
 
         }
-
+    } catch (Error const& error) {
+        // TODO : continue if the level is "warning"
+        cerr << error.what(currentLine, currentCharPos) << endl;
     }
 
     file.close();
 
-    execute();
+    //execute();
 
     return 0;
 }

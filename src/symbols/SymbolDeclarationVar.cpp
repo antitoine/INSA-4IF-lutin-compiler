@@ -4,6 +4,7 @@
 #include "SymbolDeclarationVar.h"
 #include "SymbolVariable.h"
 #include "RegexSymbol.h"
+#include "../exceptions/ErrorSemanticVarAlreadyDeclared.h"
 
 using namespace std;
 
@@ -50,9 +51,7 @@ void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable, map<string, St
     // Check if the variable doesn't already exists
     map<string, StructVar *>::iterator it = dicoVariables.find(pVariable->getName());
     if (it != dicoVariables.end()) { // The variable exists
-        cerr << "Error: the variable " << pVariable->getName() << " has already been declared." << endl;
-        // TODO : Exception
-        return;
+        throw ErrorSemanticVarAlreadyDeclared(pVariable->getName(), false);
     }
 
     variables.push_back(pVariable);

@@ -11,7 +11,7 @@
 #include "symbols/SymbolInstructionWrite.h"
 #include "symbols/SymbolInstructionRead.h"
 
-Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables)
+Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables, int & charPos)
 {
     Symbol * symbol = NULL;
     std::string symbolDetected;
@@ -29,6 +29,7 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar
 
     // If a symbol is found
     if (symbol != NULL) {
+        charPos += symbolDetected.length();
         //std::cout << "Symbol detected: " << symbolDetected << std::endl;
     }
 
