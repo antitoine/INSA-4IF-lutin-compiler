@@ -11,3 +11,7 @@ SymbolExpressionParenthesis::SymbolExpressionParenthesis() : SymbolExpression(S_
 float SymbolExpressionParenthesis::eval(std::map<Symbol*, StructVar> & dicoVariables){
     return symbolExpression->eval(dicoVariables);
 }
+
+void SymbolExpressionParenthesis::setExpression(SymbolExpression *expression) {
+    symbolExpression = expression;
+}

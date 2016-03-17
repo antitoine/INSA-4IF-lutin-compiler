@@ -8,6 +8,7 @@
 #include "symbols/SymbolDeclarationConst.h"
 #include "symbols/UnitSymbol.h"
 #include "symbols/SymbolNumber.h"
+#include "symbols/SymbolInstructionWrite.h"
 
 Symbol * Lexer::readNextSymbol(std::string & stringToRead)
 {
@@ -17,6 +18,8 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead)
     // Test to find a symbol, by priority order
     if ((symbol = SymbolDeclarationVar::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, symbolDetected)) != NULL);
+    else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, symbolDetected)) != NULL);
+
     else if ((symbol = SymbolVariable::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolNumber::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);

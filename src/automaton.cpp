@@ -9,6 +9,8 @@
 #include "symbols/SymbolVariable.h"
 #include "symbols/SymbolNumber.h"
 #include "symbols/SymbolDeclarationConst.h"
+#include "symbols/SymbolExpressionBinary.h"
+#include "symbols/SymbolExpressionParenthesis.h"
 
 using namespace std;
 
@@ -115,6 +117,7 @@ void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
 
 void Automaton::setCurrentDeclarationConst(SymbolDeclarationConst * symbolDeclarationConst) {
     currentSymbolDeclarationConst = symbolDeclarationConst;
+    symbolsToExecute.push_back(currentSymbolDeclarationConst);
     cout << "#TRACE: setCurrentDeclarationConst" << endl;
 }
 
@@ -130,4 +133,43 @@ void Automaton::addConstantValueToCurrentDeclarationConst(SymbolNumber * number)
         currentSymbolDeclarationConst->addConstantValue(constantValue);
         cout << "#TRACE: Constant value " << constantValue << " added to the current declaration const" << endl;
     }
+}
+
+/**
+ * Aggregate the three expressions at the top of the temporary stack as one binary operator.
+ */
+void Automaton::aggregateBinaryOperatorExpression() {
+    if (currentExpression.size() < 3) {
+        cerr << "Error: incorrect binary expression." << endl;
+        return;
+    }
+
+    SymbolExpression * right = currentExpression.top();
+    currentExpression.pop();
+
+    SymbolExpressionBinary * binaryOperator = (SymbolExpressionBinary *) currentExpression.top();
+    currentExpression.pop();
+
+    SymbolExpression * left = currentExpression.top();
+    currentExpression.pop();
+
+    binaryOperator->setOperands(left, right);
+
+    currentExpression.push(binaryOperator);
+}
+
+void Automaton::aggregateParenthesisExpression() {
+    if (currentExpression.size() < 2) {
+        cerr << "Error: incorrect parenthesis expression." << endl;
+        return;
+    }
+
+    SymbolExpression * expression = currentExpression.top();
+    currentExpression.pop();
+
+    ((SymbolExpressionParenthesis*)currentExpression.top())->setExpression(expression);
+}
+
+void Automaton::addToCurrentExpression(SymbolExpression *expression) {
+    currentExpression.push(expression);
 }

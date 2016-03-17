@@ -65,7 +65,7 @@ int main(int argc, char * argv[]) {
     if (filename != "")
         automaton.readFile(getCmdFile(argc, argv));
     else
-        //automaton.readFile("/home/pierre/Documents/Projects/lutin-compiler/test/testTMP");
+        automaton.readFile("/home/pierre/Documents/Projects/lutin-compiler/test/testTMP");
 
     return 0;
 }

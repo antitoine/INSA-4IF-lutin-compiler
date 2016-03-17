@@ -6,6 +6,9 @@
 #include "states/state.h"
 
 #include "StructVar.h"
+#include "symbols/SymbolExpression.h"
+
+using namespace std;
 
 class State;
 class IActiveSymbol;
@@ -13,21 +16,25 @@ class SymbolDeclarationVar;
 class SymbolDeclarationConst;
 class SymbolVariable;
 class SymbolNumber;
+class SymbolExpression;
 
 class Automaton {
 
 private:
-    std::map<Symbol*, StructVar> dicoVariables;
+    map<Symbol*, StructVar> dicoVariables;
     IActiveSymbol * activeSymbol;
-    std::stack<State*> stackStates;
-    std::stack<Symbol*> stackSymbols;
-    std::list<Symbol*> symbolsToExecute;
+    stack<State*> stackStates;
+    stack<Symbol*> stackSymbols;
+    list<Symbol*> symbolsToExecute;
 
     SymbolDeclarationVar * currentSymbolDeclarationVar;
     SymbolDeclarationConst * currentSymbolDeclarationConst;
+    stack<SymbolExpression*> currentExpression;
+
+    list<Symbol*> symbolsExpressionToAggregate;
 
 public :
-    bool readFile(std::string filename);
+    bool readFile(string filename);
     void transition(Symbol * symbol, State * newState);
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();
@@ -38,6 +45,10 @@ public :
     void setCurrentDeclarationConst(SymbolDeclarationConst * symbolDeclarationConst);
     void addConstantToCurrentDeclarationConst(SymbolVariable * variable);
     void addConstantValueToCurrentDeclarationConst(SymbolNumber * number);
+
+    void aggregateBinaryOperatorExpression();
+    void aggregateParenthesisExpression();
+    void addToCurrentExpression(SymbolExpression * expression);
 
 
 private:

@@ -9,3 +9,7 @@ SymbolExpressionBinary::SymbolExpressionBinary(enum symbolIdTable idSymbol) : Sy
 }
 
 
+void SymbolExpressionBinary::setOperands(SymbolExpression *leftOperand, SymbolExpression *rightOperand) {
+    firstOperand = leftOperand;
+    secondOperand = rightOperand;
+}
