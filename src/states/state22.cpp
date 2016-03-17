@@ -22,7 +22,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * ; : E34
          */
-        case SU_SEMICOLON:
+        case SYMBOL_UNIT_SEMICOLON:
             automaton.affectCurrentExpressionToCurrentInstruction();
             automaton.transition(symbol, new State34());
             return true;
@@ -30,7 +30,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * + : E29
          */
-        case SU_PLUS:
+        case SYMBOL_UNIT_PLUS:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryAdd());
             automaton.transition(symbol, new State29());
             return true;
@@ -38,7 +38,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * - : E31
          */
-        case SU_MINUS:
+        case SYMBOL_UNIT_MINUS:
             automaton.addToCurrentExpression(new SymbolExpressionBinarySoustract());
             automaton.transition(symbol, new State31());
             return true;
@@ -46,7 +46,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * * : E30
          */
-        case SU_MULT:
+        case SYMBOL_UNIT_MULT:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryMultiplication());
             automaton.transition(symbol, new State30());
             return true;
@@ -54,7 +54,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * / : E32
          */
-        case SU_DIV:
+        case SYMBOL_UNIT_DIV:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryDivision());
             automaton.transition(symbol, new State32());
             return true;

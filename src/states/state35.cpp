@@ -16,9 +16,9 @@ bool State35::transition(Automaton & automaton, Symbol * symbol) {
          * , | R7
          */
 
-        case SU_SEMICOLON:
-        case SU_COMMA:
-            automaton.reduction(3, new SymbolUnterminal(UT_V));
+        case SYMBOL_UNIT_SEMICOLON:
+        case SYMBOL_UNIT_COMMA:
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_V));
             return true;
 
         default:

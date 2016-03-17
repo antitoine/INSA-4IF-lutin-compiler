@@ -45,7 +45,7 @@ bool State2::transition(Automaton &automaton, Symbol *symbol) {
          * $ : Accepted
          */
 
-        case SU_DOLLAR:
+        case SYMBOL_UNIT_DOLLAR:
             automaton.accept();
             return true;
 
@@ -53,7 +53,7 @@ bool State2::transition(Automaton &automaton, Symbol *symbol) {
          * I' : E10
          */
 
-        case UT_I_PRIM:
+        case SYMBOL_UNTERMINAL_I_PRIM:
             automaton.transition(symbol, new State10());
             return true;
 

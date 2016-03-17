@@ -24,31 +24,31 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
          * ) | R15
          */
 
-        case SU_SEMICOLON:
+        case SYMBOL_UNIT_SEMICOLON:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
-        case SU_PLUS:
+        case SYMBOL_UNIT_PLUS:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
-        case SU_MINUS:
+        case SYMBOL_UNIT_MINUS:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
-        case SU_ENDING_PAR:
+        case SYMBOL_UNIT_ENDING_PAR:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
         /*
          * * : E30
          */
 
-        case SU_MULT:
+        case SYMBOL_UNIT_MULT:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryMultiplication());
             automaton.transition(symbol, new State30());
             return true;
@@ -57,7 +57,7 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
          * / : E32
          */
 
-        case SU_DIV:
+        case SYMBOL_UNIT_DIV:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryDivision());
             automaton.transition(symbol, new State32());
             return true;

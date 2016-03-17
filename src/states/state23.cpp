@@ -24,7 +24,7 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
         case S_VARIABLE:
         case S_INSTRUCTION_READ:
         case S_INSTRUCTION_WRITE:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
         default:

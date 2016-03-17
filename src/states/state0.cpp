@@ -25,7 +25,7 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
         case S_VARIABLE:
         case S_INSTRUCTION_READ:
         case S_INSTRUCTION_WRITE:
-            automaton.reduction(0, new SymbolUnterminal(UT_D));
+            automaton.reduction(0, new SymbolUnterminal(SYMBOL_UNTERMINAL_D));
 
             return true;
 
@@ -33,7 +33,7 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
          * D : E1
          */
 
-        case UT_D:
+        case SYMBOL_UNTERMINAL_D:
             automaton.transition(symbol, new State1());
             return true;
 

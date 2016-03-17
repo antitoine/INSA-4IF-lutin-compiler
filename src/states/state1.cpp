@@ -68,7 +68,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          * D' : E3
          */
 
-        case UT_D_PRIM:
+        case SYMBOL_UNTERMINAL_D_PRIM:
             automaton.transition(symbol, new State3());
             return true;
 
@@ -76,7 +76,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          * I : E2
          */
 
-        case UT_I:
+        case SYMBOL_UNTERMINAL_I:
             automaton.transition(symbol, new State2());
             return true;
 
@@ -84,7 +84,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          * I' : E4
          */
 
-        case UT_I_PRIM:
+        case SYMBOL_UNTERMINAL_I_PRIM:
             automaton.transition(symbol, new State4());
             return true;
 

@@ -15,35 +15,35 @@ bool State25::transition(Automaton & automaton, Symbol * symbol) {
          * var | R5
          */
         case S_DECLARATION_VAR:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
         /*
          * const | R4
          */
         case S_DECLARATION_CONST:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
         /*
          * id | R4
          */
         case S_VARIABLE:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
         /*
          * lire | R4
          */
         case S_INSTRUCTION_READ:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
         /*
          * ecrire | R4
          */
         case S_INSTRUCTION_WRITE:
-            automaton.reduction(3, new SymbolUnterminal(UT_D_PRIM));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
 

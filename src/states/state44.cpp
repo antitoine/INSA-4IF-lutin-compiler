@@ -14,15 +14,15 @@ bool State44::transition(Automaton & automaton, Symbol * symbol) {
          * R8 : C  →  C , id = val
          * ; | R8
          */
-        case SU_SEMICOLON:
-            automaton.reduction(5, new SymbolUnterminal(UT_C));
+        case SYMBOL_UNIT_SEMICOLON:
+            automaton.reduction(5, new SymbolUnterminal(SYMBOL_UNTERMINAL_C));
             return true;
 
         /*
          * , | R8
          */
-        case SU_COMMA:
-            automaton.reduction(5, new SymbolUnterminal(UT_C));
+        case SYMBOL_UNIT_COMMA:
+            automaton.reduction(5, new SymbolUnterminal(SYMBOL_UNTERMINAL_C));
             return true;
 
         default:

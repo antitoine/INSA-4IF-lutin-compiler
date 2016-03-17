@@ -19,13 +19,13 @@ bool State19::transition(Automaton & automaton, Symbol * symbol) {
          * / | R20
          * ) | R20
          */
-        case SU_SEMICOLON:
-        case SU_PLUS:
-        case SU_MINUS:
-        case SU_MULT:
-        case SU_DIV:
-        case SU_ENDING_PAR:
-            automaton.reduction(1, new SymbolUnterminal(UT_E));
+        case SYMBOL_UNIT_SEMICOLON:
+        case SYMBOL_UNIT_PLUS:
+        case SYMBOL_UNIT_MINUS:
+        case SYMBOL_UNIT_MULT:
+        case SYMBOL_UNIT_DIV:
+        case SYMBOL_UNIT_ENDING_PAR:
+            automaton.reduction(1, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
         default:

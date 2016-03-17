@@ -15,14 +15,14 @@ bool State13::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * ; : E23
          */
-        case SU_SEMICOLON:
+        case SYMBOL_UNIT_SEMICOLON:
             automaton.transition(symbol, new State23());
             return true;
 
         /*
         * , : E24
         */
-        case SU_COMMA:
+        case SYMBOL_UNIT_COMMA:
             automaton.transition(symbol, new State24());
             return true;
 

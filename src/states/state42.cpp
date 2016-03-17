@@ -15,49 +15,49 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
          * R19 : E  → ( E )
          * ; | R19
          */
-        case SU_SEMICOLON:
+        case SYMBOL_UNIT_SEMICOLON:
             automaton.aggregateParenthesisExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
             /*
              * + | R19
              */
-        case SU_PLUS:
+        case SYMBOL_UNIT_PLUS:
             automaton.aggregateParenthesisExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
             /*
              * - | R19
              */
-        case SU_MINUS:
+        case SYMBOL_UNIT_MINUS:
             automaton.aggregateParenthesisExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
             /*
              * * | R19
              */
-        case SU_MULT:
+        case SYMBOL_UNIT_MULT:
             automaton.aggregateParenthesisExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
             /*
              * / | R19
              */
-        case SU_DIV:
+        case SYMBOL_UNIT_DIV:
             automaton.aggregateParenthesisExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
             /*
             * ) | R19
             */
-        case SU_ENDING_PAR:
+        case SYMBOL_UNIT_ENDING_PAR:
             automaton.aggregateParenthesisExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
 

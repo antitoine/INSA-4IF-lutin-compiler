@@ -24,7 +24,7 @@ bool State9::transition(Automaton & automaton, Symbol * symbol) {
          * C : E15
          */
 
-        case UT_C:
+        case SYMBOL_UNTERMINAL_C:
             automaton.transition(symbol, new State15());
             return true;
 

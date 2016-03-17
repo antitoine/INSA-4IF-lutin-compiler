@@ -20,8 +20,8 @@ bool State4::transition(Automaton &automaton, Symbol *symbol) {
         case S_VARIABLE:
         case S_INSTRUCTION_READ:
         case S_INSTRUCTION_WRITE:
-        case SU_DOLLAR:
-            automaton.reduction(1, new SymbolUnterminal(UT_I));
+        case SYMBOL_UNIT_DOLLAR:
+            automaton.reduction(1, new SymbolUnterminal(SYMBOL_UNTERMINAL_I));
             return true;
 
         default:

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "SymbolUnterminal.h"
 
-SymbolUnterminal::SymbolUnterminal(enum unterminalSymbolIdTable uSymbol):Symbol(uSymbol)
+SymbolUnterminal::SymbolUnterminal(enum TypeSymbolUnterminal uSymbol):Symbol(uSymbol)
 {
 }
 

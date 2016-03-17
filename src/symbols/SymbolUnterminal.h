@@ -7,7 +7,7 @@
 class SymbolUnterminal : public Symbol
 {
 public:
-    SymbolUnterminal(enum unterminalSymbolIdTable);
+    SymbolUnterminal(enum TypeSymbolUnterminal);
 
     virtual std::string toString();
 

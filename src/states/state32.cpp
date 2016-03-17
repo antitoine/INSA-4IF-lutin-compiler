@@ -36,7 +36,7 @@ bool State32::transition(Automaton &automaton, Symbol *symbol) {
              * ( : E18
              */
 
-        case SU_OPENNING_PAR:
+        case SYMBOL_UNIT_OPENING_PAR:
             automaton.addToCurrentExpression(new SymbolExpressionParenthesis());
             automaton.transition(symbol, new State18());
             return true;
@@ -45,7 +45,7 @@ bool State32::transition(Automaton &automaton, Symbol *symbol) {
              * E : E40
              */
 
-        case UT_E:
+        case SYMBOL_UNTERMINAL_E:
             automaton.transition(symbol, new State41());
             return true;
 

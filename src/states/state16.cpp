@@ -13,7 +13,7 @@ bool State16::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * = : E27
          */
-        case SU_EQUAL:
+        case SYMBOL_UNIT_EQUAL:
             automaton.transition(symbol, new State27());
             return true;
 

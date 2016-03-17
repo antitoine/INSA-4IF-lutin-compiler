@@ -20,18 +20,18 @@ bool State39::transition(Automaton & automaton, Symbol * symbol) {
          * / | R16
          */
 
-        case SU_SEMICOLON:
-        case SU_PLUS:
-        case SU_MINUS:
-        case SU_MULT:
-        case SU_DIV:
+        case SYMBOL_UNIT_SEMICOLON:
+        case SYMBOL_UNIT_PLUS:
+        case SYMBOL_UNIT_MINUS:
+        case SYMBOL_UNIT_MULT:
+        case SYMBOL_UNIT_DIV:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
-        case SU_ENDING_PAR:
+        case SYMBOL_UNIT_ENDING_PAR:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
         default:

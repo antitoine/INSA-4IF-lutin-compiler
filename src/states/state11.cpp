@@ -13,7 +13,7 @@ bool State11::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * ; : E21
          */
-        case SU_SEMICOLON:
+        case SYMBOL_UNIT_SEMICOLON:
             automaton.affectCurrentExpressionToCurrentInstruction();
             automaton.transition(symbol, new State21());
             return true;
