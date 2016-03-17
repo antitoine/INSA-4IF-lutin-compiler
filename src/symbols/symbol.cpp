@@ -15,7 +15,7 @@ void Symbol::computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute) 
     return;
 }
 
-void Symbol::execute(map<Symbol*, StructVar> & dicoVariables) {
+void Symbol::execute(map<string, StructVar*>& dicoVariables) {
 
 }
 

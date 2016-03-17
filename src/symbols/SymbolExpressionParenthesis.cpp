@@ -8,7 +8,7 @@ SymbolExpressionParenthesis::SymbolExpressionParenthesis() : SymbolExpression(S_
 
 }
 
-float SymbolExpressionParenthesis::eval(std::map<Symbol*, StructVar> & dicoVariables){
+float SymbolExpressionParenthesis::eval(map<string, StructVar*>& dicoVariables){
     return symbolExpression->eval(dicoVariables);
 }
 

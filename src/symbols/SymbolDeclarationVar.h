@@ -13,9 +13,9 @@ public:
     SymbolDeclarationVar();
     virtual string toString();
     static Symbol * analyse(string & stringToAnalyse, string & stringSymbolDetected);
-    void execute(map<Symbol*, StructVar> & dicoVariables);
+    void execute(map<string, StructVar*>& dicoVariables);
 
-    void addVariable(SymbolVariable *pVariable);
+    void addVariable(SymbolVariable *pVariable, map<string, StructVar*>& dicoVariables);
 
 protected:
 

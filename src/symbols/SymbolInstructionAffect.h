@@ -10,7 +10,7 @@ class SymbolInstructionAffect : public SymbolInstruction
 {
 public:
     SymbolInstructionAffect();
-    void execute(std::map<Symbol*, StructVar> & dicoVariables);
+    void execute(map<string, StructVar*>& dicoVariables);
 
     virtual void affectExpression(SymbolExpression * expression);
 

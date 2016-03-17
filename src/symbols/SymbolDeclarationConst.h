@@ -10,10 +10,10 @@ public:
     SymbolDeclarationConst();
     virtual std::string toString();
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
-    void execute(std::map<Symbol*, StructVar> & dicoVariables);
+    void execute(map<string, StructVar*>& dicoVariables);
 
     void addConstant(SymbolVariable *pVariable);
-    void addConstantValue(float constantValue);
+    void addConstantValue(float constantValue, map<string, StructVar*>& dicoVariables);
 
 protected:
     std::map<SymbolVariable*, float> constants;

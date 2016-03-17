@@ -7,7 +7,7 @@ class SymbolExpressionBinaryDivision : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryDivision();
-    float eval(std::map<Symbol*, StructVar> & dicoVariables);
+    float eval(map<string, StructVar*>& dicoVariables);
 
 
 protected:

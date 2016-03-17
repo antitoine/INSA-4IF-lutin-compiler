@@ -7,7 +7,7 @@
 class Lexer {
 
 public:
-    static Symbol * readNextSymbol(std::string & stringToRead);
+    static Symbol * readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables);
 
     static Symbol *analyse(string &stringToRead, string stringSymbolDetected);
 };

@@ -7,7 +7,7 @@ class SymbolExpressionParenthesis : public SymbolExpression
 {
 public:
     SymbolExpressionParenthesis();
-    float eval(std::map<Symbol*, StructVar> & dicoVariables);
+    float eval(map<string, StructVar*>& dicoVariables);
     void setExpression(SymbolExpression * expression);
 
 protected:

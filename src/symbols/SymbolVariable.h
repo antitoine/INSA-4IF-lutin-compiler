@@ -9,9 +9,9 @@ class SymbolVariable : public SymbolExpression
 public:
     SymbolVariable(std::string varName);
     virtual std::string toString();
-    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
+    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected, map<string, StructVar*>& dicoVariables);
     std::string getName() const;
-    float eval(std::map<Symbol*, StructVar> & dicoVariables);
+    float eval(map<string, StructVar*>& dicoVariables);
 
 
 protected:

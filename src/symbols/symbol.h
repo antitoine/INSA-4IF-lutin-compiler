@@ -67,7 +67,7 @@ public:
     operator int() const { return id; }
 
     virtual bool isPersistent() const;
-    virtual void execute(map<Symbol*, StructVar> & dicoVariables);
+    virtual void execute(map<string, StructVar*>& dicoVariables);
 
     int getId() const;
 

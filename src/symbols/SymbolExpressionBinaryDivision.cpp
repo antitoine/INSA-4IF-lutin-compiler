@@ -8,6 +8,6 @@ SymbolExpressionBinaryDivision::SymbolExpressionBinaryDivision() : SymbolExpress
 
 }
 
-float SymbolExpressionBinaryDivision::eval(std::map<Symbol*, StructVar> & dicoVariables){
+float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) / secondOperand->eval(dicoVariables);
 }

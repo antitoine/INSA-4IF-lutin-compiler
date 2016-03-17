@@ -11,7 +11,7 @@ class SymbolInstruction : public Symbol
 {
 public:
     SymbolInstruction(enum symbolIdTable idSymbol);
-    virtual void execute(std::map<Symbol*, StructVar> & dicoVariables) = 0;
+    virtual void execute(map<string, StructVar*>& dicoVariables) = 0;
     virtual bool isPersistent() const;
 
     virtual void affectExpression(SymbolExpression * expression) = 0;

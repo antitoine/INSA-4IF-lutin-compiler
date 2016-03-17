@@ -8,6 +8,6 @@ SymbolExpressionBinarySoustract::SymbolExpressionBinarySoustract() : SymbolExpre
 
 }
 
-float SymbolExpressionBinarySoustract::eval(std::map<Symbol*, StructVar> & dicoVariables){
+float SymbolExpressionBinarySoustract::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) - secondOperand->eval(dicoVariables);
 }

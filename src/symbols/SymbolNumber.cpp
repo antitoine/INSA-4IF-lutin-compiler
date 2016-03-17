@@ -12,7 +12,7 @@ SymbolNumber::SymbolNumber() : SymbolExpression(S_NUMBER) {
 SymbolNumber::SymbolNumber(string stringValue) : value(stof(stringValue)), SymbolExpression(S_NUMBER) {
 }
 
-float SymbolNumber::eval(std::map<Symbol*, StructVar> & dicoVariables){
+float SymbolNumber::eval(map<string, StructVar*>& dicoVariables){
     return value;
 }
 

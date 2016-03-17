@@ -7,7 +7,7 @@ class SymbolInstructionWrite : public SymbolInstruction
 {
 public:
     SymbolInstructionWrite();
-    void execute(std::map<Symbol*, StructVar> & dicoVariables);
+    void execute(map<string, StructVar*>& dicoVariables);
 
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
 

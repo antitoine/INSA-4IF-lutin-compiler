@@ -6,6 +6,6 @@ SymbolExpressionBinaryMultiplication::SymbolExpressionBinaryMultiplication() : S
 
 }
 
-float SymbolExpressionBinaryMultiplication::eval(std::map<Symbol*, StructVar> & dicoVariables){
+float SymbolExpressionBinaryMultiplication::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) * secondOperand->eval(dicoVariables);
 }

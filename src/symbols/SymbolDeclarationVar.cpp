@@ -32,29 +32,37 @@ Symbol * SymbolDeclarationVar::analyse(string & stringToAnalyse, string & string
     }
 }
 
-void SymbolDeclarationVar::execute(map<Symbol*, StructVar> & dicoVariables) {
+void SymbolDeclarationVar::execute(map<string, StructVar*>& dicoVariables) {
     cout << "#TRACE: execute declaration var" << endl;
     for (SymbolVariable * v : variables) {
-        StructVar s = {0, false, false};
-        bool exist = false;
+        map<string, StructVar *>::iterator it = dicoVariables.find(v->getName());
+        if (it != dicoVariables.end()) {
+            StructVar * ptS = it->second;
 
-        //we check if the variable is already in the dico
-        for(auto const &it : dicoVariables) {
-            if(dynamic_cast<SymbolVariable*>(it.first)->getName() == v->getName()){
-                exist = true;
-                break;
-            }
-        }
-
-        if(exist){
-            cout << "Variable " << ((SymbolVariable*)v)->getName() << "has already been declared" << endl;
-        }
-        else{
-            dicoVariables.insert(pair<Symbol *, StructVar>((Symbol *const &) v, s));
+            ptS->ptSymbol = v;
+            ptS->isInitialized = false;
+            ptS->isConstant = false;
         }
     }
 }
 
-void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable) {
+void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable, map<string, StructVar*>& dicoVariables) {
+    // Check if the variable doesn't already exists
+    map<string, StructVar *>::iterator it = dicoVariables.find(pVariable->getName());
+    if (it != dicoVariables.end()) { // The variable exists
+        cerr << "Error: the variable " << pVariable->getName() << " has already been declared." << endl;
+        // TODO : Exception
+        return;
+    }
+
     variables.push_back(pVariable);
+
+     // Set the StructVar in the map
+    StructVar * ptS = new StructVar;
+    ptS->ptSymbol = pVariable;
+    ptS->isConstant = false;
+    ptS->isInitialized = false;
+    ptS->value = 0;
+
+    dicoVariables.insert(pair<string, StructVar*>(pVariable->getName(), ptS));
 }

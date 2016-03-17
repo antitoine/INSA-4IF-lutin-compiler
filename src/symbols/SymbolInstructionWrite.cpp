@@ -10,7 +10,7 @@ SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION
 
 }
 
-void SymbolInstructionWrite::execute(std::map<Symbol*, StructVar> & dicoVariables) {
+void SymbolInstructionWrite::execute(map<string, StructVar*>& dicoVariables) {
     cout << symbolExpression->eval(dicoVariables) << endl;
 }
 

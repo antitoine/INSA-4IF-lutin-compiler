@@ -7,7 +7,7 @@ SymbolExpressionBinaryAdd::SymbolExpressionBinaryAdd() : SymbolExpressionBinary(
 
 }
 
-float SymbolExpressionBinaryAdd::eval(std::map<Symbol*, StructVar> & dicoVariables){
+float SymbolExpressionBinaryAdd::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) + secondOperand->eval(dicoVariables);
 }
 

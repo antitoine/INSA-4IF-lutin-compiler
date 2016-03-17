@@ -11,6 +11,7 @@ using namespace std;
 
 class State;
 class IActiveSymbol;
+class Symbol;
 class SymbolDeclarationVar;
 class SymbolDeclarationConst;
 class SymbolVariable;
@@ -21,7 +22,7 @@ class SymbolInstruction;
 class Automaton {
 
 private:
-    map<Symbol*, StructVar> dicoVariables;
+    map<string, StructVar*>dicoVariables;
     IActiveSymbol * activeSymbol;
     stack<State*> stackStates;
     stack<Symbol*> stackSymbols;

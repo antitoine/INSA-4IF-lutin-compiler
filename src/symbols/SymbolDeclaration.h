@@ -11,7 +11,7 @@ public:
     SymbolDeclaration(enum symbolIdTable idSymbol);
     SymbolDeclaration();
     virtual std::string toString();
-    virtual void execute(std::map<Symbol*, StructVar> & dicoVariables) = 0 ;
+    virtual void execute(map<string, StructVar*>& dicoVariables) = 0 ;
     virtual bool isPersistent() const;
 
 protected:

@@ -18,6 +18,7 @@ using namespace std;
 void Automaton::init() {
     // TODO
     stackStates.push(new State0());
+    dicoVariables.clear();
 }
 
 int Automaton::readFile(std::string filename) {
@@ -44,7 +45,7 @@ int Automaton::readFile(std::string filename) {
         while (!stringToCompute.empty())
         {
             std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
-            symbol = Lexer::readNextSymbol(stringToCompute);
+            symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables);
 
             if (symbol == NULL) {
                 // TODO : Warning/Error : unknown symbol
@@ -110,7 +111,7 @@ void Automaton::setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclaratio
 
 void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
     if (currentSymbolDeclarationVar != NULL) {
-        currentSymbolDeclarationVar->addVariable(variable);
+        currentSymbolDeclarationVar->addVariable(variable, dicoVariables);
         cout << "#TRACE: Variable " << variable->getName() << " added to the current declaration var" << endl;
     }
 }
@@ -130,7 +131,7 @@ void Automaton::addConstantToCurrentDeclarationConst(SymbolVariable * variable) 
 void Automaton::addConstantValueToCurrentDeclarationConst(SymbolNumber * number) {
     if (currentSymbolDeclarationConst != NULL) {
         float constantValue = number->getFloatValue();
-        currentSymbolDeclarationConst->addConstantValue(constantValue);
+        currentSymbolDeclarationConst->addConstantValue(constantValue, dicoVariables);
         cout << "#TRACE: Constant value " << constantValue << " added to the current declaration const" << endl;
     }
 }
@@ -205,8 +206,6 @@ void Automaton::affectCurrentExpressionToCurrentInstruction() {
 void Automaton::execute() {
     cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
     cout << "Execute..." << endl;
-
-    dicoVariables.clear();
 
     for (Symbol * s: symbolsToExecute) {
         s->execute(dicoVariables);

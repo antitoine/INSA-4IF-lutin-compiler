@@ -14,14 +14,20 @@ std::string SymbolVariable::toString() {
     std::cout << "Symbol ID (id: " << id << ", name: " << name << ")" << std::endl;
 }
 
-Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected, map<string, StructVar*>& dicoVariables) {
     MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::IDENTIFICATEUR);
 
     if (result.matched)
     {
         stringToAnalyse = result.stringConsumed;
         stringSymbolDetected = result.stringMatched;
-        return new SymbolVariable(result.stringMatched);
+
+        map<string, StructVar *>::iterator it = dicoVariables.find(result.stringMatched);
+        if (it != dicoVariables.end()) { // The variable exists
+            return it->second->ptSymbol;
+        } else {
+            return new SymbolVariable(result.stringMatched);
+        }
     }
     else
     {
@@ -33,12 +39,12 @@ std::string SymbolVariable::getName() const {
     return name;
 }
 
-float SymbolVariable::eval(std::map<Symbol*, StructVar> & dicoVariables){
-    std::map<Symbol*, StructVar>::iterator it = dicoVariables.find(this);
+float SymbolVariable::eval(map<string, StructVar*>& dicoVariables){
+    map<string, StructVar*>::iterator it = dicoVariables.find(name);
 
     //if the variable has already been initialized
-    if(it->second.initialized == true){
-        return it->second.value;
+    if(it->second->isInitialized == true){
+        return it->second->value;
     }
     else{
         std::cout << "Variable " << this->getName() << "has not been declared" << std::endl;

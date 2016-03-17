@@ -7,23 +7,16 @@ SymbolInstructionAffect::SymbolInstructionAffect():SymbolInstruction(S_INSTRUCTI
 
 }
 
-void SymbolInstructionAffect::execute(std::map<Symbol*, StructVar> & dicoVariables) {
-    StructVar s = {symbolExpression->eval(dicoVariables), false, true};
+void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
+    // We check if the variable is already in the dico
+    map<string, StructVar *>::iterator it = dicoVariables.find(symbolVariable->getName());
 
-    //we check if the variable is already in the dico
-    bool exist = false;
-    for(auto const &it : dicoVariables) {
-        if(dynamic_cast<SymbolVariable*>(it.first)->getName() == symbolVariable->getName()){
-            exist = true;
-            break;
-        }
-    }
-
-    //if the variable is already existing in the map
-    if(exist){
-        dicoVariables[symbolVariable]=s;
-    }
-    else{
+    if (it != dicoVariables.end()) { // The variable exists
+        StructVar * ptS = it->second;
+        ptS->value = symbolExpression->eval(dicoVariables);
+        ptS->isInitialized = true;
+    } else {
+        // TODO : Exception
         std::cout << "Variable " << symbolVariable->getName() << "has not been declared" << std::endl;
     }
 }
