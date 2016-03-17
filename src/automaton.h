@@ -41,6 +41,8 @@ public :
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();
 
+    void execute();
+
     void setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar);
     void addVariableToCurrentDeclarationVar(SymbolVariable * variable);
 

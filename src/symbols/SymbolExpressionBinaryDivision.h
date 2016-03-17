@@ -3,7 +3,7 @@
 
 #include "SymbolExpressionBinary.h"
 
-class SymbolExpressionBinaryDivision : SymbolExpressionBinary
+class SymbolExpressionBinaryDivision : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryDivision();

@@ -18,6 +18,7 @@ bool State32::transition(Automaton &automaton, Symbol *symbol) {
          */
 
         case S_VARIABLE:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State19());
             return true;
 
@@ -26,6 +27,7 @@ bool State32::transition(Automaton &automaton, Symbol *symbol) {
              */
 
         case S_NUMBER:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State20());
             return true;
 

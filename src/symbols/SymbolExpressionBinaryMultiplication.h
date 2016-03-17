@@ -3,7 +3,7 @@
 
 #include "SymbolExpressionBinary.h"
 
-class SymbolExpressionBinaryMultiplication : SymbolExpressionBinary
+class SymbolExpressionBinaryMultiplication : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinaryMultiplication();

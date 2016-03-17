@@ -16,6 +16,7 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
          * ; | R18
          */
         case SU_SEMICOLON:
+            automaton.aggregateBinaryOperatorExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -23,6 +24,7 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
          * + | R18
          */
         case SU_PLUS:
+            automaton.aggregateBinaryOperatorExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -30,6 +32,7 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
          * - | R18
          */
         case SU_MINUS:
+            automaton.aggregateBinaryOperatorExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -37,6 +40,7 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
          * * | R18
          */
         case SU_MULT:
+            automaton.aggregateBinaryOperatorExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -44,6 +48,7 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
          * / | R18
          */
         case SU_DIV:
+            automaton.aggregateBinaryOperatorExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -51,6 +56,8 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
         * ) | R18
         */
         case SU_ENDING_PAR:
+            automaton.aggregateBinaryOperatorExpression();
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 

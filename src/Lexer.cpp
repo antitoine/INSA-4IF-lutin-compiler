@@ -20,9 +20,10 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead)
     else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, symbolDetected)) != NULL);
 
+    else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolVariable::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolNumber::analyse(stringToRead, symbolDetected)) != NULL);
-    else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);
+
 
     // If a symbol is found
     if (symbol != NULL) {

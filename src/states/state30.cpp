@@ -17,6 +17,7 @@ bool State30::transition(Automaton & automaton, Symbol * symbol) {
          * id : E19
          */
         case S_VARIABLE:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State19());
             return true;
 
@@ -24,6 +25,7 @@ bool State30::transition(Automaton & automaton, Symbol * symbol) {
              * val : E20
              */
         case S_NUMBER:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State20());
             return true;
 

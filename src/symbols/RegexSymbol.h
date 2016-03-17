@@ -33,7 +33,7 @@ typedef struct MatchingResult {
 static const RE2 REG_VAR("^(var )");
 static const RE2 REG_CONST("^(const )");
 static const RE2 REG_LIRE("^(lire )");
-static const RE2 REG_ECRIRE("^(ecrire )");
+static const RE2 REG_ECRIRE("^(ecrire +)");
 static const RE2 REG_IDENTIFICATEUR("(^[a-zA-Z](\\w)*)");
 static const RE2 REG_FIN_INSTRUCTION("^(;)");
 static const RE2 REG_NOMBRE("^(-?\\d+(\\.\\d*)?)");

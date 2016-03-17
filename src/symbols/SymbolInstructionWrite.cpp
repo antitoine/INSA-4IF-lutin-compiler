@@ -15,7 +15,7 @@ void SymbolInstructionWrite::execute(std::map<Symbol*, StructVar> & dicoVariable
 }
 
 Symbol *SymbolInstructionWrite::analyse(std::string &stringToAnalyse, std::string &stringSymbolDetected) {
-    MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::CONST);
+    MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::ECRIRE);
 
     if (result.matched)
     {

@@ -43,7 +43,7 @@ int Automaton::readFile(std::string filename) {
 
         while (!stringToCompute.empty())
         {
-            std::cout << "String to compute: " << stringToCompute << std::endl;
+            std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
             symbol = Lexer::readNextSymbol(stringToCompute);
 
             if (symbol == NULL) {
@@ -62,10 +62,7 @@ int Automaton::readFile(std::string filename) {
 
     file.close();
 
-    cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
-    cout << "Execute..." << endl;
-
-    symbolsToExecute.front()->execute(dicoVariables);
+    execute();
 
     return 0;
 }
@@ -159,6 +156,8 @@ void Automaton::aggregateBinaryOperatorExpression() {
     binaryOperator->setOperands(left, right);
 
     currentExpression.push_back(binaryOperator);
+
+    cout << "#TRACE: aggregateBinaryOperatorExpression " << binaryOperator->getId() << endl;
 }
 
 void Automaton::aggregateParenthesisExpression() {
@@ -171,13 +170,17 @@ void Automaton::aggregateParenthesisExpression() {
     currentExpression.pop_back();
 
     ((SymbolExpressionParenthesis*)currentExpression.back())->setExpression(expression);
+
+
 }
 
 void Automaton::addToCurrentExpression(SymbolExpression *expression) {
+    cout << "#TRACE: addToCurrentExpression " << expression->getId() << endl;
     currentExpression.push_back(expression);
 }
 
 void Automaton::setCurrentInstruction(SymbolInstruction * instruction) {
+    cout << "#TRACE: setCurrentInstruction " << instruction->getId() << endl;
     currentInstruction = instruction;
     currentExpression.clear();
 }
@@ -188,7 +191,21 @@ void Automaton::affectCurrentExpressionToCurrentInstruction() {
             cerr << "Error: incorrect expression to affect at the current instruction." << endl;
             return;
         }
+        cout << "#TRACE: affectCurrentExpressionToCurrentInstruction " << currentInstruction->getId() << endl;
         currentInstruction->affectExpression(currentExpression.back());
         currentExpression.clear();
+        symbolsToExecute.push_back(currentInstruction);
+        currentInstruction = NULL;
+    }
+}
+
+void Automaton::execute() {
+    cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
+    cout << "Execute..." << endl;
+
+    dicoVariables.clear();
+
+    for (Symbol * s: symbolsToExecute) {
+        s->execute(dicoVariables);
     }
 }
