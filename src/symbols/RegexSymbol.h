@@ -21,6 +21,7 @@ namespace Regex {
         PARENTHESE_OUVRANTE,
         PARENTHESE_FERMANTE,
         SEPARATEUR_DECLARATION,
+        UNKNOWN_SYMBOL
     };
 }
 
@@ -46,6 +47,7 @@ static const RE2 REG_OP_DECLARER("^( *= *)");
 static const RE2 REG_PARENTHESE_OUVRANTE("^( *\\( *)");
 static const RE2 REG_PARENTHESE_FERMANTE("^( *\\) *)");
 static const RE2 REG_SEPARATEUR_DECLARATION("^( *, *)");
+static const RE2 REG_UNKNOWN_SYMBOL("^( *[^a-zA-Z0-9\\.\\+\\*\\-\\(\\);,/:]+ *)");
 
 class RegexSymbol {
 public:

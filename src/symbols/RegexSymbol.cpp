@@ -19,6 +19,7 @@ std::map<Regex::Symbol, const RE2*> RegexSymbol::regexes = {
         {Regex::Symbol::PARENTHESE_OUVRANTE,    &REG_PARENTHESE_OUVRANTE},
         {Regex::Symbol::PARENTHESE_FERMANTE,    &REG_PARENTHESE_FERMANTE},
         {Regex::Symbol::SEPARATEUR_DECLARATION, &REG_SEPARATEUR_DECLARATION},
+        {Regex::Symbol::UNKNOWN_SYMBOL,         &REG_UNKNOWN_SYMBOL},
 };
 
 const RE2 * RegexSymbol::findRegex(Regex::Symbol regexToFind) {

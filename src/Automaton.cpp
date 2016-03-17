@@ -49,16 +49,20 @@ int Automaton::readFile(std::string filename) {
 
             while (!stringToCompute.empty()) {
                 //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
-                symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, currentCharPos);
 
-                if (symbol == NULL) {
-                    // TODO : Warning/Error : unknown symbol
-                    break;
+                try {
+                    symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, currentCharPos);
+                } catch (Error const& error) {
+                    if (error.getLevel() == WARNING) {
+                        cerr << error.what(currentLine, currentCharPos) << endl;
+                        continue;
+                    } else {
+                        throw;
+                    }
                 }
-                else {
-                    // TODO : Compute symbol
-                    computeNewSymbol(symbol);
-                }
+
+                computeNewSymbol(symbol);
+
 
             }
 
@@ -115,33 +119,28 @@ void Automaton::accept() {
 void Automaton::setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar) {
     currentSymbolDeclarationVar = symbolDeclarationVar;
     symbolsToExecute.push_back(currentSymbolDeclarationVar);
-    cout << "#TRACE: setCurrentDeclarationVar" << endl;
 }
 
 void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
     if (currentSymbolDeclarationVar != NULL) {
         currentSymbolDeclarationVar->addVariable(variable, dicoVariables);
-        cout << "#TRACE: Variable " << variable->getName() << " added to the current declaration var" << endl;
     }
 }
 
 void Automaton::setCurrentDeclarationConst(SymbolDeclarationConst * symbolDeclarationConst) {
     currentSymbolDeclarationConst = symbolDeclarationConst;
     symbolsToExecute.push_back(currentSymbolDeclarationConst);
-    cout << "#TRACE: setCurrentDeclarationConst" << endl;
 }
 
 void Automaton::addConstantToCurrentDeclarationConst(SymbolVariable * variable) {
     if (currentSymbolDeclarationConst != NULL) {
         currentSymbolDeclarationConst->addConstant(variable);
-        cout << "#TRACE: Variable " << variable->getName() << " added to the current declaration const" << endl;
     }
 }
 void Automaton::addConstantValueToCurrentDeclarationConst(SymbolNumber * number) {
     if (currentSymbolDeclarationConst != NULL) {
         float constantValue = number->eval();
         currentSymbolDeclarationConst->addConstantValue(constantValue, dicoVariables);
-        cout << "#TRACE: Constant value " << constantValue << " added to the current declaration const" << endl;
     }
 }
 
@@ -166,8 +165,6 @@ void Automaton::aggregateBinaryOperatorExpression() {
     binaryOperator->setOperands(left, right);
 
     currentExpression.push_back(binaryOperator);
-
-    cout << "#TRACE: aggregateBinaryOperatorExpression " << binaryOperator->getId() << endl;
 }
 
 void Automaton::aggregateParenthesisExpression() {
@@ -180,20 +177,14 @@ void Automaton::aggregateParenthesisExpression() {
     SymbolExpression * expression = currentExpression.back();
     currentExpression.pop_back();
 
-    cout << "#TRACE: aggregateParenthesisExpression " << expression->getId() << endl;
-
     ((SymbolExpressionParenthesis*)currentExpression.back())->setExpression(expression);
-
-
 }
 
 void Automaton::addToCurrentExpression(SymbolExpression *expression) {
-    cout << "#TRACE: addToCurrentExpression " << expression->getId() << endl;
     currentExpression.push_back(expression);
 }
 
 void Automaton::setCurrentInstruction(SymbolInstruction * instruction) {
-    cout << "#TRACE: setCurrentInstruction " << instruction->getId() << endl;
     currentInstruction = instruction;
     currentExpression.clear();
 }
@@ -204,7 +195,6 @@ void Automaton::affectCurrentExpressionToCurrentInstruction() {
             cerr << "Error: incorrect expression to affect at the current instruction." << endl;
             return;
         }
-        cout << "#TRACE: affectCurrentExpressionToCurrentInstruction " << currentInstruction->getId() << endl;
         currentInstruction->affectExpression(currentExpression.back());
         currentExpression.clear();
         symbolsToExecute.push_back(currentInstruction);

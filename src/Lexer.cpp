@@ -1,7 +1,3 @@
-//
-// Created by pierre on 10/03/16.
-//
-
 #include <iostream>
 #include "Lexer.h"
 #include "symbols/SymbolDeclarationVar.h"
@@ -10,6 +6,8 @@
 #include "symbols/SymbolNumber.h"
 #include "symbols/SymbolInstructionWrite.h"
 #include "symbols/SymbolInstructionRead.h"
+#include "symbols/RegexSymbol.h"
+#include "exceptions/ErrorLexicalUnknownSymbol.h"
 
 Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables, int & charPos)
 {
@@ -30,7 +28,15 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar
     // If a symbol is found
     if (symbol != NULL) {
         charPos += symbolDetected.length();
-        //std::cout << "Symbol detected: " << symbolDetected << std::endl;
+
+    } else {
+        MatchingResult result = RegexSymbol::matches(stringToRead, Regex::Symbol::UNKNOWN_SYMBOL);
+
+        if (result.matched) {
+            stringToRead = result.stringConsumed;
+            charPos += result.stringMatched.length();
+            throw ErrorLexicalUnknownSymbol(result.stringMatched);
+        }
     }
 
     return symbol;
