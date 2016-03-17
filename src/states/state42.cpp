@@ -16,6 +16,7 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
          * ; | R19
          */
         case SU_SEMICOLON:
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -23,6 +24,7 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
              * + | R19
              */
         case SU_PLUS:
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -30,6 +32,7 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
              * - | R19
              */
         case SU_MINUS:
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -37,6 +40,7 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
              * * | R19
              */
         case SU_MULT:
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -44,6 +48,7 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
              * / | R19
              */
         case SU_DIV:
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 
@@ -51,6 +56,7 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
             * ) | R19
             */
         case SU_ENDING_PAR:
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 

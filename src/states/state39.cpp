@@ -31,7 +31,6 @@ bool State39::transition(Automaton & automaton, Symbol * symbol) {
 
         case SU_ENDING_PAR:
             automaton.aggregateBinaryOperatorExpression();
-            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 

@@ -3,6 +3,7 @@
 #include "state19.h"
 #include "state20.h"
 #include "state41.h"
+#include "../symbols/SymbolExpressionParenthesis.h"
 
 State32::State32() : State("32") {
 }
@@ -36,6 +37,7 @@ bool State32::transition(Automaton &automaton, Symbol *symbol) {
              */
 
         case SU_OPENNING_PAR:
+            automaton.addToCurrentExpression(new SymbolExpressionParenthesis());
             automaton.transition(symbol, new State18());
             return true;
 

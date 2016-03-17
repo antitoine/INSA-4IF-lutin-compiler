@@ -166,8 +166,11 @@ void Automaton::aggregateParenthesisExpression() {
         return;
     }
 
+
     SymbolExpression * expression = currentExpression.back();
     currentExpression.pop_back();
+
+    cout << "#TRACE: aggregateParenthesisExpression " << expression->getId() << endl;
 
     ((SymbolExpressionParenthesis*)currentExpression.back())->setExpression(expression);
 

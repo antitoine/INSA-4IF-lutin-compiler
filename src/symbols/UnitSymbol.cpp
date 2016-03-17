@@ -33,6 +33,10 @@ Symbol * UnitSymbol::analyse(std::string & stringToAnalyse, std::string & string
         unitSymbol = new UnitSymbol(SU_DIV);
     } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::OP_MULTIPLIER)).matched) {
         unitSymbol = new UnitSymbol(SU_MULT);
+    } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::PARENTHESE_OUVRANTE)).matched) {
+        unitSymbol = new UnitSymbol(SU_OPENNING_PAR);
+    } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::PARENTHESE_FERMANTE)).matched) {
+        unitSymbol = new UnitSymbol(SU_ENDING_PAR);
     }
 
     // TODO : other cases
