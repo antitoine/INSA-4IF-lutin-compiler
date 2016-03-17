@@ -9,10 +9,18 @@ SymbolInstructionAffect::SymbolInstructionAffect():SymbolInstruction(S_INSTRUCTI
 
 void SymbolInstructionAffect::execute(std::map<Symbol*, StructVar> & dicoVariables) {
     StructVar s = {symbolExpression->eval(dicoVariables), false, true};
-    std::map<Symbol*, StructVar>::iterator it = dicoVariables.find(symbolVariable);
+
+    //we check if the variable is already in the dico
+    bool exist = false;
+    for(auto const &it : dicoVariables) {
+        if(dynamic_cast<SymbolVariable*>(it.first)->getName() == symbolVariable->getName()){
+            exist = true;
+            break;
+        }
+    }
 
     //if the variable is already existing in the map
-    if(it != dicoVariables.end()){
+    if(exist){
         dicoVariables[symbolVariable]=s;
     }
     else{
