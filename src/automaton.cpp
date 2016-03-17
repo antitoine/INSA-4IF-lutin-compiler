@@ -44,7 +44,7 @@ int Automaton::readFile(std::string filename) {
 
         while (!stringToCompute.empty())
         {
-            std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
+            //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
             symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables);
 
             if (symbol == NULL) {

@@ -29,7 +29,7 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar
 
     // If a symbol is found
     if (symbol != NULL) {
-        std::cout << "Symbol detected: " << symbolDetected << std::endl;
+        //std::cout << "Symbol detected: " << symbolDetected << std::endl;
     }
 
     return symbol;

@@ -11,6 +11,8 @@ SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_R
 
 void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
     float userValue;
+    cout << "?" << symbolVariable->getName() << " : ";
+    cout.flush();
     std::cin >> userValue;
 
     // We check if the variable is already in the dico
