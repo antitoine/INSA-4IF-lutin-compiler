@@ -11,7 +11,7 @@ bool State34::transition(Automaton & automaton, Symbol * symbol) {
     switch (symbol->getId()) {
 
         /*
-         * R14 : I' -> id := E
+         * R14 : I' -> id := E ;
          * id     | R14
          * lire   | R14
          * ecrire | R14
