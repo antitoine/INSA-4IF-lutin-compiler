@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 #include "state.h"
-#include "../symbols/symbol.h"
-#include "../automaton.h"
+#include "../Automaton.h"
+#include "../symbols/Symbol.h"
 
 class Automaton;
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string.h>
-#include "automaton.h"
+#include "Automaton.h"
 #include "symbols/RegexSymbol.h"
 #include "TestRegex.h"
 

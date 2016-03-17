@@ -2,8 +2,8 @@
 #define SYMBOLDECLARATION
 
 #include "../StructVar.h"
-#include "../automaton.h"
-#include "symbol.h"
+#include "../Automaton.h"
+#include "Symbol.h"
 
 class SymbolDeclaration : public Symbol
 {

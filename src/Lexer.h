@@ -2,7 +2,7 @@
 #define LUTIN_COMPILER_LEXER_H
 
 #include <string>
-#include "symbols/symbol.h"
+#include "symbols/Symbol.h"
 
 class Lexer {
 

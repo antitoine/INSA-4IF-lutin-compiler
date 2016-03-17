@@ -1,7 +1,7 @@
 #if ! defined ( UNITSYMBOL )
 #define UNITSYMBOL
 
-#include "symbol.h"
+#include "Symbol.h"
 
 class UnitSymbol : public Symbol
 {

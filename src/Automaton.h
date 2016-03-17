@@ -3,6 +3,7 @@
 
 #include <map>
 #include <stack>
+#include <list>
 #include "states/state.h"
 
 #include "StructVar.h"

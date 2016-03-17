@@ -1,8 +1,8 @@
 #if ! defined ( SYMBOLEXPRESSION )
 #define SYMBOLEXPRESSION
 
-#include "symbol.h"
-#include "../automaton.h"
+#include "Symbol.h"
+#include "../Automaton.h"
 
 class SymbolExpression : public Symbol
 {

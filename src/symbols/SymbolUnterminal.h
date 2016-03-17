@@ -2,7 +2,7 @@
 #define LUTIN_COMPILER_SYMBOLUNTERMINAL_H
 
 
-#include "symbol.h"
+#include "Symbol.h"
 
 class SymbolUnterminal : public Symbol
 {

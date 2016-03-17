@@ -1,7 +1,7 @@
 #include <map>
 #include <iostream>
 #include "SymbolDeclarationConst.h"
-#include "symbol.h"
+#include "Symbol.h"
 #include "RegexSymbol.h"
 #include <re2/re2.h>
 

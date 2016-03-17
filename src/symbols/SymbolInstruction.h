@@ -4,8 +4,8 @@
 
 #include <map>
 
-#include "symbol.h"
-#include "../automaton.h"
+#include "Symbol.h"
+#include "../Automaton.h"
 
 class SymbolInstruction : public Symbol
 {

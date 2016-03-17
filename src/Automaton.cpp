@@ -2,9 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <list>
-#include "automaton.h"
+#include "Automaton.h"
 #include "Lexer.h"
 #include "states/state0.h"
+#include "symbols/Symbol.h"
 #include "symbols/SymbolDeclarationVar.h"
 #include "symbols/SymbolVariable.h"
 #include "symbols/SymbolNumber.h"
