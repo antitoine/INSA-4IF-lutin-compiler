@@ -34,7 +34,7 @@ private:
     list<Symbol*> symbolsExpressionToAggregate;
 
 public :
-    bool readFile(string filename);
+    int readFile(string filename);
     void transition(Symbol * symbol, State * newState);
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();

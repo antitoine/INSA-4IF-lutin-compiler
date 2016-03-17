@@ -5,6 +5,8 @@
 #include "symbols/RegexSymbol.h"
 #include "TestRegex.h"
 
+void displayHelp();
+
 using namespace std;
 
 // Get a table of the arguments
@@ -39,7 +41,20 @@ string getCmdFile(int argc, char ** argv)
     return "";
 }
 
+// Display the help
+void displayHelp() {
+    cout << "Lutin Compiler v0.1 by H4311 - INSA Lyon 2015-2016" << endl;
+    // TODO Print the help section
+}
+
 int main(int argc, char * argv[]) {
+
+    // No argument
+    if (argc <= 1) {
+        displayHelp();
+        return 1;
+    }
+
     Automaton automaton;
 
     char * arguments = getCmdOptions(argc, argv);
@@ -62,10 +77,11 @@ int main(int argc, char * argv[]) {
     }
 
     string filename = getCmdFile(argc, argv);
-    if (filename != "")
-        automaton.readFile(getCmdFile(argc, argv));
-    else
-        automaton.readFile("/home/pierre/Documents/Projects/lutin-compiler/test/testTMP");
 
-    return 0;
+    if (filename == "") {
+        cerr << "Error: unable to get the file path argument" << endl;
+        return 1;
+    }
+
+    return automaton.readFile(getCmdFile(argc, argv));
 }

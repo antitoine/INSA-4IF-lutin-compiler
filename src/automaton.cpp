@@ -19,7 +19,7 @@ void Automaton::init() {
     stackStates.push(new State0());
 }
 
-bool Automaton::readFile(std::string filename) {
+int Automaton::readFile(std::string filename) {
 
     init();
 
@@ -30,7 +30,7 @@ bool Automaton::readFile(std::string filename) {
     if (!file.is_open())
     {
         std::cerr << "Error: unable to open the file " << filename << std::endl;
-        return false;
+        return 1;
     }
 
     std::cout << "File " << filename << " opened." << std::endl;
@@ -65,6 +65,8 @@ bool Automaton::readFile(std::string filename) {
     cout << "Execute..." << endl;
 
     symbolsToExecute.front()->execute(dicoVariables);
+
+    return 0;
 }
 
 void Automaton::computeNewSymbol(Symbol * symbol)
