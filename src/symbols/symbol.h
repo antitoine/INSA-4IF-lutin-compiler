@@ -28,7 +28,7 @@ enum symbolIdTable {
     S_EXPRESSION_BIN_DIV
 };
 
-enum unitSymbolIdTable {
+enum TypeSymbolUnit {
     SU_PLUS = S_EXPRESSION_BIN_DIV + 1,
     SU_MINUS,
     SU_MULT,

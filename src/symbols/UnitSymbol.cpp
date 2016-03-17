@@ -7,7 +7,7 @@
 
 using namespace std;
 
-UnitSymbol::UnitSymbol(enum unitSymbolIdTable uSymbol):Symbol(uSymbol)
+UnitSymbol::UnitSymbol(enum TypeSymbolUnit uSymbol):Symbol(uSymbol)
 {
 }
 

@@ -130,7 +130,7 @@ void Automaton::addConstantToCurrentDeclarationConst(SymbolVariable * variable) 
 }
 void Automaton::addConstantValueToCurrentDeclarationConst(SymbolNumber * number) {
     if (currentSymbolDeclarationConst != NULL) {
-        float constantValue = number->getFloatValue();
+        float constantValue = number->eval();
         currentSymbolDeclarationConst->addConstantValue(constantValue, dicoVariables);
         cout << "#TRACE: Constant value " << constantValue << " added to the current declaration const" << endl;
     }

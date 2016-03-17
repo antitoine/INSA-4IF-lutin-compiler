@@ -6,7 +6,7 @@
 class UnitSymbol : public Symbol
 {
 public:
-    UnitSymbol(enum unitSymbolIdTable);
+    UnitSymbol(enum TypeSymbolUnit);
 
     virtual std::string toString();
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
