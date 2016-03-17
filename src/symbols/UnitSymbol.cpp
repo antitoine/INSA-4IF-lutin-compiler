@@ -23,6 +23,8 @@ Symbol * UnitSymbol::analyse(std::string & stringToAnalyse, std::string & string
         unitSymbol = new UnitSymbol(SU_SEMICOLON);
     } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::SEPARATEUR_DECLARATION)).matched) {
         unitSymbol = new UnitSymbol(SU_COMMA);
+    } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::OP_AFFECTER)).matched) {
+        unitSymbol = new UnitSymbol(SU_AFFECT);
     } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::OP_DECLARER)).matched) {
         unitSymbol = new UnitSymbol(SU_EQUAL);
     } else if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::OP_PLUS)).matched) {

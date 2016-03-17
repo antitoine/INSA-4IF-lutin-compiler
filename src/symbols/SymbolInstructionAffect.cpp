@@ -7,6 +7,10 @@ SymbolInstructionAffect::SymbolInstructionAffect():SymbolInstruction(S_INSTRUCTI
 
 }
 
+SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
+        :SymbolInstruction(S_INSTRUCTION_AFFECT), symbolVariable(variable) {
+}
+
 void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
     // We check if the variable is already in the dico
     map<string, StructVar *>::iterator it = dicoVariables.find(symbolVariable->getName());
@@ -24,3 +28,5 @@ void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
 void SymbolInstructionAffect::affectExpression(SymbolExpression *expression) {
     symbolExpression = expression;
 }
+
+

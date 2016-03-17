@@ -3,6 +3,7 @@
 #include "state19.h"
 #include "state20.h"
 #include "state22.h"
+#include "../symbols/SymbolExpressionParenthesis.h"
 
 State12::State12() : State("12") {
 }
@@ -17,6 +18,7 @@ bool State12::transition(Automaton & automaton, Symbol * symbol) {
          * id : E19
          */
         case S_VARIABLE:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State19());
             return true;
 
@@ -24,6 +26,7 @@ bool State12::transition(Automaton & automaton, Symbol * symbol) {
          * val : E20
          */
         case S_NUMBER:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State20());
             return true;
 
@@ -31,6 +34,8 @@ bool State12::transition(Automaton & automaton, Symbol * symbol) {
          * ( : E18
          */
         case SU_OPENNING_PAR:
+            automaton.addToCurrentExpression(new SymbolExpressionParenthesis());
+
             automaton.transition(symbol, new State18());
             return true;
 

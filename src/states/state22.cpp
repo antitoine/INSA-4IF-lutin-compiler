@@ -4,6 +4,10 @@
 #include "state31.h"
 #include "state30.h"
 #include "state32.h"
+#include "../symbols/SymbolExpressionBinaryAdd.h"
+#include "../symbols/SymbolExpressionBinarySoustract.h"
+#include "../symbols/SymbolExpressionBinaryMultiplication.h"
+#include "../symbols/SymbolExpressionBinaryDivision.h"
 
 State22::State22() : State("22") {
 }
@@ -19,6 +23,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
          * ; : E34
          */
         case SU_SEMICOLON:
+            automaton.affectCurrentExpressionToCurrentInstruction();
             automaton.transition(symbol, new State34());
             return true;
 
@@ -26,6 +31,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
          * + : E29
          */
         case SU_PLUS:
+            automaton.addToCurrentExpression(new SymbolExpressionBinaryAdd());
             automaton.transition(symbol, new State29());
             return true;
 
@@ -33,6 +39,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
          * - : E31
          */
         case SU_MINUS:
+            automaton.addToCurrentExpression(new SymbolExpressionBinarySoustract());
             automaton.transition(symbol, new State31());
             return true;
 
@@ -40,6 +47,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
          * * : E30
          */
         case SU_MULT:
+            automaton.addToCurrentExpression(new SymbolExpressionBinaryMultiplication());
             automaton.transition(symbol, new State30());
             return true;
 
@@ -47,6 +55,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
          * / : E32
          */
         case SU_DIV:
+            automaton.addToCurrentExpression(new SymbolExpressionBinaryDivision());
             automaton.transition(symbol, new State32());
             return true;
 

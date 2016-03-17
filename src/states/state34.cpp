@@ -22,7 +22,7 @@ bool State34::transition(Automaton & automaton, Symbol * symbol) {
         case S_INSTRUCTION_READ:
         case S_INSTRUCTION_WRITE:
         case SU_DOLLAR:
-            automaton.reduction(3, new SymbolUnterminal(UT_I_PRIM));
+            automaton.reduction(4, new SymbolUnterminal(UT_I_PRIM));
             return true;
 
 

@@ -10,6 +10,7 @@ class SymbolInstructionAffect : public SymbolInstruction
 {
 public:
     SymbolInstructionAffect();
+    SymbolInstructionAffect(SymbolVariable * variable);
     void execute(map<string, StructVar*>& dicoVariables);
 
     virtual void affectExpression(SymbolExpression * expression);

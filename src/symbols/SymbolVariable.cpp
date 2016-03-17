@@ -26,7 +26,11 @@ Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & st
         if (it != dicoVariables.end()) { // The variable exists
             return it->second->ptSymbol;
         } else {
-            return new SymbolVariable(result.stringMatched);
+            // Trim the name
+            string varName = result.stringMatched;
+            size_t first = varName.find_first_not_of(' ');
+            size_t last = varName.find_last_not_of(' ');
+            return new SymbolVariable(varName.substr(first, (last-first+1)));
         }
     }
     else

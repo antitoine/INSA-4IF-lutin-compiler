@@ -8,6 +8,7 @@
 #include "state8.h"
 #include "state9.h"
 #include "../symbols/SymbolDeclarationConst.h"
+#include "../symbols/SymbolInstructionAffect.h"
 
 State1::State1() : State(" 1") {
 }
@@ -41,6 +42,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          */
 
         case S_VARIABLE:
+            automaton.setCurrentInstruction(new SymbolInstructionAffect((SymbolVariable *) symbol));
             automaton.transition(symbol, new State7());
             return true;
 
