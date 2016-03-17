@@ -14,6 +14,7 @@ bool State5::transition(Automaton &automaton, Symbol *symbol) {
          * id : E11
          */
         case S_VARIABLE:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State11());
             return true;
 

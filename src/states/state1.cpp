@@ -51,6 +51,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
          */
 
         case S_INSTRUCTION_READ:
+            automaton.setCurrentInstruction((SymbolInstruction *) symbol);
             automaton.transition(symbol, new State5());
             return true;
 

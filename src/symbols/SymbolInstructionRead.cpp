@@ -1,6 +1,7 @@
 //#include <boost>
 #include <map>
 #include "SymbolInstructionRead.h"
+#include "RegexSymbol.h"
 
 
 SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_READ)
@@ -25,5 +26,25 @@ void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
 }
 
 void SymbolInstructionRead::affectExpression(SymbolExpression *expression) {
-    // Nothing to do
+    if (SymbolVariable * variable = dynamic_cast<SymbolVariable *>(expression)) {
+        symbolVariable = variable;
+    } else {
+        cerr << "Error: incorrect expression for read instruction." << endl;
+        // TODO : exception
+    }
+}
+
+Symbol *SymbolInstructionRead::analyse(std::string &stringToAnalyse, std::string &stringSymbolDetected) {
+    MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::LIRE);
+
+    if (result.matched)
+    {
+        stringToAnalyse = result.stringConsumed;
+        stringSymbolDetected = result.stringMatched;
+        return new SymbolInstructionRead();
+    }
+    else
+    {
+        return NULL;
+    }
 }
