@@ -15,11 +15,10 @@ public:
     void addConstant(SymbolVariable *pVariable);
     void addConstantValue(float constantValue, map<string, StructVar*>& dicoVariables);
 
-protected:
-    std::map<SymbolVariable*, float> constants;
-
 private:
+    std::map<SymbolVariable*, float> constants;
     SymbolVariable * temporaryPtVariable;
+
 };
 
 #endif

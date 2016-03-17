@@ -63,7 +63,6 @@ public:
     Symbol(int id) : id(id) {}
     virtual ~Symbol() {}
     virtual std::string toString();
-    virtual void computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute);
     operator int() const { return id; }
 
     virtual bool isPersistent() const;

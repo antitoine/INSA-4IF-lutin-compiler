@@ -16,7 +16,7 @@ float SymbolNumber::eval(map<string, StructVar*>& dicoVariables){
     return value;
 }
 
-float SymbolNumber::getFloatValue() const {
+float SymbolNumber::eval() const {
     return value;
 }
 

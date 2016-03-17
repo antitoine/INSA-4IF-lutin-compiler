@@ -9,7 +9,7 @@ public:
     SymbolNumber();
     SymbolNumber(string stringValue);
     float eval(map<string, StructVar*>& dicoVariables);
-    float getFloatValue() const;
+    float eval() const;
 
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
 

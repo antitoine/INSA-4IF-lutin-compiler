@@ -3,16 +3,23 @@
 '''''''''
 
 class "StructVar" as STRUCT_VAR {
+    ptSymbol: SymbolVariable*
     value: float
     isConstant: bool
+    isInitialized: bool
 }
 
 class "Automaton" as CLASS_AUTOMATE {
-    - dicoVariables: map<SymbolVariable*, StructVar>
-    - activeSymbol: IActiveSymbol
-    + analyse()
-    - lireSymbolSuivant()
-    + execute()
+    - dicoVariables: map<string, StructVar*>
+
+    + readFile(string filename): int
+    + transition(Symbol * symbol, State * newState): void
+    + reduction(int reductionSize, Symbol * unterminalSymbol): void
+    + accept(): void
+    + execute(): void
+
+    - computeNewSymbol(Symbol * symbol): void
+    - init(): void
 }
 
 abstract class "State" as CLASS_ETAT {
@@ -24,76 +31,121 @@ abstract class "State" as CLASS_ETAT {
 
 abstract class "Symbol" as CLASS_SYMBOLE {
     # id: int
+    + Symbol(int id)
     + {abstract} operator int() const: int
+    + isPersistent() const: bool
+    + execute(map<string, StructVar*>& dicoVariables): void
+    + getId() const: int
 }
 
-enum "TypeUnitSymbol" as ENUM_SYMBOLE_UNITAIRE {
-    SU_PLUS
-    SU_MINUS
-    SU_MULT
-    SU_DIV
-    SU_EQUAL
-    SU_AFFECT
-    SU_ENDING_PAR
-    SU_OPENING_PAR
-    SU_SEMICOLON
-    SU_COMMA
-    SU_DOLLAR
+enum "TypeSymbolUnit" as ENUM_SYMBOLE_UNITAIRE {
+    SYMBOL_UNIT_PLUS
+    SYMBOL_UNIT_MINUS
+    SYMBOL_UNIT_MULT
+    SYMBOL_UNIT_DIV
+    SYMBOL_UNIT_EQUAL
+    SYMBOL_UNIT_AFFECT
+    SYMBOL_UNIT_ENDING_PAR
+    SYMBOL_UNIT_OPENING_PAR
+    SYMBOL_UNIT_SEMICOLON
+    SYMBOL_UNIT_COMMA
+    SYMBOL_UNIT_DOLLAR
 }
+
+enum "TypeSymbolUnterminal" as ENUM_SYMBOL_UNTERMINAL {
+    SYMBOL_UNTERMINAL_P
+    SYMBOL_UNTERMINAL_D
+    SYMBOL_UNTERMINAL_D_PRIM
+    SYMBOL_UNTERMINAL_V
+    SYMBOL_UNTERMINAL_C
+    SYMBOL_UNTERMINAL_I
+    SYMBOL_UNTERMINAL_I_PRIM
+    SYMBOL_UNTERMINAL_E
+}
+
 class "SymbolUnit" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
-    - type: TypeUnitSymbol
+    + SymbolUnit(enum TypeSymbolUnit)
 }
 
-interface "IActiveSymbol" as INTERFACE_ACTIVE_SYMBOL {
-    + computeSymbol(symbol:Symbol)
+class "SymbolUnterminal" as CLASS_SYMBOLE_UNTERMINAL extends CLASS_SYMBOLE {
+    + SymbolUnterminal(enum TypeSymbolUnterminal)
 }
 
-abstract class "SymbolDeclaration" as CLASS_SYMBOLE_DECLARATION extends CLASS_SYMBOLE implements INTERFACE_ACTIVE_SYMBOL {
+
+abstract class "SymbolDeclaration" as CLASS_SYMBOLE_DECLARATION extends CLASS_SYMBOLE {
     + {abstract} execute(dicoVariables)
-    + {abstract} {static} analyse()
 }
 class "SymbolDeclarationVar" as CLASS_SYMBOLE_DECLARATION_VAR extends CLASS_SYMBOLE_DECLARATION {
-    - idVariable: string
-    + execute(dicoVariables)
-    + {static} analyse()
+    - variables: list<SymbolVariable*>
+    + execute(map<string, StructVar*>& dicoVariables): void
+    + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
 }
 class "SymbolDeclarationConst" as CLASS_SYMBOLE_DECLARATION_CONST extends CLASS_SYMBOLE_DECLARATION {
-    - variables: map<idVar:string, value:float>
+    - constants: map<SymbolVariable*, float>
+    - temporaryPtVariable: SymbolVariable *
     + execute(dicoVariables)
-    + {static} analyse()
+    + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
 }
-abstract class "SymbolInstruction" as CLASS_SYMBOLE_INSTRUCTION extends CLASS_SYMBOLE implements INTERFACE_ACTIVE_SYMBOL {
-    + {abstract} execute(dicoVariables)
-    + {abstract} {static} analyse()
+abstract class "SymbolInstruction" as CLASS_SYMBOLE_INSTRUCTION extends CLASS_SYMBOLE {
+    + {abstract} execute(map<string, StructVar*>& dicoVariables): void
+    + isPersistent() const: bool
+    + {abstract} affectExpression(SymbolExpression * expression): void
 }
 class "SymbolInstructionWrite" as CLASS_SYMBOLE_INSTRUCTION_ECRITURE extends CLASS_SYMBOLE_INSTRUCTION {
-    + execute(dicoVariables)
-    + {static} analyse()
+    + execute(map<string, StructVar*>& dicoVariables): void
+    + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
+    + affectExpression(SymbolExpression * expression): void
 }
 class "SymbolInstructionRead" as CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE extends CLASS_SYMBOLE_INSTRUCTION {
-    + execute(dicoVariables)
-    + {static} analyse()
+    + execute(map<string, StructVar*>& dicoVariables): void
+    + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
+    + affectExpression(SymbolExpression * expression): void
 }
 class "SymbolInstructionAffect" as CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION extends CLASS_SYMBOLE_INSTRUCTION {
-    + execute(dicoVariables)
-    + {static} analyse()
+    + execute(map<string, StructVar*>& dicoVariables): void
+    + affectExpression(SymbolExpression * expression): void
 }
 
 abstract class "SymbolExpression" as CLASS_SYMBOLE_EXPRESSION extends CLASS_SYMBOLE {
-    + {abstract} eval(dicoVariables) : float
+    + {abstract} eval(map<string, StructVar*>& dicoVariables) : float
+    + isPersistent() const: bool
 }
 
-class "SymbolNumber" as CLASS_SYMBOLE_NOMBRE extends CLASS_SYMBOLE_EXPRESSION
-class "SymbolVariable" as CLASS_SYMBOLE_VARIABLE extends CLASS_SYMBOLE_EXPRESSION
+class "SymbolNumber" as CLASS_SYMBOLE_NOMBRE extends CLASS_SYMBOLE_EXPRESSION {
+    - value: float
+
+    + eval(map<string, StructVar*>& dicoVariables): float
+    + eval() const: float
+    + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
+}
+class "SymbolVariable" as CLASS_SYMBOLE_VARIABLE extends CLASS_SYMBOLE_EXPRESSION {
+    - name: string
+
+    + eval(map<string, StructVar*>& dicoVariables): float
+    + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
+    + getName() const: string
+}
 
 abstract class "SymbolExpressionBinary" as CLASS_SYMBOLE_EXPRESSION_BINAIRE extends CLASS_SYMBOLE_EXPRESSION {
+    + {abstract} eval(map<string, StructVar*>& dicoVariables): float
+    + setOperands(SymbolExpression * leftOperand, SymbolExpression * rightOperand): void
 }
 
 class "SymbolExpressionParenthesis" as CLASS_SYMBOLE_EXPRESSION_PARENTHESE extends CLASS_SYMBOLE_EXPRESSION {
+    + eval(map<string, StructVar*>& dicoVariables): float
+    + setExpression(SymbolExpression * expression): void
 }
 
-class "SymbolExpressionBinaryAdd" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_ADD extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
-class "SymbolExpressionBinarySoustract" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
-class "SymbolExpressionBinaryMultiplication" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_MULT extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
-class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV extends CLASS_SYMBOLE_EXPRESSION_BINAIRE
+class "SymbolExpressionBinaryAdd" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_ADD extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
+    + eval(map<string, StructVar*>& dicoVariables) : float
+}
+class "SymbolExpressionBinarySoustract" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
+    + eval(map<string, StructVar*>& dicoVariables) : float
+}
+class "SymbolExpressionBinaryMultiplication" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_MULT extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
+    + eval(map<string, StructVar*>& dicoVariables) : float
+}
+class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
+    + eval(map<string, StructVar*>& dicoVariables) : float
+}
 

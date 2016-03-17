@@ -23,7 +23,6 @@ class Automaton {
 
 private:
     map<string, StructVar*>dicoVariables;
-    IActiveSymbol * activeSymbol;
     stack<State*> stackStates;
     stack<Symbol*> stackSymbols;
     list<Symbol*> symbolsToExecute;
@@ -33,8 +32,6 @@ private:
 
     list<SymbolExpression*> currentExpression;
     SymbolInstruction * currentInstruction;
-
-    list<Symbol*> symbolsExpressionToAggregate;
 
 public :
     int readFile(string filename);

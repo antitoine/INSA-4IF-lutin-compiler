@@ -10,11 +10,6 @@ int Symbol::getId() const {
     return id;
 }
 
-void Symbol::computeSublistSymbols(const std::list<Symbol*> & symbolsToCompute) {
-    // Default: ignore
-    return;
-}
-
 void Symbol::execute(map<string, StructVar*>& dicoVariables) {
 
 }
