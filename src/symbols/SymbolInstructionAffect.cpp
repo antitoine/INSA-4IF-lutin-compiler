@@ -28,3 +28,6 @@ void SymbolInstructionAffect::execute(std::map<Symbol*, StructVar> & dicoVariabl
     }
 }
 
+void SymbolInstructionAffect::affectExpression(SymbolExpression *expression) {
+    symbolExpression = expression;
+}

@@ -2,7 +2,6 @@
 #define SYMBOLINSTRUCTIONWWRITE
 
 #include "SymbolInstruction.h"
-#include "SymbolExpression.h"
 
 class SymbolInstructionWrite : public SymbolInstruction
 {
@@ -11,6 +10,8 @@ public:
     void execute(std::map<Symbol*, StructVar> & dicoVariables);
 
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
+
+    virtual void affectExpression(SymbolExpression * expression);
 
 protected:
     SymbolExpression* symbolExpression;

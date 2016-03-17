@@ -14,6 +14,8 @@ public:
     virtual void execute(std::map<Symbol*, StructVar> & dicoVariables) = 0;
     virtual bool isPersistent() const;
 
+    virtual void affectExpression(SymbolExpression * expression) = 0;
+
 protected:
 
 };

@@ -24,6 +24,7 @@ bool State29::transition(Automaton & automaton, Symbol * symbol) {
          * val : E20
          */
         case S_NUMBER:
+            automaton.addToCurrentExpression((SymbolExpression *) symbol);
             automaton.transition(symbol, new State20());
             return true;
 

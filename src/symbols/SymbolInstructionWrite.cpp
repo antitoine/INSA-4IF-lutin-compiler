@@ -1,5 +1,6 @@
 //#include <boost>
 #include <map>
+#include "SymbolExpression.h"
 #include "SymbolInstructionWrite.h"
 #include "RegexSymbol.h"
 
@@ -26,4 +27,8 @@ Symbol *SymbolInstructionWrite::analyse(std::string &stringToAnalyse, std::strin
     {
         return NULL;
     }
+}
+
+void SymbolInstructionWrite::affectExpression(SymbolExpression *expression) {
+    symbolExpression = expression;
 }

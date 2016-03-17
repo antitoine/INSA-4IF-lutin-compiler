@@ -12,6 +12,8 @@ public:
     SymbolInstructionAffect();
     void execute(std::map<Symbol*, StructVar> & dicoVariables);
 
+    virtual void affectExpression(SymbolExpression * expression);
+
 protected:
     SymbolExpression* symbolExpression;
     SymbolVariable* symbolVariable;

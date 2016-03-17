@@ -23,7 +23,13 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
         case SU_SEMICOLON:
         case SU_PLUS:
         case SU_MINUS:
+            automaton.aggregateBinaryOperatorExpression();
+            automaton.reduction(3, new SymbolUnterminal(UT_E));
+            return true;
+
         case SU_ENDING_PAR:
+            automaton.aggregateBinaryOperatorExpression();
+            automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(UT_E));
             return true;
 

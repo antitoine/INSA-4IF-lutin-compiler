@@ -30,3 +30,7 @@ void SymbolInstructionRead::execute(std::map<Symbol*, StructVar> & dicoVariables
         std::cout << "Variable " << symbolVariable->getName() << "has not been declared" << std::endl;
     }
 }
+
+void SymbolInstructionRead::affectExpression(SymbolExpression *expression) {
+    // Nothing to do
+}

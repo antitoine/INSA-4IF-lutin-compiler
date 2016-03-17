@@ -13,32 +13,16 @@ bool State28::transition(Automaton & automaton, Symbol * symbol) {
         /*
          * R13 : I’ → ecrire E ;
          * id | R13
-         */
-        case S_VARIABLE:
-            automaton.reduction(3, new SymbolUnterminal(UT_I_PRIM));
-            return true;
-
-        /*
          * lire | R13
-         */
-        case S_INSTRUCTION_READ:
-            automaton.reduction(3, new SymbolUnterminal(UT_I_PRIM));
-            return true;
-
-        /*
          * ecrire | R13
-         */
-        case S_INSTRUCTION_WRITE:
-            automaton.reduction(3, new SymbolUnterminal(UT_I_PRIM));
-            return true;
-
-        /*
          * $ | R13
          */
+        case S_VARIABLE:
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
         case SU_DOLLAR:
             automaton.reduction(3, new SymbolUnterminal(UT_I_PRIM));
             return true;
-
 
         default:
             // TODO : handle exceptions with warning message

@@ -6,7 +6,6 @@
 #include "states/state.h"
 
 #include "StructVar.h"
-#include "symbols/SymbolExpression.h"
 
 using namespace std;
 
@@ -17,6 +16,7 @@ class SymbolDeclarationConst;
 class SymbolVariable;
 class SymbolNumber;
 class SymbolExpression;
+class SymbolInstruction;
 
 class Automaton {
 
@@ -29,7 +29,9 @@ private:
 
     SymbolDeclarationVar * currentSymbolDeclarationVar;
     SymbolDeclarationConst * currentSymbolDeclarationConst;
-    stack<SymbolExpression*> currentExpression;
+
+    list<SymbolExpression*> currentExpression;
+    SymbolInstruction * currentInstruction;
 
     list<Symbol*> symbolsExpressionToAggregate;
 
@@ -45,6 +47,9 @@ public :
     void setCurrentDeclarationConst(SymbolDeclarationConst * symbolDeclarationConst);
     void addConstantToCurrentDeclarationConst(SymbolVariable * variable);
     void addConstantValueToCurrentDeclarationConst(SymbolNumber * number);
+
+    void setCurrentInstruction(SymbolInstruction * instruction);
+    void affectCurrentExpressionToCurrentInstruction();
 
     void aggregateBinaryOperatorExpression();
     void aggregateParenthesisExpression();

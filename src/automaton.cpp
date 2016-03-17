@@ -11,6 +11,7 @@
 #include "symbols/SymbolDeclarationConst.h"
 #include "symbols/SymbolExpressionBinary.h"
 #include "symbols/SymbolExpressionParenthesis.h"
+#include "symbols/SymbolInstruction.h"
 
 using namespace std;
 
@@ -146,18 +147,18 @@ void Automaton::aggregateBinaryOperatorExpression() {
         return;
     }
 
-    SymbolExpression * right = currentExpression.top();
-    currentExpression.pop();
+    SymbolExpression * right = currentExpression.back();
+    currentExpression.pop_back();
 
-    SymbolExpressionBinary * binaryOperator = (SymbolExpressionBinary *) currentExpression.top();
-    currentExpression.pop();
+    SymbolExpressionBinary * binaryOperator = (SymbolExpressionBinary *) currentExpression.back();
+    currentExpression.pop_back();
 
-    SymbolExpression * left = currentExpression.top();
-    currentExpression.pop();
+    SymbolExpression * left = currentExpression.back();
+    currentExpression.pop_back();
 
     binaryOperator->setOperands(left, right);
 
-    currentExpression.push(binaryOperator);
+    currentExpression.push_back(binaryOperator);
 }
 
 void Automaton::aggregateParenthesisExpression() {
@@ -166,12 +167,28 @@ void Automaton::aggregateParenthesisExpression() {
         return;
     }
 
-    SymbolExpression * expression = currentExpression.top();
-    currentExpression.pop();
+    SymbolExpression * expression = currentExpression.back();
+    currentExpression.pop_back();
 
-    ((SymbolExpressionParenthesis*)currentExpression.top())->setExpression(expression);
+    ((SymbolExpressionParenthesis*)currentExpression.back())->setExpression(expression);
 }
 
 void Automaton::addToCurrentExpression(SymbolExpression *expression) {
-    currentExpression.push(expression);
+    currentExpression.push_back(expression);
+}
+
+void Automaton::setCurrentInstruction(SymbolInstruction * instruction) {
+    currentInstruction = instruction;
+    currentExpression.clear();
+}
+
+void Automaton::affectCurrentExpressionToCurrentInstruction() {
+    if (currentInstruction != NULL) {
+        if (currentExpression.empty() || currentExpression.size() > 1) {
+            cerr << "Error: incorrect expression to affect at the current instruction." << endl;
+            return;
+        }
+        currentInstruction->affectExpression(currentExpression.back());
+        currentExpression.clear();
+    }
 }
