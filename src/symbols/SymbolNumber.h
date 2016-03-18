@@ -14,6 +14,8 @@ public:
 
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
 
+    static string removeLeadingZeroes(string number);
+
 protected:
     float value;
 };

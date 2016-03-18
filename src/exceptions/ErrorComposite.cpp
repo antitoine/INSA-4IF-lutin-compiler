@@ -4,11 +4,11 @@
 
 #include "ErrorComposite.h"
 
-ErrorComposite::ErrorComposite() : Error(ERROR_COMPOSITE, WARNING) {
+ErrorComposite::ErrorComposite() throw() : Error(ERROR_COMPOSITE, WARNING) {
 
 }
 
-ErrorComposite::~ErrorComposite() {
+ErrorComposite::~ErrorComposite() throw() {
     for (Error * error : components) {
         delete error;
     }
