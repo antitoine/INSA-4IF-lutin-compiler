@@ -1,10 +1,15 @@
-//#include <boost>
 #include <map>
 #include "SymbolInstructionAffect.h"
 
-SymbolInstructionAffect::SymbolInstructionAffect():SymbolInstruction(S_INSTRUCTION_AFFECT)
+using namespace std;
+
+SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCTION_AFFECT)
 {
 
+}
+
+string SymbolInstructionAffect::toString() const {
+    return symbolVariable->toString() + " := " + symbolExpression->toString();
 }
 
 SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)

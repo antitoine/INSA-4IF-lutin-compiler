@@ -13,7 +13,8 @@ enum TypeErrorLevel {
 enum TypeError {
     ERROR_COMPOSITE = 0,
     ERROR_SEMANTIC_VAR_ALREADY_DECLARED,
-    ERROR_LEXICAL_UNKNOWN_SYMBOL
+    ERROR_LEXICAL_UNKNOWN_SYMBOL,
+    ERROR_LEXICAL_UNEXPECTED_SYMBOL
 };
 
 class Error : public exception {

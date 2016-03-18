@@ -2,7 +2,7 @@
 #include "Lexer.h"
 #include "symbols/SymbolDeclarationVar.h"
 #include "symbols/SymbolDeclarationConst.h"
-#include "symbols/UnitSymbol.h"
+#include "symbols/SymbolUnit.h"
 #include "symbols/SymbolNumber.h"
 #include "symbols/SymbolInstructionWrite.h"
 #include "symbols/SymbolInstructionRead.h"
@@ -19,11 +19,10 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar
     else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolInstructionRead::analyse(stringToRead, stringSymbolDetected)) != NULL);
 
-    else if ((symbol = UnitSymbol::analyse(stringToRead, stringSymbolDetected)) != NULL);
+    else if ((symbol = SymbolUnit::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolVariable::analyse(stringToRead, stringSymbolDetected, dicoVariables)) != NULL);
     else if ((symbol = SymbolNumber::analyse(stringToRead, stringSymbolDetected)) != NULL);
-
-
+    
     // If a symbol is not found
     if (symbol == NULL) {
         MatchingResult result = RegexSymbol::matches(stringToRead, Regex::Symbol::UNKNOWN_SYMBOL);

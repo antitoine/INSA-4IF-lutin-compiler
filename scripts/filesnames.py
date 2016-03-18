@@ -3,7 +3,7 @@
 import os.path
 
 
-nomsSymboles = ["UnitSymbol", "SymbolInstruction", "SymbolDeclaration", "SymbolInstructionwWrite", "SymbolInstructionAffect", "SymbolDeclarationVar", "SymbolDeclarationConst", "SymbolExpression", "SymbolInstructionRead", "SymbolExpressionBinary", "SymbolExpressionParenthesis", "SymbolNumber", "SymbolVariable", "SymbolExpressionBinaryAdd", "SymbolExpressionBinarySoustract", "SymbolExpressionBinaryMultiplication", "SymbolExpressionBinaryDivision" ]
+nomsSymboles = ["SymbolUnit", "SymbolInstruction", "SymbolDeclaration", "SymbolInstructionwWrite", "SymbolInstructionAffect", "SymbolDeclarationVar", "SymbolDeclarationConst", "SymbolExpression", "SymbolInstructionRead", "SymbolExpressionBinary", "SymbolExpressionParenthesis", "SymbolNumber", "SymbolVariable", "SymbolExpressionBinaryAdd", "SymbolExpressionBinarySubstract", "SymbolExpressionBinaryMultiplication", "SymbolExpressionBinaryDivision" ]
 chemin = "../src/"
 
 for symb in nomsSymboles:

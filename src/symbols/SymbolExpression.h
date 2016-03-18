@@ -8,7 +8,8 @@ class SymbolExpression : public Symbol
 {
 public:
     SymbolExpression(enum symbolIdTable idSymbol);
-    virtual float eval(map<string, StructVar*>& dicoVariables) = 0;
+    virtual std::string toString() const = 0;
+    virtual float eval(std::map<std::string, StructVar*>& dicoVariables) = 0;
     virtual bool isPersistent() const;
 
 protected:

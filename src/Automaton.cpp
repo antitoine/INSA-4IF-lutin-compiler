@@ -14,6 +14,7 @@
 #include "symbols/SymbolExpressionParenthesis.h"
 #include "symbols/SymbolInstruction.h"
 #include "exceptions/Error.h"
+#include "exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 using namespace std;
 
@@ -37,7 +38,6 @@ int Automaton::readFile(std::string filename) {
         return 1;
     }
 
-    std::cout << "File " << filename << " opened." << std::endl;
     currentLineError = 1, currentCharPosError = 1;
     string stringSymbolDetected;
 
@@ -82,7 +82,17 @@ int Automaton::readFile(std::string filename) {
 void Automaton::computeNewSymbol(Symbol * symbol)
 {
     stackSymbols.push(symbol);
-    stackStates.top()->transition(*this, symbol);
+
+    try {
+        stackStates.top()->transition(*this, symbol);
+    } catch (ErrorLexicalUnexpectedSymbol const& error) {
+        if (error.getLevel() == WARNING) {
+            cerr << error.what(currentLineError, currentCharPosError) << endl;
+            stackStates.top()->transition(*this, error.getExpectedSymbol());
+        } else {
+            throw;
+        }
+    }
 }
 
 void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
@@ -94,7 +104,17 @@ void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
 
     stackSymbols.push(unterminalSymbol);
 
-    stackStates.top()->transition(*this, unterminalSymbol);
+    try {
+        stackStates.top()->transition(*this, unterminalSymbol);
+    } catch (ErrorLexicalUnexpectedSymbol const& error) {
+        if (error.getLevel() == WARNING) {
+            cerr << error.what(currentLineError, currentCharPosError) << endl;
+            stackStates.top()->transition(*this, error.getExpectedSymbol());
+        } else {
+            throw;
+        }
+    }
+
 }
 
 void Automaton::transition(Symbol * symbol, State * newState) {
@@ -106,7 +126,16 @@ void Automaton::transition(Symbol * symbol, State * newState) {
 
     stackStates.push(newState);
     if (!stackSymbols.empty()) {
-        stackStates.top()->transition(*this, stackSymbols.top());
+        try {
+            stackStates.top()->transition(*this, stackSymbols.top());
+        } catch (ErrorLexicalUnexpectedSymbol const& error) {
+            if (error.getLevel() == WARNING) {
+                cerr << error.what(currentLineError, currentCharPosError) << endl;
+                stackStates.top()->transition(*this, error.getExpectedSymbol());
+            } else {
+                throw;
+            }
+        }
     }
 }
 

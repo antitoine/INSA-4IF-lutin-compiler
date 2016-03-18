@@ -2,10 +2,6 @@
 #include <iostream>
 #include <string>
 
-std::string Symbol::toString() {
-    std::cout << "Symbol : " << id << std::endl;
-}
-
 int Symbol::getId() const {
     return id;
 }

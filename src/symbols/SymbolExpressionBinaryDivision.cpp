@@ -1,4 +1,3 @@
-//#include <boost>
 #include <map>
 #include "SymbolExpressionBinaryDivision.h"
 
@@ -6,6 +5,10 @@ using namespace std;
 
 SymbolExpressionBinaryDivision::SymbolExpressionBinaryDivision() : SymbolExpressionBinary(S_EXPRESSION_BIN_DIV) {
 
+}
+
+string SymbolExpressionBinaryDivision::toString() const {
+    return firstOperand->toString() + " / " + secondOperand->toString();
 }
 
 float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariables){

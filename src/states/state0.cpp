@@ -1,5 +1,6 @@
 #include "state0.h"
 #include "state1.h"
+#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 #include "../symbols/SymbolUnterminal.h"
 
 State0::State0() : State(" 0") {
@@ -38,7 +39,6 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
             return true;
 
         default:
-            // TODO : handle exceptions with warning message
-            return false;
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
     }
 }

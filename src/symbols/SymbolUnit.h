@@ -3,12 +3,11 @@
 
 #include "Symbol.h"
 
-class UnitSymbol : public Symbol
+class SymbolUnit : public Symbol
 {
 public:
-    UnitSymbol(enum TypeSymbolUnit);
-
-    virtual std::string toString();
+    SymbolUnit(enum TypeSymbolUnit);
+    virtual std::string toString() const;
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
 
 protected:
