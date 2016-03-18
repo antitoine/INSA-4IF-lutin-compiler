@@ -26,7 +26,7 @@ void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
         ptS->isInitialized = true;
     } else {
         // TODO : Exception
-        std::cout << "Variable " << symbolVariable->getName() << "has not been declared" << std::endl;
+        std::cout << "Variable " << symbolVariable->getName() << " has not been declared" << std::endl;
     }
 }
 
