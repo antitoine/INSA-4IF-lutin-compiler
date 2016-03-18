@@ -42,3 +42,6 @@ int Error::getLevel() const throw() {
     return level;
 }
 
+int Error::getNumber() const throw() {
+    return number;
+}

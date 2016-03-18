@@ -76,8 +76,6 @@ int Automaton::readFile(std::string filename) {
 
     file.close();
 
-    execute();
-
     return 0;
 }
 
@@ -211,11 +209,18 @@ void Automaton::affectCurrentExpressionToCurrentInstruction() {
     }
 }
 
-void Automaton::execute() {
+int Automaton::execute() {
     cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
     cout << "Execute..." << endl;
 
-    for (Symbol * s: symbolsToExecute) {
-        s->execute(dicoVariables);
+    try {
+        for (Symbol * s: symbolsToExecute) {
+            s->execute(dicoVariables);
+        }
+    } catch (Error const& error) {
+        cerr << error.what() << endl;
+        return error.getNumber();
     }
+
+
 }

@@ -24,6 +24,7 @@ public:
     virtual string what(int line, int charPos) const throw();
 
     int getLevel() const throw();
+    int getNumber() const throw();
 
 protected:
     virtual string whatDetails() const throw() = 0;
