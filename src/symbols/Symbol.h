@@ -58,9 +58,10 @@ class Symbol {
 
 protected:
     int id;
+    bool isValid;
 
 public:
-    Symbol(int id) : id(id) {}
+    Symbol(int id);
     virtual ~Symbol() {}
     virtual std::string toString() const = 0;
     operator int() const { return id; }

@@ -39,6 +39,7 @@ int Automaton::readFile(std::string filename) {
     }
 
     currentLineError = 1, currentCharPosError = 1;
+    string stringSymbolDetected;
 
     int returnCode = 0;
 
@@ -53,10 +54,11 @@ int Automaton::readFile(std::string filename) {
                 //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
 
                 try {
-                    symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, currentCharPosError);
+                    symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, stringSymbolDetected);
                 } catch (Error const& error) {
                     if (error.getLevel() == WARNING) {
                         cerr << error.what(currentLineError, currentCharPosError) << endl;
+                        currentCharPosError += stringSymbolDetected.length();
                         continue;
                     } else {
                         throw;
@@ -64,12 +66,10 @@ int Automaton::readFile(std::string filename) {
                 }
 
                 computeNewSymbol(symbol);
-
-
+                currentCharPosError += stringSymbolDetected.length();
             }
 
             currentLineError++;
-
         }
     } catch (Error const& error) {
         // Error level here can only be critical
