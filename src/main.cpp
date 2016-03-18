@@ -70,7 +70,7 @@ int main(int argc, char * argv[]) {
 
     if (errorCode) {
         // Error message has already been printed by automaton
-        return 1;
+        return errorCode;
     }
 
     if(strchr(arguments, 'h'))
@@ -100,7 +100,7 @@ int main(int argc, char * argv[]) {
     }
     if(strchr(arguments, 'e'))
     {
-        automaton.execute();
+        errorCode = automaton.execute();
     }
     if(strchr(arguments, 'o'))
     {
