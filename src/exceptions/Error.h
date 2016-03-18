@@ -12,7 +12,8 @@ enum TypeErrorLevel {
 
 enum TypeError {
     ERROR_SEMANTIC_VAR_ALREADY_DECLARED = 0,
-    ERROR_LEXICAL_UNKNOWN_SYMBOL
+    ERROR_LEXICAL_UNKNOWN_SYMBOL,
+    ERROR_LEXICAL_UNEXPECTED_SYMBOL
 };
 
 class Error : public exception {
