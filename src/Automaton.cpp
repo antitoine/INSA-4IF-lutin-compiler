@@ -37,7 +37,6 @@ int Automaton::readFile(std::string filename) {
         return 1;
     }
 
-    std::cout << "File " << filename << " opened." << std::endl;
     currentLineError = 1, currentCharPosError = 1;
 
     try {
