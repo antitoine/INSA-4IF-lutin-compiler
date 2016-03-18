@@ -9,32 +9,28 @@
 #include "symbols/RegexSymbol.h"
 #include "exceptions/ErrorLexicalUnknownSymbol.h"
 
-Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables, int & charPos)
+Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables, string & stringSymbolDetected)
 {
     Symbol * symbol = NULL;
-    std::string symbolDetected;
 
     // Test to find a symbol, by priority order
-    if ((symbol = SymbolDeclarationVar::analyse(stringToRead, symbolDetected)) != NULL);
-    else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, symbolDetected)) != NULL);
-    else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, symbolDetected)) != NULL);
-    else if ((symbol = SymbolInstructionRead::analyse(stringToRead, symbolDetected)) != NULL);
+    if ((symbol = SymbolDeclarationVar::analyse(stringToRead, stringSymbolDetected)) != NULL);
+    else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, stringSymbolDetected)) != NULL);
+    else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, stringSymbolDetected)) != NULL);
+    else if ((symbol = SymbolInstructionRead::analyse(stringToRead, stringSymbolDetected)) != NULL);
 
-    else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);
-    else if ((symbol = SymbolVariable::analyse(stringToRead, symbolDetected, dicoVariables)) != NULL);
-    else if ((symbol = SymbolNumber::analyse(stringToRead, symbolDetected)) != NULL);
+    else if ((symbol = UnitSymbol::analyse(stringToRead, stringSymbolDetected)) != NULL);
+    else if ((symbol = SymbolVariable::analyse(stringToRead, stringSymbolDetected, dicoVariables)) != NULL);
+    else if ((symbol = SymbolNumber::analyse(stringToRead, stringSymbolDetected)) != NULL);
 
 
-    // If a symbol is found
-    if (symbol != NULL) {
-        charPos += symbolDetected.length();
-
-    } else {
+    // If a symbol is not found
+    if (symbol == NULL) {
         MatchingResult result = RegexSymbol::matches(stringToRead, Regex::Symbol::UNKNOWN_SYMBOL);
 
         if (result.matched) {
             stringToRead = result.stringConsumed;
-            charPos += result.stringMatched.length();
+            stringSymbolDetected = result.stringMatched;
             throw ErrorLexicalUnknownSymbol(result.stringMatched);
         }
     }

@@ -44,13 +44,15 @@ std::string SymbolVariable::getName() const {
 }
 
 float SymbolVariable::eval(map<string, StructVar*>& dicoVariables){
+
+
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
 
     //if the variable has already been initialized
     if(it->second->isInitialized == true){
         return it->second->value;
     }
-    else{
+    else {
         std::cout << "Variable " << this->getName() << "has not been declared" << std::endl;
     }
 }
