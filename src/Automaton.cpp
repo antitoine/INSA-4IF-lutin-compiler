@@ -76,8 +76,6 @@ int Automaton::readFile(std::string filename) {
 
     file.close();
 
-    //execute();
-
     return 0;
 }
 
