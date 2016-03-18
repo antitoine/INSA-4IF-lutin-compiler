@@ -47,7 +47,7 @@ void displayHelp() {
     cout << "NAME" <<endl;
     cout << "Lutin Compiler v0.1 by H4311 - INSA Lyon 2015-2016" << endl;
     cout << "SYNOPSIS" <<endl;
-    cout << "xxx [-p][-a][-e][-o] infile" <<endl;
+    cout << "lut [-p][-a][-e][-o] infile" <<endl;
     cout << "DESCRIPTION" <<endl;
     cout << "When you invoke this command, it normally does preprocessing." <<endl;
     cout << "Options allows you to personnalize your utilisation of the command." <<endl;
