@@ -59,6 +59,8 @@ public :
     void aggregateParenthesisExpression();
     void addToCurrentExpression(SymbolExpression * expression);
 
+    string programmeToString() const;
+
 
 private:
     void computeNewSymbol(Symbol * symbol);

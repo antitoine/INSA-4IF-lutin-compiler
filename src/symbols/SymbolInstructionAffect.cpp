@@ -9,7 +9,7 @@ SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCT
 }
 
 string SymbolInstructionAffect::toString() const {
-    return symbolVariable->toString() + " := " + symbolExpression->toString();
+    return symbolVariable->toString() + " := " + symbolExpression->toString() + ";\n";
 }
 
 SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)

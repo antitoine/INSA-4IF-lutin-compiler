@@ -223,3 +223,12 @@ int Automaton::execute() {
 
 
 }
+
+string Automaton::programmeToString() const {
+    string programme = "";
+    for(Symbol* symbol : symbolsToExecute) {
+        programme += symbol->toString();
+    }
+
+    return programme;
+}

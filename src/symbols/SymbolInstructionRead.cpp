@@ -10,7 +10,7 @@ SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_R
 }
 
 string SymbolInstructionRead::toString() const {
-    return "lire" + symbolVariable->toString();
+    return "lire " + symbolVariable->toString() + ";\n";
 }
 
 void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){

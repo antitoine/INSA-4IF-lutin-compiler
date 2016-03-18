@@ -92,7 +92,7 @@ int main(int argc, char * argv[]) {
     }
     if(strchr(arguments, 'p'))
     {
-        // Print Memory Structure
+        cout << automaton.programmeToString();
     }
     if(strchr(arguments, 'a'))
     {

@@ -15,7 +15,7 @@ SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATI
 std::string SymbolDeclarationConst::toString() const {
     string constDeclarations = "";
     for(std::pair<SymbolVariable*, float> symbolVariable : constants) {
-        constDeclarations += "const " + symbolVariable.first->toString() + "=" + to_string(symbolVariable.second) + ";";
+        constDeclarations += "const " + symbolVariable.first->toString() + " = " + to_string(symbolVariable.second) + ";\n";
     }
 
     return constDeclarations;
