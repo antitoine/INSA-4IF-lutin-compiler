@@ -1,4 +1,3 @@
-//#include <boost>
 #include <map>
 #include "SymbolExpression.h"
 #include "SymbolInstructionWrite.h"
@@ -8,6 +7,10 @@ using namespace std;
 
 SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION_WRITE) {
 
+}
+
+string SymbolInstructionWrite::toString() const {
+    return "ecrire " + symbolExpression->toString();
 }
 
 void SymbolInstructionWrite::execute(map<string, StructVar*>& dicoVariables) {

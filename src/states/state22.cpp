@@ -5,7 +5,7 @@
 #include "state30.h"
 #include "state32.h"
 #include "../symbols/SymbolExpressionBinaryAdd.h"
-#include "../symbols/SymbolExpressionBinarySoustract.h"
+#include "../symbols/SymbolExpressionBinarySubstract.h"
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
 
@@ -39,7 +39,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
          * - : E31
          */
         case SYMBOL_UNIT_MINUS:
-            automaton.addToCurrentExpression(new SymbolExpressionBinarySoustract());
+            automaton.addToCurrentExpression(new SymbolExpressionBinarySubstract());
             automaton.transition(symbol, new State31());
             return true;
 

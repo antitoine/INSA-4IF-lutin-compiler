@@ -5,14 +5,20 @@
 #include "RegexSymbol.h"
 #include <re2/re2.h>
 
+using namespace std;
 
 SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATION_CONST)
 {
 
 }
 
-std::string SymbolDeclarationConst::toString() {
-    std::cout << "Symbol CONST (id: " << id << ")" << std::endl;
+std::string SymbolDeclarationConst::toString() const {
+    string constDeclarations = "";
+    for(std::pair<SymbolVariable*, float> symbolVariable : constants) {
+        constDeclarations += "const " + symbolVariable.first->toString() + "=" + to_string(symbolVariable.second) + ";";
+    }
+
+    return constDeclarations;
 }
 
 Symbol * SymbolDeclarationConst::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {

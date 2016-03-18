@@ -8,8 +8,7 @@ class SymbolUnterminal : public Symbol
 {
 public:
     SymbolUnterminal(enum TypeSymbolUnterminal);
-
-    virtual std::string toString();
+    virtual std::string toString() const;
 
 protected:
 };

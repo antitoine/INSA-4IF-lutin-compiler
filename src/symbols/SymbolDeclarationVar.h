@@ -5,13 +5,11 @@
 
 class SymbolVariable;
 
-using namespace std;
-
 class SymbolDeclarationVar : public SymbolDeclaration
 {
 public:
     SymbolDeclarationVar();
-    virtual string toString();
+    virtual string toString() const;
     static Symbol * analyse(string & stringToAnalyse, string & stringSymbolDetected);
     void execute(map<string, StructVar*>& dicoVariables);
 

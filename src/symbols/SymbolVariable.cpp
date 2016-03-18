@@ -10,8 +10,8 @@ SymbolVariable::SymbolVariable(std::string varName) : SymbolExpression(S_VARIABL
 
 }
 
-std::string SymbolVariable::toString() {
-    std::cout << "Symbol ID (id: " << id << ", name: " << name << ")" << std::endl;
+std::string SymbolVariable::toString() const {
+    return name;
 }
 
 Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected, map<string, StructVar*>& dicoVariables) {

@@ -2,7 +2,7 @@
 #include "Lexer.h"
 #include "symbols/SymbolDeclarationVar.h"
 #include "symbols/SymbolDeclarationConst.h"
-#include "symbols/UnitSymbol.h"
+#include "symbols/SymbolUnit.h"
 #include "symbols/SymbolNumber.h"
 #include "symbols/SymbolInstructionWrite.h"
 #include "symbols/SymbolInstructionRead.h"
@@ -20,7 +20,7 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar
     else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolInstructionRead::analyse(stringToRead, symbolDetected)) != NULL);
 
-    else if ((symbol = UnitSymbol::analyse(stringToRead, symbolDetected)) != NULL);
+    else if ((symbol = SymbolUnit::analyse(stringToRead, symbolDetected)) != NULL);
     else if ((symbol = SymbolVariable::analyse(stringToRead, symbolDetected, dicoVariables)) != NULL);
     else if ((symbol = SymbolNumber::analyse(stringToRead, symbolDetected)) != NULL);
 
