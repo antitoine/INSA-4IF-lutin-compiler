@@ -6,7 +6,7 @@ ErrorSemanticVarAlreadyDeclared::~ErrorSemanticVarAlreadyDeclared() throw() {
 }
 
 ErrorSemanticVarAlreadyDeclared::ErrorSemanticVarAlreadyDeclared(string duplicateVarName, bool constant)
-        : varName(duplicateVarName), isConstant(constant), ErrorSemantic(ERROR_SEMANTIC_VAR_ALREADY_DECLARED, CRITICAL_ERROR) {
+        : varName(duplicateVarName), isConstant(constant), ErrorSemantic(ERROR_SEMANTIC_VAR_ALREADY_DECLARED, WARNING) {
 }
 
 string ErrorSemanticVarAlreadyDeclared::whatDetails() const throw() {

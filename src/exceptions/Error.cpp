@@ -12,6 +12,10 @@ Error::~Error() throw() {
 
 }
 
+const char* Error::what() const throw() {
+    return what(-1, -1).c_str();
+}
+
 string Error::what(int line, int charPos) const throw() {
     stringstream s;
 
@@ -21,7 +25,13 @@ string Error::what(int line, int charPos) const throw() {
         s << "ERROR ";
     }
 
-    s << "at line " << line << ", character " << charPos << ": ";
+    if (line != -1) {
+        s << "at line " << line;
+    }
+    if (charPos != -1) {
+        s << ", character " << charPos;
+    }
+    s << ": ";
 
     s << whatDetails();
 

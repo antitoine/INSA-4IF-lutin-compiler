@@ -34,6 +34,9 @@ private:
     list<SymbolExpression*> currentExpression;
     SymbolInstruction * currentInstruction;
 
+    int currentLineError;
+    int currentCharPosError;
+
 public :
     int readFile(string filename);
     void transition(Symbol * symbol, State * newState);
