@@ -8,6 +8,7 @@
 #include "../symbols/SymbolExpressionBinarySubstract.h"
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
+#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State22::State22() : State("22") {
 }
@@ -61,7 +62,7 @@ bool State22::transition(Automaton & automaton, Symbol * symbol) {
 
 
         default:
-            // TODO : handle exceptions with warning message
-            return false;
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+
     }
 }
