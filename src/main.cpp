@@ -58,6 +58,19 @@ int main(int argc, char * argv[]) {
     Automaton automaton;
 
     char * arguments = getCmdOptions(argc, argv);
+    string filename = getCmdFile(argc, argv);
+
+    if (filename == "") {
+        cerr << "Error: unable to get the file path argument" << endl;
+        return 1;
+    }
+
+    int errorCode = automaton.readFile(getCmdFile(argc, argv));
+
+    if (errorCode) {
+        // Error message has already been printed by automaton
+        return 1;
+    }
 
     if(strchr(arguments, 'h'))
     {
@@ -86,24 +99,11 @@ int main(int argc, char * argv[]) {
     }
     if(strchr(arguments, 'e'))
     {
-        // Execution of the program
+        automaton.execute();
     }
     if(strchr(arguments, 'o'))
     {
         // Optimisation of the program
-    }
-
-    string filename = getCmdFile(argc, argv);
-
-    if (filename == "") {
-        cerr << "Error: unable to get the file path argument" << endl;
-        return 1;
-    }
-
-    int errorCode = automaton.readFile(getCmdFile(argc, argv));
-
-    if (!errorCode) {
-        automaton.execute();
     }
 
     return errorCode;
