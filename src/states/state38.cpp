@@ -3,9 +3,8 @@
 #include "state32.h"
 #include "../symbols/SymbolUnterminal.h"
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
-#include "../symbols/SymbolExpressionBinarySubstract.h"
-#include "../symbols/SymbolExpressionBinaryAdd.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
+#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State38::State38() : State("38") {
 }
@@ -63,7 +62,7 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
             return true;
 
         default:
-            // TODO : handle exceptions with warning message
-            return false;
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+
     }
 }
