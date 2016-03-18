@@ -1,4 +1,3 @@
-//#include <boost>
 #include <map>
 #include "SymbolNumber.h"
 #include "RegexSymbol.h"
@@ -7,6 +6,10 @@ using namespace std;
 
 SymbolNumber::SymbolNumber() : SymbolExpression(S_NUMBER) {
 
+}
+
+string SymbolNumber::toString() const {
+    return to_string(value);
 }
 
 SymbolNumber::SymbolNumber(string stringValue) : value(stof(stringValue)), SymbolExpression(S_NUMBER) {

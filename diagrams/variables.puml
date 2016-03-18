@@ -139,7 +139,7 @@ class "SymbolExpressionParenthesis" as CLASS_SYMBOLE_EXPRESSION_PARENTHESE exten
 class "SymbolExpressionBinaryAdd" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_ADD extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
     + eval(map<string, StructVar*>& dicoVariables) : float
 }
-class "SymbolExpressionBinarySoustract" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
+class "SymbolExpressionBinarySubstract" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
     + eval(map<string, StructVar*>& dicoVariables) : float
 }
 class "SymbolExpressionBinaryMultiplication" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_MULT extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {

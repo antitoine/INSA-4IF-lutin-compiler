@@ -14,8 +14,13 @@ SymbolDeclarationVar::SymbolDeclarationVar()
 
 }
 
-string SymbolDeclarationVar::toString() {
-    cout << "Symbol VAR (id: " << id << ")" << endl;
+string SymbolDeclarationVar::toString() const {
+    string varDeclarations = "";
+    for(SymbolVariable* symbolVariable : variables) {
+        varDeclarations += "var " + symbolVariable->toString() + ";";
+    }
+
+    return varDeclarations;
 }
 
 Symbol * SymbolDeclarationVar::analyse(string & stringToAnalyse, string & stringSymbolDetected) {

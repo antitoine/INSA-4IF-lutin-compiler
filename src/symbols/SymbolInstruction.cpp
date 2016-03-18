@@ -1,4 +1,3 @@
-//#include <boost>
 #include "SymbolInstruction.h"
 
 using namespace std;
@@ -7,7 +6,6 @@ SymbolInstruction::SymbolInstruction(enum symbolIdTable idSymbol):Symbol(idSymbo
 {
 
 }
-
 
 bool SymbolInstruction::isPersistent() const {
     return true;

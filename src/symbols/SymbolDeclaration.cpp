@@ -1,4 +1,3 @@
-//#include <boost>
 #include <map>
 #include <iostream>
 #include "SymbolDeclaration.h"
@@ -12,10 +11,6 @@ SymbolDeclaration::SymbolDeclaration(enum symbolIdTable idSymbol):Symbol(idSymbo
 
 SymbolDeclaration::SymbolDeclaration():Symbol(S_DECLARATION) {
 
-}
-
-std::string SymbolDeclaration::toString() {
-    std::cout << "Symbol D" << std::endl;
 }
 
 bool SymbolDeclaration::isPersistent() const {

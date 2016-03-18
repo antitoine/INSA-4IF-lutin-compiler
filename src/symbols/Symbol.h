@@ -62,7 +62,7 @@ protected:
 public:
     Symbol(int id) : id(id) {}
     virtual ~Symbol() {}
-    virtual std::string toString();
+    virtual std::string toString() const = 0;
     operator int() const { return id; }
 
     virtual bool isPersistent() const;

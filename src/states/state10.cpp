@@ -1,6 +1,6 @@
 #include "state10.h"
 #include "../symbols/SymbolUnterminal.h"
-#include "../symbols/UnitSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State10::State10() : State("10") {
 }

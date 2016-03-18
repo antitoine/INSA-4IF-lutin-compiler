@@ -3,7 +3,7 @@
 #include "state32.h"
 #include "../symbols/SymbolUnterminal.h"
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
-#include "../symbols/SymbolExpressionBinarySoustract.h"
+#include "../symbols/SymbolExpressionBinarySubstract.h"
 #include "../symbols/SymbolExpressionBinaryAdd.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
 

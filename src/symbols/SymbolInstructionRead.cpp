@@ -1,12 +1,16 @@
-//#include <boost>
 #include <map>
 #include "SymbolInstructionRead.h"
 #include "RegexSymbol.h"
 
+using namespace std;
 
 SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_READ)
 {
 
+}
+
+string SymbolInstructionRead::toString() const {
+    return "lire" + symbolVariable->toString();
 }
 
 void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
