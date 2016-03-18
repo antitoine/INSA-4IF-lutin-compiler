@@ -20,9 +20,11 @@ public:
     Error(int number, int level=CRITICAL_ERROR) throw();
     virtual ~Error() throw();
 
+    virtual const char* what() const throw();
     virtual string what(int line, int charPos) const throw();
 
     int getLevel() const throw();
+    int getNumber() const throw();
 
 protected:
     virtual string whatDetails() const throw() = 0;

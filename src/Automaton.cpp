@@ -38,23 +38,23 @@ int Automaton::readFile(std::string filename) {
     }
 
     std::cout << "File " << filename << " opened." << std::endl;
-    int currentLine = 1, currentCharPos = 1;
+    currentLineError = 1, currentCharPosError = 1;
 
     try {
 
         // TODO : line too long
         while (std::getline(file, line)) {
             std::string stringToCompute(line);
-            currentCharPos = 1;
+            currentCharPosError = 1;
 
             while (!stringToCompute.empty()) {
                 //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
 
                 try {
-                    symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, currentCharPos);
+                    symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, currentCharPosError);
                 } catch (Error const& error) {
                     if (error.getLevel() == WARNING) {
-                        cerr << error.what(currentLine, currentCharPos) << endl;
+                        cerr << error.what(currentLineError, currentCharPosError) << endl;
                         continue;
                     } else {
                         throw;
@@ -66,17 +66,15 @@ int Automaton::readFile(std::string filename) {
 
             }
 
-            currentLine++;
+            currentLineError++;
 
         }
     } catch (Error const& error) {
         // TODO : continue if the level is "warning"
-        cerr << error.what(currentLine, currentCharPos) << endl;
+        cerr << error.what(currentLineError, currentCharPosError) << endl;
     }
 
     file.close();
-
-    //execute();
 
     return 0;
 }
@@ -123,7 +121,16 @@ void Automaton::setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclaratio
 
 void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
     if (currentSymbolDeclarationVar != NULL) {
-        currentSymbolDeclarationVar->addVariable(variable, dicoVariables);
+        try {
+            currentSymbolDeclarationVar->addVariable(variable, dicoVariables);
+        } catch (Error const& error) {
+            if (error.getLevel() == WARNING) {
+                cerr << error.what(currentLineError, currentCharPosError) << endl;
+            } else {
+                throw;
+            }
+        }
+
     }
 }
 
@@ -202,11 +209,18 @@ void Automaton::affectCurrentExpressionToCurrentInstruction() {
     }
 }
 
-void Automaton::execute() {
+int Automaton::execute() {
     cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
     cout << "Execute..." << endl;
 
-    for (Symbol * s: symbolsToExecute) {
-        s->execute(dicoVariables);
+    try {
+        for (Symbol * s: symbolsToExecute) {
+            s->execute(dicoVariables);
+        }
+    } catch (Error const& error) {
+        cerr << error.what() << endl;
+        return error.getNumber();
     }
+
+
 }

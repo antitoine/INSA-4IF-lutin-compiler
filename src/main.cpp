@@ -96,5 +96,11 @@ int main(int argc, char * argv[]) {
         return 1;
     }
 
-    return automaton.readFile(getCmdFile(argc, argv));
+    int errorCode = automaton.readFile(getCmdFile(argc, argv));
+
+    if (!errorCode) {
+        automaton.execute();
+    }
+
+    return errorCode;
 }

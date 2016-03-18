@@ -34,13 +34,16 @@ private:
     list<SymbolExpression*> currentExpression;
     SymbolInstruction * currentInstruction;
 
+    int currentLineError;
+    int currentCharPosError;
+
 public :
     int readFile(string filename);
     void transition(Symbol * symbol, State * newState);
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();
 
-    void execute();
+    int execute();
 
     void setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar);
     void addVariableToCurrentDeclarationVar(SymbolVariable * variable);
