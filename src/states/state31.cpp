@@ -4,6 +4,7 @@
 #include "state20.h"
 #include "state40.h"
 #include "../symbols/SymbolExpressionParenthesis.h"
+#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State31::State31() : State("31") {
 }
@@ -50,7 +51,7 @@ bool State31::transition(Automaton &automaton, Symbol *symbol) {
             return true;
 
         default:
-            // TODO : handle exceptions with warning message
-            return false;
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+
     }
 }

@@ -11,7 +11,7 @@ SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCT
 }
 
 string SymbolInstructionAffect::toString() const {
-    return symbolVariable->toString() + " := " + symbolExpression->toString();
+    return symbolVariable->toString() + " := " + symbolExpression->toString() + ";\n";
 }
 
 SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
@@ -28,7 +28,7 @@ void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
         ptS->isInitialized = true;
     } else {
         // TODO : Exception
-        std::cout << "Variable " << symbolVariable->getName() << "has not been declared" << std::endl;
+        std::cout << "Variable " << symbolVariable->getName() << " has not been declared" << std::endl;
     }
 }
 

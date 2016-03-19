@@ -10,7 +10,7 @@ SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION
 }
 
 string SymbolInstructionWrite::toString() const {
-    return "ecrire " + symbolExpression->toString();
+    return "ecrire " + symbolExpression->toString() + ";\n";
 }
 
 void SymbolInstructionWrite::execute(map<string, StructVar*>& dicoVariables) {

@@ -15,6 +15,8 @@ public:
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
+    static string removeLeadingZeroes(string number);
+
 protected:
     float value;
 };

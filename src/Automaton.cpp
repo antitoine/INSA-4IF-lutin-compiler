@@ -41,6 +41,8 @@ int Automaton::readFile(std::string filename) {
     currentLineError = 1, currentCharPosError = 1;
     string stringSymbolDetected;
 
+    int returnCode = 0;
+
     try {
 
         // TODO : line too long
@@ -70,13 +72,14 @@ int Automaton::readFile(std::string filename) {
             currentLineError++;
         }
     } catch (Error const& error) {
-        // TODO : continue if the level is "warning"
+        // Error level here can only be critical
         cerr << error.what(currentLineError, currentCharPosError) << endl;
+        returnCode = 1;
     }
 
     file.close();
 
-    return 0;
+    return returnCode;
 }
 
 void Automaton::computeNewSymbol(Symbol * symbol)
@@ -252,4 +255,13 @@ int Automaton::execute() {
     }
 
 
+}
+
+string Automaton::programmeToString() const {
+    string programme = "";
+    for(Symbol* symbol : symbolsToExecute) {
+        programme += symbol->toString();
+    }
+
+    return programme;
 }

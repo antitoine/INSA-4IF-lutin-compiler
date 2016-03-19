@@ -3,6 +3,7 @@
 #include "SymbolDeclarationConst.h"
 #include "Symbol.h"
 #include "RegexSymbol.h"
+#include "SymbolNumber.h"
 #include <re2/re2.h>
 
 using namespace std;
@@ -12,10 +13,13 @@ SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATI
 
 }
 
-std::string SymbolDeclarationConst::toString() const {
+string SymbolDeclarationConst::toString() const {
     string constDeclarations = "";
-    for(std::pair<SymbolVariable*, float> symbolVariable : constants) {
-        constDeclarations += "const " + symbolVariable.first->toString() + "=" + to_string(symbolVariable.second) + ";";
+    for(pair<SymbolVariable*, float> symbolVariable : constants) {
+        string constValue = to_string(symbolVariable.second);
+        constValue = SymbolNumber::removeLeadingZeroes(constValue);
+
+        constDeclarations += "const " + symbolVariable.first->toString() + " = " + constValue + ";\n";
     }
 
     return constDeclarations;

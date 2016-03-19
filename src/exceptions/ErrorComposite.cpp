@@ -3,11 +3,11 @@
 
 using namespace std;
 
-ErrorComposite::ErrorComposite() : Error(ERROR_COMPOSITE, WARNING) {
+ErrorComposite::ErrorComposite() throw() : Error(ERROR_COMPOSITE, WARNING) {
 
 }
 
-ErrorComposite::ErrorComposite(std::list < Error * > *errors)
+ErrorComposite::ErrorComposite(std::list < Error * > *errors) throw()
         : Error(ERROR_COMPOSITE, WARNING) {
     for (Error * e : *errors) {
         addError(e);
@@ -15,7 +15,7 @@ ErrorComposite::ErrorComposite(std::list < Error * > *errors)
 }
 
 
-ErrorComposite::~ErrorComposite() {
+ErrorComposite::~ErrorComposite() throw() {
     for (Error * error : components) {
         delete error;
     }

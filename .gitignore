@@ -26,6 +26,7 @@
 # Executables
 *.exe
 *.out
+!/tests/*/stderr.out
 *.app
 /bin
 
