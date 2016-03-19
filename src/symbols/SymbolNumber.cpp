@@ -12,6 +12,7 @@ string SymbolNumber::toString() const {
     return to_string(value);
 }
 
+//TODO : check stof function
 SymbolNumber::SymbolNumber(string stringValue) : value(stof(stringValue)), SymbolExpression(S_NUMBER) {
 }
 
@@ -39,3 +40,6 @@ Symbol *SymbolNumber::analyse(std::string &stringToAnalyse, std::string &stringS
 }
 
 
+list<Error *> * SymbolNumber::checkEval(map<string, StructVar*>& dicoVariables) {
+    return NULL;
+}

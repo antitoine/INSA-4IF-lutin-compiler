@@ -1,5 +1,7 @@
 #include <map>
+#include <list>
 #include "SymbolInstructionAffect.h"
+#include "../exceptions/ErrorComposite.h"
 
 using namespace std;
 
@@ -35,3 +37,24 @@ void SymbolInstructionAffect::affectExpression(SymbolExpression *expression) {
 }
 
 
+void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
+    // Check the expression
+    std::list<Error*> * exprErrors = symbolExpression->checkEval(dicoVariables);
+
+    // Check variable to affect
+    try {
+        symbolVariable->check(dicoVariables);
+    } catch (Error const& error) {
+        if (error.getLevel() == WARNING) {
+            if (exprErrors != NULL) {
+                ErrorComposite e = ErrorComposite(exprErrors);
+                delete exprErrors;
+                throw e;
+            } else {
+                throw;
+            }
+        } else {
+            throw;
+        }
+    }
+}

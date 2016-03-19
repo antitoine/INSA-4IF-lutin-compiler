@@ -18,3 +18,8 @@ Symbol::Symbol(int id)
         : id(id), isValid(false) {
 
 }
+
+void Symbol::check(map<string, StructVar*>& dicoVariables) {
+    // TODO : default method
+    isValid = true;
+}

@@ -13,6 +13,7 @@ public:
     float eval() const;
 
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
+    virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
 protected:
     float value;

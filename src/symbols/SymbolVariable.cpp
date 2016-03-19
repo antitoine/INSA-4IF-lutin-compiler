@@ -3,9 +3,11 @@
 #include <regex>
 #include "SymbolVariable.h"
 #include "RegexSymbol.h"
+#include "../exceptions/ErrorSemanticVarNotDeclared.h"
+#include "../exceptions/ErrorSemanticVarNotInitialized.h"
 
 
-SymbolVariable::SymbolVariable(std::string varName) : SymbolExpression(S_VARIABLE), name(varName)
+SymbolVariable::SymbolVariable(std::string varName) : SymbolExpression(S_VARIABLE), name(varName), evalIsAlreadyChecked(false)
 {
 
 }
@@ -55,4 +57,37 @@ float SymbolVariable::eval(map<string, StructVar*>& dicoVariables){
     else {
         std::cout << "Variable " << this->getName() << "has not been declared" << std::endl;
     }
+}
+
+void SymbolVariable::check(map<string, StructVar*>& dicoVariables) {
+    // Not an eval check: only check if the variable is declared
+    map<string, StructVar*>::iterator it = dicoVariables.find(name);
+    if (it == dicoVariables.end()) {
+        throw ErrorSemanticVarNotDeclared(name);
+    }
+}
+
+list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables) {
+    if (evalIsAlreadyChecked) {
+        return NULL;
+    }
+
+    std::list<Error *> * errors = NULL;
+
+    // Check if the variable is declared
+    map<string, StructVar*>::iterator it = dicoVariables.find(name);
+    if (it == dicoVariables.end()) {
+        errors = new list<Error *>;
+        errors->push_back(new ErrorSemanticVarNotDeclared(name));
+    } else {
+        // Check if the variable is initialized
+        if (!it->second->isInitialized) {
+            errors = new list<Error *>;
+            errors->push_back(new ErrorSemanticVarNotInitialized(name));
+        }
+    }
+
+    evalIsAlreadyChecked = true;
+
+    return errors;
 }

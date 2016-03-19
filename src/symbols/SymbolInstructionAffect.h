@@ -15,6 +15,8 @@ public:
     void execute(map<string, StructVar*>& dicoVariables);
     virtual void affectExpression(SymbolExpression * expression);
 
+    virtual void check(map<string, StructVar*>& dicoVariables);
+
 protected:
     SymbolExpression* symbolExpression;
     SymbolVariable* symbolVariable;

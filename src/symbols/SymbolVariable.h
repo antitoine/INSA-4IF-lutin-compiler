@@ -12,11 +12,13 @@ public:
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected, map<string, StructVar*>& dicoVariables);
     std::string getName() const;
     float eval(map<string, StructVar*>& dicoVariables);
+    virtual void check(map<string, StructVar*>& dicoVariables);
+    virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
 protected:
-
-private:
     std::string name;
+    bool evalIsAlreadyChecked;
+
 };
 
 #endif
