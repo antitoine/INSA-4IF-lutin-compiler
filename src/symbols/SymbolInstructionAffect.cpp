@@ -1,5 +1,6 @@
 #include <map>
 #include <list>
+#include <sstream>
 #include "SymbolInstructionAffect.h"
 #include "../exceptions/ErrorComposite.h"
 
@@ -11,7 +12,9 @@ SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCT
 }
 
 string SymbolInstructionAffect::toString() const {
-    return symbolVariable->toString() + " := " + symbolExpression->toString() + ";\n";
+    stringstream s;
+    s << symbolVariable->toString() << " := " << symbolExpression->toString() << ";\n";
+    return s.str();
 }
 
 SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
@@ -43,13 +46,11 @@ void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
 
     // Check variable to affect
     try {
-        symbolVariable->check(dicoVariables);
+        symbolVariable->check(dicoVariables, true);
     } catch (Error const& error) {
         if (error.getLevel() == WARNING) {
             if (exprErrors != NULL) {
-                ErrorComposite e = ErrorComposite(exprErrors);
-                delete exprErrors;
-                throw e;
+                throw ErrorComposite(exprErrors);
             } else {
                 throw;
             }
@@ -57,4 +58,15 @@ void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
             throw;
         }
     }
+
+    // Only the expression is incorrect
+    if (exprErrors != NULL) {
+        throw ErrorComposite(exprErrors);
+    }
+
+    // If the check is correct, the variable is set as initialized
+    dicoVariables[symbolVariable->getName()]->isInitialized = true;
+
+    // Set the variable used
+    symbolVariable->setUsed();
 }

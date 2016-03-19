@@ -83,3 +83,9 @@ void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, S
         cerr << "No constant to affect a value." << endl;
     }
 }
+
+void SymbolDeclarationConst::check(map<string, StructVar *> &dicoVariables) {
+    for (pair<SymbolVariable *const, float> & entry : constants) {
+        dicoVariables[entry.first->getName()]->isInitialized = true;
+    }
+}

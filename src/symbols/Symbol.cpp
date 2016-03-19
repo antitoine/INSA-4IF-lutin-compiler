@@ -15,11 +15,10 @@ bool Symbol::isPersistent() const {
 }
 
 Symbol::Symbol(int id)
-        : id(id), isValid(false) {
+        : id(id) {
 
 }
 
 void Symbol::check(map<string, StructVar*>& dicoVariables) {
-    // TODO : default method
-    isValid = true;
+    // Nothing to check by default
 }

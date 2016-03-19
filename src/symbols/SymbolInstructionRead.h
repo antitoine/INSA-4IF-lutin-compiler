@@ -13,6 +13,8 @@ public:
     virtual void affectExpression(SymbolExpression * expression);
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
 
+    virtual void check(map<string, StructVar*>& dicoVariables);
+
 protected:
     SymbolVariable* symbolVariable;
 };

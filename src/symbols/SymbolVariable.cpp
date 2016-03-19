@@ -3,11 +3,15 @@
 #include <regex>
 #include "SymbolVariable.h"
 #include "RegexSymbol.h"
+#include "../exceptions/ErrorSemanticVarIsConst.h"
 #include "../exceptions/ErrorSemanticVarNotDeclared.h"
 #include "../exceptions/ErrorSemanticVarNotInitialized.h"
+#include "../exceptions/ErrorSemanticVarNotUsed.h"
 
 
-SymbolVariable::SymbolVariable(std::string varName) : SymbolExpression(S_VARIABLE), name(varName), evalIsAlreadyChecked(false)
+
+SymbolVariable::SymbolVariable(std::string varName)
+        : SymbolExpression(S_VARIABLE), name(varName), evalIsAlreadyChecked(false), constErrorIsAlreadyThrown(false), isUsed(false)
 {
 
 }
@@ -46,8 +50,6 @@ std::string SymbolVariable::getName() const {
 }
 
 float SymbolVariable::eval(map<string, StructVar*>& dicoVariables){
-
-
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
 
     //if the variable has already been initialized
@@ -60,11 +62,21 @@ float SymbolVariable::eval(map<string, StructVar*>& dicoVariables){
 }
 
 void SymbolVariable::check(map<string, StructVar*>& dicoVariables) {
-    // Not an eval check: only check if the variable is declared
+    check(dicoVariables, false);
+}
+
+void SymbolVariable::check(map<string, StructVar *> &dicoVariables, bool checkConstantUpdate) {
+    // Not an eval check: check if the variable is declared
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
         throw ErrorSemanticVarNotDeclared(name);
+    } else {
+        if (!constErrorIsAlreadyThrown && checkConstantUpdate && it->second->isConstant) {
+            constErrorIsAlreadyThrown = true;
+            throw ErrorSemanticVarIsConst(name);
+        }
     }
+
 }
 
 list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables) {
@@ -89,5 +101,26 @@ list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables)
 
     evalIsAlreadyChecked = true;
 
+    // If there is no error the variable is used correctly
+    if (errors == NULL) {
+        setUsed();
+    }
+
     return errors;
+}
+
+
+void SymbolVariable::initCheck() {
+    evalIsAlreadyChecked = false;
+    isUsed = false;
+}
+
+void SymbolVariable::setUsed() {
+    isUsed = true;
+}
+
+void SymbolVariable::checkUsed() {
+    if (!isUsed) {
+        throw ErrorSemanticVarNotUsed(name);
+    }
 }

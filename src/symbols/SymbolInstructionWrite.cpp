@@ -1,7 +1,9 @@
 #include <map>
+#include <sstream>
 #include "SymbolExpression.h"
 #include "SymbolInstructionWrite.h"
 #include "RegexSymbol.h"
+#include "../exceptions/ErrorComposite.h"
 
 using namespace std;
 
@@ -10,7 +12,9 @@ SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION
 }
 
 string SymbolInstructionWrite::toString() const {
-    return "ecrire " + symbolExpression->toString() + ";\n";
+    stringstream s;
+    s << "ecrire " << symbolExpression->toString() << ";\n";
+    return s.str();
 }
 
 void SymbolInstructionWrite::execute(map<string, StructVar*>& dicoVariables) {
@@ -34,4 +38,12 @@ Symbol *SymbolInstructionWrite::analyse(std::string &stringToAnalyse, std::strin
 
 void SymbolInstructionWrite::affectExpression(SymbolExpression *expression) {
     symbolExpression = expression;
+}
+
+void SymbolInstructionWrite::check(map<string, StructVar *> &dicoVariables) {
+    // Check the expression
+    std::list<Error*> * exprErrors = symbolExpression->checkEval(dicoVariables);
+    if (exprErrors != NULL) {
+        throw ErrorComposite(exprErrors);
+    }
 }

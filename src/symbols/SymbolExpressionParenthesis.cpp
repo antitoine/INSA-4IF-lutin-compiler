@@ -23,5 +23,5 @@ void SymbolExpressionParenthesis::setExpression(SymbolExpression *expression) {
 }
 
 list<Error *> * SymbolExpressionParenthesis::checkEval(map<string, StructVar*>& dicoVariables) {
-    return symbolExpression->checkEval(map<string, StructVar*>& dicoVariables);
+    return symbolExpression->checkEval(dicoVariables);
 }

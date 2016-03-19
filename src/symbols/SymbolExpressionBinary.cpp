@@ -20,12 +20,12 @@ list<Error *> * SymbolExpressionBinary::checkEval(map<string, StructVar*>& dicoV
     std::list<Error *> * errors = NULL;
     std::list<Error *> * operandErrors = NULL;
 
-    operandErrors = firstOperand->checkEval(map<string, StructVar*>& dicoVariables);
+    operandErrors = firstOperand->checkEval(dicoVariables);
     if (operandErrors != NULL) {
         errors = operandErrors;
     }
 
-    operandErrors = secondOperand->checkEval(map<string, StructVar*>& dicoVariables);
+    operandErrors = secondOperand->checkEval(dicoVariables);
     if (operandErrors != NULL) {
         if (errors == NULL) {
             errors = operandErrors;

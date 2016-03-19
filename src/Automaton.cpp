@@ -250,7 +250,7 @@ int Automaton::execute() {
             s->execute(dicoVariables);
         }
     } catch (Error const& error) {
-        cerr << error.what() << endl;
+        cerr << error.whatDefault() << endl;
         return error.getNumber();
     }
 
@@ -264,4 +264,45 @@ string Automaton::programmeToString() const {
     }
 
     return programme;
+}
+
+void Automaton::checkProgram() {
+    initDicoVariables();
+
+    for (Symbol * s : symbolsToExecute) {
+        try {
+            s->check(dicoVariables);
+        } catch (Error const& error) {
+            if (error.getLevel() == WARNING) {
+                cerr << error.whatDefault() << endl;
+            } else {
+                throw;
+            }
+        }
+    }
+
+    // Check all the variables
+    checkProgramVariablesUsed();
+}
+
+void Automaton::initDicoVariables() {
+    for (pair<string, StructVar*> entry : dicoVariables) {
+        entry.second->isInitialized = false;
+        entry.second->ptSymbol->initCheck();
+    }
+
+}
+
+void Automaton::checkProgramVariablesUsed() {
+    for (pair<string, StructVar*> entry : dicoVariables) {
+        try {
+            entry.second->ptSymbol->checkUsed();
+        } catch (Error const& error) {
+            if (error.getLevel() == WARNING) {
+                cerr << error.whatDefault() << endl;
+            } else {
+                throw;
+            }
+        }
+    }
 }

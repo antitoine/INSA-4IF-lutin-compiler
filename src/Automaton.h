@@ -43,7 +43,9 @@ public :
     void reduction(int reductionSize, Symbol * unterminalSymbol);
     void accept();
 
+    void initDicoVariables();
     int execute();
+    void checkProgram();
 
     void setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar);
     void addVariableToCurrentDeclarationVar(SymbolVariable * variable);
@@ -65,6 +67,8 @@ public :
 private:
     void computeNewSymbol(Symbol * symbol);
     void init();
+
+    void checkProgramVariablesUsed();
 };
 
 

@@ -58,7 +58,6 @@ class Symbol {
 
 protected:
     int id;
-    bool isValid;
 
 public:
     Symbol(int id);
