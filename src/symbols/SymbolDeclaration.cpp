@@ -16,3 +16,7 @@ SymbolDeclaration::SymbolDeclaration():Symbol(S_DECLARATION) {
 bool SymbolDeclaration::isPersistent() const {
     return true;
 }
+
+void SymbolDeclaration::check(map<string, StructVar*>& dicoVariables) {
+    // Double declaration already check in analysis
+}

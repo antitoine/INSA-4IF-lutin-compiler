@@ -15,6 +15,8 @@ public:
 
     void addVariable(SymbolVariable *pVariable, map<string, StructVar*>& dicoVariables);
 
+
+
 protected:
 
 private:

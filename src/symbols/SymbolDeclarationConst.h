@@ -15,6 +15,8 @@ public:
     void addConstant(SymbolVariable *pVariable);
     void addConstantValue(float constantValue, map<string, StructVar*>& dicoVariables);
 
+    virtual void check(map<string, StructVar*>& dicoVariables);
+
 private:
     std::map<SymbolVariable*, float> constants;
     SymbolVariable * temporaryPtVariable;

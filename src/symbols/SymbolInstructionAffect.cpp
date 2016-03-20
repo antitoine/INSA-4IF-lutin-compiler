@@ -1,5 +1,8 @@
 #include <map>
+#include <list>
+#include <sstream>
 #include "SymbolInstructionAffect.h"
+#include "../exceptions/ErrorComposite.h"
 
 using namespace std;
 
@@ -9,7 +12,9 @@ SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCT
 }
 
 string SymbolInstructionAffect::toString() const {
-    return symbolVariable->toString() + " := " + symbolExpression->toString() + ";\n";
+    stringstream s;
+    s << symbolVariable->toString() << " := " << symbolExpression->toString() << ";\n";
+    return s.str();
 }
 
 SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
@@ -26,7 +31,7 @@ void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
         ptS->isInitialized = true;
     } else {
         // TODO : Exception
-        std::cout << "Variable " << symbolVariable->getName() << "has not been declared" << std::endl;
+        std::cout << "Variable " << symbolVariable->getName() << " has not been declared" << std::endl;
     }
 }
 
@@ -35,3 +40,33 @@ void SymbolInstructionAffect::affectExpression(SymbolExpression *expression) {
 }
 
 
+void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
+    // Check the expression
+    std::list<Error*> * exprErrors = symbolExpression->checkEval(dicoVariables);
+
+    // Check variable to affect
+    try {
+        symbolVariable->check(dicoVariables, true);
+    } catch (Error const& error) {
+        if (error.getLevel() == WARNING) {
+            if (exprErrors != NULL) {
+                throw ErrorComposite(exprErrors);
+            } else {
+                throw;
+            }
+        } else {
+            throw;
+        }
+    }
+
+    // Only the expression is incorrect
+    if (exprErrors != NULL) {
+        throw ErrorComposite(exprErrors);
+    }
+
+    // If the check is correct, the variable is set as initialized
+    dicoVariables[symbolVariable->getName()]->isInitialized = true;
+
+    // Set the variable used
+    symbolVariable->setUsed();
+}

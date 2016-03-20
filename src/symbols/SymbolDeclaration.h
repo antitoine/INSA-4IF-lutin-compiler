@@ -14,6 +14,8 @@ public:
     virtual void execute(map<string, StructVar*>& dicoVariables) = 0;
     virtual bool isPersistent() const;
 
+    virtual void check(map<string, StructVar*>& dicoVariables);
+
 protected:
 };
 

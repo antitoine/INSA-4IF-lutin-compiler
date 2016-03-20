@@ -1,5 +1,6 @@
 #include "state26.h"
 #include "state36.h"
+#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State26::State26() : State("26") {
 }
@@ -19,7 +20,7 @@ bool State26::transition(Automaton & automaton, Symbol * symbol) {
             return true;
 
         default:
-            // TODO : handle exceptions with warning message
-            return false;
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+
     }
 }

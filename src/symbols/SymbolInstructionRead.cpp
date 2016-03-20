@@ -54,3 +54,13 @@ Symbol *SymbolInstructionRead::analyse(std::string &stringToAnalyse, std::string
         return NULL;
     }
 }
+
+void SymbolInstructionRead::check(map<string, StructVar *> &dicoVariables) {
+    // Check variable to affect
+    symbolVariable->check(dicoVariables);
+
+    // If the check is correct, the variable is set as initialized
+    dicoVariables[symbolVariable->getName()]->isInitialized = true;
+
+    symbolVariable->setUsed();
+}

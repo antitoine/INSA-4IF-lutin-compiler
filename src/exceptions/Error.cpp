@@ -1,5 +1,6 @@
 #include <string>
 #include <sstream>
+#include <iostream>
 #include "Error.h"
 using namespace std;
 
@@ -9,11 +10,10 @@ Error::Error(int number, int level) throw()
 }
 
 Error::~Error() throw() {
-
 }
 
-const char* Error::what() const throw() {
-    return what(-1, -1).c_str();
+string Error::whatDefault() const throw() {
+    return what(-1, -1);
 }
 
 string Error::what(int line, int charPos) const throw() {
@@ -45,3 +45,5 @@ int Error::getLevel() const throw() {
 int Error::getNumber() const throw() {
     return number;
 }
+
+

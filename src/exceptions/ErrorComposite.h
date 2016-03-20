@@ -9,11 +9,15 @@ using namespace std;
 class ErrorComposite : public Error {
 public:
     ErrorComposite() throw();
+    ErrorComposite(list<Error*> *ptListErrors) throw();
     virtual ~ErrorComposite() throw();
     void addError(Error * error);
+    virtual string what(int line, int charPos) const throw();
 
-private:
+protected:
     list<Error *> components;
+
+    virtual string whatDetails() const throw();
 };
 
 

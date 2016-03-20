@@ -58,7 +58,6 @@ class Symbol {
 
 protected:
     int id;
-    bool isValid;
 
 public:
     Symbol(int id);
@@ -68,6 +67,7 @@ public:
 
     virtual bool isPersistent() const;
     virtual void execute(map<string, StructVar*>& dicoVariables);
+    virtual void check(map<string, StructVar*>& dicoVariables);
 
     int getId() const;
 

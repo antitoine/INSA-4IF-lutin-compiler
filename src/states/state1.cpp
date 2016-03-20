@@ -9,6 +9,7 @@
 #include "state9.h"
 #include "../symbols/SymbolDeclarationConst.h"
 #include "../symbols/SymbolInstructionAffect.h"
+#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State1::State1() : State(" 1") {
 }
@@ -89,7 +90,7 @@ bool State1::transition(Automaton &automaton, Symbol *symbol) {
             return true;
 
         default:
-            // TODO : handle exceptions with warning message
-            return false;
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+
     }
 }

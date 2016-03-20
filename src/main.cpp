@@ -97,6 +97,7 @@ int main(int argc, char * argv[]) {
     if(strchr(arguments, 'a'))
     {
         // Static analysis of the program
+        automaton.checkProgram();
     }
     if(strchr(arguments, 'e'))
     {
