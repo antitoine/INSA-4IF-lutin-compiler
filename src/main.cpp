@@ -6,7 +6,7 @@
 #include "symbols/RegexSymbol.h"
 #include "TestRegex.h"
 
-void displayHelp();
+void displayHowToAccessHelp();
 
 using namespace std;
 
@@ -43,16 +43,32 @@ string getCmdFile(int argc, char ** argv)
 }
 
 // Display the help
-void displayHelp() {
-    cout << "In order to access the help, please use the -h option in the commande line." << endl;
+void displayHowToAccessHelp() {
+    cout << "In order to access the help, please use the -h option in the command line." << endl;
 }
 
+void displayHelp(){
+    cout << "NAME" <<endl;
+    cout << "Lutin Compiler v0.1 by H4311 - INSA Lyon 2015-2016" << endl;
+    cout << "SYNOPSIS" <<endl;
+    cout << "lut [-p][-a][-e][-o] infile" <<endl;
+    cout << "DESCRIPTION" <<endl;
+    cout << "When you invoke this command, it normally does preprocessing." <<endl;
+    cout << "Options allows you to personnalize your utilisation of the command." <<endl;
+    cout << "They can be in any order, and grouped (i.e. -pao) but must be placed before the infile." <<endl;
+    cout << "OPTIONS" <<endl;
+    cout << "-p : print the memory representation of the program, eventual errors printed on the standard error output" <<endl;
+    cout << "-a : static analysis of the program, extract errors on the standard error output" <<endl;
+    cout << "-e : interprete and execute each instructions of the program" <<endl;
+    cout << "-o : simplification and optimisation of the program, if combined with -p only the tranformed program will be printed" <<endl;
+    cout << "-h : print the help" << endl;
+}
 
 int main(int argc, char * argv[]) {
 
     // No argument
     if (argc <= 1) {
-        displayHelp();
+        displayHowToAccessHelp();
         return 1;
     }
 
@@ -61,8 +77,16 @@ int main(int argc, char * argv[]) {
     char * arguments = getCmdOptions(argc, argv);
     string filename = getCmdFile(argc, argv);
 
-    if (filename == "") {
+    //we check first if the user want the help before checking for anything else
+    if(strchr(arguments, 'h'))
+    {
+        displayHelp();
+        return 1;
+    }
+
+    if (!filename.compare("")) {
         cerr << "Error: unable to get the file path argument" << endl;
+        displayHowToAccessHelp();
         return 1;
     }
 
@@ -70,26 +94,11 @@ int main(int argc, char * argv[]) {
 
     if (errorCode) {
         // Error message has already been printed by automaton
+        displayHowToAccessHelp();
         return errorCode;
     }
 
-    if(strchr(arguments, 'h'))
-    {
-        cout << "NAME" <<endl;
-        cout << "Lutin Compiler v0.1 by H4311 - INSA Lyon 2015-2016" << endl;
-        cout << "SYNOPSIS" <<endl;
-        cout << "lut [-p][-a][-e][-o] infile" <<endl;
-        cout << "DESCRIPTION" <<endl;
-        cout << "When you invoke this command, it normally does preprocessing." <<endl;
-        cout << "Options allows you to personnalize your utilisation of the command." <<endl;
-        cout << "They can be in any order, and grouped (i.e. -pao) but must be placed before the infile." <<endl;
-        cout << "OPTIONS" <<endl;
-        cout << "-p : print the memory representation of the program, eventual errors printed on the standard error output" <<endl;
-        cout << "-a : static analysis of the program, extract errors on the standard error output" <<endl;
-        cout << "-e : interprete and execute each instructions of the program" <<endl;
-        cout << "-o : simplification and optimisation of the program, if combined with -p only the tranformed program will be printed" <<endl;
-        cout << "-h : print the help" << endl;
-    }
+
     if(strchr(arguments, 'p'))
     {
         cout << automaton.programmeToString();
