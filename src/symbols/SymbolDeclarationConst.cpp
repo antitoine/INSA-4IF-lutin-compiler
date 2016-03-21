@@ -1,5 +1,6 @@
 #include <map>
 #include <iostream>
+#include <algorithm>
 #include "SymbolDeclarationConst.h"
 #include "Symbol.h"
 #include "RegexSymbol.h"
@@ -15,7 +16,25 @@ SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATI
 
 string SymbolDeclarationConst::toString() const {
     string constDeclarations = "";
+
+    // C++ not happy, can't find the correct constructor or some stupid stuff
+//    std::map<SymbolVariable*, float >::reverse_iterator iter;
+//    for (iter = constants.rbegin(); iter != constants.rend(); ++iter)
+//    {
+//        string constValue = to_string(iter->second);
+//        constValue = SymbolNumber::removeLeadingZeroes(constValue);
+//
+//        constDeclarations += "const " + iter->first->toString() + " = " + constValue + ";\n";
+//    }
+
+    // So I need to do TWO fucking loops to revert that bloody map
+    list<pair<SymbolVariable*, float>> constantsReversed;
+
     for(pair<SymbolVariable*, float> symbolVariable : constants) {
+        constantsReversed.push_front(symbolVariable);
+    }
+
+    for(pair<SymbolVariable*, float> symbolVariable : constantsReversed) {
         string constValue = to_string(symbolVariable.second);
         constValue = SymbolNumber::removeLeadingZeroes(constValue);
 
