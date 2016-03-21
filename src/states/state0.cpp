@@ -39,7 +39,6 @@ bool State0::transition(Automaton &automaton, Symbol *symbol) {
             return true;
 
         default:
-            string a = symbol->toString();
             throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
     }
 }
