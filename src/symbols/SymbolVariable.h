@@ -8,6 +8,8 @@ class SymbolVariable : public SymbolExpression
 {
 public:
     SymbolVariable(std::string varName);
+    virtual ~SymbolVariable();
+
     virtual std::string toString() const;
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected, map<string, StructVar*>& dicoVariables);
     std::string getName() const;
@@ -19,6 +21,8 @@ public:
     void setUsed();
 
     void checkUsed();
+
+    virtual bool canDeleteExprComponents() const;
 
 protected:
     std::string name;

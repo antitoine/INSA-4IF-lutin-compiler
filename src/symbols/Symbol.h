@@ -77,6 +77,8 @@ public:
 
     void setSymbolDetectionPosition(int numLine, int numChar);
 
+    virtual bool canDeleteExprComponents() const;
+
 };
 
 #endif //LUTIN_COMPILER_SYMBOL_H

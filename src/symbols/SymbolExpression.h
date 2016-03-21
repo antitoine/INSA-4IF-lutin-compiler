@@ -17,6 +17,8 @@ public:
     virtual bool isPersistent() const;
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables) = 0;
 
+    virtual ~SymbolExpression();
+
 protected:
 
 

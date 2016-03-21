@@ -124,3 +124,11 @@ void SymbolVariable::checkUsed() {
         throw ErrorSemanticVarNotUsed(name);
     }
 }
+
+SymbolVariable::~SymbolVariable() {
+
+}
+
+bool SymbolVariable::canDeleteExprComponents() const {
+    return false;
+}

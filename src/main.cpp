@@ -81,12 +81,14 @@ int main(int argc, char * argv[]) {
     if(strchr(arguments, 'h'))
     {
         displayHelp();
+        delete [] arguments;
         return 1;
     }
 
     if (!filename.compare("")) {
         cerr << "Error: unable to get the file path argument" << endl;
         displayHowToAccessHelp();
+        delete [] arguments;
         return 1;
     }
 
@@ -95,13 +97,14 @@ int main(int argc, char * argv[]) {
     if (errorCode) {
         // Error message has already been printed by automaton
         displayHowToAccessHelp();
+        delete [] arguments;
         return errorCode;
     }
 
 
     if(strchr(arguments, 'p'))
     {
-        cout << automaton.programmeToString();
+        cout << automaton.programmeToString() << endl;
     }
     if(strchr(arguments, 'a'))
     {
@@ -116,6 +119,8 @@ int main(int argc, char * argv[]) {
     {
         // Optimisation of the program
     }
+
+    delete [] arguments;
 
     return errorCode;
 }

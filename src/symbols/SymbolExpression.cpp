@@ -9,3 +9,7 @@ SymbolExpression::SymbolExpression(enum symbolIdTable idSymbol) : Symbol(idSymbo
 bool SymbolExpression::isPersistent() const {
     return true;
 }
+
+SymbolExpression::~SymbolExpression() {
+
+}

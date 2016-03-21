@@ -63,6 +63,8 @@ public :
 
     string programmeToString() const;
 
+    virtual ~Automaton();
+
 
 private:
     void computeNewSymbol(Symbol * symbol);

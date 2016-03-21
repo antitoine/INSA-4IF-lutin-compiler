@@ -309,3 +309,25 @@ void Automaton::checkProgramVariablesUsed() {
         }
     }
 }
+
+Automaton::~Automaton() {
+    for (pair<string, StructVar*> entry : dicoVariables) {
+        delete entry.second->ptSymbol;
+        delete entry.second;
+    }
+
+    while (!stackStates.empty()) {
+        delete stackStates.top();
+        stackStates.pop();
+    }
+
+    while (!stackSymbols.empty()) {
+        delete stackSymbols.top();
+        stackSymbols.pop();
+    }
+
+    for (Symbol *s : symbolsToExecute) {
+        delete s;
+    }
+
+}

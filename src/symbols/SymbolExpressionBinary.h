@@ -14,6 +14,8 @@ public:
     virtual void setOperands(SymbolExpression * leftOperand, SymbolExpression * rightOperand);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
+    virtual ~SymbolExpressionBinary();
+
 protected:
     SymbolExpression *firstOperand;
     SymbolExpression *secondOperand;
