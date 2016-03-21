@@ -33,13 +33,13 @@ void ErrorComposite::addError(Error *error) {
     }
 }
 
-string ErrorComposite::whatDetails() const throw() {
+string ErrorComposite::toStringDetails() const throw() {
     stringstream s;
     int iErrorMax = components.size() - 1;
     int i = 0;
 
     for (list<Error*>::const_iterator it = components.begin(); it != components.end(); it++, i++) {
-        s << (*it)->whatDefault();
+        s << (*it)->toString();
         if (i != iErrorMax) {
             s << endl;
         }
@@ -48,6 +48,6 @@ string ErrorComposite::whatDetails() const throw() {
     return s.str();
 }
 
-string ErrorComposite::what(int line, int charPos) const throw() {
-    return whatDetails();
+string ErrorComposite::toString() const throw() {
+    return toStringDetails();
 }

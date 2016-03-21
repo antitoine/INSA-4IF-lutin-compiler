@@ -8,11 +8,11 @@ using namespace std;
 
 class ErrorLexicalUnknownSymbol : public ErrorLexical {
 public:
-    ErrorLexicalUnknownSymbol(string symbolName);
+    ErrorLexicalUnknownSymbol(string symbolName, int numLineError=-1, int numCharError=-1);
     virtual ~ErrorLexicalUnknownSymbol() throw();
 
 protected:
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 
     string symbolName;
 };

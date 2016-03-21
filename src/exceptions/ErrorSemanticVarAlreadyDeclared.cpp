@@ -5,11 +5,11 @@ ErrorSemanticVarAlreadyDeclared::~ErrorSemanticVarAlreadyDeclared() throw() {
 
 }
 
-ErrorSemanticVarAlreadyDeclared::ErrorSemanticVarAlreadyDeclared(string duplicateVarName, bool constant)
-        : varName(duplicateVarName), isConstant(constant), ErrorSemantic(ERROR_SEMANTIC_VAR_ALREADY_DECLARED, WARNING) {
+ErrorSemanticVarAlreadyDeclared::ErrorSemanticVarAlreadyDeclared(SymbolVariable * variable, bool constant) throw()
+        : ErrorSemanticVar(ERROR_SEMANTIC_VAR_ALREADY_DECLARED, WARNING, variable), isConstant(constant) {
 }
 
-string ErrorSemanticVarAlreadyDeclared::whatDetails() const throw() {
+string ErrorSemanticVarAlreadyDeclared::toStringDetails() const throw() {
     stringstream s;
     s << "The ";
     if (isConstant) {
@@ -17,6 +17,6 @@ string ErrorSemanticVarAlreadyDeclared::whatDetails() const throw() {
     } else {
         s << "variable ";
     }
-    s << "\"" << varName << "\" has already been declared.";
+    s << "\"" << variable->getName() << "\" has already been declared.";
     return s.str();
 }

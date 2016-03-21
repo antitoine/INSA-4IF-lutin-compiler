@@ -2,19 +2,19 @@
 #define LUT_ERRORSEMANTICVARALREADYDECLARED_H
 
 #include <string>
-#include "ErrorSemantic.h"
+#include "ErrorSemanticVar.h"
+#include "../symbols/SymbolVariable.h"
 
 using namespace std;
 
-class ErrorSemanticVarAlreadyDeclared : public ErrorSemantic {
+class ErrorSemanticVarAlreadyDeclared : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarAlreadyDeclared(string duplicateVarName, bool constant);
+    ErrorSemanticVarAlreadyDeclared(SymbolVariable * variable, bool constant) throw();
     virtual ~ErrorSemanticVarAlreadyDeclared() throw();
 
 protected:
-    string varName;
     bool isConstant;
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 };
 
 

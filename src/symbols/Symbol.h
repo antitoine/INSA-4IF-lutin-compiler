@@ -58,10 +58,12 @@ class Symbol {
 
 protected:
     int id;
+    int numLineDetection;
+    int numCharDetection;
 
 public:
     Symbol(int id);
-    virtual ~Symbol() {}
+    virtual ~Symbol();
     virtual std::string toString() const = 0;
     operator int() const { return id; }
 
@@ -70,6 +72,10 @@ public:
     virtual void check(map<string, StructVar*>& dicoVariables);
 
     int getId() const;
+    int getNumLineDetection() const;
+    int getNumCharDetection() const;
+
+    void setSymbolDetectionPosition(int numLine, int numChar);
 
 };
 

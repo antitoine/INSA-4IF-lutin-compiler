@@ -4,38 +4,12 @@
 #include "Error.h"
 using namespace std;
 
-Error::Error(int number, int level) throw()
-        : number(number), level(level) {
+Error::Error(int number, int level, int numLineError, int numCharError) throw()
+        : number(number), level(level), numLineError(numLineError), numCharError(numCharError) {
 
 }
 
 Error::~Error() throw() {
-}
-
-string Error::whatDefault() const throw() {
-    return what(-1, -1);
-}
-
-string Error::what(int line, int charPos) const throw() {
-    stringstream s;
-
-    if (level == WARNING) {
-        s << "WARNING ";
-    } else if (level == CRITICAL_ERROR) {
-        s << "ERROR ";
-    }
-
-    if (line != -1) {
-        s << "at line " << line;
-    }
-    if (charPos != -1) {
-        s << ", character " << charPos;
-    }
-    s << ": ";
-
-    s << whatDetails();
-
-    return s.str();
 }
 
 int Error::getLevel() const throw() {
@@ -46,4 +20,28 @@ int Error::getNumber() const throw() {
     return number;
 }
 
+string Error::toString() const throw() {
+    return toString(numLineError, numCharError);
+}
 
+string Error::toString(int linePos, int charPos) const throw() {
+    stringstream s;
+
+    if (level == WARNING) {
+        s << "WARNING ";
+    } else if (level == CRITICAL_ERROR) {
+        s << "ERROR ";
+    }
+
+    if (linePos != -1) {
+        s << "at line " << numLineError;
+    }
+    if (charPos != -1) {
+        s << ", character " << numCharError;
+    }
+    s << ": ";
+
+    s << toStringDetails();
+
+    return s.str();
+}

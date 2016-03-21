@@ -2,18 +2,17 @@
 #define LUT_ERRORSEMANTICVARISCONST_H
 
 #include <string>
-#include "ErrorSemantic.h"
+#include "ErrorSemanticVar.h"
 
 using namespace std;
 
-class ErrorSemanticVarIsConst : public ErrorSemantic {
+class ErrorSemanticVarIsConst : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarIsConst(string varName) throw();
+    ErrorSemanticVarIsConst(SymbolVariable * variable) throw();
     virtual ~ErrorSemanticVarIsConst() throw();
 
 protected:
-    string varName;
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 };
 
 

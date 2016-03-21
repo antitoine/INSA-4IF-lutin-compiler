@@ -9,13 +9,13 @@ using namespace std;
 
 class ErrorLexicalUnexpectedSymbol : public ErrorLexical {
 public:
-    ErrorLexicalUnexpectedSymbol(string symbolName);
-    ErrorLexicalUnexpectedSymbol(string symbolName, Symbol* expectedSymbol);
+    ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar);
+    ErrorLexicalUnexpectedSymbol(const string & symbolName, Symbol* expectedSymbol, int numLine, int numChar);
     virtual ~ErrorLexicalUnexpectedSymbol() throw();
     Symbol* getExpectedSymbol() const;
 
 protected:
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 
     string symbolName;
 

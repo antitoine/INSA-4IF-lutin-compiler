@@ -19,7 +19,7 @@ bool State7::transition(Automaton &automaton, Symbol *symbol) {
             return true;
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
 
     }
 }

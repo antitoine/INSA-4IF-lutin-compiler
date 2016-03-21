@@ -9,7 +9,8 @@
 #include "symbols/RegexSymbol.h"
 #include "exceptions/ErrorLexicalUnknownSymbol.h"
 
-Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar*>& dicoVariables, string & stringSymbolDetected)
+Symbol * Lexer::readNextSymbol(string & stringToRead, map<string, StructVar *> & dicoVariables, string & stringSymbolDetected,
+                               int linePosition, int charPosition)
 {
     Symbol * symbol = NULL;
 
@@ -30,7 +31,7 @@ Symbol * Lexer::readNextSymbol(std::string & stringToRead, map<string, StructVar
         if (result.matched) {
             stringToRead = result.stringConsumed;
             stringSymbolDetected = result.stringMatched;
-            throw ErrorLexicalUnknownSymbol(result.stringMatched);
+            throw ErrorLexicalUnknownSymbol(result.stringMatched, linePosition, charPosition);
         }
     }
 

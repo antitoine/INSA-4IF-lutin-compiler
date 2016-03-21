@@ -7,12 +7,12 @@ ErrorSemanticVarNotInitialized::~ErrorSemanticVarNotInitialized() throw() {
 
 }
 
-ErrorSemanticVarNotInitialized::ErrorSemanticVarNotInitialized(string varName) throw()
-        : varName(varName), ErrorSemantic(ERROR_SEMANTIC_VAR_NOT_INITIALIZED, WARNING) {
+ErrorSemanticVarNotInitialized::ErrorSemanticVarNotInitialized(SymbolVariable * variable) throw()
+        : ErrorSemanticVar(ERROR_SEMANTIC_VAR_NOT_INITIALIZED, WARNING, variable) {
 }
 
-string ErrorSemanticVarNotInitialized::whatDetails() const throw() {
+string ErrorSemanticVarNotInitialized::toStringDetails() const throw() {
     stringstream s;
-    s << "The variable " << "\"" << varName << "\" is used but not initialized.";
+    s << "The variable " << "\"" << variable->getName() << "\" is used but not initialized.";
     return s.str();
 }

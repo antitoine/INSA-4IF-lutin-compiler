@@ -4,12 +4,12 @@
 
 using namespace std;
 
-ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(string symbolName)
-        : symbolName(symbolName), ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, CRITICAL_ERROR) {
+ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar)
+        : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, CRITICAL_ERROR, numLine, numChar), symbolName(symbolName) {
 }
 
-ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(string symbolName, Symbol* expectedSymbol)
-        : symbolName(symbolName), ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, WARNING),
+ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string & symbolName, Symbol* expectedSymbol, int numLine, int numChar)
+        : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, WARNING, numLine, numChar), symbolName(symbolName),
           expectedSymbol(expectedSymbol) {
 }
 
@@ -17,7 +17,7 @@ ErrorLexicalUnexpectedSymbol::~ErrorLexicalUnexpectedSymbol() throw() {
 
 }
 
-string ErrorLexicalUnexpectedSymbol::whatDetails() const throw() {
+string ErrorLexicalUnexpectedSymbol::toStringDetails() const throw() {
     stringstream s;
     if (this->getLevel() == WARNING) {
         s << "Unexpected symbol read and ignored (\"" << symbolName << "\").";

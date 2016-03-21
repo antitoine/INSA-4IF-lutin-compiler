@@ -5,7 +5,7 @@
 
 class ErrorSemantic : public Error {
 public:
-    ErrorSemantic(int number, int level=CRITICAL_ERROR) throw();
+    ErrorSemantic(int number, int level=CRITICAL_ERROR, int numLineError=-1, int numCharError=-1) throw();
     virtual ~ErrorSemantic() throw();
 };
 

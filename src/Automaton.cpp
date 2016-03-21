@@ -54,10 +54,12 @@ int Automaton::readFile(std::string filename) {
                 //std::cout << "String to compute: #" << stringToCompute << "#" << std::endl;
 
                 try {
-                    symbol = Lexer::readNextSymbol(stringToCompute, dicoVariables, stringSymbolDetected);
+                    symbol = Lexer::readNextSymbol(stringToCompute,
+                                                   dicoVariables,
+                                                   stringSymbolDetected, currentLineError, currentCharPosError);
                 } catch (Error const& error) {
                     if (error.getLevel() == WARNING) {
-                        cerr << error.what(currentLineError, currentCharPosError) << endl;
+                        cerr << error.toString() << endl;
                         currentCharPosError += stringSymbolDetected.length();
                         continue;
                     } else {
@@ -65,6 +67,7 @@ int Automaton::readFile(std::string filename) {
                     }
                 }
 
+                symbol->setSymbolDetectionPosition(currentLineError, currentCharPosError);
                 computeNewSymbol(symbol);
                 currentCharPosError += stringSymbolDetected.length();
             }
@@ -73,7 +76,7 @@ int Automaton::readFile(std::string filename) {
         }
     } catch (Error const& error) {
         // Error level here can only be critical
-        cerr << error.what(currentLineError, currentCharPosError) << endl;
+        cerr << error.toString(currentLineError, currentCharPosError) << endl;
         returnCode = 1;
     }
 
@@ -90,7 +93,7 @@ void Automaton::computeNewSymbol(Symbol * symbol)
         stackStates.top()->transition(*this, symbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         if (error.getLevel() == WARNING) {
-            cerr << error.what(currentLineError, currentCharPosError) << endl;
+            cerr << error.toString(currentLineError, currentCharPosError) << endl;
             stackStates.top()->transition(*this, error.getExpectedSymbol());
         } else {
             throw;
@@ -111,7 +114,7 @@ void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
         stackStates.top()->transition(*this, unterminalSymbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         if (error.getLevel() == WARNING) {
-            cerr << error.what(currentLineError, currentCharPosError) << endl;
+            cerr << error.toString(currentLineError, currentCharPosError) << endl;
             stackStates.top()->transition(*this, error.getExpectedSymbol());
         } else {
             throw;
@@ -133,7 +136,7 @@ void Automaton::transition(Symbol * symbol, State * newState) {
             stackStates.top()->transition(*this, stackSymbols.top());
         } catch (ErrorLexicalUnexpectedSymbol const& error) {
             if (error.getLevel() == WARNING) {
-                cerr << error.what(currentLineError, currentCharPosError) << endl;
+                cerr << error.toString(currentLineError, currentCharPosError) << endl;
                 stackStates.top()->transition(*this, error.getExpectedSymbol());
             } else {
                 throw;
@@ -157,7 +160,7 @@ void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
             currentSymbolDeclarationVar->addVariable(variable, dicoVariables);
         } catch (Error const& error) {
             if (error.getLevel() == WARNING) {
-                cerr << error.what(currentLineError, currentCharPosError) << endl;
+                cerr << error.toString(currentLineError, currentCharPosError) << endl;
             } else {
                 throw;
             }
@@ -250,7 +253,7 @@ int Automaton::execute() {
             s->execute(dicoVariables);
         }
     } catch (Error const& error) {
-        cerr << error.whatDefault() << endl;
+        cerr << error.toString() << endl;
         return error.getNumber();
     }
 
@@ -274,7 +277,7 @@ void Automaton::checkProgram() {
             s->check(dicoVariables);
         } catch (Error const& error) {
             if (error.getLevel() == WARNING) {
-                cerr << error.whatDefault() << endl;
+                cerr << error.toString() << endl;
             } else {
                 throw;
             }
@@ -299,7 +302,7 @@ void Automaton::checkProgramVariablesUsed() {
             entry.second->ptSymbol->checkUsed();
         } catch (Error const& error) {
             if (error.getLevel() == WARNING) {
-                cerr << error.whatDefault() << endl;
+                cerr << error.toString() << endl;
             } else {
                 throw;
             }

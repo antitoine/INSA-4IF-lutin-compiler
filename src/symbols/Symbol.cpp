@@ -15,10 +15,27 @@ bool Symbol::isPersistent() const {
 }
 
 Symbol::Symbol(int id)
-        : id(id) {
+        : id(id), numLineDetection(-1), numCharDetection(-1) {
 
 }
 
 void Symbol::check(map<string, StructVar*>& dicoVariables) {
     // Nothing to check by default
+}
+
+void Symbol::setSymbolDetectionPosition(int numLine, int numChar) {
+    numLineDetection = numLine;
+    numCharDetection = numChar;
+}
+
+int Symbol::getNumLineDetection() const {
+    return numLineDetection;
+}
+
+int Symbol::getNumCharDetection() const {
+    return numCharDetection;
+}
+
+Symbol::~Symbol() {
+
 }

@@ -8,12 +8,12 @@ using namespace std;
 
 class ErrorSemanticVarNotUsed : public ErrorSemantic {
 public:
-    ErrorSemanticVarNotUsed(string varName) throw();
+    ErrorSemanticVarNotUsed(const string & varName) throw();
     virtual ~ErrorSemanticVarNotUsed() throw();
 
 protected:
     string varName;
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 };
 
 #endif //LUT_ERRORSEMANTICVARNOTUSED_H

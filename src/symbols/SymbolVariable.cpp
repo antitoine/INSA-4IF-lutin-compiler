@@ -69,11 +69,11 @@ void SymbolVariable::check(map<string, StructVar *> &dicoVariables, bool checkCo
     // Not an eval check: check if the variable is declared
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
-        throw ErrorSemanticVarNotDeclared(name);
+        throw ErrorSemanticVarNotDeclared(this);
     } else {
         if (!constErrorIsAlreadyThrown && checkConstantUpdate && it->second->isConstant) {
             constErrorIsAlreadyThrown = true;
-            throw ErrorSemanticVarIsConst(name);
+            throw ErrorSemanticVarIsConst(this);
         }
     }
 
@@ -90,12 +90,12 @@ list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables)
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
         errors = new list<Error *>;
-        errors->push_back(new ErrorSemanticVarNotDeclared(name));
+        errors->push_back(new ErrorSemanticVarNotDeclared(this));
     } else {
         // Check if the variable is initialized
         if (!it->second->isInitialized) {
             errors = new list<Error *>;
-            errors->push_back(new ErrorSemanticVarNotInitialized(name));
+            errors->push_back(new ErrorSemanticVarNotInitialized(this));
         }
     }
 

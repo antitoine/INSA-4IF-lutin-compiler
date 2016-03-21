@@ -23,23 +23,26 @@ enum TypeError {
 
 class Error : public exception {
 public:
-    Error(int number, int level=CRITICAL_ERROR) throw();
+    Error(int number, int level=CRITICAL_ERROR, int numLineError=-1, int numCharError=-1) throw();
     virtual ~Error() throw();
 
-    virtual string whatDefault() const throw();
-    virtual string what(int line, int charPos) const throw();
+    virtual string toString() const throw();
+    virtual string toString(int linePos, int charPos) const throw();
 
     int getLevel() const throw();
     int getNumber() const throw();
 
 protected:
-    virtual string whatDetails() const throw() = 0;
+    virtual string toStringDetails() const throw() = 0;
 
     // Error number
     int number;
 
     // Error level
     int level;
+
+    int numLineError;
+    int numCharError;
 };
 
 

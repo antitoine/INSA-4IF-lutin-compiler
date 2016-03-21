@@ -2,18 +2,17 @@
 #define LUT_ERRORSEMANTICVARNOTDECLARED_H
 
 #include <string>
-#include "ErrorSemantic.h"
+#include "ErrorSemanticVar.h"
 
 using namespace std;
 
-class ErrorSemanticVarNotDeclared : public ErrorSemantic {
+class ErrorSemanticVarNotDeclared : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarNotDeclared(string varName) throw();
+    ErrorSemanticVarNotDeclared(SymbolVariable * variable) throw();
     virtual ~ErrorSemanticVarNotDeclared() throw();
 
 protected:
-    string varName;
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 };
 
 

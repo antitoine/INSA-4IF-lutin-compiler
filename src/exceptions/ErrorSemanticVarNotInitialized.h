@@ -2,18 +2,18 @@
 #define LUT_ERRORSEMANTICVARNOTINITIALIZED_H
 
 #include <string>
-#include "ErrorSemantic.h"
+#include "../symbols/SymbolVariable.h"
+#include "ErrorSemanticVar.h"
 
 using namespace std;
 
-class ErrorSemanticVarNotInitialized : public ErrorSemantic {
+class ErrorSemanticVarNotInitialized : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarNotInitialized(string varName) throw();
+    ErrorSemanticVarNotInitialized(SymbolVariable * variable) throw();
     virtual ~ErrorSemanticVarNotInitialized() throw();
 
 protected:
-    string varName;
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 };
 
 

@@ -7,12 +7,12 @@ ErrorSemanticVarNotDeclared::~ErrorSemanticVarNotDeclared() throw() {
 
 }
 
-ErrorSemanticVarNotDeclared::ErrorSemanticVarNotDeclared(string varName) throw()
-        : varName(varName), ErrorSemantic(ERROR_SEMANTIC_VAR_NOT_DECLARED, WARNING) {
+ErrorSemanticVarNotDeclared::ErrorSemanticVarNotDeclared(SymbolVariable * variable) throw()
+        : ErrorSemanticVar(ERROR_SEMANTIC_VAR_NOT_DECLARED, WARNING, variable) {
 }
 
-string ErrorSemanticVarNotDeclared::whatDetails() const throw() {
+string ErrorSemanticVarNotDeclared::toStringDetails() const throw() {
     stringstream s;
-    s << "The variable " << "\"" << varName << "\" is used but not declared.";
+    s << "The variable " << "\"" << variable->getName() << "\" is used but not declared.";
     return s.str();
 }

@@ -56,7 +56,7 @@ void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable, map<string, St
     // Check if the variable doesn't already exists
     map<string, StructVar *>::iterator it = dicoVariables.find(pVariable->getName());
     if (it != dicoVariables.end()) { // The variable exists
-        throw ErrorSemanticVarAlreadyDeclared(pVariable->getName(), false);
+        throw ErrorSemanticVarAlreadyDeclared(pVariable, false);
     }
 
     variables.push_back(pVariable);

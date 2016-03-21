@@ -63,7 +63,7 @@ bool State41::transition(Automaton & automaton, Symbol * symbol) {
 
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
 
     }
 }

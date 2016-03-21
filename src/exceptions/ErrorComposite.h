@@ -12,12 +12,13 @@ public:
     ErrorComposite(list<Error*> *ptListErrors) throw();
     virtual ~ErrorComposite() throw();
     void addError(Error * error);
-    virtual string what(int line, int charPos) const throw();
+
+    virtual string toString() const throw();
 
 protected:
     list<Error *> components;
 
-    virtual string whatDetails() const throw();
+    virtual string toStringDetails() const throw();
 };
 
 
