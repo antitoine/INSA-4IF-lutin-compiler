@@ -76,8 +76,8 @@ int Automaton::readFile(std::string filename) {
         }
     } catch (Error const& error) {
         // Error level here can only be critical
-        cerr << error.toString(currentLineError, currentCharPosError) << endl;
-        returnCode = 1;
+        cerr << error.toString() << endl;
+        returnCode = error.getNumber();
     }
 
     file.close();
@@ -93,7 +93,7 @@ void Automaton::computeNewSymbol(Symbol * symbol)
         stackStates.top()->transition(*this, symbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         if (error.getLevel() == WARNING) {
-            cerr << error.toString(currentLineError, currentCharPosError) << endl;
+            cerr << error.toString() << endl;
             stackStates.top()->transition(*this, error.getExpectedSymbol());
         } else {
             throw;
@@ -114,7 +114,7 @@ void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
         stackStates.top()->transition(*this, unterminalSymbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         if (error.getLevel() == WARNING) {
-            cerr << error.toString(currentLineError, currentCharPosError) << endl;
+            cerr << error.toString() << endl;
             stackStates.top()->transition(*this, error.getExpectedSymbol());
         } else {
             throw;
@@ -136,7 +136,7 @@ void Automaton::transition(Symbol * symbol, State * newState) {
             stackStates.top()->transition(*this, stackSymbols.top());
         } catch (ErrorLexicalUnexpectedSymbol const& error) {
             if (error.getLevel() == WARNING) {
-                cerr << error.toString(currentLineError, currentCharPosError) << endl;
+                cerr << error.toString() << endl;
                 stackStates.top()->transition(*this, error.getExpectedSymbol());
             } else {
                 throw;
@@ -160,7 +160,7 @@ void Automaton::addVariableToCurrentDeclarationVar(SymbolVariable * variable) {
             currentSymbolDeclarationVar->addVariable(variable, dicoVariables);
         } catch (Error const& error) {
             if (error.getLevel() == WARNING) {
-                cerr << error.toString(currentLineError, currentCharPosError) << endl;
+                cerr << error.toString() << endl;
             } else {
                 throw;
             }
