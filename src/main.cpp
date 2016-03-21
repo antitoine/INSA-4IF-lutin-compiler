@@ -4,27 +4,23 @@
 #include <string.h>
 #include "Automaton.h"
 #include "symbols/RegexSymbol.h"
-#include "TestRegex.h"
 
 void displayHowToAccessHelp();
 
 using namespace std;
 
 // Get a table of the arguments
-char* getCmdOptions(int argc, char ** argv)
+string getCmdOptions(int argc, char ** argv)
 {
-    char *results = new char[20];
-    int pointer = 0;
+    string results = "";
     for (int i = 1 ; i < argc; i++) {
         if (argv[i][0] == '-'){
             // Memorize the different arguments in the result
             for (int j = 1; j < strlen(argv[i]); j++) {
-                results[pointer] = argv[i][j];
-                pointer++;
+                results += argv[i][j];
             }
         }
     }
-    results[pointer] = '\0';
     return results;
 }
 
@@ -77,21 +73,19 @@ int main(int argc, char * argv[]) {
 
     Automaton automaton;
 
-    char * arguments = getCmdOptions(argc, argv);
+    string arguments = getCmdOptions(argc, argv);
     string filename = getCmdFile(argc, argv);
 
     //we check first if the user want the help before checking for anything else
-    if(strchr(arguments, 'h'))
+    if(arguments.find('h') != string::npos)
     {
         displayHelp();
-        delete [] arguments;
         return 0;
     }
 
     if (!filename.compare("")) {
         cerr << "Error: unable to get the file path argument" << endl;
         displayHowToAccessHelp();
-        delete [] arguments;
         return 1;
     }
 
@@ -100,30 +94,27 @@ int main(int argc, char * argv[]) {
     if (errorCode) {
         // Error message has already been printed by automaton
         displayHowToAccessHelp();
-        delete [] arguments;
         return errorCode;
     }
 
 
-    if(strchr(arguments, 'p'))
+    if(arguments.find('p') != string::npos)
     {
         cout << automaton.programmeToString() << endl;
     }
-    if(strchr(arguments, 'a'))
+    if(arguments.find('a') != string::npos)
     {
         // Static analysis of the program
         automaton.checkProgram();
     }
-    if(strchr(arguments, 'e'))
+    if(arguments.find('e') != string::npos)
     {
         errorCode = automaton.execute();
     }
-    if(strchr(arguments, 'o'))
+    if(arguments.find('o') != string::npos)
     {
         // Optimisation of the program
     }
-
-    delete [] arguments;
 
     return errorCode;
 }
