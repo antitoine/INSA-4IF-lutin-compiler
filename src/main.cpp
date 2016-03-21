@@ -15,18 +15,16 @@ char* getCmdOptions(int argc, char ** argv)
 {
     char *results = new char[20];
     int pointer = 0;
-    for (int i = 0 ; i < argc; i++) {
+    for (int i = 1 ; i < argc; i++) {
         if (argv[i][0] == '-'){
-            // Memorize the differents arguments in the result
+            // Memorize the different arguments in the result
             for (int j = 1; j < strlen(argv[i]); j++) {
                 results[pointer] = argv[i][j];
                 pointer++;
             }
-        } else if(i > 1) {
-            // We reached the end of args, next option is the namefile. No matter of what's next.
-            break;
         }
     }
+    results[pointer] = '\0';
     return results;
 }
 
@@ -42,26 +40,31 @@ string getCmdFile(int argc, char ** argv)
     return "";
 }
 
-// Display the help
+// Display how to display help
 void displayHowToAccessHelp() {
+    cout << "Lutin Compiler by H4311" << endl;
     cout << "In order to access the help, please use the -h option in the command line." << endl;
 }
 
+// Display help message
 void displayHelp(){
-    cout << "NAME" <<endl;
-    cout << "Lutin Compiler v0.1 by H4311 - INSA Lyon 2015-2016" << endl;
-    cout << "SYNOPSIS" <<endl;
-    cout << "lut [-p][-a][-e][-o] infile" <<endl;
-    cout << "DESCRIPTION" <<endl;
-    cout << "When you invoke this command, it normally does preprocessing." <<endl;
-    cout << "Options allows you to personnalize your utilisation of the command." <<endl;
-    cout << "They can be in any order, and grouped (i.e. -pao) but must be placed before the infile." <<endl;
-    cout << "OPTIONS" <<endl;
-    cout << "-p : print the memory representation of the program, eventual errors printed on the standard error output" <<endl;
-    cout << "-a : static analysis of the program, extract errors on the standard error output" <<endl;
-    cout << "-e : interprete and execute each instructions of the program" <<endl;
-    cout << "-o : simplification and optimisation of the program, if combined with -p only the tranformed program will be printed" <<endl;
-    cout << "-h : print the help" << endl;
+    cout << "Lutin Compiler by H4311 - INSA Lyon 2015-2016 - Version 0.1" << endl;
+    cout << endl;
+    cout << "SYNOPSIS" << endl;
+    cout << "   lut [-p][-a][-e][-o] infile" << endl;
+    cout << endl;
+    cout << "DESCRIPTION" << endl;
+    cout << "   When you invoke this command, it normally does preprocessing." << endl;
+    cout << "   Options allows you to personnalize your utilisation of the command." << endl;
+    cout << "   They can be in any order, and grouped (i.e. -pao) but must be placed before the infile." << endl;
+    cout << endl;
+    cout << "OPTIONS" << endl;
+    cout << "   -p : print the memory representation of the program, eventual errors printed on the standard error output" << endl;
+    cout << "   -a : static analysis of the program, extract errors on the standard error output" << endl;
+    cout << "   -e : interprete and execute each instructions of the program" << endl;
+    cout << "   -o : simplification and optimisation of the program, if combined with -p only the tranformed program will be printed" << endl;
+    cout << "   -h : print the help" << endl;
+    cout << endl;
 }
 
 int main(int argc, char * argv[]) {
@@ -82,7 +85,7 @@ int main(int argc, char * argv[]) {
     {
         displayHelp();
         delete [] arguments;
-        return 1;
+        return 0;
     }
 
     if (!filename.compare("")) {
