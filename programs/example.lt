@@ -1,5 +1,5 @@
-var x ;
-const n=10, n2=100.34 ;
+var x, y ;
+const n=10, n2=100 ;
 ecrire (n+n2)*2;
 x := n+n2 ;
 ecrire x+2 ;
