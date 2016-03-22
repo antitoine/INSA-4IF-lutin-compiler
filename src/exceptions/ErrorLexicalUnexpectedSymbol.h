@@ -10,15 +10,18 @@ using namespace std;
 class ErrorLexicalUnexpectedSymbol : public ErrorLexical {
 public:
     ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar);
-    ErrorLexicalUnexpectedSymbol(const string & symbolName, Symbol* expectedSymbol, int numLine, int numChar);
+    ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, Symbol* expectedSymbol);
+    ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, bool ignoreSymbol);
     virtual ~ErrorLexicalUnexpectedSymbol() throw();
     Symbol* getExpectedSymbol() const;
+
+    bool isSymbolIgnored() const;
 
 protected:
     virtual string toStringDetails() const throw();
 
     string symbolName;
-
+    bool isIgnored;
     Symbol* expectedSymbol;
 };
 

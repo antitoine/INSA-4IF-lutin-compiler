@@ -94,7 +94,9 @@ void Automaton::computeNewSymbol(Symbol * symbol)
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         if (error.getLevel() == WARNING) {
             cerr << error.toString() << endl;
-            stackStates.top()->transition(*this, error.getExpectedSymbol());
+            if (!error.isSymbolIgnored()) {
+                stackStates.top()->transition(*this, error.getExpectedSymbol());
+            }
         } else {
             throw;
         }
