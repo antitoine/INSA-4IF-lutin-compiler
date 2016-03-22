@@ -92,14 +92,7 @@ void Automaton::computeNewSymbol(Symbol * symbol)
     try {
         stackStates.top()->transition(*this, symbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
-        if (error.getLevel() == WARNING) {
-            cerr << error.toString() << endl;
-            if (!error.isSymbolIgnored()) {
-                stackStates.top()->transition(*this, error.getExpectedSymbol());
-            }
-        } else {
-            throw;
-        }
+        computeErrorLexicalUnexpectedSymbol(error);
     }
 }
 
@@ -115,12 +108,7 @@ void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
     try {
         stackStates.top()->transition(*this, unterminalSymbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
-        if (error.getLevel() == WARNING) {
-            cerr << error.toString() << endl;
-            stackStates.top()->transition(*this, error.getExpectedSymbol());
-        } else {
-            throw;
-        }
+        computeErrorLexicalUnexpectedSymbol(error);
     }
 
 }
@@ -136,13 +124,21 @@ void Automaton::transition(Symbol * symbol, State * newState) {
         try {
             stackStates.top()->transition(*this, stackSymbols.top());
         } catch (ErrorLexicalUnexpectedSymbol const& error) {
-            if (error.getLevel() == WARNING) {
-                cerr << error.toString() << endl;
-                stackStates.top()->transition(*this, error.getExpectedSymbol());
-            } else {
-                throw;
-            }
+            computeErrorLexicalUnexpectedSymbol(error);
         }
+    }
+}
+
+void Automaton::computeErrorLexicalUnexpectedSymbol(ErrorLexicalUnexpectedSymbol const &error) {
+    if (error.getLevel() == WARNING) {
+        cerr << error.toString() << endl;
+        delete stackSymbols.top();
+        stackSymbols.pop();
+        if (!error.isSymbolIgnored()) {
+            stackStates.top()->transition(*this, error.getExpectedSymbol());
+        }
+    } else {
+        throw;
     }
 }
 
@@ -320,3 +316,5 @@ Automaton::~Automaton() {
         delete s;
     }
 }
+
+

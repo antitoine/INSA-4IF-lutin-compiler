@@ -7,6 +7,7 @@
 #include "states/state.h"
 
 #include "StructVar.h"
+#include "exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 using namespace std;
 
@@ -71,6 +72,8 @@ private:
     void init();
 
     void checkProgramVariablesUsed();
+
+    void computeErrorLexicalUnexpectedSymbol(ErrorLexicalUnexpectedSymbol const& error);
 };
 
 
