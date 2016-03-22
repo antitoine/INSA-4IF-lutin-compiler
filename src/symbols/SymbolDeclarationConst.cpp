@@ -1,5 +1,6 @@
 #include <map>
 #include <iostream>
+#include <algorithm>
 #include "SymbolDeclarationConst.h"
 #include "Symbol.h"
 #include "RegexSymbol.h"
@@ -15,6 +16,7 @@ SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATI
 
 string SymbolDeclarationConst::toString() const {
     string constDeclarations = "";
+
     for(pair<SymbolVariable*, float> symbolVariable : constants) {
         string constValue = to_string(symbolVariable.second);
         constValue = SymbolNumber::removeLeadingZeroes(constValue);
