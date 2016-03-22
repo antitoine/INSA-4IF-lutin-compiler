@@ -31,6 +31,7 @@ list<Error *> * SymbolExpressionBinary::checkEval(map<string, StructVar*>& dicoV
             errors = operandErrors;
         } else {
             errors->insert(errors->end(), operandErrors->begin(), operandErrors->end());
+            delete operandErrors;
         }
     }
 
@@ -38,11 +39,11 @@ list<Error *> * SymbolExpressionBinary::checkEval(map<string, StructVar*>& dicoV
 }
 
 SymbolExpressionBinary::~SymbolExpressionBinary() {
-    if (firstOperand != NULL && firstOperand->canDeleteExprComponents()) {
+    if (firstOperand != NULL) {
         delete firstOperand;
     }
 
-    if (secondOperand != NULL && secondOperand->canDeleteExprComponents()) {
+    if (secondOperand != NULL) {
         delete secondOperand;
     }
 }

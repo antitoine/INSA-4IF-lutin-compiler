@@ -22,17 +22,9 @@ SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
 }
 
 void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
-    // We check if the variable is already in the dico
-    map<string, StructVar *>::iterator it = dicoVariables.find(symbolVariable->getName());
-
-    if (it != dicoVariables.end()) { // The variable exists
-        StructVar * ptS = it->second;
-        ptS->value = symbolExpression->eval(dicoVariables);
-        ptS->isInitialized = true;
-    } else {
-        // TODO : Exception
-        std::cout << "Variable " << symbolVariable->getName() << " has not been declared" << std::endl;
-    }
+    // Check done before execution: variable in dico
+    StructVar * ptS = dicoVariables[symbolVariable->getName()];
+    ptS->value = symbolExpression->eval(dicoVariables);
 }
 
 void SymbolInstructionAffect::affectExpression(SymbolExpression *expression) {
@@ -65,8 +57,19 @@ void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
     }
 
     // If the check is correct, the variable is set as initialized
-    dicoVariables[symbolVariable->getName()]->isInitialized = true;
+    StructVar * pt = dicoVariables[symbolVariable->getName()];
+    pt->isInitialized = true;
 
-    // Set the variable used
-    symbolVariable->setUsed();
+    // Set the variable as used
+    pt->isUsed = true;
+}
+
+SymbolInstructionAffect::~SymbolInstructionAffect() {
+    if (symbolExpression != NULL) {
+        delete symbolExpression;
+    }
+
+    if (symbolVariable != NULL) {
+        delete symbolVariable;
+    }
 }

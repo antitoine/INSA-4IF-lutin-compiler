@@ -7,12 +7,14 @@ class SymbolExpressionParenthesis : public SymbolExpression
 {
 public:
     SymbolExpressionParenthesis();
+    virtual ~SymbolExpressionParenthesis();
+
     virtual std::string toString() const;
     float eval(map<string, StructVar*>& dicoVariables);
     void setExpression(SymbolExpression * expression);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
-    virtual ~SymbolExpressionParenthesis();
+
 
 protected:
     SymbolExpression* symbolExpression;

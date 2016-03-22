@@ -39,7 +39,3 @@ int Symbol::getNumCharDetection() const {
 Symbol::~Symbol() {
 
 }
-
-bool Symbol::canDeleteExprComponents() const {
-    return true;
-}

@@ -15,6 +15,7 @@
 #include "symbols/SymbolInstruction.h"
 #include "exceptions/Error.h"
 #include "exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "exceptions/ErrorSemanticVarNotUsed.h"
 
 using namespace std;
 
@@ -55,7 +56,6 @@ int Automaton::readFile(std::string filename) {
 
                 try {
                     symbol = Lexer::readNextSymbol(stringToCompute,
-                                                   dicoVariables,
                                                    stringSymbolDetected, currentLineError, currentCharPosError);
                 } catch (Error const& error) {
                     if (error.getLevel() == WARNING) {
@@ -127,7 +127,6 @@ void Automaton::transition(Symbol * symbol, State * newState) {
     if (!stackSymbols.top()->isPersistent()) {
         delete stackSymbols.top();
     }
-
     stackSymbols.pop();
 
     stackStates.push(newState);
@@ -291,28 +290,21 @@ void Automaton::checkProgram() {
 void Automaton::initDicoVariables() {
     for (pair<string, StructVar*> entry : dicoVariables) {
         entry.second->isInitialized = false;
-        entry.second->ptSymbol->initCheck();
+        entry.second->isUsed = false;
     }
-
 }
 
 void Automaton::checkProgramVariablesUsed() {
     for (pair<string, StructVar*> entry : dicoVariables) {
-        try {
-            entry.second->ptSymbol->checkUsed();
-        } catch (Error const& error) {
-            if (error.getLevel() == WARNING) {
-                cerr << error.toString() << endl;
-            } else {
-                throw;
-            }
+        if (!entry.second->isUsed) {
+            ErrorSemanticVarNotUsed e(entry.first);
+            cerr << e.toString() << endl;
         }
     }
 }
 
 Automaton::~Automaton() {
     for (pair<string, StructVar*> entry : dicoVariables) {
-        delete entry.second->ptSymbol;
         delete entry.second;
     }
 
@@ -329,5 +321,4 @@ Automaton::~Automaton() {
     for (Symbol *s : symbolsToExecute) {
         delete s;
     }
-
 }

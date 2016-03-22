@@ -7,6 +7,10 @@ SymbolExpressionBinaryMultiplication::SymbolExpressionBinaryMultiplication() : S
 
 }
 
+SymbolExpressionBinaryMultiplication::~SymbolExpressionBinaryMultiplication() {
+
+}
+
 string SymbolExpressionBinaryMultiplication::toString() const {
     return firstOperand->toString() + " * " + secondOperand->toString();
 }
@@ -14,3 +18,5 @@ string SymbolExpressionBinaryMultiplication::toString() const {
 float SymbolExpressionBinaryMultiplication::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) * secondOperand->eval(dicoVariables);
 }
+
+

@@ -8,7 +8,7 @@ using namespace std;
 
 class ErrorSemanticVarIsConst : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarIsConst(SymbolVariable * variable) throw();
+    ErrorSemanticVarIsConst(const string & varName, int lineError, int charError) throw();
     virtual ~ErrorSemanticVarIsConst() throw();
 
 protected:

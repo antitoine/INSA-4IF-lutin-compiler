@@ -72,12 +72,11 @@ public:
     virtual void check(map<string, StructVar*>& dicoVariables);
 
     int getId() const;
-    int getNumLineDetection() const;
-    int getNumCharDetection() const;
 
-    void setSymbolDetectionPosition(int numLine, int numChar);
+    virtual int getNumLineDetection() const;
+    virtual int getNumCharDetection() const;
 
-    virtual bool canDeleteExprComponents() const;
+    virtual void setSymbolDetectionPosition(int numLine, int numChar);
 
 };
 

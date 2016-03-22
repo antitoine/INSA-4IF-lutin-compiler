@@ -7,6 +7,10 @@ SymbolExpressionBinaryAdd::SymbolExpressionBinaryAdd() : SymbolExpressionBinary(
 
 }
 
+SymbolExpressionBinaryAdd::~SymbolExpressionBinaryAdd() {
+
+}
+
 string SymbolExpressionBinaryAdd::toString() const {
     return firstOperand->toString() + " + " + secondOperand->toString();
 }

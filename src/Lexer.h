@@ -7,7 +7,7 @@
 class Lexer {
 
 public:
-    static Symbol *readNextSymbol(string &stringToRead, map<string, StructVar *> & dicoVariables, string & stringSymbolDetected,
+    static Symbol *readNextSymbol(string &stringToRead, string & stringSymbolDetected,
                                   int linePosition, int charPosition);
 };
 

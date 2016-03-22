@@ -8,7 +8,7 @@ using namespace std;
 
 class ErrorSemanticVarNotDeclared : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarNotDeclared(SymbolVariable * variable) throw();
+    ErrorSemanticVarNotDeclared(const string & varName, int lineError, int charError) throw();
     virtual ~ErrorSemanticVarNotDeclared() throw();
 
 protected:

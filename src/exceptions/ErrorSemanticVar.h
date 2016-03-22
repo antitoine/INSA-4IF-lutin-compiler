@@ -6,11 +6,11 @@
 
 class ErrorSemanticVar : public ErrorSemantic {
 public:
-    ErrorSemanticVar(int number, int level, SymbolVariable * variable);
+    ErrorSemanticVar(int number, int level, const string & varName, int lineError, int charError);
     virtual ~ErrorSemanticVar() throw();
 
 protected:
-    SymbolVariable * variable;
+    string varName;
     virtual string toStringDetails() const throw() = 0;
 };
 

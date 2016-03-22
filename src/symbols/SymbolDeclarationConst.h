@@ -8,6 +8,8 @@ class SymbolDeclarationConst : public SymbolDeclaration
 {
 public:
     SymbolDeclarationConst();
+    virtual ~SymbolDeclarationConst();
+
     virtual std::string toString() const;
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
     void execute(map<string, StructVar*>& dicoVariables);

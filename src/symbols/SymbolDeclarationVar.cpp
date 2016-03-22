@@ -39,12 +39,12 @@ Symbol * SymbolDeclarationVar::analyse(string & stringToAnalyse, string & string
 }
 
 void SymbolDeclarationVar::execute(map<string, StructVar*>& dicoVariables) {
-    cout << "#TRACE: execute declaration var" << endl;
     for (SymbolVariable * v : variables) {
         map<string, StructVar *>::iterator it = dicoVariables.find(v->getName());
         if (it != dicoVariables.end()) {
             StructVar * ptS = it->second;
 
+            // TODO : bizarre.. à voir
             ptS->ptSymbol = v;
             ptS->isInitialized = false;
             ptS->isConstant = false;
@@ -56,7 +56,7 @@ void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable, map<string, St
     // Check if the variable doesn't already exists
     map<string, StructVar *>::iterator it = dicoVariables.find(pVariable->getName());
     if (it != dicoVariables.end()) { // The variable exists
-        throw ErrorSemanticVarAlreadyDeclared(pVariable, false);
+        throw ErrorSemanticVarAlreadyDeclared(pVariable->getName(), false, pVariable->getNumLineDetection(), pVariable->getNumCharDetection());
     }
 
     variables.push_back(pVariable);
@@ -66,7 +66,14 @@ void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable, map<string, St
     ptS->ptSymbol = pVariable;
     ptS->isConstant = false;
     ptS->isInitialized = false;
+    ptS->isUsed = false;
     ptS->value = 0;
 
     dicoVariables.insert(pair<string, StructVar*>(pVariable->getName(), ptS));
+}
+
+SymbolDeclarationVar::~SymbolDeclarationVar() {
+    for (SymbolVariable * ptVar : variables) {
+        delete ptVar;
+    }
 }

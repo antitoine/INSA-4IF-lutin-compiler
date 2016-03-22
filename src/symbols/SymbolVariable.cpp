@@ -11,16 +11,15 @@
 
 
 SymbolVariable::SymbolVariable(std::string varName)
-        : SymbolExpression(S_VARIABLE), name(varName), evalIsAlreadyChecked(false), constErrorIsAlreadyThrown(false), isUsed(false)
+        : SymbolExpression(S_VARIABLE), name(varName)
 {
-
 }
 
 std::string SymbolVariable::toString() const {
     return name;
 }
 
-Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected, map<string, StructVar*>& dicoVariables) {
+Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
     MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::IDENTIFICATEUR);
 
     if (result.matched)
@@ -28,16 +27,13 @@ Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & st
         stringToAnalyse = result.stringConsumed;
         stringSymbolDetected = result.stringMatched;
 
-        map<string, StructVar *>::iterator it = dicoVariables.find(result.stringMatched);
-        if (it != dicoVariables.end()) { // The variable exists
-            return it->second->ptSymbol;
-        } else {
-            // Trim the name
-            string varName = result.stringMatched;
-            size_t first = varName.find_first_not_of(' ');
-            size_t last = varName.find_last_not_of(' ');
-            return new SymbolVariable(varName.substr(first, (last-first+1)));
-        }
+        // Trim the name
+        string varName = result.stringMatched;
+        size_t first = varName.find_first_not_of(' ');
+        size_t last = varName.find_last_not_of(' ');
+        varName = varName.substr(first, (last-first+1));
+
+        return new SymbolVariable(varName);
     }
     else
     {
@@ -69,66 +65,37 @@ void SymbolVariable::check(map<string, StructVar *> &dicoVariables, bool checkCo
     // Not an eval check: check if the variable is declared
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
-        throw ErrorSemanticVarNotDeclared(this);
+        throw ErrorSemanticVarNotDeclared(name, numLineDetection, numCharDetection);
     } else {
-        if (!constErrorIsAlreadyThrown && checkConstantUpdate && it->second->isConstant) {
-            constErrorIsAlreadyThrown = true;
-            throw ErrorSemanticVarIsConst(this);
+        if (checkConstantUpdate && it->second->isConstant) {
+            throw ErrorSemanticVarIsConst(name, numLineDetection, numCharDetection);
         }
     }
-
 }
 
 list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables) {
-    if (evalIsAlreadyChecked) {
-        return NULL;
-    }
-
     std::list<Error *> * errors = NULL;
 
     // Check if the variable is declared
     map<string, StructVar*>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
         errors = new list<Error *>;
-        errors->push_back(new ErrorSemanticVarNotDeclared(this));
+        errors->push_back(new ErrorSemanticVarNotDeclared(name, numLineDetection, numCharDetection));
     } else {
+        // Set variable as used
+        it->second->isUsed = true;
+
         // Check if the variable is initialized
         if (!it->second->isInitialized) {
             errors = new list<Error *>;
-            errors->push_back(new ErrorSemanticVarNotInitialized(this));
+            errors->push_back(new ErrorSemanticVarNotInitialized(name, numLineDetection, numCharDetection));
         }
-    }
-
-    evalIsAlreadyChecked = true;
-
-    // If there is no error the variable is used correctly
-    if (errors == NULL) {
-        setUsed();
     }
 
     return errors;
 }
 
 
-void SymbolVariable::initCheck() {
-    evalIsAlreadyChecked = false;
-    isUsed = false;
-}
-
-void SymbolVariable::setUsed() {
-    isUsed = true;
-}
-
-void SymbolVariable::checkUsed() {
-    if (!isUsed) {
-        throw ErrorSemanticVarNotUsed(name);
-    }
-}
-
 SymbolVariable::~SymbolVariable() {
 
-}
-
-bool SymbolVariable::canDeleteExprComponents() const {
-    return false;
 }

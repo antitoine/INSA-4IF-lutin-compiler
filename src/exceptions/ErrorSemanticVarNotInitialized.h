@@ -9,7 +9,7 @@ using namespace std;
 
 class ErrorSemanticVarNotInitialized : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarNotInitialized(SymbolVariable * variable) throw();
+    ErrorSemanticVarNotInitialized(const string & varName, int lineError, int charError) throw();
     virtual ~ErrorSemanticVarNotInitialized() throw();
 
 protected:

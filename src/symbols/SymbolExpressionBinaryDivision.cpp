@@ -7,6 +7,10 @@ SymbolExpressionBinaryDivision::SymbolExpressionBinaryDivision() : SymbolExpress
 
 }
 
+SymbolExpressionBinaryDivision::~SymbolExpressionBinaryDivision() {
+
+}
+
 string SymbolExpressionBinaryDivision::toString() const {
     return firstOperand->toString() + " / " + secondOperand->toString();
 }
@@ -14,3 +18,4 @@ string SymbolExpressionBinaryDivision::toString() const {
 float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) / secondOperand->eval(dicoVariables);
 }
+

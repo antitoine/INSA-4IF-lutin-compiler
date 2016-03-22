@@ -78,3 +78,7 @@ Symbol *SymbolUnit::analyse(std::string & stringToAnalyse, std::string & stringS
 
     return unitSymbol;
 }
+
+SymbolUnit::~SymbolUnit() {
+
+}

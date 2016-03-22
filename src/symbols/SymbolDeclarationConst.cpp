@@ -89,3 +89,10 @@ void SymbolDeclarationConst::check(map<string, StructVar *> &dicoVariables) {
         dicoVariables[entry.first->getName()]->isInitialized = true;
     }
 }
+
+SymbolDeclarationConst::~SymbolDeclarationConst() {
+    for (pair<SymbolVariable *const, float> & entry : constants) {
+        delete entry.first;
+    }
+
+}

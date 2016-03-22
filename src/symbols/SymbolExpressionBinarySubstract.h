@@ -7,6 +7,8 @@ class SymbolExpressionBinarySubstract : public SymbolExpressionBinary
 {
 public:
     SymbolExpressionBinarySubstract();
+    virtual ~SymbolExpressionBinarySubstract();
+
     virtual std::string toString() const;
     float eval(map<string, StructVar*>& dicoVariables);
 

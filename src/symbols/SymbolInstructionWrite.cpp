@@ -47,3 +47,9 @@ void SymbolInstructionWrite::check(map<string, StructVar *> &dicoVariables) {
         throw ErrorComposite(exprErrors);
     }
 }
+
+SymbolInstructionWrite::~SymbolInstructionWrite() {
+    if (symbolExpression != NULL) {
+        delete symbolExpression;
+    }
+}

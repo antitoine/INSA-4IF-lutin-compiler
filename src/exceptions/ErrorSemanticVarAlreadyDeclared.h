@@ -9,7 +9,7 @@ using namespace std;
 
 class ErrorSemanticVarAlreadyDeclared : public ErrorSemanticVar {
 public:
-    ErrorSemanticVarAlreadyDeclared(SymbolVariable * variable, bool constant) throw();
+    ErrorSemanticVarAlreadyDeclared(const string & varName, bool constant, int lineError, int charError) throw();
     virtual ~ErrorSemanticVarAlreadyDeclared() throw();
 
 protected:

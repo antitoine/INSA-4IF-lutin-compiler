@@ -60,7 +60,15 @@ void SymbolInstructionRead::check(map<string, StructVar *> &dicoVariables) {
     symbolVariable->check(dicoVariables);
 
     // If the check is correct, the variable is set as initialized
-    dicoVariables[symbolVariable->getName()]->isInitialized = true;
+    StructVar * pt = dicoVariables[symbolVariable->getName()];
+    pt->isInitialized = true;
 
-    symbolVariable->setUsed();
+    // Set the variable as used
+    pt->isUsed = true;
+}
+
+SymbolInstructionRead::~SymbolInstructionRead() {
+    if (symbolVariable != NULL) {
+        delete symbolVariable;
+    }
 }

@@ -54,3 +54,7 @@ string SymbolNumber::removeLeadingZeroes(string number) {
 list<Error *> * SymbolNumber::checkEval(map<string, StructVar*>& dicoVariables) {
     return NULL;
 }
+
+SymbolNumber::~SymbolNumber() {
+
+}

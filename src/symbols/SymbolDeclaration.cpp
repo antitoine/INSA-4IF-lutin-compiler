@@ -20,3 +20,7 @@ bool SymbolDeclaration::isPersistent() const {
 void SymbolDeclaration::check(map<string, StructVar*>& dicoVariables) {
     // Double declaration already check in analysis
 }
+
+SymbolDeclaration::~SymbolDeclaration() {
+
+}

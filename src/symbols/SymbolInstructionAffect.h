@@ -11,6 +11,8 @@ class SymbolInstructionAffect : public SymbolInstruction
 public:
     SymbolInstructionAffect();
     SymbolInstructionAffect(SymbolVariable * variable);
+    virtual ~SymbolInstructionAffect();
+
     virtual std::string toString() const;
     void execute(map<string, StructVar*>& dicoVariables);
     virtual void affectExpression(SymbolExpression * expression);

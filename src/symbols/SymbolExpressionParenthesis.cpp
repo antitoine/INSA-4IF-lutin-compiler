@@ -27,5 +27,7 @@ list<Error *> * SymbolExpressionParenthesis::checkEval(map<string, StructVar*>& 
 }
 
 SymbolExpressionParenthesis::~SymbolExpressionParenthesis() {
-    delete symbolExpression;
+    if (symbolExpression != NULL) {
+        delete symbolExpression;
+    }
 }

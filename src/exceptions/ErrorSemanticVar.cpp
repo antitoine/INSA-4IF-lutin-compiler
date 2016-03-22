@@ -5,6 +5,6 @@ ErrorSemanticVar::~ErrorSemanticVar() throw() {
 
 }
 
-ErrorSemanticVar::ErrorSemanticVar(int number, int level, SymbolVariable * variable)
-        : ErrorSemantic(number, level, variable->getNumLineDetection(), variable->getNumCharDetection()), variable(variable) {
+ErrorSemanticVar::ErrorSemanticVar(int number, int level, const string & varName, int lineError, int charError)
+        : ErrorSemantic(number, level, lineError, charError), varName(varName) {
 }

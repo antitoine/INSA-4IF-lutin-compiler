@@ -8,6 +8,8 @@ class SymbolInstructionRead : public SymbolInstruction
 {
 public:
     SymbolInstructionRead();
+    virtual ~SymbolInstructionRead();
+
     void execute(map<string, StructVar*>& dicoVariables);
     virtual std::string toString() const;
     virtual void affectExpression(SymbolExpression * expression);

@@ -8,6 +8,8 @@ class SymbolNumber : public SymbolExpression
 public:
     SymbolNumber();
     SymbolNumber(string stringValue);
+    virtual ~SymbolNumber();
+
     virtual std::string toString() const;
     float eval(map<string, StructVar*>& dicoVariables);
     float eval() const;

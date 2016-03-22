@@ -7,6 +7,10 @@ SymbolExpressionBinarySubstract::SymbolExpressionBinarySubstract() : SymbolExpre
 
 }
 
+SymbolExpressionBinarySubstract::~SymbolExpressionBinarySubstract() {
+
+}
+
 string SymbolExpressionBinarySubstract::toString() const {
     return firstOperand->toString() + " - " + secondOperand->toString();
 }
@@ -14,3 +18,5 @@ string SymbolExpressionBinarySubstract::toString() const {
 float SymbolExpressionBinarySubstract::eval(map<string, StructVar*>& dicoVariables){
     return firstOperand->eval(dicoVariables) - secondOperand->eval(dicoVariables);
 }
+
+

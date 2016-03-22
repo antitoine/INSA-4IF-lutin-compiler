@@ -9,6 +9,7 @@ struct StructVar {
     float value;
     bool isConstant;
     bool isInitialized;
+    bool isUsed;
 };
 
 #endif //LUTIN_COMPILER_STRUCTVAR_H
