@@ -7,7 +7,7 @@ using namespace std;
 
 enum TypeErrorLevel {
     WARNING = 0,
-    CRITICAL_ERROR = 1
+    ERROR = 1
 };
 
 enum TypeError {
@@ -23,9 +23,10 @@ enum TypeError {
 
 class Error : public exception {
 public:
-    Error(int number, int level=CRITICAL_ERROR, int numLineError=-1, int numCharError=-1) throw();
+    Error(int number, int level=ERROR, int numLineError=-1, int numCharError=-1) throw();
     virtual ~Error() throw();
 
+    virtual const char* what() const throw();
     virtual string toString() const throw();
     virtual string toString(int linePos, int charPos) const throw();
 

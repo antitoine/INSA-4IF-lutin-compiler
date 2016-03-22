@@ -5,7 +5,7 @@
 using namespace std;
 
 ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar)
-        : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, CRITICAL_ERROR, numLine, numChar), symbolName(symbolName) {
+        : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, ERROR, numLine, numChar), symbolName(symbolName) {
 }
 
 ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string & symbolName, Symbol* expectedSymbol, int numLine, int numChar)

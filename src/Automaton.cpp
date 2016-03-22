@@ -275,11 +275,7 @@ void Automaton::checkProgram() {
         try {
             s->check(dicoVariables);
         } catch (Error const& error) {
-            if (error.getLevel() == WARNING) {
-                cerr << error.toString() << endl;
-            } else {
-                throw;
-            }
+            cerr << error.toString() << endl;
         }
     }
 

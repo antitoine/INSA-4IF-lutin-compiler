@@ -29,7 +29,7 @@ string Error::toString(int linePos, int charPos) const throw() {
 
     if (level == WARNING) {
         s << "WARNING ";
-    } else if (level == CRITICAL_ERROR) {
+    } else if (level == ERROR) {
         s << "ERROR ";
     }
 
@@ -44,4 +44,8 @@ string Error::toString(int linePos, int charPos) const throw() {
     s << toStringDetails();
 
     return s.str();
+}
+
+const char *Error::what() const throw() {
+    return toString().c_str();
 }
