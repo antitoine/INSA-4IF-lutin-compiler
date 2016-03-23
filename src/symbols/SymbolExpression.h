@@ -18,6 +18,7 @@ public:
     virtual float eval(std::map<std::string, StructVar*>& dicoVariables) = 0;
     virtual bool isPersistent() const;
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables) = 0;
+    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
 
 
 

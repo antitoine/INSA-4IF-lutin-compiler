@@ -13,6 +13,7 @@ public:
     float eval(map<string, StructVar*>& dicoVariables);
     void setExpression(SymbolExpression * expression);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
+    SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
 
 
 

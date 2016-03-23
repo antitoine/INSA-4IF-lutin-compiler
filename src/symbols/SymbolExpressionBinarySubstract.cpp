@@ -20,3 +20,12 @@ float SymbolExpressionBinarySubstract::eval(map<string, StructVar*>& dicoVariabl
 }
 
 
+SymbolExpression * SymbolExpressionBinarySubstract::optimizeExpression(map<string, StructVar*>& dicoVariables) {
+    firstOperand = firstOperand->optimizeExpression(dicoVariables);
+    secondOperand = secondOperand->optimizeExpression(dicoVariables);
+
+    if (secondOperand->eval(dicoVariables) == 0 && secondOperand->getId() == S_NUMBER)
+        return firstOperand;
+    else
+        return this;
+}

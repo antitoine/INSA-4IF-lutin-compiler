@@ -297,6 +297,18 @@ string Automaton::programmeToString() const {
     return programme;
 }
 
+void Automaton::optimizeProgram() {
+    list<Symbol*> optimizedSymbolsToExecute;
+    for (Symbol * s : symbolsToExecute) {
+        try {
+            optimizedSymbolsToExecute.push_back(s->optimize(dicoVariables));
+        } catch (Error const& error) {
+            cerr << error.toString() << endl;
+        }
+    }
+    symbolsToExecute = optimizedSymbolsToExecute;
+}
+
 void Automaton::checkProgram() {
     programCanExecute = true;
 

@@ -1,5 +1,6 @@
 #include <map>
 #include "SymbolExpressionBinaryDivision.h"
+#include "SymbolNumber.h"
 
 using namespace std;
 
@@ -19,3 +20,14 @@ float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariable
     return firstOperand->eval(dicoVariables) / secondOperand->eval(dicoVariables);
 }
 
+SymbolExpression * SymbolExpressionBinaryDivision::optimizeExpression(map<string, StructVar*>& dicoVariables) {
+    firstOperand = firstOperand->optimizeExpression(dicoVariables);
+    secondOperand = secondOperand->optimizeExpression(dicoVariables);
+
+    if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER)
+        return (new SymbolNumber("0"));
+    else if (secondOperand->eval(dicoVariables) == 1)
+        return firstOperand;
+    else
+        return this;
+}

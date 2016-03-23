@@ -13,3 +13,7 @@ bool SymbolExpression::isPersistent() const {
 SymbolExpression::~SymbolExpression() {
 
 }
+
+SymbolExpression * SymbolExpression::optimizeExpression(map<string, StructVar*>& dicoVariables) {
+    return this;
+}

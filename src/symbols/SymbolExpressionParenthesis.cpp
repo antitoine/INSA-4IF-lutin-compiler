@@ -31,3 +31,12 @@ SymbolExpressionParenthesis::~SymbolExpressionParenthesis() {
         delete symbolExpression;
     }
 }
+
+SymbolExpression * SymbolExpressionParenthesis::optimizeExpression(map<string, StructVar*>& dicoVariables) {
+    symbolExpression = symbolExpression->optimizeExpression(dicoVariables);
+
+    if (symbolExpression->getId() == S_EXPRESSION_PARENTHESIS || symbolExpression->getId() == S_NUMBER || symbolExpression->getId() == S_VARIABLE)
+        return symbolExpression;
+    else
+        return this;
+}
