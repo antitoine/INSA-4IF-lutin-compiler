@@ -1,7 +1,9 @@
 #include "state13.h"
 #include "state23.h"
 #include "state24.h"
+#include "../exceptions/ErrorLexicalMissingSymbol.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State13::State13() : State("13") {
 }

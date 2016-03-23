@@ -17,7 +17,7 @@ string SymbolUnit::toString() const {
         case SYMBOL_UNIT_COMMA:
             return ", ";
         case SYMBOL_UNIT_AFFECT:
-            return "=";
+            return ":=";
         case SYMBOL_UNIT_EQUAL:
             return "=";
         case SYMBOL_UNIT_PLUS:

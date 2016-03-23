@@ -8,6 +8,7 @@
 
 #include "StructVar.h"
 #include "exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "exceptions/ErrorLexicalMissingSymbol.h"
 
 using namespace std;
 
@@ -37,6 +38,9 @@ private:
 
     int currentLineError;
     int currentCharPosError;
+
+    bool programChecked;
+    bool programCanExecute;
 
 public :
     int readFile(string filename);
@@ -74,6 +78,7 @@ private:
     void checkProgramVariablesUsed();
 
     void computeErrorLexicalUnexpectedSymbol(ErrorLexicalUnexpectedSymbol const& error);
+    void computeErrorLexicalMissingSymbol(ErrorLexicalMissingSymbol const& error);
 };
 
 

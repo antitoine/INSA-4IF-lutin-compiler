@@ -16,6 +16,7 @@
 #include "exceptions/Error.h"
 #include "exceptions/ErrorLexicalUnexpectedSymbol.h"
 #include "exceptions/ErrorSemanticVarNotUsed.h"
+#include "exceptions/ErrorLexicalMissingSymbol.h"
 
 using namespace std;
 
@@ -23,6 +24,8 @@ void Automaton::init() {
     // TODO
     stackStates.push(new State0());
     dicoVariables.clear();
+    programChecked = false;
+    programCanExecute = false;
 }
 
 int Automaton::readFile(std::string filename) {
@@ -93,6 +96,8 @@ void Automaton::computeNewSymbol(Symbol * symbol)
         stackStates.top()->transition(*this, symbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         computeErrorLexicalUnexpectedSymbol(error);
+    } catch (ErrorLexicalMissingSymbol const& error) {
+        computeErrorLexicalMissingSymbol(error);
     }
 }
 
@@ -109,6 +114,8 @@ void Automaton::reduction(int reductionSize, Symbol * unterminalSymbol) {
         stackStates.top()->transition(*this, unterminalSymbol);
     } catch (ErrorLexicalUnexpectedSymbol const& error) {
         computeErrorLexicalUnexpectedSymbol(error);
+    } catch (ErrorLexicalMissingSymbol const& error) {
+        computeErrorLexicalMissingSymbol(error);
     }
 
 }
@@ -125,6 +132,8 @@ void Automaton::transition(Symbol * symbol, State * newState) {
             stackStates.top()->transition(*this, stackSymbols.top());
         } catch (ErrorLexicalUnexpectedSymbol const& error) {
             computeErrorLexicalUnexpectedSymbol(error);
+        } catch (ErrorLexicalMissingSymbol const& error) {
+            computeErrorLexicalMissingSymbol(error);
         }
     }
 }
@@ -135,12 +144,25 @@ void Automaton::computeErrorLexicalUnexpectedSymbol(ErrorLexicalUnexpectedSymbol
         delete stackSymbols.top();
         stackSymbols.pop();
         if (!error.isSymbolIgnored()) {
+            stackSymbols.push(error.getExpectedSymbol());
             stackStates.top()->transition(*this, error.getExpectedSymbol());
         }
     } else {
         throw;
     }
 }
+
+
+void Automaton::computeErrorLexicalMissingSymbol(ErrorLexicalMissingSymbol const &error) {
+    if (error.getLevel() == WARNING) {
+        cerr << error.toString() << endl;
+        stackSymbols.push(error.getMissingSymbol());
+        stackStates.top()->transition(*this, error.getMissingSymbol());
+    } else {
+        throw;
+    }
+}
+
 
 void Automaton::accept() {
     // TODO implementer
@@ -242,7 +264,16 @@ void Automaton::affectCurrentExpressionToCurrentInstruction() {
 }
 
 int Automaton::execute() {
-    cout << "Symbols to execute, size: " << symbolsToExecute.size() << endl;
+
+    if (!programChecked) {
+        checkProgram();
+    }
+
+    if (!programCanExecute) {
+        cerr << "The program can't be executed. Correct the errors and retry." << endl;
+        return -1; // TODO : code ?
+    }
+
     cout << "Execute..." << endl;
 
     try {
@@ -267,6 +298,8 @@ string Automaton::programmeToString() const {
 }
 
 void Automaton::checkProgram() {
+    programCanExecute = true;
+
     initDicoVariables();
 
     for (Symbol * s : symbolsToExecute) {
@@ -274,11 +307,16 @@ void Automaton::checkProgram() {
             s->check(dicoVariables);
         } catch (Error const& error) {
             cerr << error.toString() << endl;
+            if (error.getLevel() == ERROR) {
+                programCanExecute = false;
+            }
         }
     }
 
     // Check all the variables
     checkProgramVariablesUsed();
+
+    programChecked = true;
 }
 
 void Automaton::initDicoVariables() {
@@ -316,5 +354,4 @@ Automaton::~Automaton() {
         delete s;
     }
 }
-
 

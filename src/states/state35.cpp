@@ -1,6 +1,7 @@
 #include "state35.h"
 #include "../symbols/SymbolUnterminal.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State35::State35() : State("35") {
 }
@@ -22,8 +23,14 @@ bool State35::transition(Automaton & automaton, Symbol * symbol) {
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_V));
             return true;
 
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
+        case S_DECLARATION_CONST:
+        case S_DECLARATION_VAR:
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
+
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection(), true);
 
     }
 }

@@ -28,7 +28,7 @@ bool State34::transition(Automaton & automaton, Symbol * symbol) {
 
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection(), true);
 
     }
 }

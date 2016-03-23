@@ -13,7 +13,11 @@ SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION
 
 string SymbolInstructionWrite::toString() const {
     stringstream s;
-    s << "ecrire " << symbolExpression->toString() << ";\n";
+    s << "ecrire ";
+    if (symbolExpression != NULL) {
+        s << symbolExpression->toString();
+    }
+    s << ";" << endl;
     return s.str();
 }
 
