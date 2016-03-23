@@ -98,23 +98,26 @@ int main(int argc, char * argv[]) {
     }
 
 
-    if(arguments.find('p') != string::npos)
-    {
-        cout << automaton.programmeToString() << endl;
-    }
+
     if(arguments.find('a') != string::npos)
     {
         // Static analysis of the program
         automaton.checkProgram();
     }
+    if(arguments.find('o') != string::npos)
+    {
+        // Optimisation of the program
+        automaton.optimizeProgram();
+    }
+    if(arguments.find('p') != string::npos)
+    {
+        cout << automaton.programmeToString() << endl;
+    }
     if(arguments.find('e') != string::npos)
     {
         errorCode = automaton.execute();
     }
-    if(arguments.find('o') != string::npos)
-    {
-        // Optimisation of the program
-    }
+
 
     return errorCode;
 }

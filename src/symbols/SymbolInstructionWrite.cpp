@@ -53,3 +53,8 @@ SymbolInstructionWrite::~SymbolInstructionWrite() {
         delete symbolExpression;
     }
 }
+
+Symbol * SymbolInstructionWrite::optimize(map<string, StructVar*>& dicoVariables) {
+    symbolExpression = symbolExpression->optimizeExpression(dicoVariables);
+    return this;
+}

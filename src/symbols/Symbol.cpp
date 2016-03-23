@@ -39,3 +39,7 @@ int Symbol::getNumCharDetection() const {
 Symbol::~Symbol() {
 
 }
+
+Symbol * Symbol::optimize(map<string, StructVar*>& dicoVariables) {
+    return this;
+}

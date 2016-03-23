@@ -13,6 +13,9 @@ public:
     void execute(map<string, StructVar*>& dicoVariables);
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
     virtual void affectExpression(SymbolExpression * expression);
+
+    Symbol * optimize(map<string, StructVar*>& dicoVariables);
+
     virtual void check(map<string, StructVar*>& dicoVariables);
 
 protected:

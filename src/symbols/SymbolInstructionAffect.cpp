@@ -73,3 +73,8 @@ SymbolInstructionAffect::~SymbolInstructionAffect() {
         delete symbolVariable;
     }
 }
+
+Symbol * SymbolInstructionAffect::optimize(map<string, StructVar*>& dicoVariables) {
+    symbolExpression = symbolExpression->optimizeExpression(dicoVariables);
+    return this;
+}

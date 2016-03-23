@@ -46,6 +46,7 @@ public :
 
     void initDicoVariables();
     int execute();
+    void optimizeProgram();
     void checkProgram();
 
     void setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar);
