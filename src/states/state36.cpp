@@ -1,6 +1,7 @@
 #include "state36.h"
 #include "state43.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State36::State36() : State("36") {
 }
@@ -20,7 +21,7 @@ bool State36::transition(Automaton & automaton, Symbol * symbol) {
             return true;
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_EQUAL));
 
     }
 }

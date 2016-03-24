@@ -8,11 +8,15 @@ using namespace std;
 
 SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCTION_AFFECT)
 {
-
+    symbolVariable = NULL;
+    symbolExpression = NULL;
 }
 
 string SymbolInstructionAffect::toString() const {
     stringstream s;
+    if (symbolExpression == NULL) {
+        return symbolVariable->toString();
+    }
     s << symbolVariable->toString() << " := " << symbolExpression->toString() << ";\n";
     return s.str();
 }

@@ -5,6 +5,7 @@
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State38::State38() : State("38") {
 }
@@ -60,6 +61,13 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
             automaton.addToCurrentExpression(new SymbolExpressionBinaryDivision());
             automaton.transition(symbol, new State32());
             return true;
+
+        case S_VARIABLE:
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
+        case S_DECLARATION_CONST:
+        case S_DECLARATION_VAR:
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:
             throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());

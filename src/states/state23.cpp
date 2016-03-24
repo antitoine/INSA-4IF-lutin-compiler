@@ -29,7 +29,7 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
             return true;
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection(), true);
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
 
     }
 }

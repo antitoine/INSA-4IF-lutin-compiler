@@ -1,6 +1,7 @@
 #include "state11.h"
 #include "state21.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State11::State11() : State("11") {
 }
@@ -19,8 +20,9 @@ bool State11::transition(Automaton & automaton, Symbol * symbol) {
             automaton.transition(symbol, new State21());
             return true;
 
+
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
     }
 }

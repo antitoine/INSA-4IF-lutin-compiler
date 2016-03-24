@@ -9,6 +9,7 @@
 #include "../symbols/SymbolExpressionBinarySubstract.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State17::State17() : State("17") {
 }
@@ -59,6 +60,13 @@ bool State17::transition(Automaton & automaton, Symbol * symbol) {
             automaton.transition(symbol, new State32());
             return true;
 
+
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
+        case S_DECLARATION_CONST:
+        case S_DECLARATION_VAR:
+        case S_VARIABLE:
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:
             throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());

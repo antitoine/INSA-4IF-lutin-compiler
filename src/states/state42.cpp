@@ -1,6 +1,7 @@
 #include "state42.h"
 #include "../symbols/SymbolUnterminal.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State42::State42() : State("42") {
 }
@@ -60,6 +61,13 @@ bool State42::transition(Automaton & automaton, Symbol * symbol) {
             automaton.aggregateParenthesisExpression();
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
+
+        case S_VARIABLE:
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
+        case S_DECLARATION_CONST:
+        case S_DECLARATION_VAR:
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
 
         default:

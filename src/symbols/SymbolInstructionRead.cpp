@@ -6,10 +6,13 @@ using namespace std;
 
 SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_READ)
 {
-
+    symbolVariable = NULL;
 }
 
 string SymbolInstructionRead::toString() const {
+    if (symbolVariable == NULL) {
+        return "lire";
+    }
     return "lire " + symbolVariable->toString() + ";\n";
 }
 
@@ -24,12 +27,7 @@ void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
 }
 
 void SymbolInstructionRead::affectExpression(SymbolExpression *expression) {
-    if (SymbolVariable * variable = dynamic_cast<SymbolVariable *>(expression)) {
-        symbolVariable = variable;
-    } else {
-        cerr << "Error: incorrect expression for read instruction." << endl;
-        // TODO : exception
-    }
+    symbolVariable = (SymbolVariable *) expression;
 }
 
 Symbol *SymbolInstructionRead::analyse(std::string &stringToAnalyse, std::string &stringSymbolDetected) {

@@ -5,6 +5,7 @@
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State40::State40() : State("40") {
 }
@@ -64,6 +65,13 @@ bool State40::transition(Automaton & automaton, Symbol * symbol) {
             automaton.aggregateBinaryOperatorExpression();
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
+
+        case S_VARIABLE:
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
+        case S_DECLARATION_CONST:
+        case S_DECLARATION_VAR:
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
 
         default:

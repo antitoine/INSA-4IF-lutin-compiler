@@ -60,6 +60,10 @@ int Automaton::readFile(std::string filename) {
                 try {
                     symbol = Lexer::readNextSymbol(stringToCompute,
                                                    stringSymbolDetected, currentLineError, currentCharPosError);
+
+                    symbol->setSymbolDetectionPosition(currentLineError, currentCharPosError);
+                    computeNewSymbol(symbol);
+                    currentCharPosError += stringSymbolDetected.length();
                 } catch (Error const& error) {
                     if (error.getLevel() == WARNING) {
                         cerr << error.toString() << endl;
@@ -69,10 +73,6 @@ int Automaton::readFile(std::string filename) {
                         throw;
                     }
                 }
-
-                symbol->setSymbolDetectionPosition(currentLineError, currentCharPosError);
-                computeNewSymbol(symbol);
-                currentCharPosError += stringSymbolDetected.length();
             }
 
             currentLineError++;

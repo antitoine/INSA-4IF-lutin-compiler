@@ -8,16 +8,17 @@
 using namespace std;
 
 SymbolInstructionWrite::SymbolInstructionWrite():SymbolInstruction(S_INSTRUCTION_WRITE) {
-
+    symbolExpression = NULL;
 }
 
 string SymbolInstructionWrite::toString() const {
     stringstream s;
-    s << "ecrire ";
-    if (symbolExpression != NULL) {
-        s << symbolExpression->toString();
+
+    if (symbolExpression == NULL) {
+        return "ecrire";
     }
-    s << ";" << endl;
+
+    s << "ecrire " << symbolExpression->toString() << ";" << endl;
     return s.str();
 }
 

@@ -5,6 +5,7 @@
 #include "Symbol.h"
 #include "RegexSymbol.h"
 #include "SymbolNumber.h"
+#include "../exceptions/ErrorSemanticVarAlreadyDeclared.h"
 #include <re2/re2.h>
 
 using namespace std;
@@ -16,6 +17,10 @@ SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATI
 
 string SymbolDeclarationConst::toString() const {
     string constDeclarations = "";
+
+    if (constants.empty()) {
+        return "const";
+    }
 
     for(pair<SymbolVariable*, float> symbolVariable : constants) {
         string constValue = to_string(symbolVariable.second);
@@ -64,9 +69,7 @@ void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, S
         // Check if the variable doesn't already exists
         map<string, StructVar *>::iterator it = dicoVariables.find(temporaryPtVariable->getName());
         if (it != dicoVariables.end()) { // The variable exists
-            cerr << "Error: the variable " << temporaryPtVariable->getName() << " has already been declared." << endl;
-            // TODO : Exception
-            return;
+            throw ErrorSemanticVarAlreadyDeclared(temporaryPtVariable->getName(), true, temporaryPtVariable->getNumLineDetection(), temporaryPtVariable->getNumCharDetection());
         }
 
         constants.insert(pair<SymbolVariable*, float>(temporaryPtVariable, constantValue));

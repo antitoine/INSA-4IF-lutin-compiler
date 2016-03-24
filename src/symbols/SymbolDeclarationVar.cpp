@@ -16,7 +16,12 @@ SymbolDeclarationVar::SymbolDeclarationVar()
 
 string SymbolDeclarationVar::toString() const {
     string varDeclarations = "";
-    for(SymbolVariable* symbolVariable : variables) {
+
+    if (variables.empty()) {
+        return "var";
+    }
+
+    for (SymbolVariable* symbolVariable : variables) {
         varDeclarations += "var " + symbolVariable->toString() + ";\n";
     }
 

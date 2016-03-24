@@ -1,6 +1,7 @@
 #include "state19.h"
 #include "../symbols/SymbolUnterminal.h"
 #include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
+#include "../symbols/SymbolUnit.h"
 
 State19::State19() : State("19") {
 }
@@ -28,6 +29,13 @@ bool State19::transition(Automaton & automaton, Symbol * symbol) {
         case SYMBOL_UNIT_ENDING_PAR:
             automaton.reduction(1, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
+
+        case S_INSTRUCTION_READ:
+        case S_INSTRUCTION_WRITE:
+        case S_DECLARATION_CONST:
+        case S_DECLARATION_VAR:
+        case S_VARIABLE:
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:
             throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());

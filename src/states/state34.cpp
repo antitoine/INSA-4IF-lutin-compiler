@@ -26,9 +26,8 @@ bool State34::transition(Automaton & automaton, Symbol * symbol) {
             automaton.reduction(4, new SymbolUnterminal(SYMBOL_UNTERMINAL_I_PRIM));
             return true;
 
-
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection(), true);
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
 
     }
 }
