@@ -2,13 +2,12 @@
 #include <iostream>
 #include <regex>
 #include "SymbolVariable.h"
+#include "SymbolNumber.h"
 #include "RegexSymbol.h"
 #include "../exceptions/ErrorSemanticVarIsConst.h"
 #include "../exceptions/ErrorSemanticVarNotDeclared.h"
 #include "../exceptions/ErrorSemanticVarNotInitialized.h"
 #include "../exceptions/ErrorSemanticVarNotUsed.h"
-
-
 
 SymbolVariable::SymbolVariable(std::string varName)
         : SymbolExpression(S_VARIABLE), name(varName)
@@ -91,4 +90,13 @@ list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables)
 
 SymbolVariable::~SymbolVariable() {
 
+}
+
+SymbolExpression *SymbolVariable::optimizeExpression(map<string, StructVar *> &dicoVariables) {
+    StructVar * ptS = dicoVariables[name];
+    if (ptS->isConstant) {
+        return new SymbolNumber(ptS->value);
+    } else {
+        return this;
+    }
 }

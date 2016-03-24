@@ -23,6 +23,8 @@ public:
     virtual void check(map<string, StructVar*>& dicoVariables, bool checkConstantUpdate);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
+    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
+
 protected:
     std::string name;
 };

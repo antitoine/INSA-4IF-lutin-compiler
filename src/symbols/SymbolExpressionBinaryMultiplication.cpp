@@ -21,7 +21,11 @@ float SymbolExpressionBinaryMultiplication::eval(map<string, StructVar*>& dicoVa
 }
 
 SymbolExpression * SymbolExpressionBinaryMultiplication::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    SymbolExpressionBinary::optimizeExpression(dicoVariables);
+    SymbolExpression * exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
+
+    if (exprOptimized != NULL) {
+        return exprOptimized;
+    }
 
     if (firstOperand->eval(dicoVariables) == 1) {
         return secondOperand;

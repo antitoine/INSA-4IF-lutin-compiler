@@ -1,6 +1,7 @@
 #include <map>
 #include <list>
 #include "SymbolExpressionBinary.h"
+#include "SymbolNumber.h"
 #include "../exceptions/Error.h"
 
 using namespace std;
@@ -65,6 +66,13 @@ SymbolExpression *SymbolExpressionBinary::optimizeExpression(map<string, StructV
         delete secondOperand;
         secondOperand = secondOperandOptimized;
     }
+
+    // Merge the numeric symbols
+    if (firstOperand->getId() == S_NUMBER && secondOperand->getId() == S_NUMBER) {
+        return new SymbolNumber(eval(dicoVariables));
+    }
+
+    return NULL;
 }
 
 void SymbolExpressionBinary::detachExpressions() {

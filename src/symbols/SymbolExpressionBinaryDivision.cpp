@@ -21,7 +21,11 @@ float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariable
 }
 
 SymbolExpression * SymbolExpressionBinaryDivision::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    SymbolExpressionBinary::optimizeExpression(dicoVariables);
+    SymbolExpression * exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
+
+    if (exprOptimized != NULL) {
+        return exprOptimized;
+    }
 
     if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER) {
         return (new SymbolNumber(0.0));

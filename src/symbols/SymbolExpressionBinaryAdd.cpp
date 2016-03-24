@@ -20,7 +20,11 @@ float SymbolExpressionBinaryAdd::eval(map<string, StructVar*>& dicoVariables){
 }
 
 SymbolExpression * SymbolExpressionBinaryAdd::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    SymbolExpressionBinary::optimizeExpression(dicoVariables);
+    SymbolExpression * exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
+
+    if (exprOptimized != NULL) {
+        return exprOptimized;
+    }
 
     if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER) {
         return secondOperand;
