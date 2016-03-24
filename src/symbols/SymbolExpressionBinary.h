@@ -16,7 +16,9 @@ public:
     virtual void setOperands(SymbolExpression * leftOperand, SymbolExpression * rightOperand);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
+    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
 
+    virtual void detachExpressions();
 
 protected:
     SymbolExpression *firstOperand;

@@ -20,6 +20,7 @@ public:
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables) = 0;
     virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
 
+    virtual void detachExpressions();
 
 
 protected:

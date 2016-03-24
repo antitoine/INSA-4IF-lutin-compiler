@@ -21,13 +21,15 @@ float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariable
 }
 
 SymbolExpression * SymbolExpressionBinaryDivision::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    firstOperand = firstOperand->optimizeExpression(dicoVariables);
-    secondOperand = secondOperand->optimizeExpression(dicoVariables);
+    SymbolExpressionBinary::optimizeExpression(dicoVariables);
 
-    if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER)
-        return (new SymbolNumber("0"));
-    else if (secondOperand->eval(dicoVariables) == 1)
+    if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER) {
+        return (new SymbolNumber(0.0));
+    }
+    else if (secondOperand->eval(dicoVariables) == 1) {
         return firstOperand;
-    else
+    }
+    else {
         return this;
+    }
 }

@@ -6,7 +6,8 @@
 using namespace std;
 
 SymbolExpressionBinary::SymbolExpressionBinary(enum symbolIdTable idSymbol) : SymbolExpression(idSymbol) {
-
+    firstOperand = NULL;
+    secondOperand = NULL;
 }
 
 
@@ -46,4 +47,27 @@ SymbolExpressionBinary::~SymbolExpressionBinary() {
     if (secondOperand != NULL) {
         delete secondOperand;
     }
+}
+
+SymbolExpression *SymbolExpressionBinary::optimizeExpression(map<string, StructVar *> &dicoVariables) {
+    SymbolExpression * firstOperandOptimized = firstOperand->optimizeExpression(dicoVariables);
+
+    if (firstOperandOptimized != firstOperand) {
+        firstOperand->detachExpressions();
+        delete firstOperand;
+        firstOperand = firstOperandOptimized;
+    }
+
+    SymbolExpression * secondOperandOptimized  = secondOperand->optimizeExpression(dicoVariables);
+
+    if (secondOperandOptimized != secondOperand) {
+        secondOperand->detachExpressions();
+        delete secondOperand;
+        secondOperand = secondOperandOptimized;
+    }
+}
+
+void SymbolExpressionBinary::detachExpressions() {
+    firstOperand = NULL;
+    secondOperand = NULL;
 }

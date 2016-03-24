@@ -33,10 +33,21 @@ SymbolExpressionParenthesis::~SymbolExpressionParenthesis() {
 }
 
 SymbolExpression * SymbolExpressionParenthesis::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    symbolExpression = symbolExpression->optimizeExpression(dicoVariables);
+    SymbolExpression * exprOptimized = symbolExpression->optimizeExpression(dicoVariables);
+    if (exprOptimized != symbolExpression) {
+        symbolExpression->detachExpressions();
+        delete symbolExpression;
+        symbolExpression = exprOptimized;
+    }
 
-    if (symbolExpression->getId() == S_EXPRESSION_PARENTHESIS || symbolExpression->getId() == S_NUMBER || symbolExpression->getId() == S_VARIABLE)
+    if (symbolExpression->getId() == S_EXPRESSION_PARENTHESIS || symbolExpression->getId() == S_NUMBER || symbolExpression->getId() == S_VARIABLE) {
         return symbolExpression;
-    else
+    }
+    else {
         return this;
+    }
+}
+
+void SymbolExpressionParenthesis::detachExpressions() {
+    symbolExpression = NULL;
 }

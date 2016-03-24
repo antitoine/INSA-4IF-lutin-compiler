@@ -11,7 +11,7 @@ public:
 
     virtual std::string toString() const;
     float eval(map<string, StructVar*>& dicoVariables);
-    SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
+    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
 
 protected:
 

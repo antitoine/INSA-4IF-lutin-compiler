@@ -21,18 +21,22 @@ float SymbolExpressionBinaryMultiplication::eval(map<string, StructVar*>& dicoVa
 }
 
 SymbolExpression * SymbolExpressionBinaryMultiplication::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    firstOperand = firstOperand->optimizeExpression(dicoVariables);
-    secondOperand = secondOperand->optimizeExpression(dicoVariables);
+    SymbolExpressionBinary::optimizeExpression(dicoVariables);
 
-    if (firstOperand->eval(dicoVariables) == 1)
+    if (firstOperand->eval(dicoVariables) == 1) {
         return secondOperand;
-    else if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER)
-        return (new SymbolNumber("0"));
-    else if (secondOperand->eval(dicoVariables) == 1)
+    }
+    else if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER) {
+        return (new SymbolNumber(0.0));
+    }
+    else if (secondOperand->eval(dicoVariables) == 1) {
         return firstOperand;
-    else if (secondOperand->eval(dicoVariables) == 0 && secondOperand->getId() == S_NUMBER)
-        return (new SymbolNumber("0"));
-    else
+    }
+    else if (secondOperand->eval(dicoVariables) == 0 && secondOperand->getId() == S_NUMBER) {
+        return (new SymbolNumber(0.0));
+    }
+    else {
         return this;
+    }
 }
 
