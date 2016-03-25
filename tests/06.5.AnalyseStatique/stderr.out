@@ -1,0 +1,2 @@
+ERRERROR at line 1, character 6: The variable "a" is used but not declared.
+OR at line 2, character 1: The variable "d" is a constant and can't be modified.

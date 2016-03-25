@@ -1,7 +1,6 @@
-var a,b,e;
+var a,b;
 const c = 4;
 const d = 6;
-e := 3;
 a := (c+d)*3-5;
 ecrire a;
 b := 6;

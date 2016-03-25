@@ -85,7 +85,6 @@ resultOut="Non testé"
 if [ -r "std.out" ]
 then 
   diff -wB temp.txt std.out >/dev/null
-  #cat temp.txt
   if [ $? -eq 0 ]
   then
     echo "                                       Stdout      : PASSED"
