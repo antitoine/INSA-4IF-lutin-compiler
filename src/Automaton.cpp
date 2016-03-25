@@ -311,19 +311,26 @@ string Automaton::programmeToString() const {
 }
 
 void Automaton::optimizeProgram() {
-    list<Symbol*> optimizedSymbolsToExecute;
+    std::list<Symbol*> optimizedSymbolsToExecute;
+    std::list<SymbolDeclarationConst*> declarationsToErase;
     for (Symbol * s : symbolsToExecute) {
         try {
             if (s->getId() != S_DECLARATION_CONST)
                 optimizedSymbolsToExecute.push_back(s->optimize(dicoVariables));
             else {
-                // suppression de la constante du dico des variables
-                ((SymbolDeclarationConst*) s)->detachConstant(dicoVariables);
+                declarationsToErase.push_back(((SymbolDeclarationConst*) s));
             }
         } catch (Error const& error) {
             cerr << error.toString() << endl;
         }
     }
+
+    // Remove the const declarations in optimizedSymbolsToExecute
+    for (SymbolDeclarationConst * declarationConst : declarationsToErase) {
+        optimizedSymbolsToExecute.remove(declarationConst);
+        delete declarationConst;
+    }
+
     symbolsToExecute = optimizedSymbolsToExecute;
 }
 

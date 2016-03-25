@@ -32,9 +32,10 @@ string SymbolDeclarationConst::toString() const {
 
 void SymbolDeclarationConst::detachConstant(map<string, StructVar*>& dicoVariables) {
     for (pair<SymbolVariable*, float> symbolVariable : constants) {
-        cout << symbolVariable.first->getName() << "pénis" << endl;
-        //dicoVariables.erase(symbolVariable.first->getName());
+        dicoVariables.erase(symbolVariable.first->getName());
     }
+
+
 }
 
 Symbol * SymbolDeclarationConst::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
