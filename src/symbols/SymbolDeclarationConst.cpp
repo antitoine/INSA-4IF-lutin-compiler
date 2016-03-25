@@ -7,6 +7,7 @@
 #include "SymbolNumber.h"
 #include "../exceptions/ErrorSemanticVarAlreadyDeclared.h"
 #include <re2/re2.h>
+#include <sstream>
 
 using namespace std;
 
@@ -16,20 +17,17 @@ SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATI
 }
 
 string SymbolDeclarationConst::toString() const {
-    string constDeclarations = "";
+    stringstream constDeclarations;
 
     if (constants.empty()) {
         return "const";
     }
 
-    for(pair<SymbolVariable*, float> symbolVariable : constants) {
-        string constValue = to_string(symbolVariable.second);
-        constValue = SymbolNumber::removeLeadingZeroes(constValue);
-
-        constDeclarations += "const " + symbolVariable.first->toString() + " = " + constValue + ";\n";
+    for (pair<SymbolVariable*, float> symbolVariable : constants) {
+        constDeclarations << "const " << symbolVariable.first->toString() << " = " << symbolVariable.second << ";" << endl;
     }
 
-    return constDeclarations;
+    return constDeclarations.str();
 }
 
 Symbol * SymbolDeclarationConst::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
@@ -52,7 +50,6 @@ void SymbolDeclarationConst::execute(map<string, StructVar*>& dicoVariables) {
     for (auto const &v : constants) {
         StructVar * ptS = dicoVariables[v.first->getName()];
 
-        ptS->ptSymbol = v.first;
         ptS->isInitialized = true;
         ptS->isConstant = true;
         ptS->value = v.second;
@@ -76,7 +73,6 @@ void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, S
 
         // Set the StructVar in the map
         StructVar * ptS = new StructVar;
-        ptS->ptSymbol = temporaryPtVariable;
         ptS->isConstant = true;
         ptS->isInitialized = true;
         ptS->value = constantValue;

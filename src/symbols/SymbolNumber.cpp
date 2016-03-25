@@ -1,4 +1,5 @@
 #include <map>
+#include <sstream>
 #include "SymbolNumber.h"
 #include "RegexSymbol.h"
 
@@ -17,17 +18,15 @@ SymbolNumber::SymbolNumber(float value) : SymbolExpression(S_NUMBER), value(valu
 }
 
 string SymbolNumber::toString() const {
-    string valueString = to_string(value);
-
-    valueString = SymbolNumber::removeLeadingZeroes(valueString);
-
-    return valueString;
+    stringstream s;
+    s << value;
+    return s.str();
 }
 
 
 
 
-float SymbolNumber::eval(map<string, StructVar*>& dicoVariables){
+float SymbolNumber::eval(map<string, StructVar*>& dicoVariables) {
     return value;
 }
 

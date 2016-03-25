@@ -5,7 +5,6 @@ class SymbolVariable;
 
 struct StructVar {
     // What define a symbol : what it contains, if it's constant, and if it has been initialized yet
-    SymbolVariable * ptSymbol;
     float value;
     bool isConstant;
     bool isInitialized;

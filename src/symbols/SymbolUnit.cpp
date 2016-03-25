@@ -63,8 +63,6 @@ Symbol *SymbolUnit::analyse(std::string & stringToAnalyse, std::string & stringS
         unitSymbol = new SymbolUnit(SYMBOL_UNIT_ENDING_PAR);
     }
 
-    // TODO : other cases
-
     if (result.matched)
     {
         stringSymbolDetected = result.stringMatched;
@@ -72,7 +70,6 @@ Symbol *SymbolUnit::analyse(std::string & stringToAnalyse, std::string & stringS
     }
     else
     {
-        // TODO : other cases
         return NULL;
     }
 

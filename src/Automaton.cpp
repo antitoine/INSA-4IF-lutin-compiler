@@ -273,7 +273,7 @@ int Automaton::execute() {
         cerr << "The program can't be executed. Correct the errors and retry." << endl;
         return -1; // TODO : code ?
     }
-    
+
     try {
         for (Symbol * s: symbolsToExecute) {
             s->execute(dicoVariables);
@@ -339,8 +339,14 @@ void Automaton::initDicoVariables() {
 void Automaton::checkProgramVariablesUsed() {
     for (pair<string, StructVar*> entry : dicoVariables) {
         if (!entry.second->isUsed) {
-            ErrorSemanticVarNotUsed e(entry.first);
-            cerr << e.toString() << endl;
+            if (!entry.second->isInitialized) {
+                ErrorSemanticVarNotUsed e(entry.first, true);
+                cerr << e.toString() << endl;
+            } else {
+                ErrorSemanticVarNotUsed e(entry.first);
+                cerr << e.toString() << endl;
+            }
+
         }
     }
 }

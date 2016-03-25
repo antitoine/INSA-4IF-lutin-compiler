@@ -3,7 +3,6 @@
 '''''''''
 
 class "StructVar" as STRUCT_VAR {
-    ptSymbol: SymbolVariable*
     value: float
     isConstant: bool
     isInitialized: bool
