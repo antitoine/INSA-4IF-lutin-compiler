@@ -327,6 +327,7 @@ void Automaton::optimizeProgram() {
 
     // Remove the const declarations in optimizedSymbolsToExecute
     for (SymbolDeclarationConst * declarationConst : declarationsToErase) {
+        declarationConst->detachConstant(dicoVariables);
         optimizedSymbolsToExecute.remove(declarationConst);
         delete declarationConst;
     }

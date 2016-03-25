@@ -34,8 +34,6 @@ void SymbolDeclarationConst::detachConstant(map<string, StructVar*>& dicoVariabl
     for (pair<SymbolVariable*, float> symbolVariable : constants) {
         dicoVariables.erase(symbolVariable.first->getName());
     }
-
-
 }
 
 Symbol * SymbolDeclarationConst::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {

@@ -17,7 +17,7 @@ string SymbolInstructionRead::toString() const {
     }
 
     stringstream ss;
-    ss << "lire " << symbolVariable->toString() << endl;
+    ss << "lire " << symbolVariable->toString() << ";" << endl;
     return ss.str();
 }
 

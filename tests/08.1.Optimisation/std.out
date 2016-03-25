@@ -1,7 +1,5 @@
 var a;
 var b;
-const c = 4;
-const d = 6;
 var e;
 a := 25;
 lire b;

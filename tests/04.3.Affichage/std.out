@@ -1,6 +1,6 @@
 var a;
 var b;
 var c;
-const d = 500.8;
 const f = 4;
+const d = 500.8;
 a := (c + d) * 3 - 5;
