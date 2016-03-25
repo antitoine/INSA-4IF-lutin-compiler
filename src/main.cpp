@@ -68,7 +68,7 @@ int main(int argc, char * argv[]) {
     // No argument
     if (argc <= 1) {
         displayHowToAccessHelp();
-        return 1;
+        return TypeError::ERROR_WRONG_ARGUMENTS;
     }
 
     Automaton automaton;
@@ -86,7 +86,7 @@ int main(int argc, char * argv[]) {
     if (!filename.compare("")) {
         cerr << "Error: unable to get the file path argument" << endl;
         displayHowToAccessHelp();
-        return 1;
+        return TypeError::ERROR_FILE_NOT_FOUND;
     }
 
     int errorCode = automaton.readFile(getCmdFile(argc, argv));
