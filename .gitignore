@@ -27,6 +27,7 @@
 *.exe
 *.out
 !/tests/*/stderr.out
+!/tests/*/std.out
 *.app
 /bin
 
