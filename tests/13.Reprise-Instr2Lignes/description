@@ -1,0 +1,3 @@
+Principe de "reprise sur erreur", où si une instruction est sur plusieurs lignes (pas de points virgules entre),
+l'instruction est considérée comme étant sur une seule ligne et donc sur un seul bloc.
+

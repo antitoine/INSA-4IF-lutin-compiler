@@ -1,0 +1,3 @@
+Mise en avant du choix au niveau du traitement des erreurs et de la récupération :
+Ici on a un const qui n'est pas terminé par une virgule, suivi par une affectation (car on a déclaré a comme un var avant).
+Cependant, ici nous considérons que c'est le const qui n'est pas terminé et qui est donc
