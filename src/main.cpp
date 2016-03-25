@@ -93,6 +93,7 @@ int main(int argc, char * argv[]) {
         filename = getCmdFile(argc, argv);
     } catch (ErrorArgument error) {
         cerr << error.toString() << endl;
+        displayHowToAccessHelp();
         return TypeError::ERROR_WRONG_ARGUMENTS;
     }
 
