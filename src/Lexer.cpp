@@ -34,7 +34,7 @@ Symbol * Lexer::readNextSymbol(string & stringToRead, string & stringSymbolDetec
             throw ErrorLexicalUnknownSymbol(result.stringMatched, linePosition, charPosition);
         }
     }
-    
+
 
     return symbol;
 }

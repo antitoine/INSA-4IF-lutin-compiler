@@ -1,6 +1,7 @@
 #include <map>
 #include "SymbolInstructionRead.h"
 #include "RegexSymbol.h"
+#include "../exceptions/ErrorSemanticIncorrectNumericValue.h"
 
 using namespace std;
 
@@ -21,6 +22,10 @@ void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
     cout << "?" << symbolVariable->getName() << " : ";
     cout.flush();
     std::cin >> userValue;
+
+    if (!cin) {
+        throw ErrorSemanticIncorrectNumericValue(this);
+    }
 
     // Instruction already checked
     dicoVariables[symbolVariable->getName()]->value = userValue;
