@@ -1,0 +1,3 @@
+WARNING at line 2, character 1: Missing symbol detected (";") and inserted.
+WARNING at line 3, character 3: Unexpected symbol read ("=") and replaced by ":=".
+WARNING at line 4, character 1: Missing symbol detected (";") and inserted.

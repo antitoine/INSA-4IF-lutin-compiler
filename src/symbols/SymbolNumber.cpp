@@ -23,9 +23,6 @@ string SymbolNumber::toString() const {
     return s.str();
 }
 
-
-
-
 float SymbolNumber::eval(map<string, StructVar*>& dicoVariables) {
     return value;
 }

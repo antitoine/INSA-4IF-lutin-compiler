@@ -1,4 +1,5 @@
 #include <map>
+#include <sstream>
 #include "SymbolInstructionRead.h"
 #include "RegexSymbol.h"
 #include "../exceptions/ErrorSemanticIncorrectNumericValue.h"
@@ -14,14 +15,17 @@ string SymbolInstructionRead::toString() const {
     if (symbolVariable == NULL) {
         return "lire";
     }
-    return "lire " + symbolVariable->toString() + ";\n";
+
+    stringstream ss;
+    ss << "lire " << symbolVariable->toString() << endl;
+    return ss.str();
 }
 
 void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
     float userValue;
     cout << "?" << symbolVariable->getName() << " : ";
     cout.flush();
-    std::cin >> userValue;
+    cin >> userValue;
 
     if (!cin) {
         throw ErrorSemanticIncorrectNumericValue(this);

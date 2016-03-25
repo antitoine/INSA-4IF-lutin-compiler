@@ -1,0 +1,3 @@
+Option -p pour afficher le code source reconnu tel que représenté dans la mémoire du programme.
+Programme où il manque un point virgule et les deux points sur une affectation (génère des warning mais le rajoute dans le programme en mémoire)
+

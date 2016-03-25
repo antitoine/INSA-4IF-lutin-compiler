@@ -1,0 +1,3 @@
+Option -p pour afficher le code source reconnu tel que représenté dans la mémoire du programme.
+Déclaration de variables et de constantes par énumération (délimité par virgules) -> représenté par des instructions séparées
+
