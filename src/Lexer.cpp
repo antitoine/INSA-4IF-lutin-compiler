@@ -35,6 +35,7 @@ Symbol * Lexer::readNextSymbol(string & stringToRead, string & stringSymbolDetec
         }
     }
 
+
     return symbol;
 }
 
