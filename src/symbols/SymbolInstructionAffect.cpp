@@ -63,9 +63,6 @@ void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
     // If the check is correct, the variable is set as initialized
     StructVar * pt = dicoVariables[symbolVariable->getName()];
     pt->isInitialized = true;
-
-    // Set the variable as used
-    pt->isUsed = true;
 }
 
 SymbolInstructionAffect::~SymbolInstructionAffect() {
