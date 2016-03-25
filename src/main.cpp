@@ -26,10 +26,10 @@ string getCmdOptions(int argc, char ** argv)
         if (argv[i][0] == '-'){
             // Memorize the different arguments in the result
             for (int j = 1; j < strlen(argv[i]); j++) {
-                if (allowedArgs.find(argv[i][j]) != string::npos && results.find(argv[i][j]) != string::npos) {
+                if (allowedArgs.find(argv[i][j]) != string::npos && results.find(argv[i][j]) == string::npos) {
                     results += argv[i][j];
                 } else {
-                    throw new ErrorArgument();
+                    throw ErrorArgument();
                 }
             }
         }
