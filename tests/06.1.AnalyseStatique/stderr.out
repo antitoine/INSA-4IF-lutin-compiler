@@ -1,0 +1,3 @@
+ERROR at line 5, character 1: The variable "a" is used but not declared.
+ERROR at line 6, character 8: The variable "a" is used but not declared.
+ERROR at line 6, character 10: The variable "b" is used but not initialized.
