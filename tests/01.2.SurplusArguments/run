@@ -1,1 +1,1 @@
-../lut -opagftbps -plm ../files/correct.lt -zgzkbfv -sygg
+../lut -oe -oe ../files/correct.lt error -error
