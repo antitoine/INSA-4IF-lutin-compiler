@@ -52,7 +52,6 @@ void SymbolDeclarationConst::execute(map<string, StructVar*>& dicoVariables) {
     for (auto const &v : constants) {
         StructVar * ptS = dicoVariables[v.first->getName()];
 
-        ptS->ptSymbol = v.first;
         ptS->isInitialized = true;
         ptS->isConstant = true;
         ptS->value = v.second;
@@ -76,7 +75,6 @@ void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, S
 
         // Set the StructVar in the map
         StructVar * ptS = new StructVar;
-        ptS->ptSymbol = temporaryPtVariable;
         ptS->isConstant = true;
         ptS->isInitialized = true;
         ptS->value = constantValue;

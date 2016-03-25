@@ -49,8 +49,6 @@ void SymbolDeclarationVar::execute(map<string, StructVar*>& dicoVariables) {
         if (it != dicoVariables.end()) {
             StructVar * ptS = it->second;
 
-            // TODO : bizarre.. à voir
-            ptS->ptSymbol = v;
             ptS->isInitialized = false;
             ptS->isConstant = false;
         }
@@ -68,7 +66,6 @@ void SymbolDeclarationVar::addVariable(SymbolVariable *pVariable, map<string, St
 
      // Set the StructVar in the map
     StructVar * ptS = new StructVar;
-    ptS->ptSymbol = pVariable;
     ptS->isConstant = false;
     ptS->isInitialized = false;
     ptS->isUsed = false;
