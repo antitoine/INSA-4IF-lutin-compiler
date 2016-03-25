@@ -40,7 +40,7 @@ int Automaton::readFile(std::string filename) {
     if (!file.is_open())
     {
         std::cerr << "Error: unable to open the file " << filename << std::endl;
-        return 1;
+        return TypeError::ERROR_FILE_NOT_FOUND;
     }
 
     currentLineError = 1, currentCharPosError = 1;

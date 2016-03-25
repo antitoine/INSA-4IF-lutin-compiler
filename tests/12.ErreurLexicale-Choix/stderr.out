@@ -1,0 +1,2 @@
+WARNING at line 3, character 1: Missing symbol detected (", ") and inserted.
+ERROR at line 3, character 1: The constant "a" has already been declared.
