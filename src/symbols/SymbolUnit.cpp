@@ -32,6 +32,8 @@ string SymbolUnit::toString() const {
             return "(";
         case SYMBOL_UNIT_ENDING_PAR:
             return ")";
+        case SYMBOL_UNIT_DOLLAR:
+            return "$";
         default:
             return "";
     }

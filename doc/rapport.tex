@@ -1,0 +1,62 @@
+\input{preambule}
+
+%%  ========   IMPORTANT ========
+%% Indiquer ici les parties que vous voulez compilez
+
+%%% Begin document
+\begin{document}
+\includepdf[pages={1}]{title.pdf}
+
+\listoftodos[Modifications du rapport]
+\newpage
+\tableofcontents
+{%
+\let\oldnumberline\numberline%
+\renewcommand{\numberline}{\figurename~\oldnumberline}%
+\renewcommand\listfigurename{Liste des figures}
+\listoffigures%
+}
+{%
+\let\oldnumberline\numberline%
+\renewcommand{\numberline}{\tablename~\oldnumberline}%
+\renewcommand\listtablename{Liste des tableaux}
+\listoftables%
+}
+
+\newpage
+\addcontentsline{toc}{part}{Introduction}
+\newgeometry{height=10in}.
+\chapter*{Introduction}
+
+Test
+
+\addcontentsline{toc}{part}{Grammaire du langage lutin}
+\newgeometry{height=10in}.
+\chapter*{Grammaire du langage lutin}
+\setcounter{section}{0}
+
+Test
+
+\addcontentsline{toc}{part}{Automate LR}
+\newgeometry{height=10in}.
+\chapter*{Automate LR}
+\setcounter{section}{0}
+
+Test
+
+\addcontentsline{toc}{part}{Table des transition LR}
+\newgeometry{height=10in}.
+\chapter*{Table des transition LR}
+\setcounter{section}{0}
+
+Test
+
+\addcontentsline{toc}{part}{Structures de données}
+\newgeometry{height=10in}.
+\chapter*{Structures de données}
+\setcounter{section}{0}
+
+Test
+
+%%% End document
+\end{document}

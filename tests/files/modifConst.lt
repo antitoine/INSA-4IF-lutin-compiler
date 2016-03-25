@@ -1,0 +1,3 @@
+const d = 6;
+d := 5;
+ecrire d;

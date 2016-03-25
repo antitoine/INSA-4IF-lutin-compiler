@@ -1,0 +1,190 @@
+%%% Preamble
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage[french]{babel}
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[pdftex]{graphicx}	
+\usepackage{url}
+\usepackage{pdfpages}
+\usepackage{todonotes}
+\usepackage[a4paper, body={16cm,26cm}]{geometry}
+\usepackage{float}
+\usepackage{framed}
+\usepackage[toc,page]{appendix} 
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{epstopdf}
+\usepackage{adjustbox}
+
+%%% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{  \normalfont\scshape}
+%\allsectionsfont{\centering \normalfont\scshape}
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}								% No page header
+\fancyfoot[L]{}							% Empty 
+\fancyfoot[C]{}							% Empty
+\fancyfoot[R]{\thepage}					% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}		% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}		% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+
+%%% Define new commands
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
+\renewcommand{\bf}[1]{\textbf{#1}}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\sc}[1]{\textsc{#1}}
+\newcommand{\bfit}[1]{\textbf{\textit{#1}}}
+
+\newcommand{\modification}[1]{\todo[inline]{#1}}
+\newcommand{\modificationFigure}{\todo[inline]{figure modifiée}}
+\renewcommand{\thesection}{\thepart .\arabic{section}}
+
+\usepackage{tocloft}
+\cftsetindents{chapter}{0em}{1em}
+\cftsetindents{section}{1.5em}{2.5em}
+\makeatletter
+\def\l@figure{\@dottedtocline{1}{1.5em}{4em}}
+\makeatother
+\PassOptionsToPackage{colorlinks=true,linkcolor=darkgray}{hyperref}
+\usepackage{bookmark}
+\usepackage{cases}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{relsize}
+\usepackage{caption}
+\colorlet{shadecolor}{black!10}
+
+\delimitershortfall-1sp
+\newcommand\abs[1]{\left|#1\right|}
+
+
+\usepackage{tikz, pgfplots}
+
+
+%}}}
+%{{{ --- pgfplots ---------------------
+
+%{{{ Colors
+
+% TolColors from http://www.r-bloggers.com/the-paul-tol-21-color-salute/
+\definecolor{TolColor1}{HTML}{332288}   % dark purple
+\definecolor{TolColor2}{HTML}{6699CC}   % dark blue
+\definecolor{TolColor3}{HTML}{88CCEE}   % light blue
+\definecolor{TolColor4}{HTML}{44AA99}   % light green
+\definecolor{TolColor5}{HTML}{117733}   % dark green
+\definecolor{TolColor6}{HTML}{999933}   % dark brown
+\definecolor{TolColor7}{HTML}{DDCC77}   % light brown
+\definecolor{TolColor8}{HTML}{661100}   % dark red
+\definecolor{TolColor9}{HTML}{CC6677}   % light red
+\definecolor{TolColor10}{HTML}{AA4466}  % light pink
+\definecolor{TolColor11}{HTML}{882255}  % dark pink
+\definecolor{TolColor12}{HTML}{AA4499}  % light purple
+
+%}}}
+%{{{ Color cycles
+
+\pgfplotscreateplotcyclelist{mbarplot cycle}{%
+  {draw=TolColor2, fill=TolColor2!70},
+  {draw=TolColor7, fill=TolColor7!70},
+  {draw=TolColor4, fill=TolColor4!70},
+  {draw=TolColor11, fill=TolColor11!70},
+  {draw=TolColor1, fill=TolColor1!70},
+  {draw=TolColor8, fill=TolColor8!70},
+  {draw=TolColor6, fill=TolColor6!70},
+  {draw=TolColor9, fill=TolColor9!70},
+  {draw=TolColor10, fill=TolColor10!70},
+  {draw=TolColor12, fill=TolColor12!70},
+  {draw=TolColor3, fill=TolColor3!70},
+  {draw=TolColor5, fill=TolColor5!70},
+}
+
+\pgfplotscreateplotcyclelist{mlineplot cycle}{%
+  {TolColor2, mark=*, mark size=1.5pt},
+  {TolColor7, mark=square*, mark size=1.3pt},
+  {TolColor4, mark=triangle*, mark size=1.5pt},
+  {TolColor6, mark=diamond*, mark size=1.5pt},
+}
+
+
+\pgfplotsset{
+  compat=1.9,
+  mbaseplot/.style={
+    legend style={
+      draw=none,
+      fill=none,
+      cells={anchor=west},
+    },
+    x tick label style={
+      font=\footnotesize
+    },
+    y tick label style={
+      font=\footnotesize
+    },
+    legend style={
+      font=\footnotesize
+    },
+    major grid style={
+      dotted,
+    },
+    axis x line*=bottom,
+  },
+  mlineplot/.style={
+    mbaseplot,
+    xmajorgrids=true,
+    ymajorgrids=true,
+    major grid style={dotted},
+    axis x line=bottom,
+    axis y line=left,
+    legend style={
+      cells={anchor=west},
+      draw=none
+    },
+    cycle list name=mlineplot cycle,
+  },
+  mbarplot base/.style={
+    mbaseplot,
+    bar width=6pt,
+    axis y line*=none,
+  },
+  mbarplot/.style={
+    mbarplot base,
+    ybar,
+    xmajorgrids=false,
+    ymajorgrids=true,
+    area legend,
+    legend image code/.code={%
+      \draw[#1] (0cm,-0.1cm) rectangle (0.15cm,0.1cm);
+    },
+    cycle list name=mbarplot cycle,
+  },
+  horizontal mbarplot/.style={
+    mbarplot base,
+    xmajorgrids=true,
+    ymajorgrids=false,
+    xbar stacked,
+    area legend,
+    legend image code/.code={%
+      \draw[#1] (0cm,-0.1cm) rectangle (0.15cm,0.1cm);
+    },
+    cycle list name=mbarplot cycle,
+  },
+  disable thousands separator/.style={
+    /pgf/number format/.cd,
+      1000 sep={}
+  },
+}
+
+
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{ragged2e}
+\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
