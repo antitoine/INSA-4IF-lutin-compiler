@@ -1,3 +1,4 @@
 var a;
 const d = 50;
 a := 2;
+ecrire a * d;

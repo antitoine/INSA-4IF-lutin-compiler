@@ -1,2 +1,3 @@
 const c = 180;
 const d = 180;
+ecrire c * d;
