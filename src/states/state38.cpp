@@ -67,6 +67,7 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
         case S_INSTRUCTION_WRITE:
         case S_DECLARATION_CONST:
         case S_DECLARATION_VAR:
+        case SYMBOL_UNIT_DOLLAR:
             throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:

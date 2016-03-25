@@ -17,7 +17,6 @@ bool State37::transition(Automaton & automaton, Symbol * symbol) {
          * ; | R9
          * , | R9
          */
-
         case SYMBOL_UNIT_SEMICOLON:
         case SYMBOL_UNIT_COMMA:
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_C));
@@ -30,6 +29,7 @@ bool State37::transition(Automaton & automaton, Symbol * symbol) {
         case S_INSTRUCTION_WRITE:
         case S_DECLARATION_CONST:
         case S_DECLARATION_VAR:
+        case SYMBOL_UNIT_DOLLAR:
             throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:
