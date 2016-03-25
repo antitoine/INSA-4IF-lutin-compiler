@@ -273,7 +273,7 @@ int Automaton::execute() {
         cerr << "The program can't be executed. Correct the errors and retry." << endl;
         return -1; // TODO : code ?
     }
-    
+
     try {
         for (Symbol * s: symbolsToExecute) {
             s->execute(dicoVariables);
