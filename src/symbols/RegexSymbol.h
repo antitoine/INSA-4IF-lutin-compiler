@@ -31,10 +31,10 @@ typedef struct MatchingResult {
     std::string stringConsumed;
 } MatchingResult;
 
-static const RE2 REG_VAR("^( *var +)");
-static const RE2 REG_CONST("^( *const +)");
-static const RE2 REG_LIRE("^( *lire +)");
-static const RE2 REG_ECRIRE("^( *ecrire +)");
+static const RE2 REG_VAR("^( *var *)");
+static const RE2 REG_CONST("^( *const *)");
+static const RE2 REG_LIRE("^( *lire *)");
+static const RE2 REG_ECRIRE("^( *ecrire *)");
 static const RE2 REG_IDENTIFICATEUR("(^ *[a-zA-Z](\\w)* *)");
 static const RE2 REG_FIN_INSTRUCTION("^( *; *)");
 static const RE2 REG_NOMBRE("^( *-?\\d+(\\.\\d*)? *)");
@@ -47,7 +47,7 @@ static const RE2 REG_OP_DECLARER("^( *= *)");
 static const RE2 REG_PARENTHESE_OUVRANTE("^( *\\( *)");
 static const RE2 REG_PARENTHESE_FERMANTE("^( *\\) *)");
 static const RE2 REG_SEPARATEUR_DECLARATION("^( *, *)");
-static const RE2 REG_UNKNOWN_SYMBOL("^( *[^a-zA-Z0-9\\.\\+\\*\\-\\(\\);,/:]+ *)");
+static const RE2 REG_UNKNOWN_SYMBOL("^( *[^a-zA-Z0-9\\.\\+\\*\\-\\(\\);,/=]+ *)");
 
 class RegexSymbol {
 public:

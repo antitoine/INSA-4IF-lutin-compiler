@@ -17,6 +17,7 @@
 #include "exceptions/ErrorLexicalUnexpectedSymbol.h"
 #include "exceptions/ErrorSemanticVarNotUsed.h"
 #include "exceptions/ErrorLexicalMissingSymbol.h"
+#include "symbols/SymbolUnit.h"
 
 using namespace std;
 
@@ -77,11 +78,17 @@ int Automaton::readFile(std::string filename) {
 
             currentLineError++;
         }
+
+        // Add dollar symbol
+        Symbol * endSymbol = new SymbolUnit(SYMBOL_UNIT_DOLLAR);
+        endSymbol->setSymbolDetectionPosition(currentLineError, currentCharPosError);
+        computeNewSymbol(endSymbol);
     } catch (Error const& error) {
         // Error level here can only be critical
         cerr << error.toString() << endl;
         returnCode = error.getNumber();
     }
+
 
     file.close();
 
