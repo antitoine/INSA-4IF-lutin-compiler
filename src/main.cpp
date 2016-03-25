@@ -4,6 +4,7 @@
 #include <string.h>
 #include "Automaton.h"
 #include "symbols/RegexSymbol.h"
+#include "exceptions/ErrorArgument.h"
 
 void displayHowToAccessHelp();
 
@@ -28,7 +29,7 @@ string getCmdOptions(int argc, char ** argv)
                 if (allowedArgs.find(argv[i][j]) != string::npos && results.find(argv[i][j]) != string::npos) {
                     results += argv[i][j];
                 } else {
-                    return NULL;
+                    throw new ErrorArgument();
                 }
             }
         }
@@ -85,13 +86,15 @@ int main(int argc, char * argv[]) {
 
     Automaton automaton;
 
-    string arguments = getCmdOptions(argc, argv);
-    if (arguments == NULL) {
-        cerr << "Error: unknown or redundant argument encountered" << endl;
-        displayHowToAccessHelp();
-        return 1;
+    string arguments = "";
+    string filename = "";
+    try {
+        arguments = getCmdOptions(argc, argv);
+        filename = getCmdFile(argc, argv);
+    } catch (ErrorArgument error) {
+        cerr << error.toString() << endl;
+        return TypeError::ERROR_WRONG_ARGUMENTS;
     }
-    string filename = getCmdFile(argc, argv);
 
     //we check first if the user want the help before checking for anything else
     if(arguments.find(ARG_HELP) != string::npos)
