@@ -99,15 +99,15 @@ int main(int argc, char * argv[]) {
 
 
 
-    if(arguments.find('a') != string::npos)
-    {
-        // Static analysis of the program
-        automaton.checkProgram();
-    }
     if(arguments.find('o') != string::npos)
     {
         // Optimisation of the program
         automaton.optimizeProgram();
+    }
+    if(arguments.find('a') != string::npos)
+    {
+        // Static analysis of the program
+        automaton.checkProgram();
     }
     if(arguments.find('p') != string::npos)
     {

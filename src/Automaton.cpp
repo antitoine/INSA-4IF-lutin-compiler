@@ -299,7 +299,12 @@ void Automaton::optimizeProgram() {
     list<Symbol*> optimizedSymbolsToExecute;
     for (Symbol * s : symbolsToExecute) {
         try {
-            optimizedSymbolsToExecute.push_back(s->optimize(dicoVariables));
+            if (s->getId() != S_DECLARATION_CONST)
+                optimizedSymbolsToExecute.push_back(s->optimize(dicoVariables));
+            else {
+                // suppression de la constante du dico des variables
+                ((SymbolDeclarationConst*) s)->detachConstant(dicoVariables);
+            }
         } catch (Error const& error) {
             cerr << error.toString() << endl;
         }

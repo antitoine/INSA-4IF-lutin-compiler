@@ -11,6 +11,7 @@ public:
     virtual ~SymbolDeclarationConst();
 
     virtual std::string toString() const;
+    void detachConstant(map<string, StructVar*>& dicoVariables);
     static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
     void execute(map<string, StructVar*>& dicoVariables);
 
