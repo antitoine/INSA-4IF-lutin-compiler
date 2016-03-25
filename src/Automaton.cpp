@@ -172,7 +172,15 @@ void Automaton::computeErrorLexicalMissingSymbol(ErrorLexicalMissingSymbol const
 
 
 void Automaton::accept() {
-    // TODO implementer
+    while (!stackStates.empty()) {
+        delete stackStates.top();
+        stackStates.pop();
+    }
+
+    while (!stackSymbols.empty()) {
+        delete stackSymbols.top();
+        stackSymbols.pop();
+    }
 }
 
 void Automaton::setCurrentDeclarationVar(SymbolDeclarationVar * symbolDeclarationVar) {
