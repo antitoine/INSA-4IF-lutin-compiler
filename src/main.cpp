@@ -16,7 +16,7 @@ char ARG_OPTIMISATION   = 'o';
 char ARG_DISPLAY_MEM    = 'p';
 char ARG_EXECUTION      = 'e';
 
-string allowedArgs = "" + ARG_HELP + ARG_ANALYSIS + ARG_OPTIMISATION + ARG_DISPLAY_MEM + ARG_EXECUTION;
+string allowedArgs = ARG_HELP + ARG_ANALYSIS + ARG_OPTIMISATION + ARG_DISPLAY_MEM + ARG_EXECUTION + "";
 
 // Get a table of the arguments
 string getCmdOptions(int argc, char ** argv)
