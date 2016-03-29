@@ -6,5 +6,6 @@
 *.backup
 *.tdo
 *.lot
+*.lof
 *~
 !/figures/*

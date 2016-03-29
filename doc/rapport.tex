@@ -42,9 +42,22 @@
 
 \newpage
 
-\section{Structures de données}
+\afterpage{
+	\clearpage
+	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
+	\recalctypearea
+	\section{Structures de données}
+	\vspace{5cm}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1.0\textwidth,keepaspectratio]{../diagrams/class/lutin-compiler-class-diagram-uml.png}
+		\caption{A large image which required A3}
+	\end{figure}
 
-\todo{Diagramme UML de classe ici}
+	\clearpage
+	\KOMAoptions{paper=A4,pagesize}
+	\recalctypearea
+}
 
 %%% End document
 \end{document}
