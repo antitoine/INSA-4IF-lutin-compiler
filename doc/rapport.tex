@@ -22,36 +22,63 @@
 
 \todo{Introduction ici}
 
-\newpage
-
 \section{Grammaire du langage lutin}
 
-\todo{Grammaire du langage ici}
+\todo{Texte pour introduire la grammaire}
 
-\newpage
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|l c l|}
+		\hline
+		Numéro & \multicolumn{3}{c|}{Règle} \\
+		\hline
+		1 & P & $\rightarrow$ & D I \\
+		2 & D & $\rightarrow$ & D D’ \\
+		3 & D & $\rightarrow$ & $\epsilon$ \\
+		4 & D’ & $\rightarrow$ & var V ; \\
+		5 & D’ & $\rightarrow$ & const C ; \\
+		6 & V & $\rightarrow$ & V , id \\
+		7 & V & $\rightarrow$ & id \\
+		8 & C & $\rightarrow$ & C , id = val \\
+		9 & C & $\rightarrow$ & id = val \\
+		10 & I & $\rightarrow$ & I I’ \\
+		11 & I & $\rightarrow$ & I’ \\
+		12 & I’ & $\rightarrow$ & lire id ; \\
+		13 & I’ & $\rightarrow$ & ecrire E ; \\
+		14 & I’ & $\rightarrow$ & id := E ; \\
+		15 & E & $\rightarrow$ & E + E \\
+		16 & E & $\rightarrow$ & E * E \\
+		17 & E & $\rightarrow$ & E - E \\
+		18 & E & $\rightarrow$ & E / E \\
+		19 & E & $\rightarrow$ & ( E ) \\
+		20 & E & $\rightarrow$ & id \\
+		21 & E & $\rightarrow$ & val \\
+		\hline
+	\end{tabular}
+	\caption{Grammaire du langage lutin}
+\end{table}
 
 \section{Automate LR}
 
 \todo{Scan du diagramme de l'automate LR ici}
 
-\newpage
-
 \section{Table des transitions LR}
 
 \todo{Table des transitions ici}
 
-\newpage
-
+%% Section : Structures de données
 \afterpage{
 	\clearpage
 	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
 	\recalctypearea
 	\section{Structures de données}
-	\vspace{5cm}
+
+	\todo{Texte pour décrire le diagramme}	
+	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=1.0\textwidth,keepaspectratio]{../diagrams/class/lutin-compiler-class-diagram-uml.png}
-		\caption{A large image which required A3}
+		\caption{Diagramme de classe des structures de données}
 	\end{figure}
 
 	\clearpage
