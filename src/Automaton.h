@@ -25,7 +25,7 @@ class SymbolInstruction;
 class Automaton {
 
 private:
-    map<string, StructVar*>dicoVariables;
+    map<string, StructVar*> dicoVariables;
     stack<State*> stackStates;
     stack<Symbol*> stackSymbols;
     list<Symbol*> symbolsToExecute;
