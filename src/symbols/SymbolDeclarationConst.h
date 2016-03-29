@@ -4,6 +4,12 @@
 #include "SymbolDeclaration.h"
 #include "SymbolVariable.h"
 
+struct comparatorBySymbolVariablePt {
+    bool operator()(const SymbolVariable* a, const SymbolVariable*  b) const {
+        return a->getName() < b->getName();
+    }
+};
+
 class SymbolDeclarationConst : public SymbolDeclaration
 {
 public:
@@ -21,7 +27,7 @@ public:
     virtual void check(map<string, StructVar*>& dicoVariables);
 
 private:
-    std::map<SymbolVariable*, float> constants;
+    std::map<SymbolVariable*, float, comparatorBySymbolVariablePt> constants;
     SymbolVariable * temporaryPtVariable;
 
 };
