@@ -5,6 +5,6 @@
 *.toc
 *.backup
 *.tdo
-*.lol
+*.lot
 *~
 !/figures/*
