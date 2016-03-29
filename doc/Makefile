@@ -9,7 +9,7 @@ buildTitle: title.tex
 	$(LATEX_BUILDER) $(BUILD_FLAGS) $< #> /dev/null
 	$(LATEX_BUILDER) $(BUILD_FLAGS) $< #> /dev/null
 
-build: rapport.tex
+build: rapport.tex buildTitle
 	$(LATEX_BUILDER) $(BUILD_FLAGS) $< #> /dev/null
 	$(LATEX_BUILDER) $(BUILD_FLAGS) $< #> /dev/null
 
