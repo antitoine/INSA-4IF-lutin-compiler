@@ -7,6 +7,10 @@
 CLASS_AUTOMATE --> CLASS_SYMBOLE : symbolsToExecute: list<Symbol*>
 CLASS_AUTOMATE --> CLASS_SYMBOLE : stackSymbols: stack<Symbol*>
 CLASS_AUTOMATE --> CLASS_ETAT : stackStates: stack<State*>
+CLASS_AUTOMATE --> CLASS_SYMBOLE_DECLARATION_VAR : currentSymbolDeclarationVar: SymbolDeclarationVar*
+CLASS_AUTOMATE --> CLASS_SYMBOLE_DECLARATION_CONST : currentSymbolDeclarationConst: SymbolDeclarationConst*
+CLASS_AUTOMATE --> CLASS_SYMBOLE_EXPRESSION : currentExpression: list<SymbolExpression*>
+CLASS_AUTOMATE --> CLASS_SYMBOLE_INSTRUCTION : currentInstruction: SymbolInstruction*
 
 '' Symboles
 
@@ -14,6 +18,7 @@ CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION --> "-symbolVariable \n               
 CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE --> "-symbolVariable \n                      1" CLASS_SYMBOLE_VARIABLE
 
 CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION --> "-symbolExpression \n                            1 " CLASS_SYMBOLE_EXPRESSION
+CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION --> "-symbolVariable \n                            1 " CLASS_SYMBOLE_VARIABLE
 CLASS_SYMBOLE_INSTRUCTION_ECRITURE --> "-symbolExpression \n                            1 " CLASS_SYMBOLE_EXPRESSION
 
 CLASS_SYMBOLE_EXPRESSION_BINAIRE o-- "2" CLASS_SYMBOLE_EXPRESSION
