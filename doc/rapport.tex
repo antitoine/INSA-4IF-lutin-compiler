@@ -4,8 +4,9 @@
 \begin{document}
 \includepdf[pages={1}]{title.pdf}
 
-\listoftodos[Modifications du rapport]
-\newpage
+% Liste des TODOs
+%\listoftodos[Modifications du rapport]
+%\newpage
 
 \tableofcontents
 
@@ -14,6 +15,8 @@
 \listoftables
 
 \newpage
+
+\part{Livrables}
 
 \section{Déroulement et répartition des tâches}
 
@@ -114,11 +117,12 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 	\section{Table des transitions LR}
 	\label{sec:transitions}
 
-	\todo{Texte pour décrire les transitions}	
+	Avant d'implémenter l'ensemble des états, nous avons réalisé une table référençant toutes les transitions possibles d'un état à un autre en fonction des symboles analysés. Voici cette table de transition LR (cf tableau \ref{tab:transitions}).
 	
 	\begin{table}[H]
 		\centering
 		\csvautotabular[respect dollar=true]{data/table-analyse-automate-lr.csv}
+		\label{tab:transitions}
 		\caption{Table des transitions LR}
 	\end{table}
 
@@ -135,12 +139,37 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 	\section{Structures de données}
 	\label{sec:structure}
 	
-	\todo{Texte pour décrire le diagramme}	
+	Afin de décrire au mieux la structure employée dans ce projet, vous trouverez ci-dessous le diagramme de classe simplifié dans le standard UML (cf figure \ref{fig:structure}). En effet, afin de le rendre plus compréhensible, seules les classes les plus importantes sont visibles, de plus les classes de type exception sont regroupé dans un package. Vous trouverez en annexe (cf figure \ref{fig:full-structure}) le diagramme de classe complet du programme.
 
 	\begin{figure}[H]
 		\centerline{
 			\includegraphics[width=1.15\textwidth,keepaspectratio]{../diagrams-simplified/class/lutin-compiler-class-diagram-simplified-uml.png}
+		}
+		\label{fig:structure}
+		\caption{Diagramme de classe des structures de données}
+	\end{figure}
+
+	\clearpage
+	\KOMAoptions{paper=A4,pagesize}
+	\recalctypearea
+}
+
+% Annexes
+\afterpage{
+	\clearpage
+	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
+	\recalctypearea
+	
+	\part{Annexes}
+	
+	\section{Structures de données complète}
+	\label{sec:full-structure}
+	
+	\begin{figure}[H]
+		\centerline{
+			\includegraphics[width=1.15\textwidth,keepaspectratio]{../diagrams/class/lutin-compiler-class-diagram-uml.png}
 		}	
+		\label{fig:full-structure}
 		\caption{Diagramme de classe des structures de données}
 	\end{figure}
 
