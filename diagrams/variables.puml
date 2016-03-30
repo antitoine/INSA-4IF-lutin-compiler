@@ -206,3 +206,61 @@ class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV e
     + toString() const: string
 }
 
+
+'' Exceptions ------------------------------------------------
+class "Error" as CLASS_ERROR {
+    - number: int
+    - level: int
+    - numLineError: int
+    - numCharError: int
+
+    + Error(int number, int level, int numLineError, int numCharError)
+    + what() const: const char*
+    + toString() const: string
+    + toString(int linePos, int charPos) const: string
+}
+
+class "ErrorArgument" as CLASS_ERROR_ARGUMENT {
+    + ErrorArgument()
+    + toString() const: string
+}
+
+class "ErrorLexical" AS CLASS_ERROR_LEXICAL extends CLASS_ERROR {
+    + ErrorLexical(int number, int level, int numLineError, int numCharError)
+
+}
+
+class "ErrorSemantic" AS CLASS_ERROR_SEMANTIC extends CLASS_ERROR {
+    + ErrorSemantic(int number, int level, int numLineError, int numCharError)
+
+}
+
+class "ErrorLexicalMissingSymbol" as CLASS_ERROR_MISSING_LEXICAL_SYMBOL extends CLASS_ERROR_LEXICAL {
+    + ErrorLexicalMissingSymbol(int numLine, int numChar, Symbol * missingSymbol)
+    + toString() const: string
+    # toStringDetails() const: string
+}
+
+class "ErrorLexicalUnexpectedSymbol" as CLASS_ERROR_LEXICAL_UNEXPECTED_SYMBOL extends CLASS_ERROR_LEXICAL {
+    # symbolName: string
+    # isIgnored: bool
+
+    + ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar)
+    + ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, Symbol* expectedSymbol)
+    + ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, bool ignoreSymbol)
+    + isSymbolIgnored() const: bool
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticIncorrectNumericValue" as CLASS_ERROR_SEMANTIC_INCORRECT_NUMERIC_VALUE extends CLASS_ERROR_SEMANTIC {
+    + ErrorSemanticIncorrectNumericValue(SymbolInstructionRead * instructionRead)
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticVar" as CLASS_ERROR_SEMANTIC_VAR extends CLASS_ERROR_SEMANTIC {
+    # varName : string
+
+    + ErrorSemanticVar(int number, int level, const string & varName, int lineError, int charError)
+    # toStringDetails() const: string
+}
+
