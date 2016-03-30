@@ -139,7 +139,7 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 	\section{Structures de données}
 	\label{sec:structure}
 	
-	Afin de décrire au mieux la structure employée dans ce projet, vous trouverez ci-dessous le diagramme de classe simplifié dans le standard UML (cf figure \ref{fig:structure}). En effet, afin de le rendre plus compréhensible, seules les classes les plus importantes sont visibles, de plus les classes de type exception sont regroupé dans un package. Vous trouverez en annexe (cf figure \ref{fig:full-structure}) le diagramme de classe complet du programme.
+	Afin de décrire au mieux la structure employée dans ce projet, vous trouverez ci-dessous le diagramme de classe simplifié dans le standard UML (cf figure \ref{fig:structure}). En effet, afin de le rendre plus compréhensible, seules les classes les plus importantes sont visibles. De plus les classes de type exception sont regroupé dans un package (le détail de ces classes est visible dans la figure \ref{fig:erreur-structure} en annexe ainsi que la liste des erreurs prises en charge dans le tableau \ref{tab:erreurs-liste} en annexe). Vous trouverez en annexe (cf figure \ref{fig:full-structure}) le diagramme de classe complet du programme.
 
 	\begin{figure}[H]
 		\centerline{
@@ -161,6 +161,56 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 	\recalctypearea
 	
 	\part{Annexes}
+	
+	\section{Gestion des erreurs}
+	\label{sec:erreurs}
+	
+	\subsection{Listes des erreurs traitées}
+	\label{subsec:erreur-liste}	
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Erreur} & \textbf{Type} & \textbf{Code de retour} \\
+			\hline
+			ERROR\_SEMANTIC\_VAR\_NOT\_USED & Semantic Warning & None \\
+			\hline
+			ERROR\_WRONG\_ARGUMENTS & Arguments & 1 \\
+			\hline
+			ERROR\_FILE\_NOT\_FOUND & I/O & 2 \\
+			\hline
+			ERROR\_SEMANTIC\_VAR\_ALREADY\_DECLARED & Semtantic & 3 \\
+			\hline
+			ERROR\_SEMANTIC\_VAR\_NOT\_DECLARED & Semantic & 4 \\
+			\hline
+			ERROR\_SEMANTIC\_VAR\_IS\_CONST & Semantic & 5 \\
+			\hline
+			ERROR\_SEMANTIC\_VAR\_NOT\_INITIALIZED & Semantic & 6 \\
+			\hline
+			ERROR\_LEXICAL\_UNKNOWN\_SYMBOL & Lexical & 7 \\
+			\hline
+			ERROR\_LEXICAL\_UNEXPECTED\_SYMBOL & Lexical & 8 \\
+			\hline
+			ERROR\_LEXICAL\_MISSING\_SYMBOL & Lexical & 9 \\
+			\hline
+			ERROR\_SEMANTIC\_INCORRECT\_NUM\_VALUE & Semantic & 10 \\
+			\hline
+		\end{tabular}
+		\caption{Liste des erreurs prises en compte par le programme}
+		\label{tab:erreurs-liste}
+	\end{table}
+	
+	\subsection{Structure des erreurs}
+	\label{subsec:erreur-structure}
+	
+	\begin{figure}[H]
+		\centerline{
+			\includegraphics[width=1.15\textwidth,keepaspectratio]{../diagrams-simplified/class/exceptions/lutin-compiler-class-diagram-exceptions-uml.png}
+		}	
+		\caption{Diagramme de classe des exceptions (erreurs)}
+		\label{fig:erreur-structure}
+	\end{figure}		
 	
 	\section{Structures de données complète}
 	\label{sec:full-structure}
