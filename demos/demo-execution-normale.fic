@@ -1,0 +1,6 @@
+var a, b, c;
+const c1 = 10;
+lire a;
+lire b;
+c := 2 * (a + b + c1);
+ecrire c;

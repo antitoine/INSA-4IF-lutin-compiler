@@ -1,0 +1,4 @@
+var a, b, c;
+lire a;
+b := 5;
+ecrire
