@@ -15,13 +15,40 @@
 
 \newpage
 
-\section{Introduction}
+\section{Déroulement et répartition des tâches}
 
-\todo{Introduction ici}
+Durant ce projet, nous devions implémenter un analyseur et interpréteur du langage de programmation \textit{lutin}. Pour ce faire, nous avons suivi les étapes de travail proposées dans le sujet en attribuant des membres sur chacune d'elles, permettant ainsi de les paralléliser. \\
+
+Dans un premier temps, tout le monde a réfléchi à la grammaire du langage, puis nous avons choisi celle qui était la plus simple et la plus compréhensible par l'équipe. Nous avons ensuite transformé en grammaire LR, visible dans la section \ref{sec:grammaire}. \\
+
+Puis nous avons avancé en parallèle sur les tâches suivantes avant d'implémenter :
+\begin{itemize}
+	\item Construction de l'automate LR correspondant (voir section \ref{sec:automate}) puis réalisation de la table des transitions (voir section \ref{sec:transitions}) (par Jonathan, Nicolas et Romain)
+	\item Conception de la structure de données sous forme de diagramme UML \ref{sec:structure} (par Antoine, Pierre et Baptiste)
+	\item Identification des expressions régulières (par Benoît) \\
+\end{itemize}
+
+Enfin, nous avons procédé à l'implémentation de cet analyseur et interpréteur de la manière suivante :
+\begin{itemize}
+	\item Implémentation de l'analyseur lexical (par Jonathan)
+	\item Implémentation de l'automate LR (par Antoine et Benoît)
+	\item Réalisation de l'outil en ligne de commande (par Baptiste)
+	\item Vérification statique du programme (par Pierre)
+	\item Implémentation de toutes les classes symboles (par Nicolas et Romain)
+	\item Conception de la partie optimisation et son implémentation (par Pierre et Baptiste)
+	\item Conception et réalisation de la partie affichage en mémoire du programme (par Jonathan)
+	\item Mise en place des gestions d'erreurs lexicales et syntaxiques et récupération (par Antoine, Benoît et Pierre)
+	\item Implémentation des tests (par toute l'équipe)\\
+\end{itemize}
+
+Globalement, nous avons passé en dehors des séances 4 heures chacun de travail pour ce projet.
+
+\newpage
 
 \section{Grammaire du langage lutin}
+\label{sec:grammaire}
 
-\todo{Texte pour introduire la grammaire}
+Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'ensemble des règles de notre grammaire pour le langage lutin numéroté pour faciliter la compréhension de la table de transition (voir section \ref{sec:transitions}). Le symbole $\epsilon$ représente L’élément vide.
 
 \begin{table}[h]
 	\centering
@@ -53,8 +80,8 @@
 		\hline
 	\end{tabular}
 	\caption{Grammaire du langage lutin}
+	\label{tab:grammaire}
 \end{table}
-
 
 %% Section : Automate LR
 \afterpage{
@@ -62,13 +89,15 @@
 	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
 	\recalctypearea
 	\section{Automate LR}
+	\label{sec:automate}
 
-	\todo{Texte pour décrire l'automate}	
+	Vous trouverez ci-dessous (cf figure \ref{fig:automate}) le schéma décrivant l'automate LR de notre grammaire afin d'identifier les différents états et transitions avant l'implémentation.
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[height=0.9\textheight,width=1.0\textwidth,keepaspectratio]{figures/automate-LR-lutin.jpg}
+		\includegraphics[height=0.85\textheight,width=1.0\textwidth,keepaspectratio]{figures/automate-LR-lutin.jpg}
 		\caption{Automate LR par rapport à la grammaire du langage lutin}
+		\label{fig:automate}
 	\end{figure}
 
 	\clearpage
@@ -82,6 +111,7 @@
 	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
 	\recalctypearea
 	\section{Table des transitions LR}
+	\label{sec:transitions}
 
 	\todo{Texte pour décrire les transitions}	
 	
@@ -102,7 +132,8 @@
 	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
 	\recalctypearea
 	\section{Structures de données}
-
+	\label{sec:structure}
+	
 	\todo{Texte pour décrire le diagramme}	
 	
 	\begin{figure}[H]
