@@ -1,4 +1,6 @@
 #include <map>
+#include <cmath>
+#include "../exceptions/ErrorSemanticDivisionZero.h"
 #include "SymbolExpressionBinaryDivision.h"
 #include "SymbolNumber.h"
 
@@ -17,7 +19,13 @@ string SymbolExpressionBinaryDivision::toString() const {
 }
 
 float SymbolExpressionBinaryDivision::eval(map<string, StructVar *> &dicoVariables) {
-    return firstOperand->eval(dicoVariables) / secondOperand->eval(dicoVariables);
+    float denominator = secondOperand->eval(dicoVariables);
+
+    if (denominator == 0) {
+        throw ErrorSemanticDivisionZero(secondOperand->getNumLineDetection(), secondOperand->getNumCharDetection());
+    }
+
+    return firstOperand->eval(dicoVariables) / denominator;
 }
 
 SymbolExpression *SymbolExpressionBinaryDivision::optimizeExpression(map<string, StructVar *> &dicoVariables) {
