@@ -11,15 +11,27 @@ class "StructVar" as STRUCT_VAR {
 
 class "Automaton" as CLASS_AUTOMATE {
     - dicoVariables: map<string, StructVar*>
+    - currentLineError: int
+    - currentCharPosError: int
+    - programChecked: bool
+    - programCanExecute: bool
 
     + readFile(string filename): int
     + transition(Symbol * symbol, State * newState): void
     + reduction(int reductionSize, Symbol * unterminalSymbol): void
     + accept(): void
     + execute(): void
+    + optimizeProgram(): void
+    + checkProgram(): void
+    + aggregateBinaryOperatorExpression(): void
+    + aggregateParenthesisExpression(): void
+    + programmeToString(): string
 
     - computeNewSymbol(Symbol * symbol): void
     - init(): void
+    - checkProgramVariablesUsed(): void
+    - computeErrorLexicalUnexpectedSymbol(ErrorLexicalUnexpectedSymbol& error): void
+    - computeErrorLexicalMissingSymbol(ErrorLexicalMissingSymbol& error): void
 }
 
 abstract class "State" as CLASS_ETAT {
@@ -31,6 +43,12 @@ class "Lexer" as CLASS_LEXER {
     + {static} Symbol *readNextSymbol(string &stringToRead, string & stringSymbolDetected, int linePosition, int charPosition): void
 }
 
+
+'' Exceptions ------------------------------------------------
+package "Exceptions" {
+
+}
+
 '' Symbols ------------------------------------------------
 
 abstract class "Symbol" as CLASS_SYMBOLE {
@@ -38,9 +56,9 @@ abstract class "Symbol" as CLASS_SYMBOLE {
     # numLineDetection : int
     # numCharDetection : int
     + Symbol(int id)
-    + operator int() const: int
-    + {abstract} toString() const: string
-    + {abstract} isPersistent() const: bool
+    + operator int(): int
+    + {abstract} toString(): string
+    + {abstract} isPersistent(): bool
     + {abstract} execute(map<string, StructVar*>& dicoVariables): void
     + {abstract} check(map<string, StructVar*>& dicoVariables): void
     + {abstract} optimize(map<string, StructVar*>& dicoVariables): Symbol*
@@ -54,7 +72,7 @@ class "SymbolUnit" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
 
 class "SymbolUnterminal" as CLASS_SYMBOLE_UNTERMINAL extends CLASS_SYMBOLE {
     + SymbolUnterminal(enum TypeSymbolUnterminal)
-    + toString() const: string
+    + toString(): string
 }
 
 
@@ -87,7 +105,7 @@ class "SymbolInstructionWrite" as CLASS_SYMBOLE_INSTRUCTION_ECRITURE extends CLA
     + affectExpression(SymbolExpression * expression): void
     + check(map<string, StructVar*>& dicoVariables): void
     + optimize(map<string, StructVar*>& dicoVariables): Symbol *
-    + toString() const: string
+    + toString(): string
 }
 class "SymbolInstructionRead" as CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE extends CLASS_SYMBOLE_INSTRUCTION {
     + SymbolInstructionRead()
@@ -95,7 +113,7 @@ class "SymbolInstructionRead" as CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE extends C
     + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
     + affectExpression(SymbolExpression * expression): void
     + check(map<string, StructVar*>& dicoVariables): void
-    + toString() const: string
+    + toString(): string
 }
 class "SymbolInstructionAffect" as CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION extends CLASS_SYMBOLE_INSTRUCTION {
     + SymbolInstructionAffect()
@@ -105,7 +123,7 @@ class "SymbolInstructionAffect" as CLASS_SYMBOLE_INSTRUCTION_VAR_AFFECTATION ext
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
     + check(map<string, StructVar*>& dicoVariables): void
     + detachExpressions(): void
-    + toString() const: string
+    + toString(): string
 }
 
 abstract class "SymbolExpression" as CLASS_SYMBOLE_EXPRESSION extends CLASS_SYMBOLE {
@@ -124,7 +142,7 @@ class "SymbolNumber" as CLASS_SYMBOLE_NOMBRE extends CLASS_SYMBOLE_EXPRESSION {
     + SymbolNumber(string stringValue)
     + SymbolNumber(float value)
     + eval(map<string, StructVar*>& dicoVariables): float
-    + eval() const: float
+    + eval(): float
     + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
     + checkEval(map<string, StructVar*>& dicoVariables): list<Error*> *
 }
@@ -138,7 +156,7 @@ class "SymbolVariable" as CLASS_SYMBOLE_VARIABLE extends CLASS_SYMBOLE_EXPRESSIO
     + check(map<string, StructVar*>& dicoVariables, bool checkConstantUpdate): void
     + checkEval(map<string, StructVar*>& dicoVariables): list<Error*> *
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
-    + toString() const: string
+    + toString(): string
 }
 
 abstract class "SymbolExpressionBinary" as CLASS_SYMBOLE_EXPRESSION_BINAIRE extends CLASS_SYMBOLE_EXPRESSION {
@@ -151,7 +169,7 @@ class "SymbolExpressionParenthesis" as CLASS_SYMBOLE_EXPRESSION_PARENTHESE exten
     + eval(map<string, StructVar*>& dicoVariables) : float
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
     + checkEval(map<string, StructVar*>& dicoVariables): list<Error*> *
-    + toString() const: string
+    + toString(): string
     + setExpression(SymbolExpression * expression): void
     + detachExpressions(): void
 }
@@ -160,30 +178,33 @@ class "SymbolExpressionBinaryAdd" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_ADD extend
     + SymbolExpressionBinaryAdd()
     + eval(map<string, StructVar*>& dicoVariables) : float
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
-    + toString() const: string
+    + toString(): string
 }
 class "SymbolExpressionBinarySubstract" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_SOUSTRACTION extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
     + SymbolExpressionBinarySubstract()
     + eval(map<string, StructVar*>& dicoVariables) : float
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
-    + toString() const: string
+    + toString(): string
 }
 class "SymbolExpressionBinaryMultiplication" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_MULT extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
     + SymbolExpressionBinaryMultiplication()
     + eval(map<string, StructVar*>& dicoVariables) : float
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
-    + toString() const: string
+    + toString(): string
 }
 class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV extends CLASS_SYMBOLE_EXPRESSION_BINAIRE {
     + SymbolExpressionBinaryDivision()
     + eval(map<string, StructVar*>& dicoVariables) : float
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
-    + toString() const: string
+    + toString(): string
 }
 
+class "RegexSymbol" as CLASS_REGEX_SYMBOL {
+    - regexes : map<Regex::Symbol, RE2 *>
 
-'' Exceptions ------------------------------------------------
-package "Exceptions" {
+    - {static} findRegex(Regex::Symbol regexToFind): RE2 *
+    - RegexSymbol()
 
+    + {static} matches( string &stringToMatch, Regex::Symbol regexToMatch): MatchingResult
 }
 

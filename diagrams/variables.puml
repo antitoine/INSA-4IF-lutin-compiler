@@ -11,15 +11,27 @@ class "StructVar" as STRUCT_VAR {
 
 class "Automaton" as CLASS_AUTOMATE {
     - dicoVariables: map<string, StructVar*>
+    - currentLineError: int
+    - currentCharPosError: int
+    - programChecked: bool
+    - programCanExecute: bool
 
     + readFile(string filename): int
     + transition(Symbol * symbol, State * newState): void
     + reduction(int reductionSize, Symbol * unterminalSymbol): void
     + accept(): void
     + execute(): void
+    + optimizeProgram(): void
+    + checkProgram(): void
+    + aggregateBinaryOperatorExpression(): void
+    + aggregateParenthesisExpression(): void
+    + programmeToString() const: string
 
     - computeNewSymbol(Symbol * symbol): void
     - init(): void
+    - checkProgramVariablesUsed(): void
+    - computeErrorLexicalUnexpectedSymbol(ErrorLexicalUnexpectedSymbol const& error): void
+    - computeErrorLexicalMissingSymbol(ErrorLexicalMissingSymbol const& error): void
 }
 
 abstract class "State" as CLASS_ETAT {
@@ -204,6 +216,15 @@ class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV e
     + eval(map<string, StructVar*>& dicoVariables) : float
     + optimizeExpression(map<string, StructVar*>& dicoVariables): SymbolExpression *
     + toString() const: string
+}
+
+class "RegexSymbol" as CLASS_REGEX_SYMBOL {
+    - regexes : map<Regex::Symbol, RE2 *>
+
+    - {static} findRegex(Regex::Symbol regexToFind): RE2 *
+    - RegexSymbol()
+
+    + {static} matches( string &stringToMatch, Regex::Symbol regexToMatch): MatchingResult
 }
 
 

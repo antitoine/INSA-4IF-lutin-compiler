@@ -2,17 +2,39 @@
 \documentclass[11pt]{article}
 
 \usepackage[paper=A4,pagesize]{typearea}
+
 \usepackage[utf8]{inputenc}
+
 \usepackage[T1]{fontenc}
+
+% Permet de définir les marges
 \usepackage[a4paper,pdftex]{geometry}	% Use A4 paper margins
+
+% Défini le langage utilisé
 \usepackage[french]{babel}
+
 \usepackage{xcolor} % Required for specifying custom colors
 \usepackage{fix-cm} % Allows increasing the font size of specific fonts beyond LaTeX default specifications
-\usepackage{hyperref}
+
+% Permet l'utilisation des liens
+%\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
+
+% Permet l'utilisation des todo
 \usepackage{todonotes}
+
+% Permet de wrapper les figures
 \usepackage{wrapfig}
+
+% Permet l'importation de page PDF
 \usepackage{pdfpages}
+
+% Permet d'encapsuler du contenu sur une ou plusieurs pages
 \usepackage{afterpage}
+
+% Permet l'importation de fichier CSV dans des tableaux
 \usepackage{csvsimple}
+
+% Permet l'utilisation de la position H pour les figures et tableaux (force la position 'here')
 \usepackage{float}
 \restylefloat{table,figure}
