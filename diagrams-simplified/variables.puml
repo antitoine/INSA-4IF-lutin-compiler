@@ -47,31 +47,6 @@ abstract class "Symbol" as CLASS_SYMBOLE {
     + {abstract} setSymbolDetectionPosition(int numLine, int numChar): void
 }
 
-enum "TypeSymbolUnit" as ENUM_SYMBOLE_UNITAIRE {
-    SYMBOL_UNIT_PLUS
-    SYMBOL_UNIT_MINUS
-    SYMBOL_UNIT_MULT
-    SYMBOL_UNIT_DIV
-    SYMBOL_UNIT_EQUAL
-    SYMBOL_UNIT_AFFECT
-    SYMBOL_UNIT_ENDING_PAR
-    SYMBOL_UNIT_OPENING_PAR
-    SYMBOL_UNIT_COMMA
-    SYMBOL_UNIT_SEMICOLON
-    SYMBOL_UNIT_DOLLAR
-}
-
-enum "TypeSymbolUnterminal" as ENUM_SYMBOL_UNTERMINAL {
-    SYMBOL_UNTERMINAL_P
-    SYMBOL_UNTERMINAL_D
-    SYMBOL_UNTERMINAL_D_PRIM
-    SYMBOL_UNTERMINAL_V
-    SYMBOL_UNTERMINAL_C
-    SYMBOL_UNTERMINAL_I
-    SYMBOL_UNTERMINAL_I_PRIM
-    SYMBOL_UNTERMINAL_E
-}
-
 class "SymbolUnit" as CLASS_SYMBOLE_POINT_VIRGULE extends CLASS_SYMBOLE {
     + SymbolUnit(enum TypeSymbolUnit)
     + {static} analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected): Symbol *
@@ -208,105 +183,7 @@ class "SymbolExpressionBinaryDivision" as CLASS_SYMBOLE_EXPRESSION_BINAIRE_DIV e
 
 
 '' Exceptions ------------------------------------------------
-class "Error" as CLASS_ERROR {
-    - number: int
-    - level: int
-    - numLineError: int
-    - numCharError: int
+package "Exceptions" {
 
-    + Error(int number, int level, int numLineError, int numCharError)
-    + what() const: const char*
-    + toString() const: string
-    + toString(int linePos, int charPos) const: string
-}
-
-class "ErrorArgument" as CLASS_ERROR_ARGUMENT {
-    + ErrorArgument()
-    + toString() const: string
-}
-
-class "ErrorComposite" as CLASS_ERROR_COMPOSITE extends CLASS_ERROR {
-    - components: list<Error*>
-
-    + ErrorComposite()
-    + addError(Error *error): void
-    + toString() const: string
-    # toStringDetails() const: string
-}
-
-class "ErrorLexical" AS CLASS_ERROR_LEXICAL extends CLASS_ERROR {
-    + ErrorLexical(int number, int level, int numLineError, int numCharError)
-
-}
-
-class "ErrorSemantic" AS CLASS_ERROR_SEMANTIC extends CLASS_ERROR {
-    + ErrorSemantic(int number, int level, int numLineError, int numCharError)
-
-}
-
-class "ErrorLexicalMissingSymbol" as CLASS_ERROR_MISSING_LEXICAL_SYMBOL extends CLASS_ERROR_LEXICAL {
-    + ErrorLexicalMissingSymbol(int numLine, int numChar, Symbol * missingSymbol)
-    + toString() const: string
-    # toStringDetails() const: string
-}
-
-class "ErrorLexicalUnexpectedSymbol" as CLASS_ERROR_LEXICAL_UNEXPECTED_SYMBOL extends CLASS_ERROR_LEXICAL {
-    # symbolName: string
-    # isIgnored: bool
-
-    + ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar)
-    + ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, Symbol* expectedSymbol)
-    + ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, bool ignoreSymbol)
-    + isSymbolIgnored() const: bool
-    # toStringDetails() const: string
-}
-
-class "ErrorLexicalUnknownSymbol" as CLASS_ERROR_LEXICAL_UNKNOWN_SYMBOL extends CLASS_ERROR_LEXICAL {
-    # symbolName: string
-
-    + ErrorLexicalUnknownSymbol(string symbolName, int numLineError, int numCharError)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticIncorrectNumericValue" as CLASS_ERROR_SEMANTIC_INCORRECT_NUMERIC_VALUE extends CLASS_ERROR_SEMANTIC {
-    + ErrorSemanticIncorrectNumericValue(SymbolInstructionRead * instructionRead)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticVar" as CLASS_ERROR_SEMANTIC_VAR extends CLASS_ERROR_SEMANTIC {
-    # varName : string
-
-    + ErrorSemanticVar(int number, int level, const string & varName, int lineError, int charError)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticVarAlreadyDeclared" as CLASS_ERROR_SEMANTIC_VAR_ALREADY_DECLARED extends CLASS_ERROR_SEMANTIC_VAR {
-    # isConstant : bool
-
-    + ErrorSemanticVarAlreadyDeclared(const string &varName, bool constant, int lineError, int charError)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticVarIsConst" as CLASS_ERROR_SEMANTIC_VAR_IS_CONST extends CLASS_ERROR_SEMANTIC_VAR {
-    + ErrorSemanticVarIsConst(const string &varName, int lineError, int charError)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticVarNotDeclared" as CLASS_ERROR_SEMANTIC_VAR_NOT_DECLARED extends CLASS_ERROR_SEMANTIC_VAR {
-    + ErrorSemanticVarNotDeclared(const string &varName, int lineError, int charError)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticVarNotInitialized" as CLASS_ERROR_SEMANTIC_VAR_NOT_INITIALIZED extends CLASS_ERROR_SEMANTIC_VAR {
-    + ErrorSemanticVarNotInitialized(const string &varName, int lineError, int charError)
-    # toStringDetails() const: string
-}
-
-class "ErrorSemanticVarNotUsed" as CLASS_ERROR_SEMANTIC_VAR_NOT_USED extends CLASS_ERROR_SEMANTIC_VAR {
-    - varName: string
-    - isNotInitialized: bool
-
-    + ErrorSemanticVarNotUsed(const string &varName, bool notInitialized)
-    # toStringDetails() const: string
 }
 

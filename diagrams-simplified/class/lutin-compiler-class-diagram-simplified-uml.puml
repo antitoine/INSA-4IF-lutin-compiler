@@ -23,10 +23,8 @@ CLASS_SYMBOLE_INSTRUCTION_ECRITURE --> "-symbolExpression \n                    
 
 CLASS_SYMBOLE_EXPRESSION_BINAIRE o-- "2" CLASS_SYMBOLE_EXPRESSION
 
-CLASS_SYMBOLE_EXPRESSION_PARENTHESE --> "-symbolExpression\n                            1" CLASS_SYMBOLE_EXPRESSION
+CLASS_SYMBOLE_EXPRESSION_PARENTHESE --> "-symbolExpression\n                             1" CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE
 
-CLASS_ERROR_MISSING_LEXICAL_SYMBOL --> "-missingSymbol\n                            1" CLASS_SYMBOLE
-CLASS_ERROR_LEXICAL_UNEXPECTED_SYMBOL --> "-expectedSymbol\n                            1" CLASS_SYMBOLE
-CLASS_ERROR_LEXICAL_UNEXPECTED_SYMBOL --> "-instructionRead\n                            1" CLASS_SYMBOLE_INSTRUCTION_VAR_LECTURE
+CLASS_SYMBOLE <--> Exceptions
 
 @enduml
