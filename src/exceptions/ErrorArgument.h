@@ -3,8 +3,8 @@
 
 #include <exception>
 #include <string>
-using namespace std;
 
+using namespace std;
 
 class ErrorArgument : public exception {
 public:

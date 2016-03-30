@@ -6,9 +6,14 @@
 
 using namespace std;
 
+/**
+ * Error: try to use an undeclared variable.
+ */
 class ErrorSemanticVarNotDeclared : public ErrorSemanticVar {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
-    ErrorSemanticVarNotDeclared(const string & varName, int lineError, int charError) throw();
+    ErrorSemanticVarNotDeclared(const string &varName, int lineError, int charError) throw();
+
     virtual ~ErrorSemanticVarNotDeclared() throw();
 
 protected:

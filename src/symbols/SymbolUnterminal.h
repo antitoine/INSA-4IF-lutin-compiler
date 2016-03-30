@@ -1,18 +1,21 @@
 #ifndef LUTIN_COMPILER_SYMBOLUNTERMINAL_H
 #define LUTIN_COMPILER_SYMBOLUNTERMINAL_H
 
-
 #include "Symbol.h"
 
-class SymbolUnterminal : public Symbol
-{
+using namespace std;
+
+/**
+ * Class representing an unterminal symbol, i.e. an artificial token generated during the lexical analysis.
+ */
+class SymbolUnterminal : public Symbol {
+// METHODS -------------------------------------------------------------------------------------------------------------    
 public:
     SymbolUnterminal(enum TypeSymbolUnterminal);
+
     virtual ~SymbolUnterminal();
 
-    virtual std::string toString() const;
-
-protected:
+    virtual string toString() const;
 };
 
 

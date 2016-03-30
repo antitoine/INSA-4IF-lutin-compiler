@@ -2,18 +2,20 @@
 #include <iostream>
 #include <algorithm>
 #include "SymbolDeclarationConst.h"
-#include "Symbol.h"
 #include "RegexSymbol.h"
-#include "SymbolNumber.h"
 #include "../exceptions/ErrorSemanticVarAlreadyDeclared.h"
-#include <re2/re2.h>
 #include <sstream>
 
 using namespace std;
 
-SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATION_CONST)
-{
+SymbolDeclarationConst::SymbolDeclarationConst() : SymbolDeclaration(S_DECLARATION_CONST) {
 
+}
+
+SymbolDeclarationConst::~SymbolDeclarationConst() {
+    for (pair<SymbolVariable *const, float> &entry : constants) {
+        delete entry.first;
+    }
 }
 
 string SymbolDeclarationConst::toString() const {
@@ -23,38 +25,37 @@ string SymbolDeclarationConst::toString() const {
         return "const";
     }
 
-    for (pair<SymbolVariable*, float> symbolVariable : constants) {
-        constDeclarations << "const " << symbolVariable.first->toString() << " = " << symbolVariable.second << ";" << endl;
+    for (pair<SymbolVariable *, float> symbolVariable : constants) {
+        constDeclarations << "const " << symbolVariable.first->toString() << " = " << symbolVariable.second << ";" <<
+        endl;
     }
 
     return constDeclarations.str();
 }
 
-void SymbolDeclarationConst::detachConstant(map<string, StructVar*>& dicoVariables) {
-    for (pair<SymbolVariable*, float> symbolVariable : constants) {
+void SymbolDeclarationConst::detachConstant(map<string, StructVar *> &dicoVariables) {
+    for (pair<SymbolVariable *, float> symbolVariable : constants) {
         dicoVariables.erase(symbolVariable.first->getName());
     }
 }
 
-Symbol * SymbolDeclarationConst::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+Symbol *SymbolDeclarationConst::analyse(string &stringToAnalyse, string &stringSymbolDetected) {
     MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::CONST);
 
-    if (result.matched)
-    {
+    if (result.matched) {
         stringToAnalyse = result.stringConsumed;
         stringSymbolDetected = result.stringMatched;
         return new SymbolDeclarationConst();
     }
-    else
-    {
+    else {
         return NULL;
     }
 }
 
-void SymbolDeclarationConst::execute(map<string, StructVar*>& dicoVariables) {
+void SymbolDeclarationConst::execute(map<string, StructVar *> &dicoVariables) {
     //For each constant declaration, initialize the struct var
     for (auto const &v : constants) {
-        StructVar * ptS = dicoVariables[v.first->getName()];
+        StructVar *ptS = dicoVariables[v.first->getName()];
 
         ptS->isInitialized = true;
         ptS->isConstant = true;
@@ -66,24 +67,26 @@ void SymbolDeclarationConst::addConstant(SymbolVariable *pVariable) {
     temporaryPtVariable = pVariable;
 }
 
-void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, StructVar*>& dicoVariables) {
+void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, StructVar *> &dicoVariables) {
     if (temporaryPtVariable != NULL) {
 
         // Check if the variable doesn't already exists
         map<string, StructVar *>::iterator it = dicoVariables.find(temporaryPtVariable->getName());
         if (it != dicoVariables.end()) { // The variable exists
-            throw ErrorSemanticVarAlreadyDeclared(temporaryPtVariable->getName(), true, temporaryPtVariable->getNumLineDetection(), temporaryPtVariable->getNumCharDetection());
+            throw ErrorSemanticVarAlreadyDeclared(temporaryPtVariable->getName(), true,
+                                                  temporaryPtVariable->getNumLineDetection(),
+                                                  temporaryPtVariable->getNumCharDetection());
         }
 
-        constants.insert(pair<SymbolVariable*, float>(temporaryPtVariable, constantValue));
+        constants.insert(pair<SymbolVariable *, float>(temporaryPtVariable, constantValue));
 
         // Set the StructVar in the map
-        StructVar * ptS = new StructVar;
+        StructVar *ptS = new StructVar;
         ptS->isConstant = true;
         ptS->isInitialized = true;
         ptS->value = constantValue;
 
-        dicoVariables.insert(pair<string, StructVar*>(temporaryPtVariable->getName(), ptS));
+        dicoVariables.insert(pair<string, StructVar *>(temporaryPtVariable->getName(), ptS));
 
         temporaryPtVariable = NULL;
     } else {
@@ -92,14 +95,8 @@ void SymbolDeclarationConst::addConstantValue(float constantValue, map<string, S
 }
 
 void SymbolDeclarationConst::check(map<string, StructVar *> &dicoVariables) {
-    for (pair<SymbolVariable *const, float> & entry : constants) {
+    for (pair<SymbolVariable *const, float> &entry : constants) {
         dicoVariables[entry.first->getName()]->isInitialized = true;
     }
 }
 
-SymbolDeclarationConst::~SymbolDeclarationConst() {
-    for (pair<SymbolVariable *const, float> & entry : constants) {
-        delete entry.first;
-    }
-
-}

@@ -6,9 +6,14 @@
 
 using namespace std;
 
+/**
+ * Error: try to modify a constant.
+ */
 class ErrorSemanticVarIsConst : public ErrorSemanticVar {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
-    ErrorSemanticVarIsConst(const string & varName, int lineError, int charError) throw();
+    ErrorSemanticVarIsConst(const string &varName, int lineError, int charError) throw();
+
     virtual ~ErrorSemanticVarIsConst() throw();
 
 protected:

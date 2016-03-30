@@ -15,13 +15,12 @@ string SymbolExpressionBinarySubstract::toString() const {
     return firstOperand->toString() + " - " + secondOperand->toString();
 }
 
-float SymbolExpressionBinarySubstract::eval(map<string, StructVar*>& dicoVariables){
+float SymbolExpressionBinarySubstract::eval(map<string, StructVar *> &dicoVariables) {
     return firstOperand->eval(dicoVariables) - secondOperand->eval(dicoVariables);
 }
 
-
-SymbolExpression * SymbolExpressionBinarySubstract::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    SymbolExpression * exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
+SymbolExpression *SymbolExpressionBinarySubstract::optimizeExpression(map<string, StructVar *> &dicoVariables) {
+    SymbolExpression *exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
 
     if (exprOptimized != NULL) {
         return exprOptimized;
@@ -29,8 +28,7 @@ SymbolExpression * SymbolExpressionBinarySubstract::optimizeExpression(map<strin
 
     if (secondOperand->eval(dicoVariables) == 0 && secondOperand->getId() == S_NUMBER) {
         return firstOperand;
-    }
-    else {
+    } else {
         return this;
     }
 }

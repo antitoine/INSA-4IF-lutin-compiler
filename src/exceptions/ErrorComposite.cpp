@@ -6,23 +6,21 @@
 using namespace std;
 
 ErrorComposite::ErrorComposite() throw() : Error(ERROR_COMPOSITE, WARNING) {
-
 }
 
-ErrorComposite::ErrorComposite(std::list < Error * > *ptListErrors) throw()
-        : Error(ERROR_COMPOSITE, WARNING) {
-    if (ptListErrors != NULL) {
-        for (std::list<Error*>::iterator it = ptListErrors->begin(); it != ptListErrors->end(); it++) {
-            addError(*it);
-        }
-        delete ptListErrors;
+ErrorComposite::~ErrorComposite() throw() {
+    for (Error *error : components) {
+        delete error;
     }
 }
 
-
-ErrorComposite::~ErrorComposite() throw() {
-    for (Error * error : components) {
-        delete error;
+ErrorComposite::ErrorComposite(list<Error *> *ptListErrors) throw()
+        : Error(ERROR_COMPOSITE, WARNING) {
+    if (ptListErrors != NULL) {
+        for (list<Error *>::iterator it = ptListErrors->begin(); it != ptListErrors->end(); it++) {
+            addError(*it);
+        }
+        delete ptListErrors;
     }
 }
 
@@ -38,7 +36,7 @@ string ErrorComposite::toStringDetails() const throw() {
     int iErrorMax = components.size() - 1;
     int i = 0;
 
-    for (list<Error*>::const_iterator it = components.begin(); it != components.end(); it++, i++) {
+    for (list<Error *>::const_iterator it = components.begin(); it != components.end(); it++, i++) {
         s << (*it)->toString();
         if (i != iErrorMax) {
             s << endl;

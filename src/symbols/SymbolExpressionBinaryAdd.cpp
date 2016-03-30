@@ -15,12 +15,12 @@ string SymbolExpressionBinaryAdd::toString() const {
     return firstOperand->toString() + " + " + secondOperand->toString();
 }
 
-float SymbolExpressionBinaryAdd::eval(map<string, StructVar*>& dicoVariables){
+float SymbolExpressionBinaryAdd::eval(map<string, StructVar *> &dicoVariables) {
     return firstOperand->eval(dicoVariables) + secondOperand->eval(dicoVariables);
 }
 
-SymbolExpression * SymbolExpressionBinaryAdd::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    SymbolExpression * exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
+SymbolExpression *SymbolExpressionBinaryAdd::optimizeExpression(map<string, StructVar *> &dicoVariables) {
+    SymbolExpression *exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
 
     if (exprOptimized != NULL) {
         return exprOptimized;

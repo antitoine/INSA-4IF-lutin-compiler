@@ -6,12 +6,14 @@
 
 using namespace std;
 
-SymbolUnit::SymbolUnit(enum TypeSymbolUnit uSymbol): Symbol(uSymbol)
-{
+SymbolUnit::SymbolUnit(enum TypeSymbolUnit uSymbol) : Symbol(uSymbol) {
+}
+
+SymbolUnit::~SymbolUnit() {
 }
 
 string SymbolUnit::toString() const {
-    switch(id) {
+    switch (id) {
         case SYMBOL_UNIT_SEMICOLON:
             return ";";
         case SYMBOL_UNIT_COMMA:
@@ -39,8 +41,8 @@ string SymbolUnit::toString() const {
     }
 }
 
-Symbol *SymbolUnit::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
-    Symbol * unitSymbol = NULL;
+Symbol *SymbolUnit::analyse(string &stringToAnalyse, string &stringSymbolDetected) {
+    Symbol *unitSymbol = NULL;
     MatchingResult result;
 
     if ((result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::FIN_INSTRUCTION)).matched) {
@@ -65,19 +67,14 @@ Symbol *SymbolUnit::analyse(std::string & stringToAnalyse, std::string & stringS
         unitSymbol = new SymbolUnit(SYMBOL_UNIT_ENDING_PAR);
     }
 
-    if (result.matched)
-    {
+    if (result.matched) {
         stringSymbolDetected = result.stringMatched;
         stringToAnalyse = result.stringConsumed;
-    }
-    else
-    {
+    } else {
         return NULL;
     }
 
     return unitSymbol;
 }
 
-SymbolUnit::~SymbolUnit() {
 
-}

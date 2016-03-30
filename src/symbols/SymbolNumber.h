@@ -3,24 +3,30 @@
 
 #include "SymbolExpression.h"
 
+using namespace std;
+
+/**
+ * Class representing a numeric symbol.
+ */
 class SymbolNumber : public SymbolExpression
 {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
     SymbolNumber();
     SymbolNumber(string stringValue);
     SymbolNumber(float value);
     virtual ~SymbolNumber();
 
-    virtual std::string toString() const;
+    virtual string toString() const;
     float eval(map<string, StructVar*>& dicoVariables);
     float eval() const;
 
-    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
+    static Symbol * analyse(string & stringToAnalyse, string & stringSymbolDetected);
     virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
 
-    static string removeLeadingZeroes(string number);
-
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
 protected:
+    /** Numeric value associated with the symbol. */
     float value;
 };
 

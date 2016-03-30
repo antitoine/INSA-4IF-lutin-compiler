@@ -1,5 +1,6 @@
 #include <string>
 #include "ErrorArgument.h"
+
 using namespace std;
 
 ErrorArgument::ErrorArgument() throw() {

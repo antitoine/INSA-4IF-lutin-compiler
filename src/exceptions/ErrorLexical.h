@@ -5,7 +5,8 @@
 
 class ErrorLexical : public Error {
 public:
-    ErrorLexical(int number, int level=WARNING, int numLineError=-1, int numCharError=-1) throw();
+    ErrorLexical(int number, int level = WARNING, int numLineError = -1, int numCharError = -1) throw();
+
     virtual ~ErrorLexical() throw();
 };
 

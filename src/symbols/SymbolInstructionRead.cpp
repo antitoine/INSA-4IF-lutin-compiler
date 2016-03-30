@@ -6,9 +6,14 @@
 
 using namespace std;
 
-SymbolInstructionRead::SymbolInstructionRead():SymbolInstruction(S_INSTRUCTION_READ)
-{
+SymbolInstructionRead::SymbolInstructionRead() : SymbolInstruction(S_INSTRUCTION_READ) {
     symbolVariable = NULL;
+}
+
+SymbolInstructionRead::~SymbolInstructionRead() {
+    if (symbolVariable != NULL) {
+        delete symbolVariable;
+    }
 }
 
 string SymbolInstructionRead::toString() const {
@@ -21,7 +26,7 @@ string SymbolInstructionRead::toString() const {
     return ss.str();
 }
 
-void SymbolInstructionRead::execute(map<string, StructVar*>& dicoVariables){
+void SymbolInstructionRead::execute(map<string, StructVar *> &dicoVariables) {
     float userValue;
     cout << "?" << symbolVariable->getName() << " : ";
     cout.flush();
@@ -39,17 +44,14 @@ void SymbolInstructionRead::affectExpression(SymbolExpression *expression) {
     symbolVariable = (SymbolVariable *) expression;
 }
 
-Symbol *SymbolInstructionRead::analyse(std::string &stringToAnalyse, std::string &stringSymbolDetected) {
+Symbol *SymbolInstructionRead::analyse(string &stringToAnalyse, string &stringSymbolDetected) {
     MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::LIRE);
 
-    if (result.matched)
-    {
+    if (result.matched) {
         stringToAnalyse = result.stringConsumed;
         stringSymbolDetected = result.stringMatched;
         return new SymbolInstructionRead();
-    }
-    else
-    {
+    } else {
         return NULL;
     }
 }
@@ -59,15 +61,11 @@ void SymbolInstructionRead::check(map<string, StructVar *> &dicoVariables) {
     symbolVariable->check(dicoVariables);
 
     // If the check is correct, the variable is set as initialized
-    StructVar * pt = dicoVariables[symbolVariable->getName()];
+    StructVar *pt = dicoVariables[symbolVariable->getName()];
     pt->isInitialized = true;
 
     // Set the variable as used
     pt->isUsed = true;
 }
 
-SymbolInstructionRead::~SymbolInstructionRead() {
-    if (symbolVariable != NULL) {
-        delete symbolVariable;
-    }
-}
+

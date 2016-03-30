@@ -7,7 +7,8 @@ ErrorSemanticVarNotInitialized::~ErrorSemanticVarNotInitialized() throw() {
 
 }
 
-ErrorSemanticVarNotInitialized::ErrorSemanticVarNotInitialized(const string & varName, int lineError, int charError) throw()
+ErrorSemanticVarNotInitialized::ErrorSemanticVarNotInitialized(const string &varName, int lineError,
+                                                               int charError) throw()
         : ErrorSemanticVar(ERROR_SEMANTIC_VAR_NOT_INITIALIZED, ERROR, varName, lineError, charError) {
 }
 

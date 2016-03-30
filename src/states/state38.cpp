@@ -4,7 +4,6 @@
 #include "../symbols/SymbolUnterminal.h"
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
-#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 #include "../symbols/SymbolUnit.h"
 
 State38::State38() : State("38") {
@@ -13,16 +12,16 @@ State38::State38() : State("38") {
 State38::~State38() {
 }
 
-bool State38::transition(Automaton & automaton, Symbol * symbol) {
+bool State38::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
-        /*
-         * R15 : E -> E + E
-         * ; | R15
-         * + | R15
-         * - | R15
-         * ) | R15
-         */
+            /*
+             * R15 : E -> E + E
+             * ; | R15
+             * + | R15
+             * - | R15
+             * ) | R15
+             */
 
         case SYMBOL_UNIT_SEMICOLON:
             automaton.aggregateBinaryOperatorExpression();
@@ -44,18 +43,18 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_E));
             return true;
 
-        /*
-         * * : E30
-         */
+            /*
+             * * : E30
+             */
 
         case SYMBOL_UNIT_MULT:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryMultiplication());
             automaton.transition(symbol, new State30());
             return true;
 
-        /*
-         * / : E32
-         */
+            /*
+             * / : E32
+             */
 
         case SYMBOL_UNIT_DIV:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryDivision());
@@ -68,10 +67,12 @@ bool State38::transition(Automaton & automaton, Symbol * symbol) {
         case S_DECLARATION_CONST:
         case S_DECLARATION_VAR:
         case SYMBOL_UNIT_DOLLAR:
-            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(),
+                                            new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(),
+                                               symbol->getNumCharDetection());
 
     }
 }

@@ -16,12 +16,12 @@ string SymbolExpressionBinaryDivision::toString() const {
     return firstOperand->toString() + " / " + secondOperand->toString();
 }
 
-float SymbolExpressionBinaryDivision::eval(map<string, StructVar*>& dicoVariables){
+float SymbolExpressionBinaryDivision::eval(map<string, StructVar *> &dicoVariables) {
     return firstOperand->eval(dicoVariables) / secondOperand->eval(dicoVariables);
 }
 
-SymbolExpression * SymbolExpressionBinaryDivision::optimizeExpression(map<string, StructVar*>& dicoVariables) {
-    SymbolExpression * exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
+SymbolExpression *SymbolExpressionBinaryDivision::optimizeExpression(map<string, StructVar *> &dicoVariables) {
+    SymbolExpression *exprOptimized = SymbolExpressionBinary::optimizeExpression(dicoVariables);
 
     if (exprOptimized != NULL) {
         return exprOptimized;
@@ -29,11 +29,9 @@ SymbolExpression * SymbolExpressionBinaryDivision::optimizeExpression(map<string
 
     if (firstOperand->eval(dicoVariables) == 0 && firstOperand->getId() == S_NUMBER) {
         return (new SymbolNumber(0.0));
-    }
-    else if (secondOperand->eval(dicoVariables) == 1) {
+    } else if (secondOperand->eval(dicoVariables) == 1) {
         return firstOperand;
-    }
-    else {
+    } else {
         return this;
     }
 }

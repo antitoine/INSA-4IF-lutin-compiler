@@ -1,24 +1,35 @@
-#if ! defined ( SYMBOLINSTRUCTIONREAD )
+#if !defined ( SYMBOLINSTRUCTIONREAD )
 #define SYMBOLINSTRUCTIONREAD
 
 #include "SymbolInstruction.h"
 #include "SymbolVariable.h"
 
-class SymbolInstructionRead : public SymbolInstruction
-{
+using namespace std;
+
+/**
+ * Class representing the read instruction (lire x;)
+ */
+class SymbolInstructionRead : public SymbolInstruction {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
     SymbolInstructionRead();
+
     virtual ~SymbolInstructionRead();
 
-    void execute(map<string, StructVar*>& dicoVariables);
-    virtual std::string toString() const;
-    virtual void affectExpression(SymbolExpression * expression);
-    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
+    void execute(map<string, StructVar *> &dicoVariables);
 
-    virtual void check(map<string, StructVar*>& dicoVariables);
+    virtual string toString() const;
 
+    virtual void affectExpression(SymbolExpression *expression);
+
+    static Symbol *analyse(string &stringToAnalyse, string &stringSymbolDetected);
+
+    virtual void check(map<string, StructVar *> &dicoVariables);
+
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
 protected:
-    SymbolVariable* symbolVariable;
+    /** The variable to update after the read operation. */
+    SymbolVariable *symbolVariable;
 };
 
 #endif

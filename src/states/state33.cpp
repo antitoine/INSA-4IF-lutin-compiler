@@ -8,7 +8,6 @@
 #include "../symbols/SymbolExpressionBinaryAdd.h"
 #include "../symbols/SymbolExpressionBinaryMultiplication.h"
 #include "../symbols/SymbolExpressionBinaryDivision.h"
-#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State33::State33() : State("33") {
 }
@@ -16,50 +15,56 @@ State33::State33() : State("33") {
 State33::~State33() {
 }
 
-bool State33::transition(Automaton & automaton, Symbol * symbol) {
+bool State33::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
-        /*
-         * + : E29
-         */
+            /*
+             * + : E29
+             */
+
         case SYMBOL_UNIT_PLUS:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryAdd());
             automaton.transition(symbol, new State29());
             return true;
 
-        /*
-         * - : E31
-         */
+            /*
+             * - : E31
+             */
+
         case SYMBOL_UNIT_MINUS:
             automaton.addToCurrentExpression(new SymbolExpressionBinarySubstract());
             automaton.transition(symbol, new State31());
             return true;
 
-        /*
-         * * : E30
-         */
+            /*
+             * * : E30
+             */
+
         case SYMBOL_UNIT_MULT:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryMultiplication());
             automaton.transition(symbol, new State30());
             return true;
 
-        /*
-         * / : E32
-         */
+            /*
+             * / : E32
+             */
+
         case SYMBOL_UNIT_DIV:
             automaton.addToCurrentExpression(new SymbolExpressionBinaryDivision());
             automaton.transition(symbol, new State32());
             return true;
 
-        /*
-         * ) : E42
-         */
+            /*
+             * ) : E42
+             */
+
         case SYMBOL_UNIT_ENDING_PAR:
             automaton.transition(symbol, new State42());
             return true;
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(),
+                                               symbol->getNumCharDetection());
 
     }
 }

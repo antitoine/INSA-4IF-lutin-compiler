@@ -1,20 +1,25 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARYSUBSTRACT )
+#if !defined ( SYMBOLEXPRESSIONBINARYSUBSTRACT )
 #define SYMBOLEXPRESSIONBINARYSUBSTRACT
 
 #include "SymbolExpressionBinary.h"
 
-class SymbolExpressionBinarySubstract : public SymbolExpressionBinary
-{
+using namespace std;
+
+/**
+ * Class representing the - operator.
+ */
+class SymbolExpressionBinarySubstract : public SymbolExpressionBinary {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
     SymbolExpressionBinarySubstract();
+
     virtual ~SymbolExpressionBinarySubstract();
 
-    virtual std::string toString() const;
-    float eval(map<string, StructVar*>& dicoVariables);
-    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
+    virtual string toString() const;
 
-protected:
+    float eval(map<string, StructVar *> &dicoVariables);
 
+    virtual SymbolExpression *optimizeExpression(map<string, StructVar *> &dicoVariables);
 };
 
 #endif

@@ -6,10 +6,23 @@
 
 using namespace std;
 
-SymbolInstructionAffect::SymbolInstructionAffect(): SymbolInstruction(S_INSTRUCTION_AFFECT)
-{
+SymbolInstructionAffect::SymbolInstructionAffect() : SymbolInstruction(S_INSTRUCTION_AFFECT) {
     symbolVariable = NULL;
     symbolExpression = NULL;
+}
+
+SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
+        : SymbolInstruction(S_INSTRUCTION_AFFECT), symbolVariable(variable) {
+}
+
+SymbolInstructionAffect::~SymbolInstructionAffect() {
+    if (symbolExpression != NULL) {
+        delete symbolExpression;
+    }
+
+    if (symbolVariable != NULL) {
+        delete symbolVariable;
+    }
 }
 
 string SymbolInstructionAffect::toString() const {
@@ -21,13 +34,9 @@ string SymbolInstructionAffect::toString() const {
     return s.str();
 }
 
-SymbolInstructionAffect::SymbolInstructionAffect(SymbolVariable *variable)
-        :SymbolInstruction(S_INSTRUCTION_AFFECT), symbolVariable(variable) {
-}
-
-void SymbolInstructionAffect::execute(map<string, StructVar*>& dicoVariables) {
-    // Check done before execution: variable in dico
-    StructVar * ptS = dicoVariables[symbolVariable->getName()];
+void SymbolInstructionAffect::execute(map<string, StructVar *> &dicoVariables) {
+    // Check done before execution: variable is in dico
+    StructVar *ptS = dicoVariables[symbolVariable->getName()];
     ptS->value = symbolExpression->eval(dicoVariables);
 }
 
@@ -35,15 +44,14 @@ void SymbolInstructionAffect::affectExpression(SymbolExpression *expression) {
     symbolExpression = expression;
 }
 
-
 void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
     // Check the expression
-    std::list<Error*> * exprErrors = symbolExpression->checkEval(dicoVariables);
+    list<Error *> *exprErrors = symbolExpression->checkEval(dicoVariables);
 
     // Check variable to affect
     try {
         symbolVariable->check(dicoVariables, true);
-    } catch (Error const& error) {
+    } catch (Error const &error) {
         if (error.getLevel() == WARNING) {
             if (exprErrors != NULL) {
                 throw ErrorComposite(exprErrors);
@@ -61,21 +69,11 @@ void SymbolInstructionAffect::check(map<string, StructVar *> &dicoVariables) {
     }
 
     // If the check is correct, the variable is set as initialized
-    StructVar * pt = dicoVariables[symbolVariable->getName()];
+    StructVar *pt = dicoVariables[symbolVariable->getName()];
     pt->isInitialized = true;
 }
 
-SymbolInstructionAffect::~SymbolInstructionAffect() {
-    if (symbolExpression != NULL) {
-        delete symbolExpression;
-    }
-
-    if (symbolVariable != NULL) {
-        delete symbolVariable;
-    }
-}
-
-Symbol * SymbolInstructionAffect::optimize(map<string, StructVar*>& dicoVariables) {
+Symbol *SymbolInstructionAffect::optimize(map<string, StructVar *> &dicoVariables) {
     symbolExpression = symbolExpression->optimizeExpression(dicoVariables);
     return this;
 }

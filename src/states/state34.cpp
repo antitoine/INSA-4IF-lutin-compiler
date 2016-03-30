@@ -1,6 +1,5 @@
 #include "state34.h"
 #include "../symbols/SymbolUnterminal.h"
-#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State34::State34() : State("34") {
 }
@@ -8,16 +7,16 @@ State34::State34() : State("34") {
 State34::~State34() {
 }
 
-bool State34::transition(Automaton & automaton, Symbol * symbol) {
+bool State34::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
-        /*
-         * R14 : I' -> id := E ;
-         * id     | R14
-         * lire   | R14
-         * ecrire | R14
-         * $      | R14
-         */
+            /*
+             * R14 : I' -> id := E ;
+             * id     | R14
+             * lire   | R14
+             * ecrire | R14
+             * $      | R14
+             */
 
         case S_VARIABLE:
         case S_INSTRUCTION_READ:
@@ -27,7 +26,8 @@ bool State34::transition(Automaton & automaton, Symbol * symbol) {
             return true;
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(),
+                                               symbol->getNumCharDetection());
 
     }
 }

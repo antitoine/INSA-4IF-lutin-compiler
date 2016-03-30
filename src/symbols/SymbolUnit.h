@@ -1,18 +1,23 @@
-#if ! defined ( UNITSYMBOL )
+#if !defined ( UNITSYMBOL )
 #define UNITSYMBOL
 
 #include "Symbol.h"
 
-class SymbolUnit : public Symbol
-{
+using namespace std;
+
+/**
+ * Class representing a unit symbol, i.e. a symbol associated with a single character.
+ */
+class SymbolUnit : public Symbol {
+// METHODS -------------------------------------------------------------------------------------------------------------    
 public:
     SymbolUnit(enum TypeSymbolUnit);
+
     virtual ~SymbolUnit();
 
-    virtual std::string toString() const;
-    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
+    virtual string toString() const;
 
-protected:
+    static Symbol *analyse(string &stringToAnalyse, string &stringSymbolDetected);
 };
 
 #endif

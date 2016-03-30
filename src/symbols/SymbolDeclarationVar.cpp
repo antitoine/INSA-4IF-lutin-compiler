@@ -1,8 +1,6 @@
 #include <map>
 #include <ostream>
-#include <iostream>
 #include "SymbolDeclarationVar.h"
-#include "SymbolVariable.h"
 #include "RegexSymbol.h"
 #include "../exceptions/ErrorSemanticVarAlreadyDeclared.h"
 

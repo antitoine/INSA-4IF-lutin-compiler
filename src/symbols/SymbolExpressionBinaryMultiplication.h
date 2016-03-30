@@ -1,21 +1,25 @@
-#if ! defined ( SYMBOLEXPRESSIONBINARYMULTIPLICATION )
+#if !defined ( SYMBOLEXPRESSIONBINARYMULTIPLICATION )
 #define SYMBOLEXPRESSIONBINARYMULTIPLICATION
 
 #include "SymbolExpressionBinary.h"
 
-class SymbolExpressionBinaryMultiplication : public SymbolExpressionBinary
-{
+using namespace std;
+
+/**
+ * Class representing the * operator.
+ */
+class SymbolExpressionBinaryMultiplication : public SymbolExpressionBinary {
+// METHODS ------------------------------------------------------------------------------------------------------------- 
 public:
     SymbolExpressionBinaryMultiplication();
+
     virtual ~SymbolExpressionBinaryMultiplication();
 
-    virtual std::string toString() const;
-    float eval(map<string, StructVar*>& dicoVariables);
-    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
+    virtual string toString() const;
 
+    float eval(map<string, StructVar *> &dicoVariables);
 
-protected:
-
+    virtual SymbolExpression *optimizeExpression(map<string, StructVar *> &dicoVariables);
 };
 
 #endif

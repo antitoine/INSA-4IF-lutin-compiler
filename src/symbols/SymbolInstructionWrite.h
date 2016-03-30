@@ -1,25 +1,36 @@
-#if ! defined ( SYMBOLINSTRUCTIONWWRITE )
+#if !defined ( SYMBOLINSTRUCTIONWWRITE )
 #define SYMBOLINSTRUCTIONWWRITE
 
 #include "SymbolInstruction.h"
 
-class SymbolInstructionWrite : public SymbolInstruction
-{
+using namespace std;
+
+/**
+ * Class representing the write instruction (ecrire E;)
+ */
+class SymbolInstructionWrite : public SymbolInstruction {
+// METHODS -------------------------------------------------------------------------------------------------------------    
 public:
     SymbolInstructionWrite();
+
     virtual ~SymbolInstructionWrite();
 
-    virtual std::string toString() const;
-    void execute(map<string, StructVar*>& dicoVariables);
-    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
-    virtual void affectExpression(SymbolExpression * expression);
+    virtual string toString() const;
 
-    Symbol * optimize(map<string, StructVar*>& dicoVariables);
+    void execute(map<string, StructVar *> &dicoVariables);
 
-    virtual void check(map<string, StructVar*>& dicoVariables);
+    static Symbol *analyse(string &stringToAnalyse, string &stringSymbolDetected);
 
+    virtual void affectExpression(SymbolExpression *expression);
+
+    Symbol *optimize(map<string, StructVar *> &dicoVariables);
+
+    virtual void check(map<string, StructVar *> &dicoVariables);
+
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
 protected:
-    SymbolExpression* symbolExpression;
+    /** The expression to write. */
+    SymbolExpression *symbolExpression;
 };
 
 #endif

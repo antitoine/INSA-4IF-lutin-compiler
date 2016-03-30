@@ -9,22 +9,19 @@
 #include "symbols/RegexSymbol.h"
 #include "exceptions/ErrorLexicalUnknownSymbol.h"
 
-Symbol * Lexer::readNextSymbol(string & stringToRead, string & stringSymbolDetected,
-                               int linePosition, int charPosition)
-{
-    Symbol * symbol = NULL;
+Symbol *Lexer::readNextSymbol(string &stringToRead, string &stringSymbolDetected, int linePosition, int charPosition) {
+    Symbol *symbol = NULL;
 
     // Test to find a symbol, by priority order
     if ((symbol = SymbolDeclarationVar::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolDeclarationConst::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolInstructionWrite::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolInstructionRead::analyse(stringToRead, stringSymbolDetected)) != NULL);
-
     else if ((symbol = SymbolUnit::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolVariable::analyse(stringToRead, stringSymbolDetected)) != NULL);
     else if ((symbol = SymbolNumber::analyse(stringToRead, stringSymbolDetected)) != NULL);
 
-    // If a symbol is not found
+    // If a symbol is not found, catch the unknown symbols.
     if (symbol == NULL) {
         MatchingResult result = RegexSymbol::matches(stringToRead, Regex::Symbol::UNKNOWN_SYMBOL);
 
@@ -34,7 +31,6 @@ Symbol * Lexer::readNextSymbol(string & stringToRead, string & stringSymbolDetec
             throw ErrorLexicalUnknownSymbol(result.stringMatched, linePosition, charPosition);
         }
     }
-
 
     return symbol;
 }

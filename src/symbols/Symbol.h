@@ -53,32 +53,88 @@ enum TypeSymbolUnterminal {
     SYMBOL_UNTERMINAL_E
 };
 
-
+/**
+ * Abstract class representing a lexical symbol.
+ */
 class Symbol {
-
-protected:
-    int id;
-    int numLineDetection;
-    int numCharDetection;
-
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
+    /**
+     * Constructor.
+     * @param Symbol's id.
+     * @seealso symbolIdTable, TypeSymbolUnit, TypeSymbolUnterminal
+     */
     Symbol(int id);
+
+    /**
+     * Virtual destructor.
+     */
     virtual ~Symbol();
-    virtual std::string toString() const = 0;
-    operator int() const { return id; }
 
+    /**
+     * Return true if the symbol is persistent and can't be immediately deleted in memory. False by default.
+     */
     virtual bool isPersistent() const;
-    virtual void execute(map<string, StructVar*>& dicoVariables);
-    virtual void check(map<string, StructVar*>& dicoVariables);
-    virtual Symbol * optimize(map<string, StructVar*>& dicoVariables);
 
-    int getId() const;
+    /**
+     * Execute the action related to the symbol.
+     * @param dicoVariables The map with the variables' status used by the program.
+     */
+    virtual void execute(map<string, StructVar *> &dicoVariables);
 
+    /**
+     * Check if the symbol is correct. Throw an exception if an error (or warning) is discovered.
+     * @param dicoVariables The map with the variables' status used by the program.
+     */
+    virtual void check(map<string, StructVar *> &dicoVariables);
+
+    /**
+     * Try to optimize the current symbol.
+     * @param dicoVariables The map with the variables' status used by the program.
+     */
+    virtual Symbol *optimize(map<string, StructVar *> &dicoVariables);
+
+    /**
+     * @return The line where the symbol was read.
+     */
     virtual int getNumLineDetection() const;
+
+    /**
+     * @return The character column where the symbol was read.
+     */
     virtual int getNumCharDetection() const;
 
+    /**
+     * Set the symbol's location in the file analyzed.
+     */
     virtual void setSymbolDetectionPosition(int numLine, int numChar);
 
+    /**
+     * Abstract method : Convert the symbol as string.
+     * @return The string describing the symbol.
+     */
+    virtual string toString() const = 0;
+
+    /**
+     * @return The symbol's id.
+     */
+    int getId() const;
+
+    /**
+     * Convert the symbol as int, by returning its id.
+     */
+    operator int() const { return id; }
+
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
+protected:
+    /** Id of the symbol. */
+    int id;
+
+    /** Line where the symbol was read. */
+    int numLineDetection;
+
+    /** Character column where the symbol was read. */
+    int numCharDetection;
 };
 
 #endif //LUTIN_COMPILER_SYMBOL_H

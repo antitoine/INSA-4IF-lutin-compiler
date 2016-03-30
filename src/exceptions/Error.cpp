@@ -1,12 +1,11 @@
 #include <string>
 #include <sstream>
-#include <iostream>
 #include "Error.h"
+
 using namespace std;
 
 Error::Error(int number, int level, int numLineError, int numCharError) throw()
         : number(number), level(level), numLineError(numLineError), numCharError(numCharError) {
-
 }
 
 Error::~Error() throw() {

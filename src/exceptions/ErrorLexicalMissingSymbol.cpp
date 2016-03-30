@@ -1,12 +1,11 @@
 #include <sstream>
 #include "ErrorLexicalMissingSymbol.h"
 
-ErrorLexicalMissingSymbol::ErrorLexicalMissingSymbol(int numLine, int numChar, Symbol * missingSymbol) throw()
+ErrorLexicalMissingSymbol::ErrorLexicalMissingSymbol(int numLine, int numChar, Symbol *missingSymbol) throw()
         : ErrorLexical(ERROR_LEXICAL_MISSING_SYMBOL, WARNING, numLine, numChar), missingSymbol(missingSymbol) {
 }
 
 ErrorLexicalMissingSymbol::~ErrorLexicalMissingSymbol() throw() {
-
 }
 
 string ErrorLexicalMissingSymbol::toStringDetails() const throw() {
@@ -15,6 +14,6 @@ string ErrorLexicalMissingSymbol::toStringDetails() const throw() {
     return s.str();
 }
 
-Symbol* ErrorLexicalMissingSymbol::getMissingSymbol() const {
+Symbol *ErrorLexicalMissingSymbol::getMissingSymbol() const {
     return missingSymbol;
 }

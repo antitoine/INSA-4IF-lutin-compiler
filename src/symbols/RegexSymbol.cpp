@@ -2,7 +2,7 @@
 #include "RegexSymbol.h"
 
 // To initialize the const map
-std::map<Regex::Symbol, const RE2*> RegexSymbol::regexes = {
+std::map<Regex::Symbol, const RE2 *> RegexSymbol::regexes = {
         {Regex::Symbol::VAR,                    &REG_VAR},
         {Regex::Symbol::CONST,                  &REG_CONST},
         {Regex::Symbol::LIRE,                   &REG_LIRE},
@@ -22,19 +22,19 @@ std::map<Regex::Symbol, const RE2*> RegexSymbol::regexes = {
         {Regex::Symbol::UNKNOWN_SYMBOL,         &REG_UNKNOWN_SYMBOL},
 };
 
-const RE2 * RegexSymbol::findRegex(Regex::Symbol regexToFind) {
-    std::map<Regex::Symbol, const RE2*>::iterator it = regexes.find(regexToFind);
-    if(it != regexes.end()) {
+const RE2 *RegexSymbol::findRegex(Regex::Symbol regexToFind) {
+    std::map<Regex::Symbol, const RE2 *>::iterator it = regexes.find(regexToFind);
+    if (it != regexes.end()) {
         return it->second;
     }
     return NULL;
 }
 
-MatchingResult RegexSymbol::matches(const std::string & stringToMatch, const Regex::Symbol regexToMatch) {
-    const RE2 * regex = findRegex(regexToMatch);
-    if(regex != NULL) {
+MatchingResult RegexSymbol::matches(const std::string &stringToMatch, const Regex::Symbol regexToMatch) {
+    const RE2 *regex = findRegex(regexToMatch);
+    if (regex != NULL) {
         re2::StringPiece result;
-        if(RE2::PartialMatch(stringToMatch, *regex, &result)) {
+        if (RE2::PartialMatch(stringToMatch, *regex, &result)) {
             std::string stringConsumed = result.end();
 
             return MatchingResult {true, result.as_string(), stringConsumed};

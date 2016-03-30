@@ -7,7 +7,7 @@ ErrorSemanticVarNotUsed::~ErrorSemanticVarNotUsed() throw() {
 
 }
 
-ErrorSemanticVarNotUsed::ErrorSemanticVarNotUsed(const string & varName, bool notInitialized) throw()
+ErrorSemanticVarNotUsed::ErrorSemanticVarNotUsed(const string &varName, bool notInitialized) throw()
         : ErrorSemantic(ERROR_SEMANTIC_VAR_NOT_USED, WARNING), varName(varName), isNotInitialized(notInitialized) {
 }
 

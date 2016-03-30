@@ -4,11 +4,13 @@
 
 using namespace std;
 
-ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar)
-        : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, ERROR, numLine, numChar), symbolName(symbolName), isIgnored(false) {
+ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string &symbolName, int numLine, int numChar)
+        : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, ERROR, numLine, numChar), symbolName(symbolName),
+          isIgnored(false) {
 }
 
-ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string & symbolName, int numLine, int numChar, Symbol* expectedSymbol)
+ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string &symbolName, int numLine, int numChar,
+                                                           Symbol *expectedSymbol)
         : ErrorLexical(ERROR_LEXICAL_UNEXPECTED_SYMBOL, WARNING, numLine, numChar), symbolName(symbolName),
           expectedSymbol(expectedSymbol), isIgnored(false) {
 }
@@ -23,7 +25,6 @@ ErrorLexicalUnexpectedSymbol::ErrorLexicalUnexpectedSymbol(const string &symbolN
 }
 
 ErrorLexicalUnexpectedSymbol::~ErrorLexicalUnexpectedSymbol() throw() {
-
 }
 
 string ErrorLexicalUnexpectedSymbol::toStringDetails() const throw() {
@@ -32,7 +33,8 @@ string ErrorLexicalUnexpectedSymbol::toStringDetails() const throw() {
         if (isIgnored) {
             s << "Unexpected symbol read and ignored (\"" << symbolName << "\").";
         } else {
-            s << "Unexpected symbol read (\"" << symbolName << "\") and replaced by \"" << expectedSymbol->toString() << "\".";
+            s << "Unexpected symbol read (\"" << symbolName << "\") and replaced by \"" << expectedSymbol->toString() <<
+            "\".";
         }
     } else {
         s << "Unexpected symbol read and caused program failure (\"" << symbolName << "\").";
@@ -40,7 +42,7 @@ string ErrorLexicalUnexpectedSymbol::toStringDetails() const throw() {
     return s.str();
 }
 
-Symbol* ErrorLexicalUnexpectedSymbol::getExpectedSymbol() const {
+Symbol *ErrorLexicalUnexpectedSymbol::getExpectedSymbol() const {
     return expectedSymbol;
 }
 
