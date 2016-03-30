@@ -7,7 +7,7 @@ ErrorSemanticVarIsConst::~ErrorSemanticVarIsConst() throw() {
 
 }
 
-ErrorSemanticVarIsConst::ErrorSemanticVarIsConst(const string & varName, int lineError, int charError) throw()
+ErrorSemanticVarIsConst::ErrorSemanticVarIsConst(const string &varName, int lineError, int charError) throw()
         : ErrorSemanticVar(ERROR_SEMANTIC_VAR_IS_CONST, ERROR, varName, lineError, charError) {
 }
 

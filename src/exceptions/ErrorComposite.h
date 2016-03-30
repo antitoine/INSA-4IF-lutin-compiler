@@ -6,20 +6,33 @@
 
 using namespace std;
 
+/**
+ * Composite of errors.
+ */
 class ErrorComposite : public Error {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
     ErrorComposite() throw();
-    ErrorComposite(list<Error*> *ptListErrors) throw();
+
+    ErrorComposite(list<Error *> *ptListErrors) throw();
+
     virtual ~ErrorComposite() throw();
-    void addError(Error * error);
 
     virtual string toString() const throw();
 
+    /**
+     * Add a new error to the current composite.
+     * @error Error to add.
+     */
+    void addError(Error *error);
+
 protected:
-    list<Error *> components;
-
     virtual string toStringDetails() const throw();
-};
 
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
+protected:
+    /** List of error components. */
+    list<Error *> components;
+};
 
 #endif //LUT_ERRORCOMPOSITE_H

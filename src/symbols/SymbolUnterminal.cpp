@@ -2,8 +2,9 @@
 #include <sstream>
 #include "SymbolUnterminal.h"
 
-SymbolUnterminal::SymbolUnterminal(enum TypeSymbolUnterminal uSymbol):Symbol(uSymbol)
-{
+using namespace std;
+
+SymbolUnterminal::SymbolUnterminal(enum TypeSymbolUnterminal uSymbol) : Symbol(uSymbol) {
 
 }
 

@@ -1,6 +1,5 @@
 #include <sstream>
 #include <algorithm>
-#include <string>
 #include "ErrorSemanticIncorrectNumericValue.h"
 
 using namespace std;
@@ -9,7 +8,7 @@ ErrorSemanticIncorrectNumericValue::~ErrorSemanticIncorrectNumericValue() throw(
 
 }
 
-ErrorSemanticIncorrectNumericValue::ErrorSemanticIncorrectNumericValue(SymbolInstructionRead * instructionRead) throw()
+ErrorSemanticIncorrectNumericValue::ErrorSemanticIncorrectNumericValue(SymbolInstructionRead *instructionRead) throw()
         : ErrorSemantic(ERROR_SEMANTIC_INCORRECT_NUM_VALUE, ERROR), instructionRead(instructionRead) {
 }
 

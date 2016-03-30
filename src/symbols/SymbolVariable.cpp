@@ -7,22 +7,25 @@
 #include "../exceptions/ErrorSemanticVarIsConst.h"
 #include "../exceptions/ErrorSemanticVarNotDeclared.h"
 #include "../exceptions/ErrorSemanticVarNotInitialized.h"
-#include "../exceptions/ErrorSemanticVarNotUsed.h"
 
-SymbolVariable::SymbolVariable(std::string varName)
-        : SymbolExpression(S_VARIABLE), name(varName)
-{
+using namespace std;
+
+SymbolVariable::SymbolVariable(string varName)
+        : SymbolExpression(S_VARIABLE), name(varName) {
 }
 
-std::string SymbolVariable::toString() const {
+SymbolVariable::~SymbolVariable() {
+
+}
+
+string SymbolVariable::toString() const {
     return name;
 }
 
-Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected) {
+Symbol *SymbolVariable::analyse(string &stringToAnalyse, string &stringSymbolDetected) {
     MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::IDENTIFICATEUR);
 
-    if (result.matched)
-    {
+    if (result.matched) {
         stringToAnalyse = result.stringConsumed;
         stringSymbolDetected = result.stringMatched;
 
@@ -30,32 +33,30 @@ Symbol * SymbolVariable::analyse(std::string & stringToAnalyse, std::string & st
         string varName = result.stringMatched;
         size_t first = varName.find_first_not_of(' ');
         size_t last = varName.find_last_not_of(' ');
-        varName = varName.substr(first, (last-first+1));
+        varName = varName.substr(first, (last - first + 1));
 
         return new SymbolVariable(varName);
-    }
-    else
-    {
+    } else {
         return NULL;
     }
 }
 
-std::string SymbolVariable::getName() const {
+string SymbolVariable::getName() const {
     return name;
 }
 
-float SymbolVariable::eval(map<string, StructVar*>& dicoVariables){
+float SymbolVariable::eval(map<string, StructVar *> &dicoVariables) {
     // Variable already checked
     return dicoVariables[name]->value;
 }
 
-void SymbolVariable::check(map<string, StructVar*>& dicoVariables) {
+void SymbolVariable::check(map<string, StructVar *> &dicoVariables) {
     check(dicoVariables, false);
 }
 
 void SymbolVariable::check(map<string, StructVar *> &dicoVariables, bool checkConstantUpdate) {
     // Not an eval check: check if the variable is declared
-    map<string, StructVar*>::iterator it = dicoVariables.find(name);
+    map<string, StructVar *>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
         throw ErrorSemanticVarNotDeclared(name, numLineDetection, numCharDetection);
     } else {
@@ -65,11 +66,11 @@ void SymbolVariable::check(map<string, StructVar *> &dicoVariables, bool checkCo
     }
 }
 
-list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables) {
-    std::list<Error *> * errors = NULL;
+list<Error *> *SymbolVariable::checkEval(map<string, StructVar *> &dicoVariables) {
+    list<Error *> *errors = NULL;
 
     // Check if the variable is declared
-    map<string, StructVar*>::iterator it = dicoVariables.find(name);
+    map<string, StructVar *>::iterator it = dicoVariables.find(name);
     if (it == dicoVariables.end()) {
         errors = new list<Error *>;
         errors->push_back(new ErrorSemanticVarNotDeclared(name, numLineDetection, numCharDetection));
@@ -87,13 +88,8 @@ list<Error *> *SymbolVariable::checkEval(map<string, StructVar*>& dicoVariables)
     return errors;
 }
 
-
-SymbolVariable::~SymbolVariable() {
-
-}
-
 SymbolExpression *SymbolVariable::optimizeExpression(map<string, StructVar *> &dicoVariables) {
-    StructVar * ptS = dicoVariables[name];
+    StructVar *ptS = dicoVariables[name];
     if (ptS->isConstant) {
         return new SymbolNumber(ptS->value);
     } else {

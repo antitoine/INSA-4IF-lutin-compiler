@@ -225,6 +225,15 @@ class "ErrorArgument" as CLASS_ERROR_ARGUMENT {
     + toString() const: string
 }
 
+class "ErrorComposite" as CLASS_ERROR_COMPOSITE extends CLASS_ERROR {
+    - components: list<Error*>
+
+    + ErrorComposite()
+    + addError(Error *error): void
+    + toString() const: string
+    # toStringDetails() const: string
+}
+
 class "ErrorLexical" AS CLASS_ERROR_LEXICAL extends CLASS_ERROR {
     + ErrorLexical(int number, int level, int numLineError, int numCharError)
 
@@ -252,6 +261,13 @@ class "ErrorLexicalUnexpectedSymbol" as CLASS_ERROR_LEXICAL_UNEXPECTED_SYMBOL ex
     # toStringDetails() const: string
 }
 
+class "ErrorLexicalUnknownSymbol" as CLASS_ERROR_LEXICAL_UNKNOWN_SYMBOL extends CLASS_ERROR_LEXICAL {
+    # symbolName: string
+
+    + ErrorLexicalUnknownSymbol(string symbolName, int numLineError, int numCharError)
+    # toStringDetails() const: string
+}
+
 class "ErrorSemanticIncorrectNumericValue" as CLASS_ERROR_SEMANTIC_INCORRECT_NUMERIC_VALUE extends CLASS_ERROR_SEMANTIC {
     + ErrorSemanticIncorrectNumericValue(SymbolInstructionRead * instructionRead)
     # toStringDetails() const: string
@@ -261,6 +277,36 @@ class "ErrorSemanticVar" as CLASS_ERROR_SEMANTIC_VAR extends CLASS_ERROR_SEMANTI
     # varName : string
 
     + ErrorSemanticVar(int number, int level, const string & varName, int lineError, int charError)
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticVarAlreadyDeclared" as CLASS_ERROR_SEMANTIC_VAR_ALREADY_DECLARED extends CLASS_ERROR_SEMANTIC_VAR {
+    # isConstant : bool
+
+    + ErrorSemanticVarAlreadyDeclared(const string &varName, bool constant, int lineError, int charError)
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticVarIsConst" as CLASS_ERROR_SEMANTIC_VAR_IS_CONST extends CLASS_ERROR_SEMANTIC_VAR {
+    + ErrorSemanticVarIsConst(const string &varName, int lineError, int charError)
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticVarNotDeclared" as CLASS_ERROR_SEMANTIC_VAR_NOT_DECLARED extends CLASS_ERROR_SEMANTIC_VAR {
+    + ErrorSemanticVarNotDeclared(const string &varName, int lineError, int charError)
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticVarNotInitialized" as CLASS_ERROR_SEMANTIC_VAR_NOT_INITIALIZED extends CLASS_ERROR_SEMANTIC_VAR {
+    + ErrorSemanticVarNotInitialized(const string &varName, int lineError, int charError)
+    # toStringDetails() const: string
+}
+
+class "ErrorSemanticVarNotUsed" as CLASS_ERROR_SEMANTIC_VAR_NOT_USED extends CLASS_ERROR_SEMANTIC_VAR {
+    - varName: string
+    - isNotInitialized: bool
+
+    + ErrorSemanticVarNotUsed(const string &varName, bool notInitialized)
     # toStringDetails() const: string
 }
 

@@ -2,7 +2,6 @@
 #include <list>
 #include "SymbolExpressionBinary.h"
 #include "SymbolNumber.h"
-#include "../exceptions/Error.h"
 
 using namespace std;
 
@@ -11,16 +10,24 @@ SymbolExpressionBinary::SymbolExpressionBinary(enum symbolIdTable idSymbol) : Sy
     secondOperand = NULL;
 }
 
+SymbolExpressionBinary::~SymbolExpressionBinary() {
+    if (firstOperand != NULL) {
+        delete firstOperand;
+    }
+
+    if (secondOperand != NULL) {
+        delete secondOperand;
+    }
+}
 
 void SymbolExpressionBinary::setOperands(SymbolExpression *leftOperand, SymbolExpression *rightOperand) {
     firstOperand = leftOperand;
     secondOperand = rightOperand;
 }
 
-
-list<Error *> * SymbolExpressionBinary::checkEval(map<string, StructVar*>& dicoVariables) {
-    std::list<Error *> * errors = NULL;
-    std::list<Error *> * operandErrors = NULL;
+list<Error *> *SymbolExpressionBinary::checkEval(map<string, StructVar *> &dicoVariables) {
+    list<Error *> *errors = NULL;
+    list<Error *> *operandErrors = NULL;
 
     operandErrors = firstOperand->checkEval(dicoVariables);
     if (operandErrors != NULL) {
@@ -40,18 +47,8 @@ list<Error *> * SymbolExpressionBinary::checkEval(map<string, StructVar*>& dicoV
     return errors;
 }
 
-SymbolExpressionBinary::~SymbolExpressionBinary() {
-    if (firstOperand != NULL) {
-        delete firstOperand;
-    }
-
-    if (secondOperand != NULL) {
-        delete secondOperand;
-    }
-}
-
 SymbolExpression *SymbolExpressionBinary::optimizeExpression(map<string, StructVar *> &dicoVariables) {
-    SymbolExpression * firstOperandOptimized = firstOperand->optimizeExpression(dicoVariables);
+    SymbolExpression *firstOperandOptimized = firstOperand->optimizeExpression(dicoVariables);
 
     if (firstOperandOptimized != firstOperand) {
         firstOperand->detachExpressions();
@@ -59,7 +56,7 @@ SymbolExpression *SymbolExpressionBinary::optimizeExpression(map<string, StructV
         firstOperand = firstOperandOptimized;
     }
 
-    SymbolExpression * secondOperandOptimized  = secondOperand->optimizeExpression(dicoVariables);
+    SymbolExpression *secondOperandOptimized = secondOperand->optimizeExpression(dicoVariables);
 
     if (secondOperandOptimized != secondOperand) {
         secondOperand->detachExpressions();

@@ -1,32 +1,50 @@
-#if ! defined ( SYMBOLVARIABLE )
+#if !defined ( SYMBOLVARIABLE )
 #define SYMBOLVARIABLE
 
 #include "SymbolExpression.h"
 #include "../StructVar.h"
 
-struct Pos {
-    int linePos;
-    int charPos;
-};
+using namespace std;
 
-class SymbolVariable : public SymbolExpression
-{
+/**
+ * Class representing a variable.
+ */
+class SymbolVariable : public SymbolExpression {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
-    SymbolVariable(std::string varName);
+    SymbolVariable(string varName);
+
     virtual ~SymbolVariable();
 
-    virtual std::string toString() const;
-    static Symbol * analyse(std::string & stringToAnalyse, std::string & stringSymbolDetected);
-    std::string getName() const;
-    float eval(map<string, StructVar*>& dicoVariables);
-    virtual void check(map<string, StructVar*>& dicoVariables); // Don't use the default value for inheritance
-    virtual void check(map<string, StructVar*>& dicoVariables, bool checkConstantUpdate);
-    virtual list<Error*> * checkEval(map<string, StructVar*>& dicoVariables);
+    virtual string toString() const;
 
-    virtual SymbolExpression * optimizeExpression(map<string, StructVar*>& dicoVariables);
+    static Symbol *analyse(string &stringToAnalyse, string &stringSymbolDetected);
 
+    float eval(map<string, StructVar *> &dicoVariables);
+
+    /**
+     * Check the symbol, without the boolean value (false by default), for inheritance.
+     */
+    virtual void check(map<string, StructVar *> &dicoVariables);
+
+    /**
+     * Check the symbol, and check if the variable is a constant if checkConstantUpdate is true, ignore it otherwise.
+     */
+    virtual void check(map<string, StructVar *> &dicoVariables, bool checkConstantUpdate);
+
+    virtual list<Error *> *checkEval(map<string, StructVar *> &dicoVariables);
+
+    virtual SymbolExpression *optimizeExpression(map<string, StructVar *> &dicoVariables);
+
+    /**
+     * @return The name of the variable.
+     */
+    string getName() const;
+
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
 protected:
-    std::string name;
+    /** Variable's name. */
+    string name;
 };
 
 #endif

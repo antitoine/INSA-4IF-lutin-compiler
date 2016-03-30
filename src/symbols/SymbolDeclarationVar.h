@@ -4,29 +4,39 @@
 #include "SymbolDeclaration.h"
 #include "SymbolVariable.h"
 
-class SymbolVariable;
-
-struct VarListEntity {
-    SymbolVariable * ptVariable;
-    int posLine;
-    int posChar;
-};
-
+/**
+ * Class representing the declaration of a simple variable.
+ */
 class SymbolDeclarationVar : public SymbolDeclaration
 {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
     SymbolDeclarationVar();
     virtual ~SymbolDeclarationVar();
 
     virtual string toString() const;
-    static Symbol * analyse(string & stringToAnalyse, string & stringSymbolDetected);
+
     void execute(map<string, StructVar*>& dicoVariables);
 
+    /**
+     * Check if the SymbolDeclarationConst can be detected in stringToAnalyse.
+     * @param stringToAnalyse String consumed if the symbol have been detected.
+     * @param stringSymbolDetected String description of the symbol.
+     * @return The pointer of the symbol if detected, NULL otherwise.
+     */
+    static Symbol * analyse(string & stringToAnalyse, string & stringSymbolDetected);
+
+    /**
+     * Add a variable to the list of variables managed by the current SymbolDeclarationVar.
+     * @param dicoVariables The map with the variables' status used by the program.
+     */
     void addVariable(SymbolVariable *pVariable, map<string, StructVar*>& dicoVariables);
 
-protected:
-
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
 private:
+    /**
+     * List of variables managed by the declaration symbol.
+     */
     list<SymbolVariable*> variables;
 };
 

@@ -7,7 +7,7 @@ ErrorSemanticVarNotDeclared::~ErrorSemanticVarNotDeclared() throw() {
 
 }
 
-ErrorSemanticVarNotDeclared::ErrorSemanticVarNotDeclared(const string & varName, int lineError, int charError) throw()
+ErrorSemanticVarNotDeclared::ErrorSemanticVarNotDeclared(const string &varName, int lineError, int charError) throw()
         : ErrorSemanticVar(ERROR_SEMANTIC_VAR_NOT_DECLARED, ERROR, varName, lineError, charError) {
 }
 

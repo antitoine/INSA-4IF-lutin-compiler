@@ -1,6 +1,5 @@
 #include "state25.h"
 #include "../symbols/SymbolUnterminal.h"
-#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State25::State25() : State("25") {
 }
@@ -8,48 +7,54 @@ State25::State25() : State("25") {
 State25::~State25() {
 }
 
-bool State25::transition(Automaton & automaton, Symbol * symbol) {
+bool State25::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
-        /*
-         * R5 : D’  → const C ;
-         * var | R5
-         */
+            /*
+             * R5 : D’  → const C ;
+             * var | R5
+             */
+
         case S_DECLARATION_VAR:
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
-        /*
-         * const | R4
-         */
+            /*
+             * const | R4
+             */
+
         case S_DECLARATION_CONST:
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
-        /*
-         * id | R4
-         */
+            /*
+             * id | R4
+             */
+
         case S_VARIABLE:
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
-        /*
-         * lire | R4
-         */
+            /*
+             * lire | R4
+             */
+
         case S_INSTRUCTION_READ:
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
-        /*
-         * ecrire | R4
-         */
+            /*
+             * ecrire | R4
+             */
+
         case S_INSTRUCTION_WRITE:
             automaton.reduction(3, new SymbolUnterminal(SYMBOL_UNTERMINAL_D_PRIM));
             return true;
 
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(),
+                                               symbol->getNumCharDetection());
 
     }
 }

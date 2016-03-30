@@ -7,9 +7,14 @@
 
 using namespace std;
 
+/**
+ * Error: try to use an uninitialized variable.
+ */
 class ErrorSemanticVarNotInitialized : public ErrorSemanticVar {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
-    ErrorSemanticVarNotInitialized(const string & varName, int lineError, int charError) throw();
+    ErrorSemanticVarNotInitialized(const string &varName, int lineError, int charError) throw();
+
     virtual ~ErrorSemanticVarNotInitialized() throw();
 
 protected:

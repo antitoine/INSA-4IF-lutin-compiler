@@ -7,14 +7,23 @@
 
 using namespace std;
 
+/**
+ * Error: a variable is declared twice.
+ */
 class ErrorSemanticVarAlreadyDeclared : public ErrorSemanticVar {
+// METHODS -------------------------------------------------------------------------------------------------------------
 public:
-    ErrorSemanticVarAlreadyDeclared(const string & varName, bool constant, int lineError, int charError) throw();
+    ErrorSemanticVarAlreadyDeclared(const string &varName, bool constant, int lineError, int charError) throw();
+
     virtual ~ErrorSemanticVarAlreadyDeclared() throw();
 
 protected:
-    bool isConstant;
     virtual string toStringDetails() const throw();
+
+// ATTRIBUTES ----------------------------------------------------------------------------------------------------------
+protected:
+    /** True if the variable is a constant. */
+    bool isConstant;
 };
 
 

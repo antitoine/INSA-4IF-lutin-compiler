@@ -1,17 +1,18 @@
 #include <map>
 #include "SymbolExpression.h"
 
+using namespace std;
 
 SymbolExpression::SymbolExpression(enum symbolIdTable idSymbol) : Symbol(idSymbol) {
 
 }
 
-bool SymbolExpression::isPersistent() const {
-    return true;
-}
-
 SymbolExpression::~SymbolExpression() {
 
+}
+
+bool SymbolExpression::isPersistent() const {
+    return true;
 }
 
 SymbolExpression * SymbolExpression::optimizeExpression(map<string, StructVar*>& dicoVariables) {

@@ -1,25 +1,25 @@
 #include "Symbol.h"
-#include <iostream>
-#include <string>
+
+Symbol::Symbol(int id)
+        : id(id), numLineDetection(-1), numCharDetection(-1) {
+}
+
+Symbol::~Symbol() {
+}
 
 int Symbol::getId() const {
     return id;
-}
-
-void Symbol::execute(map<string, StructVar*>& dicoVariables) {
-
 }
 
 bool Symbol::isPersistent() const {
     return false;
 }
 
-Symbol::Symbol(int id)
-        : id(id), numLineDetection(-1), numCharDetection(-1) {
-
+void Symbol::execute(map<string, StructVar *> &dicoVariables) {
+    // Nothing to do by default
 }
 
-void Symbol::check(map<string, StructVar*>& dicoVariables) {
+void Symbol::check(map<string, StructVar *> &dicoVariables) {
     // Nothing to check by default
 }
 
@@ -36,10 +36,7 @@ int Symbol::getNumCharDetection() const {
     return numCharDetection;
 }
 
-Symbol::~Symbol() {
-
-}
-
-Symbol * Symbol::optimize(map<string, StructVar*>& dicoVariables) {
+Symbol *Symbol::optimize(map<string, StructVar *> &dicoVariables) {
+    // Nothing to optimize by default
     return this;
 }

@@ -9,7 +9,10 @@ SymbolNumber::SymbolNumber() : SymbolExpression(S_NUMBER) {
 
 }
 
-//TODO : check stof function
+SymbolNumber::~SymbolNumber() {
+
+}
+
 SymbolNumber::SymbolNumber(string stringValue) : value(stof(stringValue)), SymbolExpression(S_NUMBER) {
 }
 
@@ -23,7 +26,7 @@ string SymbolNumber::toString() const {
     return s.str();
 }
 
-float SymbolNumber::eval(map<string, StructVar*>& dicoVariables) {
+float SymbolNumber::eval(map<string, StructVar *> &dicoVariables) {
     return value;
 }
 
@@ -31,35 +34,21 @@ float SymbolNumber::eval() const {
     return value;
 }
 
-Symbol * SymbolNumber::analyse(std::string &stringToAnalyse, std::string &stringSymbolDetected) {
+Symbol *SymbolNumber::analyse(string &stringToAnalyse, string &stringSymbolDetected) {
     MatchingResult result = RegexSymbol::matches(stringToAnalyse, Regex::Symbol::NOMBRE);
 
-    if (result.matched)
-    {
+    if (result.matched) {
         stringToAnalyse = result.stringConsumed;
         stringSymbolDetected = result.stringMatched;
         return new SymbolNumber(result.stringMatched);
-    }
-    else
-    {
+    } else {
         return NULL;
     }
 }
 
-string SymbolNumber::removeLeadingZeroes(string number) {
-    number.erase(number.find_last_not_of('0') + 1, std::string::npos);
-    number.erase(number.find_last_not_of('.') + 1, std::string::npos);
-
-    return number;
-}
-
-
-list<Error *> * SymbolNumber::checkEval(map<string, StructVar*>& dicoVariables) {
+list<Error *> *SymbolNumber::checkEval(map<string, StructVar *> &dicoVariables) {
     return NULL;
 }
 
-SymbolNumber::~SymbolNumber() {
-
-}
 
 

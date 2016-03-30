@@ -1,6 +1,5 @@
 #include "state20.h"
 #include "../symbols/SymbolUnterminal.h"
-#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 #include "../symbols/SymbolUnit.h"
 
 State20::State20() : State("20") {
@@ -9,18 +8,19 @@ State20::State20() : State("20") {
 State20::~State20() {
 }
 
-bool State20::transition(Automaton & automaton, Symbol * symbol) {
+bool State20::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
-        /*
-         * R21 : E  → val
-         * ; | R21
-         * + | R21
-         * - | R21
-         * * | R21
-         * / | R21
-         * ) | R21
-         */
+            /*
+             * R21 : E  → val
+             * ; | R21
+             * + | R21
+             * - | R21
+             * * | R21
+             * / | R21
+             * ) | R21
+             */
+
         case SYMBOL_UNIT_SEMICOLON:
         case SYMBOL_UNIT_PLUS:
         case SYMBOL_UNIT_MINUS:
@@ -36,10 +36,12 @@ bool State20::transition(Automaton & automaton, Symbol * symbol) {
         case S_DECLARATION_VAR:
         case S_VARIABLE:
         case SYMBOL_UNIT_DOLLAR:
-            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(), new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
+            throw ErrorLexicalMissingSymbol(symbol->getNumLineDetection(), symbol->getNumCharDetection(),
+                                            new SymbolUnit(SYMBOL_UNIT_SEMICOLON));
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(),
+                                               symbol->getNumCharDetection());
 
     }
 }

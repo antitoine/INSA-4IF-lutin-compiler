@@ -2,8 +2,7 @@
 
 using namespace std;
 
-SymbolInstruction::SymbolInstruction(enum symbolIdTable idSymbol):Symbol(idSymbol)
-{
+SymbolInstruction::SymbolInstruction(enum symbolIdTable idSymbol) : Symbol(idSymbol) {
 
 }
 

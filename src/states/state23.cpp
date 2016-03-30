@@ -1,6 +1,5 @@
 #include "state23.h"
 #include "../symbols/SymbolUnterminal.h"
-#include "../exceptions/ErrorLexicalUnexpectedSymbol.h"
 
 State23::State23() : State("23") {
 }
@@ -8,17 +7,17 @@ State23::State23() : State("23") {
 State23::~State23() {
 }
 
-bool State23::transition(Automaton & automaton, Symbol * symbol) {
+bool State23::transition(Automaton &automaton, Symbol *symbol) {
     switch (symbol->getId()) {
 
-        /*
-         * R4 : D’ → var V ;
-         * var    | R4
-         * const  | R4
-         * id     | R4
-         * lire   | R4
-         * ecrire | R4
-         */
+            /*
+             * R4 : D’ → var V ;
+             * var    | R4
+             * const  | R4
+             * id     | R4
+             * lire   | R4
+             * ecrire | R4
+             */
 
         case S_DECLARATION_VAR:
         case S_DECLARATION_CONST:
@@ -29,7 +28,8 @@ bool State23::transition(Automaton & automaton, Symbol * symbol) {
             return true;
 
         default:
-            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(), symbol->getNumCharDetection());
+            throw ErrorLexicalUnexpectedSymbol(symbol->toString(), symbol->getNumLineDetection(),
+                                               symbol->getNumCharDetection());
 
     }
 }

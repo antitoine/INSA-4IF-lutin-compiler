@@ -2,11 +2,12 @@
 #include "ErrorSemanticVarAlreadyDeclared.h"
 
 ErrorSemanticVarAlreadyDeclared::~ErrorSemanticVarAlreadyDeclared() throw() {
-
 }
 
-ErrorSemanticVarAlreadyDeclared::ErrorSemanticVarAlreadyDeclared(const string & varName, bool constant, int lineError, int charError) throw()
-        : ErrorSemanticVar(ERROR_SEMANTIC_VAR_ALREADY_DECLARED, ERROR, varName, lineError, charError), isConstant(constant) {
+ErrorSemanticVarAlreadyDeclared::ErrorSemanticVarAlreadyDeclared(const string &varName, bool constant, int lineError,
+                                                                 int charError) throw()
+        : ErrorSemanticVar(ERROR_SEMANTIC_VAR_ALREADY_DECLARED, ERROR, varName, lineError, charError),
+          isConstant(constant) {
 }
 
 string ErrorSemanticVarAlreadyDeclared::toStringDetails() const throw() {

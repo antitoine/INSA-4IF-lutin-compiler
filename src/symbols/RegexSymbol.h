@@ -49,16 +49,35 @@ static const RE2 REG_PARENTHESE_FERMANTE("^( *\\) *)");
 static const RE2 REG_SEPARATEUR_DECLARATION("^( *, *)");
 static const RE2 REG_UNKNOWN_SYMBOL("^( *[^a-zA-Z0-9\\.\\+\\*\\-\\(\\);,/=]+ *)");
 
+/**
+ * Static class used for regex analysis and symbol matching.
+ */
 class RegexSymbol {
 public:
-    static MatchingResult matches(const std::string & stringToMatch, const Regex::Symbol regexToMatch);
+    /**
+     * Check if the string passed by parameter can match with the regex related to the id passed by parameter.
+     * @param stringToMatch The string to test.
+     * @param regexToMatch Id of the regex to use
+     * @return A MatchingResult.
+     * @seealso Regex::Symbol
+     */
+    static MatchingResult matches(const std::string &stringToMatch, const Regex::Symbol regexToMatch);
 
 private:
-    RegexSymbol() {};
-    static const RE2 * findRegex(Regex::Symbol regexToFind);
+    RegexSymbol() { };
+
+    /**
+     * Return the RE2 regex associated with the id passed by parameter.
+     */
+    static const RE2 *findRegex(Regex::Symbol regexToFind);
 
 private:
-    static std::map<Regex::Symbol, const RE2*> regexes;
+    /**
+     * Regexes used by the class.
+     * @Key : Regex id
+     * @Value : Pointer to RE2 regex.
+     */
+    static std::map<Regex::Symbol, const RE2 *> regexes;
 };
 
 #endif //LUTIN_COMPILER_REGEXLUTIN_H
