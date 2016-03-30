@@ -1,8 +1,5 @@
 \input{preambule}
 
-%%  ========   IMPORTANT ========
-%% Indiquer ici les parties que vous voulez compilez
-
 %%% Begin document
 \begin{document}
 \includepdf[pages={1}]{title.pdf}
@@ -68,9 +65,9 @@
 
 	\todo{Texte pour décrire l'automate}	
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
-		\includegraphics[height=0.73\textheight,width=1.0\textwidth,keepaspectratio]{figures/automate-LR-lutin.jpg}
+		\includegraphics[height=0.9\textheight,width=1.0\textwidth,keepaspectratio]{figures/automate-LR-lutin.jpg}
 		\caption{Automate LR par rapport à la grammaire du langage lutin}
 	\end{figure}
 
@@ -79,9 +76,25 @@
 	\recalctypearea
 }
 
-\section{Table des transitions LR}
+%% Section : Table des transitions LR
+\afterpage{
+	\clearpage
+	\KOMAoptions{paper=A3,pagesize,paper=landscape,DIV=20}
+	\recalctypearea
+	\section{Table des transitions LR}
 
-\todo{Table des transitions ici}
+	\todo{Texte pour décrire les transitions}	
+	
+	\begin{table}[H]
+		\centering
+		\csvautotabular[respect dollar=true]{data/table-analyse-automate-lr.csv}
+		\caption{Table des transitions LR}
+	\end{table}
+
+	\clearpage
+	\KOMAoptions{paper=A4,pagesize}
+	\recalctypearea
+}
 
 %% Section : Structures de données
 \afterpage{
@@ -92,7 +105,7 @@
 
 	\todo{Texte pour décrire le diagramme}	
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1.0\textwidth,keepaspectratio]{../diagrams/class/lutin-compiler-class-diagram-uml.png}
 		\caption{Diagramme de classe des structures de données}
