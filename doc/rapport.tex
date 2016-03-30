@@ -24,7 +24,7 @@ Durant ce projet, nous devions implémenter un analyseur et interpréteur du lan
 
 Dans un premier temps, tout le monde a réfléchi à la grammaire du langage, puis nous avons choisi celle qui était la plus simple et la plus compréhensible par l'équipe. Nous l'avons ensuite transformé en grammaire LR, visible dans la section \ref{sec:grammaire}. \\
 
-Puis nous avons avancé en parallèle sur les tâches suivantes avant d'implémenter :
+Nous avons ensuite avancé en parallèle sur les tâches ci-dessous avant de nous consacrer à l'implémentation :
 \begin{itemize}
 	\item Construction de l'automate LR correspondant (voir section \ref{sec:automate}) puis réalisation de la table des transitions (voir section \ref{sec:transitions}) (par Jonathan, Nicolas et Romain)
 	\item Conception de la structure de données sous forme de diagramme UML \ref{sec:structure} (par Antoine, Pierre et Baptiste)
@@ -39,19 +39,19 @@ Enfin, nous avons procédé à l'implémentation de cet analyseur et interpréte
 	\item Vérification statique du programme (par Pierre)
 	\item Implémentation de toutes les classes symboles (par Nicolas et Romain)
 	\item Conception de la partie optimisation et son implémentation (par Pierre et Baptiste)
-	\item Conception et réalisation de la partie affichage en mémoire du programme (par Jonathan)
+	\item Conception et réalisation de la partie affichage du programme en mémoire (par Jonathan)
 	\item Mise en place des gestions d'erreurs lexicales et syntaxiques et récupération (par Antoine, Benoît et Pierre)
 	\item Implémentation des tests (par toute l'équipe)\\
 \end{itemize}
 
-A titre indicatif, pour terminer ce projet nous avons passé en dehors des séances, 8 heures en moyenne chacun.
+À titre indicatif, pour terminer ce projet nous avons passé, en dehors des séances, en moyenne 8 heures chacun.
 
 \newpage
 
 \section{Grammaire du langage lutin}
 \label{sec:grammaire}
 
-Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'ensemble des règles de notre grammaire pour le langage lutin numéroté pour faciliter la compréhension de la table de transition (voir section \ref{sec:transitions}). Le symbole $\epsilon$ représente L’élément vide.
+Vous trouverez dans le tableau ci-dessous (cf. tableau \ref{tab:grammaire}), l'ensemble des règles de notre grammaire pour le langage lutin, numérotées pour faciliter la compréhension de la table de transition (voir section \ref{sec:transitions}). Le symbole $\epsilon$ représente l’élément vide.
 
 \begin{table}[h]
 	\centering
@@ -94,7 +94,7 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 	\section{Automate LR}
 	\label{sec:automate}
 
-	Vous trouverez ci-dessous (cf figure \ref{fig:automate}) le schéma décrivant l'automate LR de notre grammaire afin d'identifier les différents états et transitions avant l'implémentation.
+	Vous trouverez ci-dessous (cf. figure \ref{fig:automate}) le schéma décrivant l'automate LR de notre grammaire permettant d'identifier les différents états et transitions avant l'implémentation.
 	
 	\begin{figure}[H]
 		\centerline{
@@ -139,14 +139,14 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 	\section{Structures de données}
 	\label{sec:structure}
 	
-	Afin de décrire au mieux la structure employée dans ce projet, vous trouverez ci-dessous le diagramme de classe simplifié dans le standard UML (cf figure \ref{fig:structure}). En effet, afin de le rendre plus compréhensible, seules les méthodes les plus importantes de chaque classe sont visibles (destructeurs, accesseurs, et mutateurs ne sont pas affichés). De plus les classes de type exception sont regroupé dans un package (le détail de ces classes est visible dans la figure \ref{fig:erreur-structure} en annexe ainsi que la liste des erreurs prises en charge dans le tableau \ref{tab:erreurs-liste} en annexe). Vous trouverez en annexe (cf figure \ref{fig:full-structure}) le diagramme de classe complet du programme.
+	Afin de décrire au mieux la structure employée dans ce projet, vous trouverez ci-dessous le diagramme de classes simplifié dans le standard UML (cf. figure \ref{fig:structure}). En effet, afin de le rendre plus compréhensible, seules les classes les plus importantes sont visibles, les classes de type exception étant également regroupées dans un package. Vous trouverez en annexe (cf. figure \ref{fig:full-structure}) le diagramme de classes complet du programme.
 
 	\begin{figure}[H]
 		\centerline{
 			\includegraphics[width=1.15\textwidth,keepaspectratio]{../diagrams-simplified/class/lutin-compiler-class-diagram-simplified-uml.png}
 		}
 		\label{fig:structure}
-		\caption{Diagramme de classe des structures de données}
+		\caption{Diagramme de classes des structures de données}
 	\end{figure}
 
 	\clearpage
@@ -212,7 +212,7 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 		\label{fig:erreur-structure}
 	\end{figure}		
 	
-	\section{Structures de données complète}
+	\section{Structures de données complètes}
 	\label{sec:full-structure}
 	
 	\begin{figure}[H]
@@ -220,7 +220,7 @@ Vous trouverez dans le tableau ci-dessous (cf tableau \ref{tab:grammaire}), l'en
 			\includegraphics[width=1.15\textwidth,keepaspectratio]{../diagrams/class/lutin-compiler-class-diagram-uml.png}
 		}	
 		\label{fig:full-structure}
-		\caption{Diagramme de classe des structures de données}
+		\caption{Diagramme de classes des structures de données}
 	\end{figure}
 
 	\clearpage
