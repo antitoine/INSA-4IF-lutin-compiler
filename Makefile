@@ -2,7 +2,7 @@ all: cible
 
 lib/re2/libre2.a: lib/re2
 	@echo "Making the lib re2 before build projet ..."
-	@make -C lib/re2
+	make -C lib/re2
 	@echo "Lib re2 is done."
 
 cible: lib/re2/libre2.a
@@ -13,4 +13,5 @@ test: cible
 	@(cd tests && ./mktest.sh)
 
 clean:
-	@rm -rf build tests/lut tests/*.csv
+	rm -rf build tests/lut tests/*.csv
+	make -C lib/re2 clean
