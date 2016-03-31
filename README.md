@@ -42,6 +42,7 @@ Warning : semi-colons are needed at each line ends
 | ERROR_LEXICAL_UNEXPECTED_SYMBOL		| Lexical     			|    8	 		|
 | ERROR_LEXICAL_MISSING_SYMBOL			| Lexical     			|    9	 		|
 | ERROR_SEMANTIC_INCORRECT_NUM_VALUE	| Semantic     			|    10	 		|
+| ERROR_SEMANTIC_DIVISION_ZERO      	| Semantic     			|    11	 		|
 
 ### Current optimizations handled
 
