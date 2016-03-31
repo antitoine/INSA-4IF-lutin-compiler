@@ -8,5 +8,4 @@ test: cible
 	(cd tests && ./mktest.sh)
 
 clean:
-	rm -rf build
-	unlink tests/lut
+	rm -rf build tests/lut tests/*.csv
