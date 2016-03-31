@@ -174,34 +174,26 @@ Vous trouverez dans le tableau ci-dessous (cf. tableau \ref{tab:grammaire}), l'e
 			\hline
 			\textbf{Erreur} & \textbf{Type} & \textbf{Code de retour} \\
 			\hline
-			ERROR\_SEMANTIC\_VAR\_NOT\_USED & Semantic Warning & None \\
+			Problème dans les arguments & Arguments & 1 \\
 			\hline
-			ERROR\_WRONG\_ARGUMENTS & Arguments & 1 \\
+			Impossible d'ouvrir le fichier & I/O & 2 \\
 			\hline
-			ERROR\_FILE\_NOT\_FOUND & I/O & 2 \\
+			Variable déjà déclarée & Semantique & 3 \\
 			\hline
-			ERROR\_SEMANTIC\_VAR\_ALREADY\_DECLARED & Semtantic & 3 \\
+			Symbole inconnu & Lexicale & 8 (si non rattrapée) \\
 			\hline
-			ERROR\_SEMANTIC\_VAR\_NOT\_DECLARED & Semantic & 4 \\
+			Symbole manquant & Lexicale & 9 (si non rattrapée) \\
 			\hline
-			ERROR\_SEMANTIC\_VAR\_IS\_CONST & Semantic & 5 \\
+			Lecture erronée à l'éxécution & Semantique & 10 \\
 			\hline
-			ERROR\_SEMANTIC\_VAR\_NOT\_INITIALIZED & Semantic & 6 \\
-			\hline
-			ERROR\_LEXICAL\_UNKNOWN\_SYMBOL & Lexical & 7 \\
-			\hline
-			ERROR\_LEXICAL\_UNEXPECTED\_SYMBOL & Lexical & 8 \\
-			\hline
-			ERROR\_LEXICAL\_MISSING\_SYMBOL & Lexical & 9 \\
-			\hline
-			ERROR\_SEMANTIC\_INCORRECT\_NUM\_VALUE & Semantic & 10 \\
-			\hline
-            ERROR\_SEMANTIC\_DIVISION\_ZERO & Semantic & 11 \\
+            		Division par zéro lors de l'éxécution & Semantique & 11 \\
 			\hline
 		\end{tabular}
 		\caption{Liste des erreurs prises en compte par le programme}
 		\label{tab:erreurs-liste}
 	\end{table}
+
+	Les autres erreurs lors de l'analyse statique retournent 100 (variable non déclarée, modification d'une constante, variable non initialisée lors de la lecture ...). Si les erreurs sont rattrapées ou s'il ne reste que des warnings, l'execution va à son terme avec un code de retour 0.
 	
 	\subsection{Structure des erreurs}
 	\label{subsec:erreur-structure}
