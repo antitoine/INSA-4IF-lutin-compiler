@@ -11,6 +11,7 @@
 
 #include "util/util.h"
 #include "util/sparse_array.h"
+#include "util/sparse_set.h"
 #include "re2/re2.h"
 
 namespace re2 {
@@ -84,7 +85,11 @@ class Prog {
   // Single instruction in regexp program.
   class Inst {
    public:
-    Inst() : out_opcode_(0), out1_(0) { }
+    Inst() : out_opcode_(0), out1_(0) {}
+
+    // Copyable.
+    Inst(const Inst&) = default;
+    Inst& operator=(const Inst&) = default;
 
     // Constructors per opcode
     void InitAlt(uint32 out, uint32 out1);
@@ -98,17 +103,21 @@ class Prog {
     // Getters
     int id(Prog* p) { return static_cast<int>(this - p->inst_); }
     InstOp opcode() { return static_cast<InstOp>(out_opcode_&7); }
-    int out()     { return out_opcode_>>3; }
-    int out1()    { DCHECK(opcode() == kInstAlt || opcode() == kInstAltMatch); return out1_; }
+    int last()      { return (out_opcode_>>3)&1; }
+    int out()       { return out_opcode_>>4; }
+    int out1()      { DCHECK(opcode() == kInstAlt || opcode() == kInstAltMatch); return out1_; }
     int cap()       { DCHECK_EQ(opcode(), kInstCapture); return cap_; }
     int lo()        { DCHECK_EQ(opcode(), kInstByteRange); return lo_; }
     int hi()        { DCHECK_EQ(opcode(), kInstByteRange); return hi_; }
     int foldcase()  { DCHECK_EQ(opcode(), kInstByteRange); return foldcase_; }
     int match_id()  { DCHECK_EQ(opcode(), kInstMatch); return match_id_; }
     EmptyOp empty() { DCHECK_EQ(opcode(), kInstEmptyWidth); return empty_; }
-    bool greedy(Prog *p) {
+
+    bool greedy(Prog* p) {
       DCHECK_EQ(opcode(), kInstAltMatch);
-      return p->inst(out())->opcode() == kInstByteRange;
+      return p->inst(out())->opcode() == kInstByteRange ||
+             (p->inst(out())->opcode() == kInstNop &&
+              p->inst(p->inst(out())->out())->opcode() == kInstByteRange);
     }
 
     // Does this inst (an kInstByteRange) match c?
@@ -123,23 +132,27 @@ class Prog {
     string Dump();
 
     // Maximum instruction id.
-    // (Must fit in out_opcode_, and PatchList steals another bit.)
+    // (Must fit in out_opcode_. PatchList/last steal another bit.)
     static const int kMaxInst = (1<<28) - 1;
 
    private:
     void set_opcode(InstOp opcode) {
-      out_opcode_ = (out()<<3) | opcode;
+      out_opcode_ = (out()<<4) | (last()<<3) | opcode;
+    }
+
+    void set_last() {
+      out_opcode_ = (out()<<4) | (1<<3) | opcode();
     }
 
     void set_out(int out) {
-      out_opcode_ = (out<<3) | opcode();
+      out_opcode_ = (out<<4) | (last()<<3) | opcode();
     }
 
     void set_out_opcode(int out, InstOp opcode) {
-      out_opcode_ = (out<<3) | opcode;
+      out_opcode_ = (out<<4) | (last()<<3) | opcode;
     }
 
-    uint32 out_opcode_;  // 29 bits of out, 3 (low) bits opcode
+    uint32 out_opcode_;  // 28 bits of out, 1 bit for last, 3 (low) bits opcode
     union {              // additional instruction arguments:
       uint32 out1_;      // opcode == kInstAlt
                          //   alternate next instruction
@@ -167,8 +180,6 @@ class Prog {
     friend class Compiler;
     friend struct PatchList;
     friend class Prog;
-
-    DISALLOW_COPY_AND_ASSIGN(Inst);
   };
 
   // Whether to anchor the search.
@@ -339,6 +350,20 @@ class Prog {
   static Prog* CompileSet(const RE2::Options& options, RE2::Anchor anchor,
                           Regexp* re);
 
+  // Flattens the Prog from "tree" form to "list" form. This is an in-place
+  // operation in the sense that the old instructions are lost.
+  void Flatten();
+
+  // Marks the "roots" in the Prog: the outs of kInstByteRange, kInstCapture
+  // and kInstEmptyWidth instructions.
+  void MarkRoots(SparseArray<int>* rootmap,
+                 SparseSet* q, vector<int>* stk);
+
+  // Emits one "list" via "tree" traversal from the given "root" instruction.
+  // The new instructions are appended to the given vector.
+  void EmitList(int root, SparseArray<int>* rootmap, vector<Inst>* flat,
+                SparseSet* q, vector<int>* stk);
+
  private:
   friend class Compiler;
 
@@ -347,6 +372,7 @@ class Prog {
   bool anchor_start_;       // regexp has explicit start anchor
   bool anchor_end_;         // regexp has explicit end anchor
   bool reversed_;           // whether program runs backward over input
+  bool did_flatten_;        // has Flatten been called?
   bool did_onepass_;        // has IsOnePass been called?
 
   int start_;               // entry point for program

@@ -3,5 +3,5 @@ const c1 = 10;
 a := 5;
 b := a * 1;
 c := b + 0;
-c := (a * b + 3) - ((a + b))
+c := (a * b + 3) - ((a + b));
 ecrire c1 + 5;

@@ -541,6 +541,9 @@ bool Compiler::IsCachedRuneByteSuffix(int id) {
 }
 
 void Compiler::AddSuffix(int id) {
+  if (failed_)
+    return;
+
   if (rune_range_.begin == 0) {
     rune_range_.begin = id;
     return;
@@ -1234,6 +1237,7 @@ Prog* Compiler::Finish() {
   prog_->ComputeByteMap();
 
   prog_->Optimize();
+  prog_->Flatten();
 
   // Record remaining memory for DFA.
   if (max_mem_ <= 0) {

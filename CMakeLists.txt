@@ -7,11 +7,11 @@ file(GLOB_RECURSE SOURCE_FILES src/*.h src/*.cpp)
 
 include_directories(lib/re2)
 
-set(LIB_RE2 ${CMAKE_CURRENT_SOURCE_DIR}/lib/re2)
+set(LIB_RE2 ${CMAKE_CURRENT_SOURCE_DIR}/lib/re2/obj/libre2.a)
 
 add_executable(lut ${SOURCE_FILES})
 
-target_link_libraries(lut ${LIB_RE2}/libre2.a pthread)
+target_link_libraries(lut ${LIB_RE2} pthread)
 
 # Coment this line to skip tests after build
 add_custom_command(TARGET lut POST_BUILD COMMAND ln -fs ${lut_BINARY_DIR}/lut lut COMMAND bash mktest.sh WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests COMMENT "Run tests ...")
