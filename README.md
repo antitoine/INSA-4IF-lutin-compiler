@@ -1,5 +1,13 @@
 # lutin-compiler
 
+## Installation
+
+To build this project, you need to go in the root directory and type in :
+`make`
+
+To test :
+`make test`
+
 ## Presentation
 
 Lutin-compiler is a 4th year Computer Science project at INSA de Lyon, aiming at creating an analysis automaton and an execution tool for a simplified programming language called Lutin.
